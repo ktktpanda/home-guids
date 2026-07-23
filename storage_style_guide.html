@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>生活感を消す収納｜おうちメンテ</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%A7%BA%3C/text%3E%3C/svg%3E">
+<style>*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0}img,svg{max-width:100%}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#eeeae1;--surface:#fbfaf6;--surface-2:#f3f0e8;--ink:#262520;--muted:#6b6a5d;
+    --faint:#9a978a;--hair:rgba(38,37,32,.13);--accent:#6f7d55;--accent-soft:#e4e8d7;
+    --brass:#a98a3f;--warn:#c0872a;--shadow:0 1px 2px rgba(38,37,32,.05),0 10px 30px rgba(38,37,32,.07);
+    --maxw:940px;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --ground:#141410;--surface:#1d1c17;--surface-2:#23221c;--ink:#ecebe1;--muted:#a7a595;
+    --faint:#726f61;--hair:rgba(236,235,225,.12);--accent:#a3b47e;--accent-soft:#252a19;
+    --brass:#cbab63;--warn:#e0a54a;--shadow:0 1px 2px rgba(0,0,0,.4),0 12px 34px rgba(0,0,0,.4);}}
+  :root[data-theme="light"]{--ground:#eeeae1;--surface:#fbfaf6;--surface-2:#f3f0e8;--ink:#262520;--muted:#6b6a5d;--faint:#9a978a;--hair:rgba(38,37,32,.13);--accent:#6f7d55;--accent-soft:#e4e8d7;--brass:#a98a3f;--warn:#c0872a}
+  :root[data-theme="dark"]{--ground:#141410;--surface:#1d1c17;--surface-2:#23221c;--ink:#ecebe1;--muted:#a7a595;--faint:#726f61;--hair:rgba(236,235,225,.12);--accent:#a3b47e;--accent-soft:#252a19;--brass:#cbab63;--warn:#e0a54a}
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+    line-height:1.8;letter-spacing:.015em;font-feature-settings:"palt" 1;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+
+  header.hero{padding:78px 0 44px}
+  .hero h1{font-size:clamp(2.1rem,5.6vw,3.5rem);line-height:1.1;margin:.6rem 0 .3rem;font-weight:800;letter-spacing:-.015em;text-wrap:balance}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero .lede{font-size:clamp(1.02rem,2.2vw,1.2rem);color:var(--muted);max-width:62ch;margin:.7rem 0 0}
+
+  /* principles */
+  .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+  .pr{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  .pr .no{font-size:.72rem;letter-spacing:.1em;color:var(--brass);font-weight:800}
+  .pr h3{margin:.3rem 0 .35rem;font-size:1.14rem;font-weight:800;letter-spacing:-.01em}
+  .pr p{margin:0;color:var(--muted);font-size:.92rem}
+
+  section{padding:30px 0}
+  .sec-head{margin:26px 0 20px}
+  .sec-head h2{font-size:clamp(1.4rem,3.4vw,2rem);margin:.3rem 0 0;font-weight:800;letter-spacing:-.015em}
+  .sec-head p{color:var(--muted);margin:.4rem 0 0;max-width:66ch}
+
+  .rooms{display:flex;flex-direction:column;gap:24px}
+  .room{background:var(--surface);border:1px solid var(--hair);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:320px 1fr}
+  .room .art{background:var(--surface-2);position:relative;border-right:1px solid var(--hair)}
+  .room .art svg{display:block;width:100%;height:auto}
+  .room .art .cap{position:absolute;left:0;right:0;bottom:0;padding:9px 14px;font-size:.74rem;color:var(--muted);background:linear-gradient(transparent,var(--surface-2));text-align:center}
+  .room .body{padding:24px 26px 26px}
+  .room .rlabel{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);font-weight:800}
+  .room h3{font-size:1.5rem;margin:.15rem 0 .1rem;font-weight:800;letter-spacing:-.01em}
+  .room .prob{color:var(--muted);font-size:.95rem;margin:.3rem 0 0}
+  .room .prob b{color:var(--ink)}
+
+  .fix{margin-top:16px}
+  .fix h4{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 .5rem}
+  .fix ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .fix li{position:relative;padding-left:22px;font-size:.95rem}
+  .fix li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;border-radius:2px;background:var(--accent)}
+  .fix li b{font-weight:700}
+  .goods{margin-top:15px;padding:13px 15px;background:var(--surface-2);border:1px solid var(--hair);border-radius:12px;font-size:.88rem;color:var(--muted)}
+  .goods b{color:var(--ink)}
+  .goods .brand{display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:20px;padding:1px 9px;font-size:.78rem;font-weight:700;margin:2px 4px 2px 0}
+
+  .buy{background:var(--surface);border:1px solid var(--hair);border-radius:20px;box-shadow:var(--shadow);padding:26px 28px;margin-top:8px}
+  .buy h2{margin:0 0 .3rem;font-size:1.4rem;font-weight:800;letter-spacing:-.01em}
+  .buy>p{color:var(--muted);margin:0 0 16px;font-size:.95rem}
+  .buy .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .bi{border:1px solid var(--hair);border-radius:14px;padding:16px;background:var(--surface-2)}
+  .bi .n{font-size:1.6rem}
+  .bi b{display:block;margin:.3rem 0 .2rem;font-size:1rem}
+  .bi span{font-size:.86rem;color:var(--muted);line-height:1.55;display:block}
+
+  .note{margin-top:24px;padding:16px 20px;border-radius:14px;background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--brass);color:var(--muted);font-size:.92rem;line-height:1.75}
+  .note b{color:var(--ink)}
+
+  footer{border-top:1px solid var(--hair);padding:30px 0 60px;color:var(--faint);font-size:.84rem;margin-top:20px}
+
+  @media (max-width:760px){
+    .principles{grid-template-columns:1fr}
+    .room{grid-template-columns:1fr}
+    .room .art{border-right:0;border-bottom:1px solid var(--hair)}
+    .buy .grid{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">おうちメンテ ／ 生活感を消す収納編</p>
+    <h1>掃除用品は、<em>隠す</em>より<em>浮かせて・そろえる</em>。</h1>
+    <p class="lede">「近くに置くと便利、でもダサい」——この矛盾は、しまい込むと今度は使わなくなって元に戻ります。答えは全部隠すことではなく、<b>置き方（浮かせる）・色（そろえる）・パッケージ（詰め替える）</b>の3つを整えること。生活感の正体はモノの数ではなく、この3つの乱れです。場所ごとに具体策を図で示します。</p>
+
+    <div class="principles">
+      <div class="pr"><div class="no">原則 01</div><h3>浮かせる</h3><p>床・カウンター直置きをやめ、壁・扉・シンクに“掛ける／貼る／磁石で付ける”。見た目が整い、水気が切れてぬめり・カビも減り、掃除も一瞬。</p></div>
+      <div class="pr"><div class="no">原則 02</div><h3>そろえる</h3><p>色を<b>白・黒・グレー・真鍮</b>のどれか1系統に固定。バラバラの色数こそ生活感の最大要因。道具の“色を選んで買う”だけで一気に整う。</p></div>
+      <div class="pr"><div class="no">原則 03</div><h3>詰め替える／線引き</h3><p>洗剤の派手なパッケージは詰め替えボトルへ。そして“毎日使う1軍だけ出す・2軍は隠す”。全部出さない、全部しまわない。</p></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">場所ごとの処方箋</p>
+      <h2>4つの場所を、こう整える</h2>
+      <p>左のイラストは“完成形の構成”です（実物写真ではなくレイアウト図）。右に「なぜダサくなるか→どう直すか→買うグッズの型」。</p>
+    </div>
+
+    <div class="rooms">
+
+      <!-- 洗面所 -->
+      <article class="room">
+        <div class="art">
+          <svg viewBox="0 0 320 250" role="img" aria-label="洗面台の壁にタオルバーを付け、カウンターに何も置かない構成図">
+            <rect width="320" height="250" fill="none"/>
+            <!-- mirror -->
+            <rect x="96" y="26" width="128" height="86" rx="6" fill="#c9d0d6"/>
+            <rect x="96" y="26" width="128" height="86" rx="6" fill="none" stroke="#8f979d" stroke-width="2"/>
+            <!-- faucet -->
+            <path d="M160 120 v-8 h14" fill="none" stroke="#8f979d" stroke-width="4" stroke-linecap="round"/>
+            <!-- counter -->
+            <rect x="40" y="140" width="240" height="12" rx="3" fill="#dfd9cd"/>
+            <!-- basin -->
+            <path d="M126 140 q34 40 68 0 Z" fill="#e7e2d6"/>
+            <!-- towel bar (brass) with towel + microfiber -->
+            <rect x="238" y="60" width="52" height="4" rx="2" fill="#a98a3f"/>
+            <rect x="244" y="64" width="20" height="52" rx="3" fill="#6f7d55"/>
+            <rect x="270" y="64" width="12" height="40" rx="3" fill="#aeb9a0"/>
+            <!-- clear counter emphasis -->
+            <text x="80" y="176" font-size="11" fill="#9a978a" font-family="sans-serif">カウンターに何も置かない</text>
+          </svg>
+          <div class="cap">壁付けバー＝タオルと拭き用クロスを“掛ける”</div>
+        </div>
+        <div class="body">
+          <p class="rlabel">洗面所</p>
+          <h3>拭き用クロスとタオルを、掛けて見せる</h3>
+          <p class="prob"><b>ダサくなる理由：</b>マイクロファイバーを1枚だけぶら下げると“雑巾感”が出る。カウンターに洗剤・コップ・歯ブラシが散ると生活感の温床に。</p>
+          <div class="fix">
+            <h4>どう直すか</h4>
+            <ul>
+              <li><b>タオルバーを1本つける</b>（真鍮 or マットブラック）。ハンドタオルと拭き用クロスを“並べて掛ける”と、雑巾感が消えて意図的な見た目に</li>
+              <li>拭き用クロスは<b>リネン調やグレーの上質なもの</b>を選び、タオルと色を合わせる。掃除用と分かるどぎつい色は避ける</li>
+              <li><b>カウンターは空に</b>。洗剤・替えは洗面台下 or 扉裏フックへ（2軍は隠す）</li>
+              <li>賃貸なら<b>粘着式（3M）や吸盤・マグネット</b>で穴あけ不要</li>
+            </ul>
+          </div>
+          <div class="goods"><b>グッズの型：</b>壁付けタオルバー／マグネットタオルバー（洗濯機や金属面に）
+            <div style="margin-top:6px">
+              <span class="brand">山崎実業 tower</span><span class="brand">無印 ステンレスバー</span><span class="brand">真鍮バー（IKEA/ニトリ）</span><span class="brand">3M 粘着フック</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 風呂 -->
+      <article class="room">
+        <div class="art">
+          <svg viewBox="0 0 320 250" role="img" aria-label="浴室の壁にマグネットバーでボトルを浮かせ、床に何も置かない構成図">
+            <rect width="320" height="250" fill="none"/>
+            <!-- tile lines -->
+            <g stroke="#d8d2c6" stroke-width="1.5">
+              <path d="M0 70 H320 M0 130 H320 M0 190 H320 M107 0 V210 M213 0 V210"/>
+            </g>
+            <!-- magnetic bar -->
+            <rect x="60" y="84" width="200" height="6" rx="3" fill="#7d7a70"/>
+            <!-- floating identical bottles (white, unified) -->
+            <g>
+              <rect x="86" y="90" width="30" height="52" rx="6" fill="#f4f2ec" stroke="#cfc9bd" stroke-width="1.5"/>
+              <rect x="132" y="90" width="30" height="52" rx="6" fill="#f4f2ec" stroke="#cfc9bd" stroke-width="1.5"/>
+              <rect x="178" y="90" width="30" height="52" rx="6" fill="#f4f2ec" stroke="#cfc9bd" stroke-width="1.5"/>
+            </g>
+            <!-- squeegee on hook -->
+            <rect x="228" y="90" width="6" height="46" rx="3" fill="#6f7d55"/>
+            <rect x="220" y="86" width="22" height="6" rx="3" fill="#6f7d55"/>
+            <!-- empty floor -->
+            <rect x="0" y="210" width="320" height="40" fill="#e7e2d6"/>
+            <text x="112" y="234" font-size="11" fill="#9a978a" font-family="sans-serif">床に直置きゼロ＝ぬめり激減</text>
+          </svg>
+          <div class="cap">マグネット/吊るしで“浮かせる”＋ボトルは白で統一</div>
+        </div>
+        <div class="body">
+          <p class="rlabel">風呂</p>
+          <h3>ボトルを浮かせて、色をそろえる</h3>
+          <p class="prob"><b>ダサくなる理由：</b>シャンプー類の派手なボトルが床やラックに直置き。色も高さもバラバラで、底がぬめってさらに不潔見え。</p>
+          <div class="fix">
+            <h4>どう直すか</h4>
+            <ul>
+              <li><b>マグネットバー／ラックで全部浮かせる</b>。床置きゼロにすると見た目が整い、<b>ぬめり・赤カビも激減</b>（掃除がそのままラクになる）</li>
+              <li>ボトルは<b>同じ詰め替え容器（白 or 半透明）に統一</b>。これだけで生活感が一番消える</li>
+              <li>スポンジ・スクイジー・掃除ブラシも<b>マグネットフックで吊るす</b></li>
+              <li>色は白＋差し色1つ（くすみカラー）まで。ロゴ入りは隠す</li>
+            </ul>
+          </div>
+          <div class="goods"><b>グッズの型：</b>マグネットバスルーム収納／詰め替えボトル／マグネットフック
+            <div style="margin-top:6px">
+              <span class="brand">山崎実業 tower/mist</span><span class="brand">無印 詰替ボトル</span><span class="brand">MARNA</span><span class="brand">ニトリ 浮かせる収納</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- トイレ -->
+      <article class="room">
+        <div class="art">
+          <svg viewBox="0 0 320 250" role="img" aria-label="トイレのブラシと洗剤を隠し、1つだけ見せる構成図">
+            <rect width="320" height="250" fill="none"/>
+            <!-- tank + toilet silhouette -->
+            <rect x="120" y="70" width="80" height="40" rx="6" fill="#e7e2d6"/>
+            <path d="M118 112 h84 v20 q0 34 -42 34 q-42 0 -42 -34 Z" fill="#eee9dd"/>
+            <!-- single diffuser on tank (show 1) -->
+            <rect x="176" y="52" width="14" height="20" rx="3" fill="#6f7d55"/>
+            <!-- slim hidden rack beside -->
+            <rect x="232" y="96" width="46" height="120" rx="8" fill="#efece4" stroke="#cfc9bd" stroke-width="1.5"/>
+            <rect x="232" y="96" width="46" height="14" rx="7" fill="#d9d3c6"/>
+            <text x="238" y="150" font-size="10" fill="#9a978a" font-family="sans-serif">ブラシ・</text>
+            <text x="238" y="164" font-size="10" fill="#9a978a" font-family="sans-serif">洗剤・</text>
+            <text x="238" y="178" font-size="10" fill="#9a978a" font-family="sans-serif">シートを</text>
+            <text x="238" y="192" font-size="10" fill="#9a978a" font-family="sans-serif">この中へ</text>
+          </svg>
+          <div class="cap">隠すが基本。見せるのは1つ（香り）だけ</div>
+        </div>
+        <div class="body">
+          <p class="rlabel">トイレ</p>
+          <h3>“隠す”を徹底し、見せるのは1つだけ</h3>
+          <p class="prob"><b>ダサくなる理由：</b>ブラシ・洗剤・掃除シートが丸見え。とくにブラシの存在感が生活感の元。狭い空間ほど物が目立つ。</p>
+          <div class="fix">
+            <h4>どう直すか</h4>
+            <ul>
+              <li><b>ブラシを隠す</b>：ケース一体型のスリムなブラシ、または<b>「流せるトイレブラシ」＋専用スタンド</b>で存在感を消す</li>
+              <li>洗剤・シート・予備は<b>スリムなトイレラックや扉付き収納</b>に全部入れる（2軍は完全に隠す）</li>
+              <li><b>見せるのは1つだけ</b>——タンク上にディフューザーや小さな植物など“インテリアになる物”を一点</li>
+              <li>マットや床置き小物を減らすほど掃除もラクで清潔見え</li>
+            </ul>
+          </div>
+          <div class="goods"><b>グッズの型：</b>ケース付きブラシ／流せるブラシ＋スタンド／スリムトイレラック
+            <div style="margin-top:6px">
+              <span class="brand">山崎実業 tower/plate</span><span class="brand">スクラビングバブル 流せるブラシ</span><span class="brand">無印 収納</span><span class="brand">KEYUCA</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- キッチン -->
+      <article class="room">
+        <div class="art">
+          <svg viewBox="0 0 320 250" role="img" aria-label="キッチンでスポンジを浮かせ、洗剤を詰め替え、ふきんをバーに掛ける構成図">
+            <rect width="320" height="250" fill="none"/>
+            <!-- window -->
+            <rect x="104" y="24" width="112" height="60" rx="4" fill="#d7dce0"/>
+            <!-- faucet -->
+            <path d="M150 120 v-26 q0 -10 12 -10 h6" fill="none" stroke="#8f979d" stroke-width="5" stroke-linecap="round"/>
+            <!-- over-faucet sponge caddy -->
+            <rect x="140" y="96" width="40" height="12" rx="4" fill="#6f7d55"/>
+            <rect x="150" y="100" width="20" height="10" rx="3" fill="#aeb9a0"/>
+            <!-- unified pump bottle -->
+            <rect x="210" y="112" width="26" height="40" rx="5" fill="#f4f2ec" stroke="#cfc9bd" stroke-width="1.5"/>
+            <rect x="219" y="102" width="8" height="12" rx="2" fill="#a98a3f"/>
+            <!-- counter -->
+            <rect x="30" y="152" width="260" height="12" rx="3" fill="#dfd9cd"/>
+            <!-- towel bar with towel -->
+            <rect x="52" y="182" width="60" height="4" rx="2" fill="#a98a3f"/>
+            <rect x="66" y="186" width="24" height="46" rx="3" fill="#6f7d55"/>
+            <text x="120" y="210" font-size="11" fill="#9a978a" font-family="sans-serif">スポンジは浮かせて水切り</text>
+          </svg>
+          <div class="cap">スポンジは浮かせ、洗剤は詰め替え、ふきんはバーに</div>
+        </div>
+        <div class="body">
+          <p class="rlabel">キッチン</p>
+          <h3>スポンジを浮かせ、洗剤を詰め替える</h3>
+          <p class="prob"><b>ダサくなる理由：</b>シンクにスポンジがベチャッ、洗剤の原色ボトル、ふきんが無造作。水回りは特に生活感が出やすい。</p>
+          <div class="fix">
+            <h4>どう直すか</h4>
+            <ul>
+              <li><b>スポンジは蛇口や壁に“浮かせる”</b>ホルダーで水切り。ぬめり防止と見た目改善を同時に</li>
+              <li>食器用洗剤は<b>シンプルな詰め替えボトル（ポンプ式）に統一</b>。原色パッケージを消すと一気に整う</li>
+              <li>ふきんは<b>バーやマグネットハンガーに掛けて乾かす</b>（衛生的で見た目もスッキリ）</li>
+              <li>ゴミ袋・スポンジ替えなどの2軍はシンク下へ隠す</li>
+            </ul>
+          </div>
+          <div class="goods"><b>グッズの型：</b>浮かせるスポンジホルダー／詰め替えポンプボトル／マグネットふきんハンガー
+            <div style="margin-top:6px">
+              <span class="brand">山崎実業 tower</span><span class="brand">無印 詰替ボトル</span><span class="brand">ideaco</span><span class="brand">3COINS</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="buy">
+      <h2>迷ったら、この3つの型を買えば化ける</h2>
+      <p>ブランドは何でもOK。まずこの“型”を各所に導入するだけで、生活感は驚くほど消えます。</p>
+      <div class="grid">
+        <div class="bi"><div class="n">🧲</div><b>浮かせるホルダー／バー</b><span>マグネット式・粘着式・つっぱり式。床とカウンターの直置きを全部これに移す。掃除もラクに。</span></div>
+        <div class="bi"><div class="n">🧴</div><b>詰め替えボトル（統一）</b><span>白 or 半透明の同シリーズで。洗剤・シャンプーの原色パッケージを消すのが最大の効果。</span></div>
+        <div class="bi"><div class="n">🖤</div><b>マットブラック/真鍮のバー</b><span>タオル・クロスを“並べて掛ける”ための1本。雑巾感を消し、意図的な見た目にする。</span></div>
+      </div>
+      <p class="note"><b>買い物の順番のコツ：</b>まず<b>色を1つ決める</b>（白基調＋金具は真鍮 or マットブラック、など）。次に各所へ「浮かせるホルダー」を1個ずつ。最後に詰め替えボトルへ移す。<b>“物を増やす”のではなく“置き方と色を変える”</b>のが、お金をかけずに一番効く方法です。ブランドは <b>山崎実業 tower</b> が生活感消しの定番で失敗しにくく、無印・ニトリ・IKEA・3COINS で色を合わせれば十分おしゃれになります。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    おうちメンテ・生活感を消す収納編 ／ イラストは完成形のレイアウト構成図です（実物写真ではありません）。ブランド名は探す手がかりの一例で、特定商品の推奨・提携ではありません。
+  </div>
+</footer>
+
+</body>
+</html>

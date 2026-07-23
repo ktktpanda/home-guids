@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>放置した風呂は、こうなる。｜浴室汚れフィールドガイド</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%9B%81%3C/text%3E%3C/svg%3E">
+<style>*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0}img,svg{max-width:100%}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#eef2f1;
+    --surface:#ffffff;
+    --surface-2:#f7faf9;
+    --ink:#152322;
+    --muted:#586a68;
+    --faint:#8697959;
+    --hair:rgba(21,35,34,.12);
+    --hair-strong:rgba(21,35,34,.22);
+    --accent:#0e8f88;
+    --accent-soft:#d7ecea;
+    --warn:#d68a15;
+    --danger:#d1541f;
+    --crit:#b12a2a;
+    --shadow:0 1px 2px rgba(21,35,34,.05), 0 8px 30px rgba(21,35,34,.06);
+    --maxw:940px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#0d1413;
+      --surface:#161f1e;
+      --surface-2:#1b2625;
+      --ink:#e7efed;
+      --muted:#9fb1af;
+      --faint:#6f817f;
+      --hair:rgba(231,239,237,.12);
+      --hair-strong:rgba(231,239,237,.2);
+      --accent:#41cfc4;
+      --accent-soft:#12312e;
+      --warn:#e6a83e;
+      --danger:#ec7a44;
+      --crit:#e46464;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#eef2f1;--surface:#ffffff;--surface-2:#f7faf9;--ink:#152322;--muted:#586a68;
+    --faint:#869795;--hair:rgba(21,35,34,.12);--hair-strong:rgba(21,35,34,.22);
+    --accent:#0e8f88;--accent-soft:#d7ecea;--warn:#d68a15;--danger:#d1541f;--crit:#b12a2a;
+    --shadow:0 1px 2px rgba(21,35,34,.05), 0 8px 30px rgba(21,35,34,.06);
+  }
+  :root[data-theme="dark"]{
+    --ground:#0d1413;--surface:#161f1e;--surface-2:#1b2625;--ink:#e7efed;--muted:#9fb1af;
+    --faint:#6f817f;--hair:rgba(231,239,237,.12);--hair-strong:rgba(231,239,237,.2);
+    --accent:#41cfc4;--accent-soft:#12312e;--warn:#e6a83e;--danger:#ec7a44;--crit:#e46464;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+    line-height:1.75;letter-spacing:.01em;
+    font-feature-settings:"palt" 1;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin:0;
+  }
+
+  /* ---------- hero ---------- */
+  header.hero{
+    padding:72px 0 40px;border-bottom:1px solid var(--hair);
+    background:
+      radial-gradient(120% 80% at 82% -10%, var(--accent-soft) 0%, transparent 55%);
+  }
+  .hero h1{
+    font-size:clamp(2.1rem,5.6vw,3.4rem);line-height:1.12;margin:.5rem 0 .2rem;
+    font-weight:800;letter-spacing:-.01em;text-wrap:balance;
+  }
+  .hero .lede{font-size:clamp(1.02rem,2.2vw,1.18rem);color:var(--muted);max-width:60ch;margin:.6rem 0 0}
+
+  .principle{
+    margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+  }
+  .principle .p{
+    background:var(--surface);border:1px solid var(--hair);border-radius:14px;
+    padding:16px 16px 18px;box-shadow:var(--shadow);
+  }
+  .principle .p .n{font-size:1.5rem}
+  .principle .p b{display:block;font-size:1.02rem;margin:.35rem 0 .15rem}
+  .principle .p span{color:var(--muted);font-size:.9rem;line-height:1.6;display:block}
+  .principle-note{
+    margin-top:16px;padding:14px 18px;border-left:3px solid var(--accent);
+    background:var(--surface-2);border-radius:0 12px 12px 0;color:var(--muted);font-size:.95rem;
+  }
+  .principle-note b{color:var(--ink)}
+
+  /* ---------- section head ---------- */
+  section{padding:44px 0}
+  .sec-head{margin:0 0 22px}
+  .sec-head h2{font-size:clamp(1.4rem,3.2vw,1.9rem);margin:.3rem 0 0;font-weight:800;letter-spacing:-.01em}
+  .sec-head p{color:var(--muted);margin:.4rem 0 0;max-width:64ch}
+
+  /* ---------- hazard cards ---------- */
+  .hazards{display:flex;flex-direction:column;gap:22px}
+  .hazard{
+    --h:#888;
+    background:var(--surface);border:1px solid var(--hair);border-radius:18px;
+    box-shadow:var(--shadow);overflow:hidden;
+    display:grid;grid-template-columns:240px 1fr;
+  }
+  .hazard .viz{position:relative;background:#0c1211;min-height:100%}
+  .hazard .viz svg{display:block;width:100%;height:100%;position:absolute;inset:0}
+  .hazard .viz .caption{
+    position:absolute;left:12px;bottom:11px;z-index:2;
+    font-size:.72rem;color:#fff;background:rgba(0,0,0,.5);
+    padding:3px 9px;border-radius:20px;letter-spacing:.04em;backdrop-filter:blur(2px);
+  }
+  .sev{
+    position:absolute;top:12px;left:12px;z-index:2;
+    font-size:.72rem;font-weight:700;letter-spacing:.06em;
+    padding:4px 10px;border-radius:20px;color:#fff;
+  }
+  .sev.warn{background:var(--warn)}
+  .sev.danger{background:var(--danger)}
+  .sev.crit{background:var(--crit)}
+
+  .hazard .body{padding:22px 24px 24px}
+  .hazard .idx{font-size:.72rem;letter-spacing:.2em;color:var(--faint);font-weight:700}
+  .hazard h3{
+    font-size:1.35rem;margin:.15rem 0 .1rem;font-weight:800;letter-spacing:-.01em;
+    display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;
+  }
+  .hazard h3 .tag{
+    font-size:.72rem;font-weight:700;color:var(--h);
+    border:1px solid currentColor;border-radius:6px;padding:1px 7px;letter-spacing:.03em;
+  }
+  .hazard .what{color:var(--muted);margin:.35rem 0 0;font-size:.95rem}
+  .hazard .what b{color:var(--ink)}
+
+  .block{margin-top:16px}
+  .block h4{
+    font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;margin:0 0 .35rem;
+    color:var(--faint);font-weight:700;
+  }
+  .block h4::before{
+    content:"";display:inline-block;width:8px;height:8px;border-radius:2px;
+    background:var(--h);margin-right:7px;vertical-align:middle;
+  }
+  .block.fix h4::before{background:var(--accent)}
+  .block p{margin:0;font-size:.95rem;color:var(--ink)}
+  .block.fix{background:var(--surface-2);border-radius:12px;padding:13px 15px;border:1px solid var(--hair)}
+  .block.fix p{color:var(--ink)}
+  .agent-strong{color:var(--h);font-weight:700}
+
+  /* neglect timeline */
+  .timeline{margin-top:16px}
+  .timeline .track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+  .timeline .track::before{
+    content:"";position:absolute;left:6%;right:6%;top:9px;height:3px;border-radius:3px;
+    background:linear-gradient(90deg,var(--warn),var(--danger),var(--crit));opacity:.35;
+  }
+  .timeline .step{position:relative;text-align:center;padding-top:22px}
+  .timeline .step .dot{
+    position:absolute;top:3px;left:50%;transform:translateX(-50%);
+    width:15px;height:15px;border-radius:50%;background:var(--surface);
+    border:3px solid var(--h);
+  }
+  .timeline .step .when{font-size:.72rem;font-weight:700;color:var(--ink);letter-spacing:.02em}
+  .timeline .step .state{font-size:.8rem;color:var(--muted);line-height:1.45;margin-top:2px;display:block}
+
+  /* ---------- routine ---------- */
+  .routine{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .rcard{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  .rcard .freq{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .rcard h3{font-size:1.15rem;margin:.2rem 0 .1rem;font-weight:800}
+  .rcard .cost{font-size:.82rem;color:var(--muted);margin:0 0 .6rem}
+  .rcard ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .rcard li{position:relative;padding-left:24px;font-size:.92rem;line-height:1.55}
+  .rcard li::before{
+    content:"";position:absolute;left:0;top:.5em;width:12px;height:12px;border-radius:4px;
+    border:2px solid var(--accent);
+  }
+  .rcard li b{color:var(--ink)}
+
+  .kicker{color:var(--accent);font-weight:700}
+
+  /* ---------- chem safety ---------- */
+  .warnbox{
+    margin-top:26px;background:var(--surface);border:1px solid var(--hair);
+    border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);
+    border-top:4px solid var(--crit);
+  }
+  .warnbox h3{margin:.1rem 0 .5rem;font-size:1.1rem;font-weight:800}
+  .warnbox h3::before{content:"⚠ ";color:var(--crit)}
+  .warnbox p{margin:.2rem 0;color:var(--muted);font-size:.94rem}
+  .warnbox p b{color:var(--ink)}
+
+  /* ---------- health ---------- */
+  .health-sec{color:#e7efed}
+  .hgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .hcard{
+    background:#17211f;border:1px solid rgba(255,255,255,.09);border-radius:16px;
+    padding:22px 22px 24px;position:relative;
+  }
+  .hcard .hicon{font-size:1.7rem;line-height:1}
+  .hcard .htag{
+    font-size:.72rem;letter-spacing:.1em;color:#ff9e7a;font-weight:700;margin:.5rem 0 0;
+  }
+  .hcard h3{font-size:1.18rem;margin:.15rem 0 .5rem;font-weight:800;color:#f3f7f5;letter-spacing:-.01em}
+  .hcard .hlead{color:#b7c5c2;font-size:.93rem;margin:0 0 .7rem}
+  .hcard .hlead b{color:#f3f7f5}
+  .hcard .hlist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+  .hcard .hlist li{position:relative;padding-left:18px;font-size:.9rem;line-height:1.6;color:#cdd8d5}
+  .hcard .hlist li::before{
+    content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;
+    background:#ff8a5c;
+  }
+  .hcard .hlist li b{color:#ffd9c8}
+  .hcard .hrisk{
+    margin:.9rem 0 0;padding:11px 13px;border-radius:10px;
+    background:rgba(255,138,92,.1);border:1px solid rgba(255,138,92,.25);
+    font-size:.85rem;color:#e9d3c8;line-height:1.55;
+  }
+  .hcard .hrisk span{
+    display:inline-block;font-weight:700;color:#ffb094;margin-right:.4em;
+    font-size:.72rem;letter-spacing:.06em;
+  }
+  .hnote{
+    margin:22px 0 0;padding:16px 20px;border-radius:12px;
+    background:rgba(255,255,255,.05);border-left:3px solid #ff8a5c;
+    color:#c5d1ce;font-size:.94rem;line-height:1.7;
+  }
+  .hnote b{color:#f3f7f5}
+  @media (max-width:720px){.hgrid{grid-template-columns:1fr}}
+
+  /* ---------- buy & do ---------- */
+  .buy-sec{background:var(--ground)}
+  .buy-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .buy-col{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:20px 20px 22px;box-shadow:var(--shadow)}
+  .buy-col.must{border-top:4px solid var(--accent)}
+  .buy-col.nice{border-top:4px solid var(--faint)}
+  .btier{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:0 0 .8rem;color:var(--accent)}
+  .buy-col.nice .btier{color:var(--muted)}
+  .blist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+  .blist li{border-bottom:1px solid var(--hair);padding-bottom:13px}
+  .blist li:last-child{border-bottom:0;padding-bottom:0}
+  .bhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .bname{font-weight:800;font-size:.98rem;color:var(--ink)}
+  .bprice{font-size:.82rem;font-weight:700;color:var(--accent);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .brole{display:block;font-size:.87rem;color:var(--muted);line-height:1.55;margin-top:.25rem}
+  .brole b{color:var(--ink)}
+
+  .plan-head{margin:34px 0 16px}
+  .plan-head h3{font-size:1.3rem;margin:0;font-weight:800;letter-spacing:-.01em}
+  .plan-head p{margin:.35rem 0 0;color:var(--muted);font-size:.94rem}
+  .plan{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .pstep{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:18px 20px 20px;box-shadow:var(--shadow)}
+  .pnum{font-weight:800;font-size:1.05rem;color:var(--accent);display:flex;flex-direction:column;margin-bottom:.7rem}
+  .pnum span{font-size:.75rem;font-weight:600;color:var(--muted);letter-spacing:.02em;margin-top:.1rem}
+  .pstep ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .pstep li{position:relative;padding-left:20px;font-size:.9rem;line-height:1.55;color:var(--ink)}
+  .pstep li::before{content:"";position:absolute;left:0;top:.5em;width:11px;height:11px;border-radius:4px;border:2px solid var(--accent)}
+  .pstep li b{font-weight:700}
+  .buy-final{margin:24px 0 0;padding:16px 20px;border-radius:12px;background:var(--accent-soft);border:1px solid var(--hair);color:var(--ink);font-size:.96rem;line-height:1.7}
+  .buy-final b{color:var(--ink)}
+  @media (max-width:720px){.buy-cols{grid-template-columns:1fr}.plan{grid-template-columns:1fr}}
+
+  /* ---------- linkage ---------- */
+  .link-sec{background:var(--surface-2);border-top:1px solid var(--hair)}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--hair);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+  .link-tbl{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px}
+  .link-tbl th,.link-tbl td{text-align:left;padding:12px 14px;vertical-align:top;border-bottom:1px solid var(--hair)}
+  .link-tbl thead th{
+    font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);
+    font-weight:700;background:var(--surface-2);white-space:nowrap;
+  }
+  .link-tbl tbody tr:last-child td{border-bottom:0}
+  .link-tbl td:first-child{color:var(--ink);font-weight:600;max-width:280px}
+  .link-tbl td:nth-child(2){color:var(--muted)}
+  .link-tbl td:nth-child(3),.link-tbl td:nth-child(4){white-space:nowrap;color:var(--muted);font-size:.84rem}
+  .cond{display:block;font-size:.76rem;color:var(--danger);margin-top:.2rem}
+  .st{display:inline-block;font-size:.74rem;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .st.have{background:var(--accent-soft);color:var(--accent)}
+  .st.add{background:rgba(214,138,21,.16);color:var(--warn)}
+  .st.note{background:var(--hair);color:var(--muted)}
+  .link-note{margin:18px 0 0;padding:15px 18px;border-radius:12px;background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--accent);color:var(--muted);font-size:.9rem;line-height:1.7}
+  .link-note b{color:var(--ink)}
+
+  footer{border-top:1px solid var(--hair);padding:30px 0 60px;color:var(--faint);font-size:.85rem}
+
+  @media (max-width:720px){
+    .principle{grid-template-columns:1fr}
+    .hazard{grid-template-columns:1fr}
+    .hazard .viz{min-height:150px}
+    .routine{grid-template-columns:1fr}
+    .timeline .step .state{font-size:.72rem}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">浴室汚れフィールドガイド</p>
+    <h1>放置した風呂は、こうなる。</h1>
+    <p class="lede">お風呂の汚れは「サボると汚れる」のではなく、条件がそろうと<b>勝手に育つ生き物と鉱物</b>です。どれが何日でどこまで進行し、なぜ落ちなくなるのか——正体・仕組み・対策を汚れの種類ごとに整理しました。</p>
+
+    <div class="principle" aria-label="汚れが育つ3条件">
+      <div class="p"><div class="n">💧</div><b>水分</b><span>濡れたまま乾かないと、菌もカビも鉱物も定着する。乾いた面では何も育たない。</span></div>
+      <div class="p"><div class="n">🍞</div><b>栄養</b><span>皮脂・石鹸カス・角質。これが菌とカビのエサ。これ自体も汚れになる。</span></div>
+      <div class="p"><div class="n">🌡️</div><b>温度</b><span>20〜30℃前後が繁殖の適温。入浴後の浴室はまさにこの温度。</span></div>
+    </div>
+    <p class="principle-note"><b>結論を先に言うと：</b>掃除そのものより「<b>使ったあとに乾かす（換気・水切り）</b>」が最強の予防です。3条件のうち水分を断つだけで、大半の汚れは発生スピードが激減します。</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">汚れの正体と末路</p>
+      <h2>放置すると危険な6つの汚れ</h2>
+      <p>左の画像は各汚れの見た目を質感再現したものです。深刻度タグは「そこまで進むとどれだけ落ちにくく／健康に悪いか」を表します。</p>
+    </div>
+
+    <div class="hazards">
+
+      <!-- 1 pink slime -->
+      <article class="hazard" style="--h:#e0568a">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="タイルの目地に広がるピンク色のぬめり汚れ">
+            <defs>
+              <filter id="f1" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.06 0.05" numOctaves="4" seed="7" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 1.05"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#e9e4da"/>
+            <g fill="#d8d2c6" opacity=".9">
+              <rect x="0" y="63" width="240" height="4"/><rect x="0" y="130" width="240" height="4"/>
+              <rect x="0" y="197" width="240" height="4"/>
+              <rect x="78" y="0" width="4" height="260"/><rect x="158" y="0" width="4" height="260"/>
+            </g>
+            <rect width="240" height="260" fill="#e0568a" filter="url(#f1)" opacity=".85"/>
+            <rect width="240" height="260" fill="#c23a6e" filter="url(#f1)" opacity=".35" transform="translate(6 5)"/>
+          </svg>
+          <span class="sev warn">深刻度：注意</span>
+          <span class="caption">ピンクのぬめり（数日で発生）</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 01</p>
+          <h3>ピンクぬめり <span class="tag">通称・赤カビ</span></h3>
+          <p class="what"><b>正体：</b>ロドトルラという酵母菌。じつはカビではなく、増殖が非常に速い菌です。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>皮脂や石鹸カスをエサに、水分さえあれば<span class="agent-strong">2〜3日</span>でピンク色のぬめりになります。表面に浮いているだけなので落とすのは簡単ですが、放っておくと本命の黒カビの「地ならし」になります。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">2〜3日</span><span class="state">うっすらピンク</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1週間</span><span class="state">ぬめり・広がる</span></div>
+              <div class="step"><span class="dot"></span><span class="when">2週間</span><span class="state">黒い点が混在</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">黒カビ本格化</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>スポンジでこすればすぐ取れる。除菌はアルコールか塩素系。<b>予防が本質</b>で、最後に50℃以上のお湯をかけて栄養を流し、水気を切って換気すれば発生が激減します。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 black mold -->
+      <article class="hazard" style="--h:#4a4a55">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ゴムパッキンに根を張った黒カビの斑点">
+            <defs>
+              <filter id="f2" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.25 0.22" numOctaves="4" seed="12" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.15"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#dfe1de"/>
+            <rect x="0" y="105" width="240" height="52" fill="#eceeeb"/>
+            <rect x="0" y="105" width="240" height="52" fill="#2c2c33" filter="url(#f2)" opacity=".95"/>
+            <rect x="0" y="150" width="240" height="60" fill="#2c2c33" filter="url(#f2)" opacity=".55"/>
+            <rect x="0" y="60" width="240" height="40" fill="#2c2c33" filter="url(#f2)" opacity=".4"/>
+          </svg>
+          <span class="sev crit">深刻度：深刻</span>
+          <span class="caption">パッキンに根を張った黒カビ</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 02</p>
+          <h3>黒カビ <span class="tag">クロカビ／真菌</span></h3>
+          <p class="what"><b>正体：</b>クラドスポリウムなどの真菌。表面ではなく素材の内部に<b>根（菌糸）を張る</b>のが厄介な点。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>ピンクぬめりや石鹸カスを栄養に、湿度70%以上・20〜30℃で繁殖。ゴムパッキンやシーリングの奥まで菌糸が入り込むと、<span class="agent-strong">表面を拭いても内部の根が残り</span>再発します。胞子はアレルギーや喘息の原因にもなります。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">1週間</span><span class="state">黒い点が出る</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">面で広がる</span></div>
+              <div class="step"><span class="dot"></span><span class="when">3ヶ月</span><span class="state">根が深部へ</span></div>
+              <div class="step"><span class="dot"></span><span class="when">半年〜</span><span class="state">漂白でも消えない</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>塩素系カビ取り剤を吹き、<b>ラップで湿布して密着</b>させ数十分放置してから流す（垂れ防止と浸透）。予防は換気・乾燥に加え、赤カビの段階でこまめに除去して「根を張らせない」こと。パッキン内部まで進んだら打ち直しが必要。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 water scale -->
+      <article class="hazard" style="--h:#6f8ba0">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="鏡や蛇口に白く固着した水垢のウロコ状の跡">
+            <defs>
+              <filter id="f3" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.02 0.35" numOctaves="3" seed="3" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.2 .9"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#9fb2bd"/>
+            <rect width="240" height="260" fill="#c9d6dd" opacity=".5"/>
+            <rect width="240" height="260" fill="#eef3f5" filter="url(#f3)" opacity=".85"/>
+            <rect width="240" height="260" fill="#ffffff" filter="url(#f3)" opacity=".5" transform="translate(0 3)"/>
+          </svg>
+          <span class="sev danger">深刻度：危険</span>
+          <span class="caption">鏡・蛇口の白いウロコ汚れ</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 03</p>
+          <h3>水垢（スケール） <span class="tag">アルカリ性・無機</span></h3>
+          <p class="what"><b>正体：</b>水道水に含まれるカルシウム・マグネシウム・ケイ酸。水滴が乾くたびに残って結晶化した「鉱物」です。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>水滴が蒸発すると水は消えてもミネラルだけが残り、それが毎日積み重なって白いウロコ状に固着します。<span class="agent-strong">層が厚くなるほど硬化</span>し、普通の中性洗剤ではまったく歯が立たなくなります。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">毎日</span><span class="state">薄い曇り</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">白い斑点</span></div>
+              <div class="step"><span class="dot"></span><span class="when">半年</span><span class="state">硬いウロコ</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1年〜</span><span class="state">研磨しないと不可</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>アルカリ性なので<b>クエン酸（酸性）</b>で中和して溶かす。キッチンペーパー＋ラップで湿布すると効く。硬化したら専用の研磨パッド。日常予防は<b>使用後に水滴を拭く・スクイジーで水切り</b>——これだけでほぼ発生しません。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 soap scum -->
+      <article class="hazard" style="--h:#9a8f72">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="壁や床に膜状にこびりついた白と黒の石鹸カス">
+            <defs>
+              <filter id="f4" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.03 0.03" numOctaves="4" seed="21" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.1 .78"/>
+              </filter>
+              <filter id="f4b" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.12" numOctaves="3" seed="9" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2 1.1"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#cfc8ba"/>
+            <rect width="240" height="260" fill="#efeade" filter="url(#f4)" opacity=".9"/>
+            <rect width="240" height="260" fill="#4a4436" filter="url(#f4b)" opacity=".45"/>
+          </svg>
+          <span class="sev danger">深刻度：危険</span>
+          <span class="caption">白（金属石鹸）と黒（皮脂）の混在</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 04</p>
+          <h3>石鹸カス <span class="tag">白＝アルカリ／黒＝酸性</span></h3>
+          <p class="what"><b>正体：</b>2種類が混在。白い「金属石鹸」（石鹸＋水道水のミネラル）と、黒ずむ「酸性石鹸カス」（皮脂・角質）。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>性質が逆の汚れが混ざるのが厄介。<span class="agent-strong">白い汚れはアルカリ性、黒い汚れは酸性</span>なので、片方の洗剤だけでは半分しか落ちません。固着するとカビの栄養源にもなります。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">1週間</span><span class="state">白いくもり</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">ザラつく膜</span></div>
+              <div class="step"><span class="dot"></span><span class="when">3ヶ月</span><span class="state">黒ずみ固着</span></div>
+              <div class="step"><span class="dot"></span><span class="when">半年〜</span><span class="state">カビの温床化</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>白い水垢系は<b>クエン酸</b>、黒い皮脂系は<b>重曹・セスキ炭酸ソーダ</b>と使い分ける。どちらか分からなければ中性洗剤でこまめに落とし、固着させないのが一番。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 drain -->
+      <article class="hazard" style="--h:#7a5a3a">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="髪の毛とぬめりが詰まった排水口">
+            <defs>
+              <filter id="f5" x="-30%" y="-30%" width="160%" height="160%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="4" seed="33" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.4 .95"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#c9ccc9"/>
+            <circle cx="120" cy="130" r="96" fill="#8a8f8b"/>
+            <circle cx="120" cy="130" r="78" fill="#3a3d39"/>
+            <rect x="24" y="20" width="192" height="220" fill="#5a4a30" filter="url(#f5)" opacity=".9"/>
+            <g stroke="#2a2018" stroke-width="1.4" fill="none" opacity=".8">
+              <path d="M60 70 C110 100 130 150 90 200"/>
+              <path d="M170 60 C130 110 150 170 110 210"/>
+              <path d="M90 50 C140 90 120 160 160 200"/>
+              <path d="M120 60 C100 120 160 140 130 205"/>
+            </g>
+          </svg>
+          <span class="sev crit">深刻度：深刻</span>
+          <span class="caption">髪＋皮脂＋菌のバイオフィルム</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 05</p>
+          <h3>排水口のぬめり・詰まり <span class="tag">バイオフィルム</span></h3>
+          <p class="what"><b>正体：</b>髪の毛に皮脂・石鹸カスが絡み、そこに雑菌が作るヌメヌメの膜（バイオフィルム）。悪臭の発生源。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>ヘアキャッチャーに髪が溜まる→汚れが付着→細菌がぬめりを形成、という連鎖。分解時に<span class="agent-strong">硫化水素などの悪臭ガス</span>が出ます。放置すると水はけが悪化し、封水（排水トラップの水）が切れると下水臭が逆流、コバエも湧きます。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">数日</span><span class="state">ぬめり発生</span></div>
+              <div class="step"><span class="dot"></span><span class="when">2週間</span><span class="state">悪臭・水はけ低下</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">部分的に詰まる</span></div>
+              <div class="step"><span class="dot"></span><span class="when">数ヶ月</span><span class="state">逆流・コバエ発生</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p><b>髪の毛は入浴のたびに取り除く</b>のが最も効く（栄養と足場を断つ）。ぬめりは塩素系のヌメリ取り、詰まりはパイプクリーナー。月1回は部品を外して丸洗いを。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6 tub ring -->
+      <article class="hazard" style="--h:#c08a4a">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="浴槽の水位ラインに輪状についた皮脂の湯垢">
+            <defs>
+              <filter id="f6" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.02 0.18" numOctaves="3" seed="44" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.3 .9"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#eef1f0"/>
+            <rect x="0" y="118" width="240" height="34" fill="#c08a4a" filter="url(#f6)" opacity=".85"/>
+            <rect x="0" y="112" width="240" height="8" fill="#a06a2a" opacity=".5"/>
+            <rect x="0" y="150" width="240" height="110" fill="#dfe4e2"/>
+          </svg>
+          <span class="sev warn">深刻度：注意</span>
+          <span class="caption">水位ラインの湯垢リング</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 06</p>
+          <h3>皮脂・湯垢（バスタブリング） <span class="tag">酸性汚れ</span></h3>
+          <p class="what"><b>正体：</b>お湯に浮いた皮脂・角質・入浴剤の成分が、水位のラインに輪状に固着したもの。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>湯面に浮いた油分が、お湯を抜くときに水位ライン上へ帯状に張り付きます。放置すると<span class="agent-strong">ザラつき・黄ばみ</span>になり、赤カビ・黒カビのエサにもなる、いわば汚れの起点です。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">毎日</span><span class="state">薄い輪</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1週間</span><span class="state">ザラつく</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">黄ばみ固着</span></div>
+              <div class="step"><span class="dot"></span><span class="when">数ヶ月</span><span class="state">カビの温床</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>お湯を抜いた直後、<b>まだ乾かないうちに</b>スポンジ＋中性洗剤でひとこすり——これが一番ラク。ザラつきが出たら重曹を。日々の一手間で他の汚れの発生源ごと断てます。</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section style="background:#0e1817;border-top:1px solid var(--hair)" class="health-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" style="color:#ff9e7a">見た目より怖い部分</p>
+      <h2 style="color:#f3f7f5">放置した浴室が、体に何をするか</h2>
+      <p style="color:#aebcb9">汚れが「汚い」だけなら我慢もできますが、実際には胞子・菌・ガスが空気と水にのって体内に入ります。誰にどんな症状が出るのか、健康被害を汚れの種類ごとに詳しく分けました。</p>
+    </div>
+
+    <div class="hgrid">
+
+      <div class="hcard">
+        <div class="hicon">🫁</div>
+        <p class="htag">黒カビの胞子 ／ 空気から</p>
+        <h3>アレルギー・喘息・肺の炎症</h3>
+        <p class="hlead">黒カビ（クラドスポリウム等）は目に見えない<b>胞子</b>を大量に空気中へ飛ばします。浴室のドアを開けた瞬間、これが居室にも流れ込みます。</p>
+        <ul class="hlist">
+          <li><b>アレルギー性鼻炎・結膜炎</b>：くしゃみ・鼻水・目のかゆみが「風邪が長引く」形で慢性化する</li>
+          <li><b>気管支喘息の誘発・悪化</b>：胞子が気道を刺激し、咳・ぜんそく発作の引き金になる</li>
+          <li><b>過敏性肺炎（夏型）</b>：日本の住宅で多いトリコスポロンというカビが原因。<b>咳と微熱が「家にいると出て、外出すると治まる」</b>のが典型サイン。放置すると肺が線維化することも</li>
+          <li><b>皮膚・爪の真菌症</b>：水虫（白癬菌）の温床にもなり、家族間でうつる</li>
+        </ul>
+        <p class="hrisk"><span>とくに注意</span>乳幼児・高齢者・妊娠中・喘息やアレルギー体質の人・免疫が下がっている人（治療中・持病あり）は症状が重く出やすい。</p>
+      </div>
+
+      <div class="hcard">
+        <div class="hicon">♨️</div>
+        <p class="htag">レジオネラ菌 ／ 湯気（エアロゾル）から</p>
+        <h3>レジオネラ肺炎（重症化しうる）</h3>
+        <p class="hlead">見落とされがちですが最も危険度が高いのがこれ。追い焚き配管・給湯・シャワーヘッドの内部にたまった<b>ぬめり（バイオフィルム）</b>の中でレジオネラ菌が増え、<b>湯気の細かい水滴と一緒に吸い込む</b>と感染します。飲んでうつるのではなく「吸う」のがポイント。</p>
+        <ul class="hlist">
+          <li><b>レジオネラ肺炎</b>：高熱・激しい咳・呼吸困難・筋肉痛。進行が速く、高齢者や持病のある人では<b>命に関わる肺炎</b>になり得る</li>
+          <li><b>ポンティアック熱</b>：軽症型で、発熱・頭痛・倦怠感がインフルエンザのように出る</li>
+          <li>とくに<b>24時間風呂・追い焚き機能・お湯を張りっぱなし</b>にする家庭でリスクが上がる（菌が好む30〜40℃の湯が滞留するため）</li>
+        </ul>
+        <p class="hrisk"><span>とくに注意</span>高齢者・喫煙者・免疫が下がっている人・慢性の肺や心臓の病気がある人。乳幼児も注意。</p>
+      </div>
+
+      <div class="hcard">
+        <div class="hicon">🦠</div>
+        <p class="htag">排水口の雑菌・ぬめり ／ 接触と空気から</p>
+        <h3>雑菌・悪臭ガスによる不調</h3>
+        <p class="hlead">排水口やぬめりには大腸菌・緑膿菌などの雑菌が繁殖します。分解の過程で<b>硫化水素などの臭気ガス</b>が出て、これ自体が体調に影響します。</p>
+        <ul class="hlist">
+          <li><b>皮膚トラブル</b>：ぬめりや雑菌のついた床・椅子から、傷口や敏感肌に炎症・かゆみ・毛のう炎（とくに緑膿菌）</li>
+          <li><b>悪臭ガスによる頭痛・吐き気・のどの痛み</b>：濃度が高い密室で長く浴びると起こる</li>
+          <li><b>不快感・食欲不振</b>：慢性的な下水臭はストレスや睡眠の質にも響く</li>
+          <li>ぬめりを栄養に<b>コバエ（チョウバエ）</b>が湧き、衛生状態がさらに悪化する</li>
+        </ul>
+        <p class="hrisk"><span>とくに注意</span>アトピー・敏感肌の人、小さな傷がある人。換気の悪い浴室ほどガスがこもる。</p>
+      </div>
+
+      <div class="hcard">
+        <div class="hicon">🕷️</div>
+        <p class="htag">湿気・カビ ／ 二次的に</p>
+        <h3>ダニの増殖とアレルギー連鎖</h3>
+        <p class="hlead">浴室の湿気とカビは<b>ダニのエサ場</b>にもなります。ダニは脱衣所や隣接する居室・寝具まで広がり、その死骸やフンが強力なアレルゲンになります。</p>
+        <ul class="hlist">
+          <li><b>ダニアレルギー</b>：鼻炎・喘息・アトピー性皮膚炎を悪化させる代表的な原因</li>
+          <li><b>カビ→ダニの連鎖</b>：カビをエサにダニが増え、そのダニをエサにさらに数が増える悪循環</li>
+          <li>浴室単体の問題にとどまらず、<b>家全体の空気の質</b>を下げていく</li>
+        </ul>
+        <p class="hrisk"><span>とくに注意</span>アレルギー体質・小さな子ども。寝室が浴室・脱衣所に近い間取りでは影響が出やすい。</p>
+      </div>
+
+    </div>
+
+    <p class="hnote">共通して効く対策は同じです——<b>換気で乾かす／ぬめりを溜めない／追い焚き配管を定期洗浄する</b>。とくにレジオネラ対策として、追い焚き機能付きの浴槽は月1回ほど<b>専用の配管洗浄剤</b>を使い、シャワーヘッドや残り湯を長く放置しないことが有効です。すでに強い咳・発熱・息苦しさが続く場合は、掃除より先に医療機関へ。</p>
+  </div>
+</section>
+
+<section style="background:var(--surface-2);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">対策の全体設計</p>
+      <h2>「がんばる掃除」より「溜めない習慣」</h2>
+      <p>汚れは初期ほど一瞬で落ち、放置するほど専用薬剤と時間が要ります。頻度で分けたルーティンにしておけば、大掃除がほぼ不要になります。</p>
+    </div>
+    <div class="routine">
+      <div class="rcard">
+        <p class="freq">毎日 / 入浴後</p>
+        <h3>1分・乾かす</h3>
+        <p class="cost">道具：スクイジー・タオル・換気扇</p>
+        <ul>
+          <li><b>お湯を抜いた直後</b>に浴槽の水位ラインをスポンジでひとこすり</li>
+          <li>排水口の<b>髪の毛を取り除く</b></li>
+          <li>壁・鏡を<b>水切り</b>（スクイジー）して水滴を残さない</li>
+          <li><b>換気扇を回しっぱなし</b>にして浴室を乾燥させる</li>
+        </ul>
+      </div>
+      <div class="rcard">
+        <p class="freq">毎週</p>
+        <h3>5分・こする</h3>
+        <p class="cost">道具：中性洗剤・スポンジ・クエン酸</p>
+        <ul>
+          <li>床・壁・浴槽を<b>中性洗剤</b>で全体洗い</li>
+          <li>ピンクぬめりが出た所を<b>除菌</b>（エタノール等）</li>
+          <li>鏡・蛇口の白いくもりを<b>クエン酸</b>で軽く落とす</li>
+          <li>排水口のフタ・部品を外して洗う</li>
+        </ul>
+      </div>
+      <div class="rcard">
+        <p class="freq">毎月</p>
+        <h3>放置系・仕込む</h3>
+        <p class="cost">道具：塩素系カビ取り・パイプクリーナー</p>
+        <ul>
+          <li>目地・パッキンに<b>塩素系＋ラップ湿布</b>で黒カビ予防</li>
+          <li>排水管に<b>パイプクリーナー</b></li>
+          <li>硬い水垢は<b>クエン酸パック</b>でじっくり</li>
+          <li>ゴムパッキンの<b>根深い黒カビ</b>は要チェック</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="warnbox">
+      <h3>薬剤を使うときの安全ルール</h3>
+      <p><b>塩素系（カビ取り・ハイター系）と酸性（クエン酸・サンポール系）は絶対に混ぜない。</b>有毒な塩素ガスが発生し、命に関わります。「まぜるな危険」表示は必ず守ること。</p>
+      <p>使う順番を分け、間に<b>十分な水で流す</b>。使用中は<b>換気を最大</b>にし、<b>ゴム手袋</b>を着用。塩素系を使ったあと同じ場所に酸性を使わない。</p>
+    </div>
+  </div>
+</section>
+
+<section class="buy-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">結論：何を買って、どうするか</p>
+      <h2>ズボラでも回る「買い物リスト＋やること」</h2>
+      <p>毎日ゴシゴシ見張るのは続きません。ゴールは「<b>物の力で自動化して、自分の手数を最小にする</b>」こと。まずこれを買って、この通りに回せばOKです。</p>
+    </div>
+
+    <div class="buy-cols">
+
+      <div class="buy-col must">
+        <p class="btier">まず これだけ買う（必須）</p>
+        <ul class="blist">
+          <li>
+            <div class="bhead"><span class="bname">防カビくん煙剤（銀イオン）</span><span class="bprice">約600円</span></div>
+            <span class="brole">2ヶ月に1回焚くだけで黒カビ予防。これが主役。<b>ルックプラス おふろの防カビくん煙剤</b>など</span>
+          </li>
+          <li>
+            <div class="bhead"><span class="bname">排水口ネット（使い捨て）</span><span class="bprice">100円〜</span></div>
+            <span class="brole">かぶせて溜まったら外して捨てるだけ。髪を指でつままない。100均でOK</span>
+          </li>
+          <li>
+            <div class="bhead"><span class="bname">お風呂用スポンジ＋中性洗剤</span><span class="bprice">〜500円</span></div>
+            <span class="brole">浴槽・ピンクカビ・湯垢はこれで十分。特別な物はいらない</span>
+          </li>
+          <li>
+            <div class="bhead"><span class="bname">水切りワイパー（スクイジー）</span><span class="bprice">100〜800円</span></div>
+            <span class="brole">壁・鏡の水滴を落として乾燥を早める。水垢・カビの最大の予防</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="buy-col nice">
+        <p class="btier">あると さらにラク（任意）</p>
+        <ul class="blist">
+          <li>
+            <div class="bhead"><span class="bname">銅製ヘアキャッチャー</span><span class="bprice">600〜4,000円</span></div>
+            <span class="brole">銅イオンでぬめり・臭いを抑制。掃除頻度そのものが減る</span>
+          </li>
+          <li>
+            <div class="bhead"><span class="bname">防カビスプレー</span><span class="bprice">800円〜</span></div>
+            <span class="brole">気になる所にシュッと補強。<b>防カビムエンダー</b>など。くん煙の合間の保険</span>
+          </li>
+          <li>
+            <div class="bhead"><span class="bname">クエン酸／重曹</span><span class="bprice">各100〜300円</span></div>
+            <span class="brole">白い水垢＝クエン酸、黒い皮脂汚れ＝重曹。固くなった汚れ用</span>
+          </li>
+          <li>
+            <div class="bhead"><span class="bname">追い焚き配管洗浄剤</span><span class="bprice">300円〜</span></div>
+            <span class="brole"><b>ジャバ</b>など。追い焚き機能があるなら月1でレジオネラ対策</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="plan-head">
+      <h3>で、こう回す</h3>
+      <p>手数の少ない順。この3リズムだけ覚えれば、大掃除はほぼ不要になります。</p>
+    </div>
+
+    <div class="plan">
+      <div class="pstep">
+        <div class="pnum">毎日<span>入浴後・約1分</span></div>
+        <ul>
+          <li>換気扇を<b>回しっぱなし</b>にする</li>
+          <li>壁・鏡を<b>水切りワイパー</b>でサッと</li>
+          <li>お湯を抜いた直後、浴槽をスポンジで<b>ひとこすり</b></li>
+          <li>排水口ネットの髪が溜まったら<b>外して捨てる</b>（触らない）</li>
+        </ul>
+      </div>
+      <div class="pstep">
+        <div class="pnum">気づいたら<span>数秒</span></div>
+        <ul>
+          <li>ピンクカビを見つけたら<b>スポンジ＋中性洗剤でその場でこする</b></li>
+          <li>除菌したい時はアルコールをシュッと吹いて拭く</li>
+          <li>黒カビの前に片付けるのがコツ（根を張らせない）</li>
+        </ul>
+      </div>
+      <div class="pstep">
+        <div class="pnum">2ヶ月に1回<span>＋配管は月1</span></div>
+        <ul>
+          <li><b>防カビくん煙剤を焚く</b>（黒カビ予防の本命）</li>
+          <li>追い焚き機能があれば<b>配管洗浄剤を月1</b>（レジオネラ対策）</li>
+          <li>固くなった水垢はクエン酸パックでまとめて</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="buy-final"><b>迷ったら最小構成：</b>「防カビくん煙剤」＋「排水口ネット」＋「水切りワイパー」の3つを今日買って、<b>換気扇つけっぱなし</b>を始めるだけで、この記事の汚れの大半は発生しなくなります。あとは慣れてきたら任意の道具を足していけばOKです。</p>
+  </div>
+</section>
+
+<section class="link-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">家事タスク表との連動</p>
+      <h2>この対策は、うちの hometasks のどれに当たるか</h2>
+      <p>このガイドの内容を、実家の家事メンテ表（<b>hometasks(4).xlsx</b>）の定期タスクに紐づけました。<b>✓＝すでにある／＋＝今回追加</b>。同じ汚れに手作業とグッズ予防で二重に効かせる設計です。</p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="link-tbl">
+        <thead>
+          <tr><th>ガイドの対策</th><th>対応するタスク</th><th>頻度</th><th>置き場所</th><th>状態</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>入浴後に乾かす（換気扇つけっぱなし＋壁鏡の水切り＋浴槽ひとこすり）</td>
+            <td>風呂上がりの「ついで動作」に付ける習慣</td><td>毎日</td><td>Notes（習慣メモ）</td>
+            <td><span class="st add">＋追加</span></td>
+          </tr>
+          <tr>
+            <td>ピンクぬめりを見つけたら中性洗剤でその場でこする</td>
+            <td>気づいたら数秒（常設タスクにしない）</td><td>随時</td><td>—</td>
+            <td><span class="st note">運用</span></td>
+          </tr>
+          <tr>
+            <td>排水口の髪・ぬめりを取る</td>
+            <td>排水口・ゴミ受けを1か所掃除＋各階補充確認</td><td>毎週 金07:00</td><td>WeeklyTasks</td>
+            <td><span class="st have">✓既存</span></td>
+          </tr>
+          <tr>
+            <td>排水口を分解洗い・ドア下レール</td>
+            <td>風呂の排水口・ドア下レール</td><td>年1（1月）</td><td>DeepCleanPlan</td>
+            <td><span class="st have">✓既存</span></td>
+          </tr>
+          <tr>
+            <td>黒カビをチェック・除去</td>
+            <td>風呂の黒カビチェック（夏の高温多湿期）</td><td>年1（7月）</td><td>DeepCleanPlan</td>
+            <td><span class="st have">✓既存</span></td>
+          </tr>
+          <tr>
+            <td>換気を効かせて乾きやすくする</td>
+            <td>浴室換気扇の表面ほこり</td><td>年1（7月）</td><td>DeepCleanPlan</td>
+            <td><span class="st have">✓既存</span></td>
+          </tr>
+          <tr>
+            <td>黒カビ予防の本命（銀イオンで空間除菌）</td>
+            <td>浴室の防カビくん煙剤を焚く</td><td>2ヶ月に1回</td><td>TodoistImport</td>
+            <td><span class="st add">＋追加</span></td>
+          </tr>
+          <tr>
+            <td>レジオネラ対策（配管のぬめり除去）</td>
+            <td>追い焚き配管を洗浄する（ジャバ等）<span class="cond">※追い焚きがある場合のみ</span></td><td>月1（第1土）</td><td>TodoistImport</td>
+            <td><span class="st add">＋追加</span></td>
+          </tr>
+          <tr>
+            <td>汚れタイプ別の落とし方（黒カビ／ぬめり）</td>
+            <td>掃除の基本ガイド（早見表）</td><td>参照用</td><td>CleaningGuide</td>
+            <td><span class="st have">✓既存</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="link-note"><b>変更したファイル：</b>hometasks(4).xlsx の <b>TodoistImport</b> に2タスク、<b>Notes</b> に運用メモ3行を追記しました（既存タスクは変更していません）。編集前のバックアップは <b>hometasks(4).bak_20260713.xlsx</b> にあります。Todoistへ取り込むと、防カビくん煙剤（隔月）と配管洗浄（月1）が自動で回り始めます。<br>※別ファイルの todoistimport.csv を併用している場合は、同じ2行を足すか CSV を書き出し直してください。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    浴室汚れフィールドガイド ／ イラストは各汚れの見た目を質感再現した図解です（実写真ではありません）。商品名は一例で、価格は目安です。薬剤の使用は必ず製品表示に従ってください。
+  </div>
+</footer>
+
+<script>
+  // reflect explicit theme toggle if the host stamps data-theme (handled by CSS); no JS state needed.
+</script>
+
+</body>
+</html>

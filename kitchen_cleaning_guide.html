@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>放置したキッチンは、油の鎧をまとう｜キッチン編</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%8D%B3%3C/text%3E%3C/svg%3E">
+<style>*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0}img,svg{max-width:100%}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#f1eee8;--surface:#ffffff;--surface-2:#f7f3ec;--ink:#241c13;--muted:#6a5f50;
+    --faint:#9a8d7a;--hair:rgba(36,28,19,.12);--hair-strong:rgba(36,28,19,.22);
+    --accent:#a8632a;--accent-soft:#f0e1cf;--warn:#c98a12;--danger:#d1541f;--crit:#b12a2a;
+    --shadow:0 1px 2px rgba(36,28,19,.05), 0 8px 30px rgba(36,28,19,.06);--maxw:940px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#12100b;--surface:#1b1611;--surface-2:#211b14;--ink:#efe7db;--muted:#b0a390;
+      --faint:#7c7060;--hair:rgba(239,231,219,.12);--hair-strong:rgba(239,231,219,.2);
+      --accent:#e0a86a;--accent-soft:#2e2013;--warn:#e6a83e;--danger:#ec7a44;--crit:#e46464;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#f1eee8;--surface:#ffffff;--surface-2:#f7f3ec;--ink:#241c13;--muted:#6a5f50;
+    --faint:#9a8d7a;--hair:rgba(36,28,19,.12);--hair-strong:rgba(36,28,19,.22);
+    --accent:#a8632a;--accent-soft:#f0e1cf;--warn:#c98a12;--danger:#d1541f;--crit:#b12a2a;
+    --shadow:0 1px 2px rgba(36,28,19,.05), 0 8px 30px rgba(36,28,19,.06);
+  }
+  :root[data-theme="dark"]{
+    --ground:#12100b;--surface:#1b1611;--surface-2:#211b14;--ink:#efe7db;--muted:#b0a390;
+    --faint:#7c7060;--hair:rgba(239,231,219,.12);--hair-strong:rgba(239,231,219,.2);
+    --accent:#e0a86a;--accent-soft:#2e2013;--warn:#e6a83e;--danger:#ec7a44;--crit:#e46464;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+    line-height:1.75;letter-spacing:.01em;font-feature-settings:"palt" 1;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+
+  header.hero{padding:72px 0 40px;border-bottom:1px solid var(--hair);background:radial-gradient(120% 80% at 82% -10%, var(--accent-soft) 0%, transparent 55%);}
+  .hero h1{font-size:clamp(2.1rem,5.6vw,3.4rem);line-height:1.12;margin:.5rem 0 .2rem;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .hero .lede{font-size:clamp(1.02rem,2.2vw,1.18rem);color:var(--muted);max-width:60ch;margin:.6rem 0 0}
+  .series{display:inline-flex;align-items:center;gap:8px;margin-bottom:6px;font-size:.76rem;color:var(--muted);background:var(--surface);border:1px solid var(--hair);border-radius:20px;padding:4px 12px}
+  .series b{color:var(--accent)}
+
+  .principle{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .principle .p{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:16px 16px 18px;box-shadow:var(--shadow)}
+  .principle .p .n{font-size:1.5rem}
+  .principle .p b{display:block;font-size:1.02rem;margin:.35rem 0 .15rem}
+  .principle .p span{color:var(--muted);font-size:.9rem;line-height:1.6;display:block}
+  .principle-note{margin-top:16px;padding:14px 18px;border-left:3px solid var(--accent);background:var(--surface-2);border-radius:0 12px 12px 0;color:var(--muted);font-size:.95rem}
+  .principle-note b{color:var(--ink)}
+
+  section{padding:44px 0}
+  .sec-head{margin:0 0 22px}
+  .sec-head h2{font-size:clamp(1.4rem,3.2vw,1.9rem);margin:.3rem 0 0;font-weight:800;letter-spacing:-.01em}
+  .sec-head p{color:var(--muted);margin:.4rem 0 0;max-width:64ch}
+
+  .hazards{display:flex;flex-direction:column;gap:22px}
+  .hazard{--h:#888;background:var(--surface);border:1px solid var(--hair);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:240px 1fr}
+  .hazard .viz{position:relative;background:#0e0a06;min-height:100%}
+  .hazard .viz svg{display:block;width:100%;height:100%;position:absolute;inset:0}
+  .hazard .viz .caption{position:absolute;left:12px;bottom:11px;z-index:2;font-size:.72rem;color:#fff;background:rgba(0,0,0,.5);padding:3px 9px;border-radius:20px;letter-spacing:.04em}
+  .sev{position:absolute;top:12px;left:12px;z-index:2;font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:4px 10px;border-radius:20px;color:#fff}
+  .sev.warn{background:var(--warn)}.sev.danger{background:var(--danger)}.sev.crit{background:var(--crit)}
+
+  .hazard .body{padding:22px 24px 24px}
+  .hazard .idx{font-size:.72rem;letter-spacing:.2em;color:var(--faint);font-weight:700}
+  .hazard h3{font-size:1.35rem;margin:.15rem 0 .1rem;font-weight:800;letter-spacing:-.01em;display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+  .hazard h3 .tag{font-size:.72rem;font-weight:700;color:var(--h);border:1px solid currentColor;border-radius:6px;padding:1px 7px;letter-spacing:.03em}
+  .hazard .what{color:var(--muted);margin:.35rem 0 0;font-size:.95rem}
+  .hazard .what b{color:var(--ink)}
+
+  .block{margin-top:16px}
+  .block h4{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;margin:0 0 .35rem;color:var(--faint);font-weight:700}
+  .block h4::before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--h);margin-right:7px;vertical-align:middle}
+  .block.fix h4::before{background:var(--accent)}
+  .block p{margin:0;font-size:.95rem;color:var(--ink)}
+  .block.fix{background:var(--surface-2);border-radius:12px;padding:13px 15px;border:1px solid var(--hair)}
+  .agent-strong{color:var(--h);font-weight:700}
+
+  .timeline{margin-top:16px}
+  .timeline .track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+  .timeline .track::before{content:"";position:absolute;left:6%;right:6%;top:9px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--warn),var(--danger),var(--crit));opacity:.35}
+  .timeline .step{position:relative;text-align:center;padding-top:22px}
+  .timeline .step .dot{position:absolute;top:3px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;background:var(--surface);border:3px solid var(--h)}
+  .timeline .step .when{font-size:.72rem;font-weight:700;color:var(--ink);letter-spacing:.02em}
+  .timeline .step .state{font-size:.8rem;color:var(--muted);line-height:1.45;margin-top:2px;display:block}
+
+  .caution{background:var(--surface);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);border-top:4px solid var(--crit);padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+  .caution .cico{font-size:1.8rem}
+  .caution h3{margin:.1rem 0 .4rem;font-size:1.15rem;font-weight:800}
+  .caution p{margin:.3rem 0 0;color:var(--muted);font-size:.94rem}
+  .caution p b{color:var(--ink)}
+
+  .health-sec{color:#efe7db}
+  .hgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .hcard{background:#1c1710;border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:22px 22px 24px}
+  .hcard .hicon{font-size:1.7rem;line-height:1}
+  .hcard .htag{font-size:.72rem;letter-spacing:.1em;color:#e6ab6c;font-weight:700;margin:.5rem 0 0}
+  .hcard h3{font-size:1.18rem;margin:.15rem 0 .5rem;font-weight:800;color:#f6efe4;letter-spacing:-.01em}
+  .hcard .hlead{color:#c4b7a4;font-size:.93rem;margin:0 0 .7rem}
+  .hcard .hlead b{color:#f6efe4}
+  .hcard .hlist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+  .hcard .hlist li{position:relative;padding-left:18px;font-size:.9rem;line-height:1.6;color:#d6c9b7}
+  .hcard .hlist li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:#e0a86a}
+  .hcard .hlist li b{color:#f0d8bd}
+  .hcard .hrisk{margin:.9rem 0 0;padding:11px 13px;border-radius:10px;background:rgba(224,168,106,.12);border:1px solid rgba(224,168,106,.28);font-size:.85rem;color:#e6d6c2;line-height:1.55}
+  .hcard .hrisk span{display:inline-block;font-weight:700;color:#eeba86;margin-right:.4em;font-size:.72rem;letter-spacing:.06em}
+  .hnote{margin:22px 0 0;padding:16px 20px;border-radius:12px;background:rgba(255,255,255,.05);border-left:3px solid #e0a86a;color:#cdc0ad;font-size:.94rem;line-height:1.7}
+  .hnote b{color:#f6efe4}
+
+  .buy-sec{background:var(--ground)}
+  .buy-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .buy-col{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:20px 20px 22px;box-shadow:var(--shadow)}
+  .buy-col.must{border-top:4px solid var(--accent)}.buy-col.nice{border-top:4px solid var(--faint)}
+  .btier{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:0 0 .8rem;color:var(--accent)}
+  .buy-col.nice .btier{color:var(--muted)}
+  .blist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+  .blist li{border-bottom:1px solid var(--hair);padding-bottom:13px}.blist li:last-child{border-bottom:0;padding-bottom:0}
+  .bhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .bname{font-weight:800;font-size:.98rem;color:var(--ink)}
+  .bprice{font-size:.82rem;font-weight:700;color:var(--accent);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .brole{display:block;font-size:.87rem;color:var(--muted);line-height:1.55;margin-top:.25rem}
+  .brole b{color:var(--ink)}
+  .plan-head{margin:34px 0 16px}
+  .plan-head h3{font-size:1.3rem;margin:0;font-weight:800;letter-spacing:-.01em}
+  .plan-head p{margin:.35rem 0 0;color:var(--muted);font-size:.94rem}
+  .plan{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .pstep{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:18px 20px 20px;box-shadow:var(--shadow)}
+  .pnum{font-weight:800;font-size:1.05rem;color:var(--accent);display:flex;flex-direction:column;margin-bottom:.7rem}
+  .pnum span{font-size:.75rem;font-weight:600;color:var(--muted);letter-spacing:.02em;margin-top:.1rem}
+  .pstep ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .pstep li{position:relative;padding-left:20px;font-size:.9rem;line-height:1.55;color:var(--ink)}
+  .pstep li::before{content:"";position:absolute;left:0;top:.5em;width:11px;height:11px;border-radius:4px;border:2px solid var(--accent)}
+  .buy-final{margin:24px 0 0;padding:16px 20px;border-radius:12px;background:var(--accent-soft);border:1px solid var(--hair);color:var(--ink);font-size:.96rem;line-height:1.7}
+  .buy-final b{color:var(--ink)}
+
+  .warnbox{margin-top:26px;background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);border-top:4px solid var(--crit)}
+  .warnbox h3{margin:.1rem 0 .5rem;font-size:1.1rem;font-weight:800}
+  .warnbox h3::before{content:"⚠ ";color:var(--crit)}
+  .warnbox p{margin:.2rem 0;color:var(--muted);font-size:.94rem}
+  .warnbox p b{color:var(--ink)}
+
+  .link-sec{background:var(--surface-2);border-top:1px solid var(--hair)}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--hair);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+  .link-tbl{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px}
+  .link-tbl th,.link-tbl td{text-align:left;padding:12px 14px;vertical-align:top;border-bottom:1px solid var(--hair)}
+  .link-tbl thead th{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:700;background:var(--surface-2);white-space:nowrap}
+  .link-tbl tbody tr:last-child td{border-bottom:0}
+  .link-tbl td:first-child{color:var(--ink);font-weight:600;max-width:280px}
+  .link-tbl td:nth-child(2){color:var(--muted)}
+  .link-tbl td:nth-child(3),.link-tbl td:nth-child(4){white-space:nowrap;color:var(--muted);font-size:.84rem}
+  .st{display:inline-block;font-size:.74rem;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .st.have{background:var(--accent-soft);color:var(--accent)}
+  .st.add{background:rgba(201,138,18,.18);color:var(--warn)}
+  .st.note{background:var(--hair);color:var(--muted)}
+  .link-note{margin:18px 0 0;padding:15px 18px;border-radius:12px;background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--accent);color:var(--muted);font-size:.9rem;line-height:1.7}
+  .link-note b{color:var(--ink)}
+
+  footer{border-top:1px solid var(--hair);padding:30px 0 60px;color:var(--faint);font-size:.85rem}
+
+  @media (max-width:720px){
+    .principle{grid-template-columns:1fr}
+    .hazard{grid-template-columns:1fr}.hazard .viz{min-height:150px}
+    .hgrid{grid-template-columns:1fr}.buy-cols{grid-template-columns:1fr}.plan{grid-template-columns:1fr}
+    .caution{grid-template-columns:1fr}
+    .timeline .step .state{font-size:.72rem}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="series">おうちメンテ・フィールドガイド <b>／ キッチン編</b></span>
+    <p class="eyebrow">油は「冷えて固まる」前がすべて</p>
+    <h1>放置したキッチンは、油の鎧をまとう。</h1>
+    <p class="lede">キッチンの汚れは他の水回りと逆で、主役は<b>油</b>。温かいうちはサッと落ちるのに、冷えるとホコリと混ざって<b>ベタベタの層に固まり</b>、やがて素人では落ちない鎧になります。しかも溜まった油は<b>引火リスク</b>、生ゴミのぬめりは<b>虫と食中毒菌</b>を呼びます。どこに何が溜まり、なぜ手遅れになるのかを整理しました。</p>
+
+    <div class="principle" aria-label="キッチン汚れの3要素">
+      <div class="p"><div class="n">🛢️</div><b>油煙</b><span>加熱調理で舞う油の粒。換気扇・壁・家電に付着してベタつきの土台になる。</span></div>
+      <div class="p"><div class="n">❄️</div><b>冷えて固化</b><span>温かい油は流れるが、冷めるとホコリと混ざり酸化して粘着・固着する。</span></div>
+      <div class="p"><div class="n">🍚</div><b>食品くず＋水分</b><span>シンク・排水口の生ゴミと水分が、菌のぬめり（バイオフィルム）を育てる。</span></div>
+    </div>
+    <p class="principle-note"><b>だから鉄則は「その日のうち・温かいうち」。</b>油もこぼれも、固まる前なら中性洗剤でひと拭き。<b>固着させない＝一番ラクで一番安全</b>（大掃除も火災リスクも減る）というのがキッチンの原則です。</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">放置の末路</p>
+      <h2>キッチンに溜まる5つの汚れ</h2>
+      <p>左は各汚れの見た目を質感再現した図解です。とくにレンジフードの油は放置で固着し、火災リスクにもつながります。</p>
+    </div>
+
+    <div class="hazards">
+
+      <!-- 1 range hood grease -->
+      <article class="hazard" style="--h:#a8632a">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="レンジフードに垂れて固まったベタベタの油汚れ">
+            <defs>
+              <filter id="k1" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.02 0.12" numOctaves="4" seed="7" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.4 1"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#c9ccce"/>
+            <g stroke="#adb1b3" stroke-width="10"><path d="M40 0 V260 M120 0 V260 M200 0 V260"/></g>
+            <rect width="240" height="260" fill="#7a4a17" filter="url(#k1)" opacity=".85"/>
+            <rect width="240" height="260" fill="#4a2c0c" filter="url(#k1)" opacity=".45" transform="translate(3 8)"/>
+          </svg>
+          <span class="sev crit">深刻度：深刻</span>
+          <span class="caption">レンジフードの固着油</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 01</p>
+          <h3>レンジフード・換気扇の油 <span class="tag">火災リスク</span></h3>
+          <p class="what"><b>正体：</b>調理の油煙が吸い込まれて付着した油＋ホコリ。放置すると茶色くベタベタに固まり、垂れてきます。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>油は空気で酸化しながらホコリと混ざり、<span class="agent-strong">冷えるほど硬い粘着層に</span>。溜まった油は可燃物で、コンロの火が引火すると<b>グリス火災（油火災）</b>の危険があります。フィルターが詰まれば換気効率も落ちます。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">2週間</span><span class="state">薄いベタつき</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">茶色く付着</span></div>
+              <div class="step"><span class="dot"></span><span class="when">半年</span><span class="state">固着・垂れる</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1年〜</span><span class="state">こびり付き・引火性</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>油は酸性汚れなので<b>アルカリ性洗剤（マジックリン等）やセスキ・重曹</b>で分解。フィルターは<b>つけ置き</b>が効く。予防は表面を月1で拭くだけ——固まる前ならスルッと落ちます。奥の内部やシロッコファンは無理せずプロも選択肢。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 stove char -->
+      <article class="hazard" style="--h:#5a4326">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="コンロと五徳に炭化した焦げ付き油">
+            <defs>
+              <filter id="k2" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.1 0.1" numOctaves="4" seed="15" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.8 1.05"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#c4c6c7"/>
+            <circle cx="120" cy="130" r="92" fill="#8a8d8e"/>
+            <circle cx="120" cy="130" r="60" fill="#5a5c5d"/>
+            <rect width="240" height="260" fill="#2a1e10" filter="url(#k2)" opacity=".82"/>
+          </svg>
+          <span class="sev danger">深刻度：危険</span>
+          <span class="caption">五徳・コンロの焦げ付き</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 02</p>
+          <h3>コンロ・五徳の焦げ付き油 <span class="tag">炭化して固着</span></h3>
+          <p class="what"><b>正体：</b>吹きこぼれや油はねが加熱で焦げ、炭化してこびりついたもの。五徳・受け皿・天板に固着します。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>こぼれをそのまま加熱するたびに<span class="agent-strong">焦げが層になって硬化</span>。毎回拭けば一瞬で取れるのに、放置すると削らないと落ちないレベルになり、見た目も清潔感も一気に落ちます。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">その日</span><span class="state">拭けば取れる</span></div>
+              <div class="step"><span class="dot"></span><span class="when">数日</span><span class="state">固まり始め</span></div>
+              <div class="step"><span class="dot"></span><span class="when">2週間</span><span class="state">こびり付き</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">炭化・要スクレーパー</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>基本は<b>調理後の余熱があるうちに固く絞った布で拭く</b>。固着した五徳は<b>重曹を入れた湯で煮る／つけ置き</b>してからこする。天板はスクレーパーで。予防＝毎回のひと拭き。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 sink drain slime -->
+      <article class="hazard" style="--h:#4a6b40">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="シンクの排水口に溜まった生ゴミのぬめりとヘドロ">
+            <defs>
+              <filter id="k3" x="-30%" y="-30%" width="160%" height="160%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="4" seed="24" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#c3c7c8"/>
+            <circle cx="120" cy="130" r="96" fill="#9498 99"/>
+            <circle cx="120" cy="130" r="96" fill="#94989a"/>
+            <circle cx="120" cy="130" r="72" fill="#3a3d3a"/>
+            <rect x="24" y="24" width="192" height="212" fill="#3f5a2f" filter="url(#k3)" opacity=".88"/>
+            <circle cx="120" cy="130" r="30" fill="#20241d"/>
+          </svg>
+          <span class="sev crit">深刻度：深刻</span>
+          <span class="caption">排水口の生ゴミぬめり</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 03</p>
+          <h3>シンク・排水口のぬめり <span class="tag">バイオフィルム</span></h3>
+          <p class="what"><b>正体：</b>食品くず・油・水分に雑菌が繁殖したぬめり（バイオフィルム）。生ゴミを放置するほど一気に育ちます。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>ゴミ受けに残った食品くずと水分で細菌が増え、ぬめりと<span class="agent-strong">強い生ゴミ臭</span>を出します。放置すると排水管の詰まり、<b>コバエ（チョウバエ）やゴキブリを呼ぶ</b>温床に。夏はとくに進行が速い。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">1日</span><span class="state">ぬめり始め</span></div>
+              <div class="step"><span class="dot"></span><span class="when">数日</span><span class="state">悪臭・ぬめり</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1週間</span><span class="state">コバエ発生</span></div>
+              <div class="step"><span class="dot"></span><span class="when">放置</span><span class="state">詰まり・虫の巣</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p><b>ゴミ受けの生ゴミは毎日捨てる</b>のが最強。ぬめりは中性洗剤＋ブラシ、定期的に<b>塩素系（キッチンハイター等）</b>で除菌。排水管はパイプクリーナー。ネットを使えば手を汚さず捨てられます。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 fridge gasket mold + back dust -->
+      <article class="hazard" style="--h:#3a3b45">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="冷蔵庫のゴムパッキンに生えた黒カビ">
+            <defs>
+              <filter id="k4" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.2 0.18" numOctaves="4" seed="33" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2 1.1"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#e4e6e6"/>
+            <rect x="70" y="0" width="60" height="260" fill="#cfd2d2"/>
+            <rect x="70" y="0" width="34" height="260" fill="#b7bbbb"/>
+            <rect x="86" y="0" width="34" height="260" fill="#2c2c33" filter="url(#k4)" opacity=".92"/>
+          </svg>
+          <span class="sev danger">深刻度：危険</span>
+          <span class="caption">冷蔵庫パッキンの黒カビ</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 04</p>
+          <h3>冷蔵庫のパッキン＆裏 <span class="tag">黒カビ＋ホコリ</span></h3>
+          <p class="what"><b>正体：</b>ドアのゴムパッキンに生える黒カビ（結露＋食品カスが原因）と、本体の裏・下に溜まるホコリ。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>パッキンは開閉時の結露で湿り、こぼれた食品を栄養に<span class="agent-strong">お風呂と同じく黒カビが根を張ります</span>。庫内の汁こぼれは食中毒菌の温床。さらに裏のホコリは<b>放熱を妨げて電気代増</b>、まれに発火要因にも。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">パッキン黒ずみ</span></div>
+              <div class="step"><span class="dot"></span><span class="when">3ヶ月</span><span class="state">黒カビ・庫内汚れ</span></div>
+              <div class="step"><span class="dot"></span><span class="when">半年</span><span class="state">根を張る・裏ホコリ</span></div>
+              <div class="step"><span class="dot"></span><span class="when">放置</span><span class="state">効率低下・菌繁殖</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>パッキンは<b>アルコールか中性洗剤で拭く</b>（黒カビ初期はこれで取れる）。庫内は汁こぼれをその都度、月1で1段ずつ拭く。<b>裏・下のホコリは掃除機</b>で。電源や配線は無理に触らない。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 microwave interior -->
+      <article class="hazard" style="--h:#7a5a2a">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="電子レンジ庫内の飛び散り汚れと焦げ付き">
+            <defs>
+              <filter id="k5" x="-30%" y="-30%" width="160%" height="160%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.3" numOctaves="3" seed="42" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.2"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#2b2924"/>
+            <rect x="20" y="20" width="200" height="220" rx="8" fill="#3a372f"/>
+            <circle cx="120" cy="180" r="60" fill="#4a463c" opacity=".7"/>
+            <rect width="240" height="260" fill="#a06a24" filter="url(#k5)" opacity=".6"/>
+          </svg>
+          <span class="sev warn">深刻度：注意</span>
+          <span class="caption">電子レンジ庫内の飛び散り</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 05</p>
+          <h3>電子レンジ庫内の飛び散り <span class="tag">焦げ・におい</span></h3>
+          <p class="what"><b>正体：</b>加熱で飛び散った食品や油。放置して再加熱を繰り返すと、こびりついて焦げ・においになります。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>飛び散りをそのまま何度も温めると<span class="agent-strong">焦げ付いて固着し、いやなにおい</span>の元に。汚れが多いと加熱ムラや発煙・発火の一因にもなります。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">都度</span><span class="state">飛び散り付着</span></div>
+              <div class="step"><span class="dot"></span><span class="when">数日</span><span class="state">こびり付き</span></div>
+              <div class="step"><span class="dot"></span><span class="when">2週間</span><span class="state">焦げ・におい</span></div>
+              <div class="step"><span class="dot"></span><span class="when">放置</span><span class="state">加熱ムラ・発煙</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p><b>水（または水＋重曹）を入れた耐熱容器を数分チンして蒸らす</b>と、汚れがふやけてサッと拭けます。こまめにやれば洗剤いらず。強くこすらず蒸気で浮かせるのがコツ。</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div style="margin-top:22px">
+      <div class="caution">
+        <div class="cico">🔥</div>
+        <div>
+          <h3>油と火の「見落とし火災」に注意</h3>
+          <p>キッチンの放置汚れは、他の部屋と違って<b>火災に直結</b>します。<b>①レンジフード・コンロに溜まった油</b>はコンロの炎で引火する恐れ（グリス火災）。②<b>油火災に水は厳禁</b>——炎が爆発的に広がります。万一のときは火を止め、濡れ布巾で覆うか消火器を。③<b>冷蔵庫・電子レンジ裏のホコリ</b>もトラッキング（コンセントのホコリ発火）の原因に。定期的な油とホコリの除去は、掃除であると同時に<b>防火</b>でもあります。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#100c07;border-top:1px solid var(--hair)" class="health-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" style="color:#e6ab6c">口に入る場所だからこそ</p>
+      <h2 style="color:#f6efe4">放置キッチンが、体に何をするか</h2>
+      <p style="color:#c0b3a0">キッチンは<b>食べ物を扱う場所</b>。汚れの放置は、カビや臭いだけでなく<b>食中毒</b>や<b>害虫</b>、そして<b>火災</b>という、他の水回りにはない直接的なリスクにつながります。</p>
+    </div>
+
+    <div class="hgrid">
+      <div class="hcard">
+        <div class="hicon">🦠</div>
+        <p class="htag">雑菌・食中毒菌 ／ 口から</p>
+        <h3>食中毒とカビ</h3>
+        <p class="hlead">シンク・ふきん・まな板・冷蔵庫の汚れには、<b>大腸菌・サルモネラ・黄色ブドウ球菌</b>などが繁殖します。調理を介して口に入るのが最大の怖さ。</p>
+        <ul class="hlist">
+          <li><b>食中毒</b>：腹痛・下痢・嘔吐。とくに夏場、生ものを扱う周辺は菌が増えやすい</li>
+          <li><b>ぬめり・ふきんの菌</b>：濡れたスポンジ・ふきんは菌の温床。使い回すと汚れを塗り広げる</li>
+          <li><b>冷蔵庫パッキンの黒カビ</b>：胞子や汁こぼれの菌が食品を汚染することも</li>
+          <li>油汚れ・食品カスは<b>あらゆる菌とカビのエサ</b>になる</li>
+        </ul>
+        <p class="hrisk"><span>とくに注意</span>乳幼児・高齢者・妊娠中は食中毒が重症化しやすい。生肉・生魚を扱ったらまな板と手をすぐ洗浄。</p>
+      </div>
+
+      <div class="hcard">
+        <div class="hicon">🪳</div>
+        <p class="htag">害虫・火災 ／ 暮らしの安全</p>
+        <h3>コバエ・ゴキブリと火のリスク</h3>
+        <p class="hlead">放置した生ゴミと油は、<b>虫を呼び、火を招きます</b>。健康というより「暮らしの安全」に直結する被害です。</p>
+        <ul class="hlist">
+          <li><b>コバエ・ゴキブリの誘引</b>：生ゴミのぬめり・食品くず・油が発生源。害虫は菌を運び、衛生をさらに悪化させる</li>
+          <li><b>グリス火災</b>：レンジフード・コンロの油に引火。油火災に<b>水をかけると爆発的に燃え広がる</b></li>
+          <li><b>トラッキング火災</b>：冷蔵庫やレンジ裏のコンセントに溜まったホコリ＋湿気が発火の一因</li>
+          <li><b>悪臭</b>：生ゴミ臭・油の酸化臭が部屋にこもる</li>
+        </ul>
+        <p class="hrisk"><span>とくに注意</span>ゴミの日まで生ゴミを放置しない（冷凍・密閉が有効）。油とホコリの定期除去は防火そのもの。</p>
+      </div>
+    </div>
+
+    <p class="hnote">効く対策はシンプルで、<b>①その日のうちに油・こぼれを拭く（固着＆火災予防）／②生ゴミは毎日捨てる（菌・虫予防）／③冷蔵庫とコンセント裏のホコリを定期除去</b>。「口に入る場所」と「火を使う場所」という2つの意識が、キッチンの手入れのすべてです。</p>
+  </div>
+</section>
+
+<section class="buy-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">結論：何を買って、どうするか</p>
+      <h2>「アルカリで油、毎日で生ゴミ」の道具立て</h2>
+      <p>キッチンは汚れの性質で洗剤を分けるのがコツ。油＝アルカリ性、水垢＝酸性、ぬめり＝中性＋塩素系。まずこれを揃えて、毎日と週1の軽いリズムで回せば固着も虫も出ません。</p>
+    </div>
+
+    <div class="buy-cols">
+      <div class="buy-col must">
+        <p class="btier">まず これだけ買う（必須）</p>
+        <ul class="blist">
+          <li><div class="bhead"><span class="bname">油汚れ用アルカリ洗剤</span><span class="bprice">300円〜</span></div><span class="brole">マジックリン等。レンジフード・コンロ・壁の油を分解。キッチンの主役</span></li>
+          <li><div class="bhead"><span class="bname">台所用中性洗剤＋スポンジ</span><span class="bprice">〜400円</span></div><span class="brole">食器・シンク・日常のぬめり用</span></li>
+          <li><div class="bhead"><span class="bname">排水口ネット／ゴミ受け</span><span class="bprice">100円〜</span></div><span class="brole">生ゴミをまとめて手を汚さず捨てる。ぬめり・虫の予防</span></li>
+          <li><div class="bhead"><span class="bname">キッチンペーパー・ゴム手袋</span><span class="bprice">〜300円</span></div><span class="brole">油拭き取り、洗剤使用時の手の保護</span></li>
+        </ul>
+      </div>
+      <div class="buy-col nice">
+        <p class="btier">あると さらにラク（任意）</p>
+        <ul class="blist">
+          <li><div class="bhead"><span class="bname">セスキ／重曹スプレー</span><span class="bprice">100円〜</span></div><span class="brole">軽い油はこれで十分。五徳のつけ置き（重曹）にも</span></li>
+          <li><div class="bhead"><span class="bname">塩素系キッチン漂白剤</span><span class="bprice">200円〜</span></div><span class="brole">キッチンハイター等。排水口・ふきん・まな板の除菌。※酸性と混ぜない</span></li>
+          <li><div class="bhead"><span class="bname">パイプクリーナー</span><span class="bprice">300円〜</span></div><span class="brole">排水管の詰まり・ぬめり・においに月1</span></li>
+          <li><div class="bhead"><span class="bname">スクレーパー／レンジフードフィルター</span><span class="bprice">数百円〜</span></div><span class="brole">固着焦げの除去、フィルターは貼り替えで掃除がラクに</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="plan-head"><h3>で、こう回す</h3><p>「その日のうち」を軽くやるほど、週末も年末もラクになる。</p></div>
+    <div class="plan">
+      <div class="pstep"><div class="pnum">毎日<span>調理後・数分</span></div><ul>
+        <li>コンロ・天板を<b>余熱があるうちにひと拭き</b></li>
+        <li><b>ゴミ受けの生ゴミを捨てる</b>＋シンクを中性洗剤で流す</li>
+        <li>飛び散ったらレンジ庫内もサッと</li>
+      </ul></div>
+      <div class="pstep"><div class="pnum">週1<span>10分</span></div><ul>
+        <li><b>レンジフード表面</b>をアルカリ洗剤で拭く</li>
+        <li>シンク・排水口を<b>塩素系で除菌</b></li>
+        <li>ふきん・スポンジを漂白・交換</li>
+      </ul></div>
+      <div class="pstep"><div class="pnum">月1〜<span>放置系・重い所</span></div><ul>
+        <li><b>五徳・フィルターをつけ置き</b>洗い</li>
+        <li>冷蔵庫を1段拭く＋<b>裏のホコリ</b>を掃除機</li>
+        <li>排水管に<b>パイプクリーナー</b></li>
+      </ul></div>
+    </div>
+
+    <p class="buy-final"><b>最小構成：</b>「油汚れ用アルカリ洗剤」「中性洗剤＋スポンジ」「排水口ネット」を置いて、<b>調理後にコンロをひと拭き＋生ゴミを毎日捨てる</b>だけ。これで固着した油も、虫も、生ゴミ臭も、そもそも出なくなります。重い所は月1でつけ置きに逃がせばOK。</p>
+
+    <div class="warnbox">
+      <h3>キッチン洗剤・火まわりの安全ルール</h3>
+      <p><b>塩素系（キッチンハイター等）と酸性（クエン酸・サンポール等）は絶対に混ぜない。</b>有毒な塩素ガスが出ます。使う日を分け、間に十分すすぐこと。</p>
+      <p><b>油火災に水は厳禁。</b>コンロ周りの油掃除中は必ず火を消す。溜まった油は引火物と心得て、レンジフードとコンロはこまめに。使用中は<b>換気とゴム手袋</b>を。</p>
+    </div>
+  </div>
+</section>
+
+<section class="link-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">家事タスク表との連動</p>
+      <h2>この対策は、うちの hometasks のどれに当たるか</h2>
+      <p>キッチンは既に<b>DeepCleanPlanの2月・8月</b>に手厚く入っています（コンロ・シンク・冷蔵庫・レンジフード）。そこへ<b>毎週のリセットと月1のレンジフード</b>を足したので、「毎日ひと拭き」「毎週リセット」「月1つけ置き」「年2総点検」の4層になりました。<b>✓＝既存／＋＝今回追加</b>。</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="link-tbl">
+        <thead><tr><th>ガイドの対策</th><th>対応するタスク</th><th>頻度</th><th>置き場所</th><th>状態</th></tr></thead>
+        <tbody>
+          <tr><td>調理後にコンロを拭く・生ゴミを毎日捨てる</td><td>調理後の「その日のうち」習慣</td><td>毎日</td><td>Notes（習慣メモ）</td><td><span class="st note">運用</span></td></tr>
+          <tr><td>コンロ・シンク・排水口を週1リセット</td><td>キッチンリセット（コンロ・シンク・排水口）</td><td>毎週 月21:00</td><td>WeeklyTasks</td><td><span class="st add">＋追加</span></td></tr>
+          <tr><td>レンジフード表面の油を拭く</td><td>レンジフード表面・フィルター確認</td><td>月1（第1日）</td><td>TodoistImport</td><td><span class="st add">＋追加</span></td></tr>
+          <tr><td>排水口の髪・ぬめりを取る（各所ローテ）</td><td>排水口・ゴミ受けを1か所掃除</td><td>毎週 金07:00</td><td>WeeklyTasks</td><td><span class="st have">✓既存</span></td></tr>
+          <tr><td>コンロ・五徳・レンジフードの本格洗い</td><td>コンロ・壁・五徳／レンジフード・フィルター</td><td>年2（2月・8月）</td><td>DeepCleanPlan</td><td><span class="st have">✓既存</span></td></tr>
+          <tr><td>シンク・排水口・生ゴミの本格対策</td><td>シンク・排水口・ゴミ受け／生ゴミ臭対策</td><td>年2（2月・8月）</td><td>DeepCleanPlan</td><td><span class="st have">✓既存</span></td></tr>
+          <tr><td>冷蔵庫の庫内・パッキン・裏のホコリ</td><td>冷蔵庫1段だけ・期限切れ確認／野菜室の夏汚れ</td><td>年2（2月・8月）</td><td>DeepCleanPlan</td><td><span class="st have">✓既存</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="link-note"><b>追記済み：</b>hometasks(4).xlsx の WeeklyTasks に「キッチンリセット（月21:00・ルンバ1/3と並行）」、TodoistImport に「レンジフード表面・フィルター確認（第1日曜）」を追加済みです。毎日のひと拭き・生ゴミ処理はNotesの習慣メモへ。さらに<b>冷蔵庫の裏・下のホコリ除去（防火）をDeepCleanPlanの2月・8月に追記済み</b>、<b>ふきん・スポンジの除菌（週1）／排水管パイプクリーナー（月1）</b>もTodoistImportに追加しました。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    おうちメンテ・フィールドガイド／キッチン編 ／ イラストは各汚れの見た目を質感再現した図解です（実写真ではありません）。塩素系と酸性洗剤は混ぜない、油火災に水をかけない——安全第一で。薬剤は製品表示に従ってください。
+  </div>
+</footer>
+
+</body>
+</html>

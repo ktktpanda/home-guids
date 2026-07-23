@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>おうちメンテ運用ダッシュボード</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%97%82%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<style>*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0}img,svg{max-width:100%}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#eef0f4;--surface:#ffffff;--surface-2:#f5f6fa;--ink:#191c28;--muted:#59607180;
+    --muted:#596071;--faint:#8b93a4;--hair:rgba(25,28,40,.12);--hair-strong:rgba(25,28,40,.22);
+    --accent:#5560d8;--accent-soft:#e3e5fb;--warn:#c98a12;--danger:#d1541f;--good:#1f9d74;
+    --shadow:0 1px 2px rgba(25,28,40,.05), 0 8px 30px rgba(25,28,40,.06);--maxw:1000px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#0b0d13;--surface:#151824;--surface-2:#1b1f2d;--ink:#e7e9f2;--muted:#9aa1b4;
+      --faint:#6b7284;--hair:rgba(231,233,242,.12);--hair-strong:rgba(231,233,242,.2);
+      --accent:#8b93f0;--accent-soft:#20244a;--warn:#e6a83e;--danger:#ec7a44;--good:#47c99a;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#eef0f4;--surface:#ffffff;--surface-2:#f5f6fa;--ink:#191c28;--muted:#596071;
+    --faint:#8b93a4;--hair:rgba(25,28,40,.12);--hair-strong:rgba(25,28,40,.22);
+    --accent:#5560d8;--accent-soft:#e3e5fb;--warn:#c98a12;--danger:#d1541f;--good:#1f9d74;
+    --shadow:0 1px 2px rgba(25,28,40,.05), 0 8px 30px rgba(25,28,40,.06);
+  }
+  :root[data-theme="dark"]{
+    --ground:#0b0d13;--surface:#151824;--surface-2:#1b1f2d;--ink:#e7e9f2;--muted:#9aa1b4;
+    --faint:#6b7284;--hair:rgba(231,233,242,.12);--hair-strong:rgba(231,233,242,.2);
+    --accent:#8b93f0;--accent-soft:#20244a;--warn:#e6a83e;--danger:#ec7a44;--good:#47c99a;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+    line-height:1.7;letter-spacing:.01em;font-feature-settings:"palt" 1;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+
+  header.hero{padding:56px 0 30px;border-bottom:1px solid var(--hair);background:radial-gradient(120% 90% at 85% -20%, var(--accent-soft) 0%, transparent 55%);}
+  .hero h1{font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.14;margin:.4rem 0 .2rem;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .hero .lede{font-size:clamp(1rem,2vw,1.12rem);color:var(--muted);max-width:64ch;margin:.5rem 0 0}
+  .kpis{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .kpi{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:10px 15px;box-shadow:var(--shadow)}
+  .kpi b{font-size:1.3rem;font-variant-numeric:tabular-nums}
+  .kpi span{display:block;font-size:.74rem;color:var(--muted);letter-spacing:.03em}
+
+  section{padding:38px 0}
+  .sec-head{margin:0 0 18px}
+  .sec-head h2{font-size:clamp(1.3rem,3vw,1.7rem);margin:.2rem 0 0;font-weight:800;letter-spacing:-.01em}
+  .sec-head p{color:var(--muted);margin:.35rem 0 0;max-width:70ch;font-size:.95rem}
+  .layer-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.08em;color:var(--accent);background:var(--accent-soft);border-radius:20px;padding:3px 11px;margin-bottom:.2rem}
+
+  /* daily habit chips */
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:11px 15px;font-size:.9rem;box-shadow:var(--shadow);display:flex;gap:9px;align-items:center}
+  .chip .e{font-size:1.15rem}
+  .chip b{font-weight:700}
+  .chip small{color:var(--muted);font-size:.8rem}
+
+  /* weekly grid */
+  .grid-wrap{overflow-x:auto;border-radius:16px}
+  .week{display:grid;grid-template-columns:repeat(7,minmax(118px,1fr));gap:10px;min-width:860px}
+  .day{background:var(--surface);border:1px solid var(--hair);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+  .day .dh{padding:9px 12px;font-weight:800;font-size:.92rem;border-bottom:1px solid var(--hair);display:flex;justify-content:space-between;align-items:center}
+  .day.sat .dh{color:#3d7dc9}.day.sun .dh{color:#c0503f}
+  .day .dh small{font-weight:600;color:var(--faint);font-size:.68rem}
+  .slot{padding:9px 12px;border-bottom:1px solid var(--hair)}
+  .slot:last-child{border-bottom:0}
+  .slot .t{font-size:.66rem;letter-spacing:.08em;color:var(--faint);font-weight:700;text-transform:uppercase}
+  .slot .task{font-size:.82rem;margin-top:3px;line-height:1.4}
+  .slot .task + .task{margin-top:6px;padding-top:6px;border-top:1px dashed var(--hair)}
+  .g{display:inline-block;font-size:.68rem;font-weight:700;color:#fff;background:var(--warn);border-radius:5px;padding:1px 6px;margin-right:5px}
+  .rot{display:inline-block;font-size:.66rem;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:5px;padding:0 5px;margin-right:5px}
+  .empty{color:var(--faint);font-size:.8rem;font-style:italic}
+
+  /* rotation tables */
+  .rota{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .rcard{background:var(--surface);border:1px solid var(--hair);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+  .rcard h3{margin:0;padding:13px 16px;font-size:1rem;font-weight:800;border-bottom:1px solid var(--hair);background:var(--surface-2)}
+  .rcard h3 span{font-weight:600;color:var(--muted);font-size:.8rem;margin-left:.4rem}
+  .rrow{display:grid;grid-template-columns:76px 1fr;gap:10px;padding:10px 16px;border-bottom:1px solid var(--hair);font-size:.88rem}
+  .rrow:last-child{border-bottom:0}
+  .rrow .wk{font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+  .rrow .wk small{display:block;font-weight:600;color:var(--faint);font-size:.68rem}
+
+  /* low-freq list */
+  .freqs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .frow{background:var(--surface);border:1px solid var(--hair);border-radius:12px;box-shadow:var(--shadow);padding:13px 16px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+  .frow .fl b{font-size:.94rem}
+  .frow .fl small{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+  .cad{font-size:.76rem;font-weight:700;color:var(--accent);white-space:nowrap;background:var(--accent-soft);border-radius:20px;padding:3px 10px}
+
+  /* zone calendar */
+  .zones{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .zone{background:var(--surface);border:1px solid var(--hair);border-radius:12px;box-shadow:var(--shadow);padding:12px 14px}
+  .zone .m{font-weight:800;font-size:.92rem;color:var(--accent)}
+  .zone .z{font-size:.82rem;color:var(--ink);margin-top:2px;line-height:1.4}
+
+  .note{margin-top:22px;padding:15px 18px;border-radius:12px;background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--accent);color:var(--muted);font-size:.92rem;line-height:1.7}
+  .note b{color:var(--ink)}
+
+  footer{border-top:1px solid var(--hair);padding:26px 0 56px;color:var(--faint);font-size:.84rem}
+
+  @media (max-width:820px){
+    .rota{grid-template-columns:1fr}.freqs{grid-template-columns:1fr}.zones{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">おうちメンテ ／ 運用ダッシュボード</p>
+    <h1>結局、いま家事はこう回っている</h1>
+    <p class="lede">タスクは「毎日＝習慣にして数えない」「毎週＝曜日で固定」「細かいもの＝月内でローテ」「重いもの＝季節に逃がす」の<b>4層</b>で整理されています。ローテはすでに複数の層で効いていて、1日に載る量は増えていません。全体像はこの1枚で足ります。</p>
+    <div class="kpis">
+      <div class="kpi"><b>4</b><span>運用の層</span></div>
+      <div class="kpi"><b>毎日</b><span>習慣（数えない）</span></div>
+      <div class="kpi"><b>1〜2個/日</b><span>平日の実タスク</span></div>
+      <div class="kpi"><b>月内ローテ</b><span>金曜朝・日曜で分散</span></div>
+      <div class="kpi"><b>年2巡</b><span>ゾーン大掃除</span></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <span class="layer-tag">層 1 ／ 毎日</span>
+    <div class="sec-head">
+      <h2>毎日の「習慣」— タスクにしない</h2>
+      <p>これはTodoistに入れず、既存の動作の“ついで”にやるもの。数えないから続きます。</p>
+    </div>
+    <div class="chips">
+      <div class="chip"><span class="e">🛁</span><div><b>風呂を乾かす</b><small>換気扇つけっぱなし＋壁鏡を水切り＋浴槽ひとこすり</small></div></div>
+      <div class="chip"><span class="e">🍳</span><div><b>調理後ひと拭き</b><small>コンロを拭く＋生ゴミを捨てる</small></div></div>
+      <div class="chip"><span class="e">🚽</span><div><b>トイレ</b><small>流すときふたを閉める／座って使う</small></div></div>
+      <div class="chip"><span class="e">❄️</span><div><b>エアコン（夏）</b><small>冷房を切る前に送風/内部クリーンで乾かす</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface-2);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)">
+  <div class="wrap">
+    <span class="layer-tag">層 2 ／ 毎週（固定）</span>
+    <div class="sec-head">
+      <h2>毎週の曜日カレンダー</h2>
+      <p>骨格はこれ。朝(7:00/8:00)に1つ、夜(21:00)に1つが基本。夜の「ルンバ＋○○」は<b>ロボットが走る待ち時間に手を動かす</b>ペア設計です。<span class="g">ゴミ</span>=収集日、<span class="rot">ローテ</span>=週替わり枠。</p>
+    </div>
+    <div class="grid-wrap">
+      <div class="week">
+        <div class="day"><div class="dh">月 <small>MON</small></div>
+          <div class="slot"><div class="t">朝 07:00</div><div class="task">シーツを洗濯機へ</div></div>
+          <div class="slot"><div class="t">夜 21:00</div><div class="task">ルンバ 1/3</div><div class="task">＋キッチンリセット</div></div>
+        </div>
+        <div class="day"><div class="dh">火 <small>TUE</small></div>
+          <div class="slot"><div class="t">朝 07:00 / 08:00</div><div class="task">子ども用品を洗う</div><div class="task"><span class="g">ゴミ</span>資源ごみ</div></div>
+          <div class="slot"><div class="t">夜 21:00</div><div class="task">ブラーバをセット</div></div>
+        </div>
+        <div class="day"><div class="dh">水 <small>WED</small></div>
+          <div class="slot"><div class="t">朝 07:00 / 08:00</div><div class="task">タオルを交換</div><div class="task"><span class="g">ゴミ</span>可燃ごみ</div></div>
+          <div class="slot"><div class="t">夜 21:00</div><div class="task">ルンバ 2/3</div><div class="task">＋トイレ掃除</div></div>
+        </div>
+        <div class="day"><div class="dh">木 <small>THU</small></div>
+          <div class="slot"><div class="t">朝 07:00</div><div class="task">洗面所まわりを拭く</div></div>
+          <div class="slot"><div class="t">夜 21:00</div><div class="task">階段と玄関を掃く</div></div>
+        </div>
+        <div class="day"><div class="dh">金 <small>FRI</small></div>
+          <div class="slot"><div class="t">朝 07:00</div><div class="task"><span class="rot">ローテ</span>金曜朝枠（下表）</div><div class="task">＋排水口1か所・補充確認</div></div>
+          <div class="slot"><div class="t">夜 21:00</div><div class="task">ルンバ 3/3</div><div class="task"><span class="rot">ローテ</span>第1/3週は大掃除の検討</div></div>
+        </div>
+        <div class="day sat"><div class="dh">土 <small>SAT</small></div>
+          <div class="slot"><div class="t">朝 08:00</div><div class="task"><span class="g">ゴミ</span>可燃ごみ</div></div>
+          <div class="slot"><div class="t">随時</div><div class="task"><span class="rot">ローテ</span>第1土：追い焚き配管洗浄</div></div>
+        </div>
+        <div class="day sun"><div class="dh">日 <small>SUN</small></div>
+          <div class="slot"><div class="t">週1</div><div class="task">ふきん・スポンジ除菌</div></div>
+          <div class="slot"><div class="t">月1ローテ</div><div class="task"><span class="rot">ローテ</span>第1〜3日曜（下表）</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="layer-tag">層 3 ／ 月内ローテ</span>
+    <div class="sec-head">
+      <h2>「毎週ほどじゃない」ものは、週替わりで回す</h2>
+      <p>これがご質問の答え：同じ枠でも<b>第1週・第2週…で違うことをやる</b>ので、1回あたりは軽いまま、月内に一巡します。覚えるのは「金曜朝」と「日曜」の2枠だけ。</p>
+    </div>
+    <div class="rota">
+      <div class="rcard">
+        <h3>金曜 朝の枠 <span>第1〜第5金で差し替え</span></h3>
+        <div class="rrow"><div class="wk">第1<small>金</small></div><div>洗濯槽クリーナーで槽洗浄</div></div>
+        <div class="rrow"><div class="wk">第2<small>金</small></div><div>玄関マット・郵便受け・宅配ボックス</div></div>
+        <div class="rrow"><div class="wk">第3<small>金</small></div><div>手すり・ドアノブ・スイッチを拭く</div></div>
+        <div class="rrow"><div class="wk">第4<small>金</small></div><div>換気口・空気清浄機フィルター確認</div></div>
+        <div class="rrow"><div class="wk">第5<small>金</small></div><div>ベランダ排水口・外回り確認</div></div>
+      </div>
+      <div class="rcard">
+        <h3>日曜の枠 <span>月1タスクを分散</span></h3>
+        <div class="rrow"><div class="wk">第1<small>日</small></div><div>レンジフード表面・フィルター確認</div></div>
+        <div class="rrow"><div class="wk">第2<small>日</small></div><div>排水管にパイプクリーナー</div></div>
+        <div class="rrow"><div class="wk">第3<small>日</small></div><div>トイレの尿石予防（酸性洗剤）</div></div>
+        <div class="rrow"><div class="wk">毎週<small>日</small></div><div>ふきん・スポンジ除菌（これだけ毎週）</div></div>
+        <div class="rrow"><div class="wk">＋</div><div>金夜 第1=大掃除ゾーン確認／第3=未完回収</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface-2);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)">
+  <div class="wrap">
+    <span class="layer-tag">層 4 ／ 低頻度（季節・年次）</span>
+    <div class="sec-head">
+      <h2>重い・たまにでいいものは、間隔をあけて自動で来る</h2>
+      <p>頻度が低いので普段は意識しなくてOK。Todoistが時期になったら勝手に出します。</p>
+    </div>
+    <div class="freqs">
+      <div class="frow"><div class="fl"><b>エアコンのフィルター（夏）</b><small>6〜9月だけ。シーズン外は停止</small></div><span class="cad">隔週</span></div>
+      <div class="frow"><div class="fl"><b>浴室の防カビくん煙剤</b><small>黒カビ予防の本命</small></div><span class="cad">隔月</span></div>
+      <div class="frow"><div class="fl"><b>火災警報器・煙感知器の点検</b><small>鳴るか確認・電池切れは交換</small></div><span class="cad">半年</span></div>
+      <div class="frow"><div class="fl"><b>月替わりゾーン大掃除</b><small>下の12ヶ月表。土日に1つだけ</small></div><span class="cad">年2巡</span></div>
+      <div class="frow"><div class="fl"><b>エアコンの分解洗浄（プロ）</b><small>ファン・熱交換器の黒カビ。春に予約</small></div><span class="cad">2〜3年</span></div>
+      <div class="frow"><div class="fl"><b>追い焚き配管洗浄</b><small>第1土。レジオネラ対策</small></div><span class="cad">月1</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="layer-tag">層 4 の中身</span>
+    <div class="sec-head">
+      <h2>月替わりゾーン（年2で一巡する大掃除）</h2>
+      <p>その月の「ゾーン」だけ見て、土日に1つだけやればOK。第1金曜の夜に「今月どれ？」の通知が来ます。</p>
+    </div>
+    <div class="zones">
+      <div class="zone"><div class="m">1月</div><div class="z">トイレ・風呂・洗面所</div></div>
+      <div class="zone"><div class="m">2月</div><div class="z">キッチン（＋冷蔵庫裏）</div></div>
+      <div class="zone"><div class="m">3月</div><div class="z">リビング</div></div>
+      <div class="zone"><div class="m">4月</div><div class="z">寝室</div></div>
+      <div class="zone"><div class="m">5月</div><div class="z">エアコン・衣替え</div></div>
+      <div class="zone"><div class="m">6月</div><div class="z">仕事部屋・玄関・ベランダ</div></div>
+      <div class="zone"><div class="m">7月</div><div class="z">トイレ・風呂・洗面所</div></div>
+      <div class="zone"><div class="m">8月</div><div class="z">キッチン（＋冷蔵庫裏）</div></div>
+      <div class="zone"><div class="m">9月</div><div class="z">寝室</div></div>
+      <div class="zone"><div class="m">10月</div><div class="z">エアコン・衣替え</div></div>
+      <div class="zone"><div class="m">11月</div><div class="z">リビング</div></div>
+      <div class="zone"><div class="m">12月</div><div class="z">予備・年末</div></div>
+    </div>
+
+    <p class="note"><b>結論：</b>「毎日」は習慣で数えない。「毎週」は曜日で固定（朝1・夜1）。「毎週ほどじゃない」細タスクは<b>金曜朝と日曜の枠で週替わりローテ</b>して月内に一巡。「重い/たまに」は隔月〜数年で自動的に来る。<b>だから1日に増えた実タスクは、キッチンとトイレの夜(ルンバと並行)＋朝のゴミ出しくらい</b>で、体感の負担はほぼ変わりません。もし多いと感じたら、日曜のローテを間引くか、季節ゾーンを減らすのが安全な調整ポイントです。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    おうちメンテ運用ダッシュボード ／ hometasks(4).xlsx の WeeklyTasks・Rotation・TodoistImport・DeepCleanPlan を1枚に集約した早見表です。収集日や枠を変えたら、該当シートとこの表を更新してください。
+  </div>
+</footer>
+
+</body>
+</html>

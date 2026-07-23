@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>放置したエアコンは、カビを部屋中に配る｜エアコン編</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%E2%9D%84%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<style>*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0}img,svg{max-width:100%}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#eceff3;--surface:#ffffff;--surface-2:#f5f7fa;--ink:#141d27;--muted:#54606d;
+    --faint:#8592a0;--hair:rgba(20,29,39,.12);--hair-strong:rgba(20,29,39,.22);
+    --accent:#2f7fc9;--accent-soft:#dcebf7;--warn:#d68a15;--danger:#d1541f;--crit:#b12a2a;
+    --shadow:0 1px 2px rgba(20,29,39,.05), 0 8px 30px rgba(20,29,39,.06);--maxw:940px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#0c1116;--surface:#141b22;--surface-2:#19222b;--ink:#e8eef4;--muted:#9dabb8;
+      --faint:#6c7986;--hair:rgba(232,238,244,.12);--hair-strong:rgba(232,238,244,.2);
+      --accent:#5aa9e6;--accent-soft:#122a3d;--warn:#e6a83e;--danger:#ec7a44;--crit:#e46464;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#eceff3;--surface:#ffffff;--surface-2:#f5f7fa;--ink:#141d27;--muted:#54606d;
+    --faint:#8592a0;--hair:rgba(20,29,39,.12);--hair-strong:rgba(20,29,39,.22);
+    --accent:#2f7fc9;--accent-soft:#dcebf7;--warn:#d68a15;--danger:#d1541f;--crit:#b12a2a;
+    --shadow:0 1px 2px rgba(20,29,39,.05), 0 8px 30px rgba(20,29,39,.06);
+  }
+  :root[data-theme="dark"]{
+    --ground:#0c1116;--surface:#141b22;--surface-2:#19222b;--ink:#e8eef4;--muted:#9dabb8;
+    --faint:#6c7986;--hair:rgba(232,238,244,.12);--hair-strong:rgba(232,238,244,.2);
+    --accent:#5aa9e6;--accent-soft:#122a3d;--warn:#e6a83e;--danger:#ec7a44;--crit:#e46464;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+    line-height:1.75;letter-spacing:.01em;font-feature-settings:"palt" 1;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+
+  header.hero{padding:72px 0 40px;border-bottom:1px solid var(--hair);
+    background:radial-gradient(120% 80% at 82% -10%, var(--accent-soft) 0%, transparent 55%);}
+  .hero h1{font-size:clamp(2.1rem,5.6vw,3.4rem);line-height:1.12;margin:.5rem 0 .2rem;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .hero .lede{font-size:clamp(1.02rem,2.2vw,1.18rem);color:var(--muted);max-width:60ch;margin:.6rem 0 0}
+  .series{display:inline-flex;align-items:center;gap:8px;margin-bottom:6px;font-size:.76rem;color:var(--muted);background:var(--surface);border:1px solid var(--hair);border-radius:20px;padding:4px 12px}
+  .series b{color:var(--accent)}
+
+  .principle{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .principle .p{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:16px 16px 18px;box-shadow:var(--shadow)}
+  .principle .p .n{font-size:1.5rem}
+  .principle .p b{display:block;font-size:1.02rem;margin:.35rem 0 .15rem}
+  .principle .p span{color:var(--muted);font-size:.9rem;line-height:1.6;display:block}
+  .principle-note{margin-top:16px;padding:14px 18px;border-left:3px solid var(--accent);background:var(--surface-2);border-radius:0 12px 12px 0;color:var(--muted);font-size:.95rem}
+  .principle-note b{color:var(--ink)}
+
+  section{padding:44px 0}
+  .sec-head{margin:0 0 22px}
+  .sec-head h2{font-size:clamp(1.4rem,3.2vw,1.9rem);margin:.3rem 0 0;font-weight:800;letter-spacing:-.01em}
+  .sec-head p{color:var(--muted);margin:.4rem 0 0;max-width:64ch}
+
+  .hazards{display:flex;flex-direction:column;gap:22px}
+  .hazard{--h:#888;background:var(--surface);border:1px solid var(--hair);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:240px 1fr}
+  .hazard .viz{position:relative;background:#0b0f14;min-height:100%}
+  .hazard .viz svg{display:block;width:100%;height:100%;position:absolute;inset:0}
+  .hazard .viz .caption{position:absolute;left:12px;bottom:11px;z-index:2;font-size:.72rem;color:#fff;background:rgba(0,0,0,.5);padding:3px 9px;border-radius:20px;letter-spacing:.04em}
+  .sev{position:absolute;top:12px;left:12px;z-index:2;font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:4px 10px;border-radius:20px;color:#fff}
+  .sev.warn{background:var(--warn)}.sev.danger{background:var(--danger)}.sev.crit{background:var(--crit)}
+
+  .hazard .body{padding:22px 24px 24px}
+  .hazard .idx{font-size:.72rem;letter-spacing:.2em;color:var(--faint);font-weight:700}
+  .hazard h3{font-size:1.35rem;margin:.15rem 0 .1rem;font-weight:800;letter-spacing:-.01em;display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+  .hazard h3 .tag{font-size:.72rem;font-weight:700;color:var(--h);border:1px solid currentColor;border-radius:6px;padding:1px 7px;letter-spacing:.03em}
+  .hazard .what{color:var(--muted);margin:.35rem 0 0;font-size:.95rem}
+  .hazard .what b{color:var(--ink)}
+
+  .block{margin-top:16px}
+  .block h4{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;margin:0 0 .35rem;color:var(--faint);font-weight:700}
+  .block h4::before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--h);margin-right:7px;vertical-align:middle}
+  .block.fix h4::before{background:var(--accent)}
+  .block p{margin:0;font-size:.95rem;color:var(--ink)}
+  .block.fix{background:var(--surface-2);border-radius:12px;padding:13px 15px;border:1px solid var(--hair)}
+  .agent-strong{color:var(--h);font-weight:700}
+
+  .timeline{margin-top:16px}
+  .timeline .track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+  .timeline .track::before{content:"";position:absolute;left:6%;right:6%;top:9px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--warn),var(--danger),var(--crit));opacity:.35}
+  .timeline .step{position:relative;text-align:center;padding-top:22px}
+  .timeline .step .dot{position:absolute;top:3px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;background:var(--surface);border:3px solid var(--h)}
+  .timeline .step .when{font-size:.72rem;font-weight:700;color:var(--ink);letter-spacing:.02em}
+  .timeline .step .state{font-size:.8rem;color:var(--muted);line-height:1.45;margin-top:2px;display:block}
+
+  /* health */
+  .health-sec{color:#e7eef4}
+  .hgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .hcard{background:#151d26;border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:22px 22px 24px;position:relative}
+  .hcard .hicon{font-size:1.7rem;line-height:1}
+  .hcard .htag{font-size:.72rem;letter-spacing:.1em;color:#7fc0ff;font-weight:700;margin:.5rem 0 0}
+  .hcard h3{font-size:1.18rem;margin:.15rem 0 .5rem;font-weight:800;color:#f2f7fb;letter-spacing:-.01em}
+  .hcard .hlead{color:#b4c3d1;font-size:.93rem;margin:0 0 .7rem}
+  .hcard .hlead b{color:#f2f7fb}
+  .hcard .hlist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+  .hcard .hlist li{position:relative;padding-left:18px;font-size:.9rem;line-height:1.6;color:#cbd6e0}
+  .hcard .hlist li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:#5aa9e6}
+  .hcard .hlist li b{color:#cfe6ff}
+  .hcard .hrisk{margin:.9rem 0 0;padding:11px 13px;border-radius:10px;background:rgba(90,169,230,.12);border:1px solid rgba(90,169,230,.28);font-size:.85rem;color:#d3e2ef;line-height:1.55}
+  .hcard .hrisk span{display:inline-block;font-weight:700;color:#94c8f5;margin-right:.4em;font-size:.72rem;letter-spacing:.06em}
+  .hnote{margin:22px 0 0;padding:16px 20px;border-radius:12px;background:rgba(255,255,255,.05);border-left:3px solid #5aa9e6;color:#c3d1de;font-size:.94rem;line-height:1.7}
+  .hnote b{color:#f2f7fb}
+
+  /* caution callout (お掃除機能) */
+  .caution{background:var(--surface);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);border-top:4px solid var(--warn);padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+  .caution .cico{font-size:1.8rem}
+  .caution h3{margin:.1rem 0 .4rem;font-size:1.15rem;font-weight:800}
+  .caution p{margin:.3rem 0 0;color:var(--muted);font-size:.94rem}
+  .caution p b{color:var(--ink)}
+
+  /* buy & do */
+  .buy-sec{background:var(--ground)}
+  .buy-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .buy-col{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:20px 20px 22px;box-shadow:var(--shadow)}
+  .buy-col.must{border-top:4px solid var(--accent)}.buy-col.nice{border-top:4px solid var(--faint)}
+  .btier{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:0 0 .8rem;color:var(--accent)}
+  .buy-col.nice .btier{color:var(--muted)}
+  .blist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+  .blist li{border-bottom:1px solid var(--hair);padding-bottom:13px}.blist li:last-child{border-bottom:0;padding-bottom:0}
+  .bhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .bname{font-weight:800;font-size:.98rem;color:var(--ink)}
+  .bprice{font-size:.82rem;font-weight:700;color:var(--accent);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .brole{display:block;font-size:.87rem;color:var(--muted);line-height:1.55;margin-top:.25rem}
+  .brole b{color:var(--ink)}
+  .plan-head{margin:34px 0 16px}
+  .plan-head h3{font-size:1.3rem;margin:0;font-weight:800;letter-spacing:-.01em}
+  .plan-head p{margin:.35rem 0 0;color:var(--muted);font-size:.94rem}
+  .plan{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .pstep{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:18px 20px 20px;box-shadow:var(--shadow)}
+  .pnum{font-weight:800;font-size:1.05rem;color:var(--accent);display:flex;flex-direction:column;margin-bottom:.7rem}
+  .pnum span{font-size:.75rem;font-weight:600;color:var(--muted);letter-spacing:.02em;margin-top:.1rem}
+  .pstep ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .pstep li{position:relative;padding-left:20px;font-size:.9rem;line-height:1.55;color:var(--ink)}
+  .pstep li::before{content:"";position:absolute;left:0;top:.5em;width:11px;height:11px;border-radius:4px;border:2px solid var(--accent)}
+  .buy-final{margin:24px 0 0;padding:16px 20px;border-radius:12px;background:var(--accent-soft);border:1px solid var(--hair);color:var(--ink);font-size:.96rem;line-height:1.7}
+  .buy-final b{color:var(--ink)}
+
+  /* linkage */
+  .link-sec{background:var(--surface-2);border-top:1px solid var(--hair)}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--hair);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+  .link-tbl{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px}
+  .link-tbl th,.link-tbl td{text-align:left;padding:12px 14px;vertical-align:top;border-bottom:1px solid var(--hair)}
+  .link-tbl thead th{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:700;background:var(--surface-2);white-space:nowrap}
+  .link-tbl tbody tr:last-child td{border-bottom:0}
+  .link-tbl td:first-child{color:var(--ink);font-weight:600;max-width:280px}
+  .link-tbl td:nth-child(2){color:var(--muted)}
+  .link-tbl td:nth-child(3),.link-tbl td:nth-child(4){white-space:nowrap;color:var(--muted);font-size:.84rem}
+  .st{display:inline-block;font-size:.74rem;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .st.have{background:var(--accent-soft);color:var(--accent)}
+  .st.add{background:rgba(214,138,21,.16);color:var(--warn)}
+  .st.note{background:var(--hair);color:var(--muted)}
+  .link-note{margin:18px 0 0;padding:15px 18px;border-radius:12px;background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--accent);color:var(--muted);font-size:.9rem;line-height:1.7}
+  .link-note b{color:var(--ink)}
+
+  footer{border-top:1px solid var(--hair);padding:30px 0 60px;color:var(--faint);font-size:.85rem}
+
+  @media (max-width:720px){
+    .principle{grid-template-columns:1fr}
+    .hazard{grid-template-columns:1fr}.hazard .viz{min-height:150px}
+    .hgrid{grid-template-columns:1fr}.buy-cols{grid-template-columns:1fr}.plan{grid-template-columns:1fr}
+    .caution{grid-template-columns:1fr}
+    .timeline .step .state{font-size:.72rem}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="series">おうちメンテ・フィールドガイド <b>／ エアコン編</b></span>
+    <p class="eyebrow">見えない送風口の奥で起きていること</p>
+    <h1>放置したエアコンは、カビを部屋中に配る。</h1>
+    <p class="lede">エアコンの怖さは「汚れる」ことより、<b>内部で育ったカビの胞子を、風にのせて部屋全体へ送り出す</b>点にあります。しかも一番カビる場所は自分で洗えない奥。何が起きて、いつ手遅れになり、どこまで自分でやれるのかを整理しました。</p>
+
+    <div class="principle" aria-label="エアコン内部でカビが育つ理由">
+      <div class="p"><div class="n">💧</div><b>結露で濡れる</b><span>冷房中は熱交換器が冷えて結露。内部はいつもびしょ濡れになる。</span></div>
+      <div class="p"><div class="n">🌫️</div><b>ホコリが栄養</b><span>吸い込む空気のホコリが内部に付着。これがカビのエサになる。</span></div>
+      <div class="p"><div class="n">🌡️</div><b>停止後に放置</b><span>冷房を切ると濡れたまま。ホコリ＋水分＋室温でカビが一気に増える。</span></div>
+    </div>
+    <p class="principle-note"><b>お風呂と全く同じ原理です。</b>違うのは「送風ファンが胞子を積極的にまき散らす」こと。だから予防の本命も同じ——<b>使ったあとに内部を乾かす（冷房後の送風／内部クリーン運転）</b>。これだけでカビの発生が大きく変わります。</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">放置の末路</p>
+      <h2>エアコン内部で進む5つのトラブル</h2>
+      <p>左は各汚れの見た目を質感再現した図解です。奥にいくほど自分では手が届かず、プロの分解洗浄が必要になります。</p>
+    </div>
+
+    <div class="hazards">
+
+      <!-- 1 filter dust -->
+      <article class="hazard" style="--h:#b09a5e">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ホコリが目詰まりしたエアコンフィルターの網目">
+            <defs>
+              <filter id="a1" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04 0.04" numOctaves="4" seed="6" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.3 .95"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#cfd3d8"/>
+            <g stroke="#aeb4bb" stroke-width="2">
+              <path d="M0 20 H240 M0 50 H240 M0 80 H240 M0 110 H240 M0 140 H240 M0 170 H240 M0 200 H240 M0 230 H240"/>
+              <path d="M20 0 V260 M50 0 V260 M80 0 V260 M110 0 V260 M140 0 V260 M170 0 V260 M200 0 V260 M230 0 V260"/>
+            </g>
+            <rect width="240" height="260" fill="#9a8552" filter="url(#a1)" opacity=".85"/>
+          </svg>
+          <span class="sev warn">深刻度：注意</span>
+          <span class="caption">目詰まりしたフィルター</span>
+        </div>
+        <div class="body">
+          <p class="idx">トラブル 01</p>
+          <h3>フィルターのホコリ詰まり <span class="tag">効率ダウン</span></h3>
+          <p class="what"><b>正体：</b>部屋の空気を吸うたびにフィルターへ溜まるホコリ・花粉・ペットの毛。一番手前で、唯一自分で簡単に洗える場所。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>網目がホコリで塞がると空気が通らず、<span class="agent-strong">効きが落ちて電気代が上がり</span>、風量も弱くなります。さらに奥（熱交換器）へホコリが抜けやすくなり、内部カビの入口にもなります。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">2週間</span><span class="state">薄くホコリ</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">目に見えて堆積</span></div>
+              <div class="step"><span class="dot"></span><span class="when">3ヶ月</span><span class="state">風量低下・電気代増</span></div>
+              <div class="step"><span class="dot"></span><span class="when">半年</span><span class="state">内部へホコリ流入</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p><b>2週間〜月1で掃除機</b>。外して裏から掃除機で吸い、汚れがひどければ水洗いして<b>完全に乾かして</b>から戻す。ここをこまめにやるだけで奥のカビ進行がかなり遅くなります。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 heat exchanger fin mold -->
+      <article class="hazard" style="--h:#4a6b64">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="アルミフィンにホコリとカビが付いた熱交換器">
+            <defs>
+              <filter id="a2" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.12 0.1" numOctaves="4" seed="14" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.8 1.05"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#c3ccce"/>
+            <g stroke="#9aa6a8" stroke-width="3">
+              <path d="M6 0 V260 M16 0 V260 M26 0 V260 M36 0 V260 M46 0 V260 M56 0 V260 M66 0 V260 M76 0 V260 M86 0 V260 M96 0 V260 M106 0 V260 M116 0 V260 M126 0 V260 M136 0 V260 M146 0 V260 M156 0 V260 M166 0 V260 M176 0 V260 M186 0 V260 M196 0 V260 M206 0 V260 M216 0 V260 M226 0 V260 M236 0 V260"/>
+            </g>
+            <rect width="240" height="260" fill="#3a4f49" filter="url(#a2)" opacity=".8"/>
+            <rect width="240" height="260" fill="#26332f" filter="url(#a2)" opacity=".4" transform="translate(4 6)"/>
+          </svg>
+          <span class="sev danger">深刻度：危険</span>
+          <span class="caption">フィンのホコリ＋カビ</span>
+        </div>
+        <div class="body">
+          <p class="idx">トラブル 02</p>
+          <h3>熱交換器（アルミフィン）のカビ <span class="tag">結露の巣</span></h3>
+          <p class="what"><b>正体：</b>冷房で最も冷える金属の板（フィン）。ここにホコリが付き、結露の水分でカビが繁殖します。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>フィンは冷房中ずっと結露で濡れ、<span class="agent-strong">ホコリ（栄養）＋水分＋温度</span>のカビ3条件が完璧にそろいます。薄い金属板が数十枚並ぶ構造で奥まで手が入らず、拭き掃除では届きません。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">ホコリ付着</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1シーズン</span><span class="state">カビ発生・臭い</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1年</span><span class="state">フィン全体に</span></div>
+              <div class="step"><span class="dot"></span><span class="when">数年</span><span class="state">プロ洗浄必須</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>予防は<b>冷房後の内部乾燥運転</b>とフィルター清掃。生えてしまったら<b>プロの分解高圧洗浄</b>が確実（市販フィンスプレーは洗剤やカビが内部に残る・電装部にかかるリスクがあり、プロは非推奨のことが多い）。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 fan black mold ★ -->
+      <article class="hazard" style="--h:#3a3b45">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="送風ファンの羽根にびっしり付いた黒カビ">
+            <defs>
+              <filter id="a3" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.2 0.2" numOctaves="4" seed="22" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2 1.1"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#b9bfc4"/>
+            <g stroke="#8f979d" stroke-width="6" stroke-linecap="round">
+              <path d="M-10 40 L250 20 M-10 75 L250 55 M-10 110 L250 90 M-10 145 L250 125 M-10 180 L250 160 M-10 215 L250 195 M-10 250 L250 230"/>
+            </g>
+            <rect width="240" height="260" fill="#2a2b33" filter="url(#a3)" opacity=".92"/>
+          </svg>
+          <span class="sev crit">深刻度：深刻</span>
+          <span class="caption">送風ファンの黒カビ</span>
+        </div>
+        <div class="body">
+          <p class="idx">トラブル 03</p>
+          <h3>送風ファンの黒カビ <span class="tag">胞子を配る本体</span></h3>
+          <p class="what"><b>正体：</b>風を送り出す筒状の羽根（シロッコファン）。ここの黒カビが<b>最重要かつ最悪</b>。回転して風を作るので、胞子を直接部屋へ飛ばします。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>フィンの結露水がしたたる位置にあり、細い羽根の一枚一枚に黒カビがびっしり付きます。運転するたび<span class="agent-strong">カビの胞子が風にのって部屋中に噴射</span>される——冷房を入れた瞬間のカビ臭の正体はこれ。羽根が奥にあり、素人ではまず洗えません。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">1シーズン</span><span class="state">黒い点が出る</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1年</span><span class="state">羽根に定着</span></div>
+              <div class="step"><span class="dot"></span><span class="when">2〜3年</span><span class="state">びっしり・強い臭い</span></div>
+              <div class="step"><span class="dot"></span><span class="when">数年放置</span><span class="state">胞子を撒き続ける</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>基本は<b>プロの分解洗浄一択</b>（ファンを外すか高圧洗浄）。1台1〜2万円、<b>2〜3年に1回</b>が目安。予防は冷房後の内部乾燥運転でカビの発生自体を遅らせること。お風呂のパッキンの根深い黒カビと同じで、<b>予防でしか間に合わない</b>場所です。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 drain pan / hose -->
+      <article class="hazard" style="--h:#4a7fae">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="結露水が溜まるドレンパンのぬめりと水漏れ">
+            <defs>
+              <filter id="a4" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.06 0.06" numOctaves="4" seed="31" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#c7cdd1"/>
+            <rect x="0" y="150" width="240" height="110" fill="#8792a0"/>
+            <rect x="0" y="150" width="240" height="110" fill="#3f5a48" filter="url(#a4)" opacity=".8"/>
+            <ellipse cx="120" cy="150" rx="150" ry="20" fill="#5c6b78"/>
+            <g fill="#6fa8d6" opacity=".8">
+              <path d="M120 150 q-6 40 0 70 q6 -30 0 -70"/>
+              <circle cx="120" cy="232" r="10"/>
+            </g>
+          </svg>
+          <span class="sev danger">深刻度：危険</span>
+          <span class="caption">ドレンパンのぬめり・水漏れ</span>
+        </div>
+        <div class="body">
+          <p class="idx">トラブル 04</p>
+          <h3>ドレンパン・ドレンホースの詰まり <span class="tag">水漏れ・悪臭</span></h3>
+          <p class="what"><b>正体：</b>結露水を受けて外へ流す皿（ドレンパン）とホース。ここにカビ・ホコリ・藻がヘドロ状に溜まります。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>常に水が通るのでぬめり（バイオフィルム）が育ち、ホースが詰まると行き場を失った水が<span class="agent-strong">室内側から水漏れ</span>します。溜まった水はカビ・悪臭・<b>コバエの発生源</b>にもなります。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">1シーズン</span><span class="state">ぬめり発生</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1年</span><span class="state">悪臭・コバエ</span></div>
+              <div class="step"><span class="dot"></span><span class="when">2年</span><span class="state">部分的に詰まる</span></div>
+              <div class="step"><span class="dot"></span><span class="when">詰まり</span><span class="state">室内へ水漏れ</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>ホース先端の詰まりは<b>専用ポンプ（サクションポンプ）</b>で吸い出せる。パン内部はプロ洗浄で。水漏れが始まったら早めに業者へ（放置は天井・壁のシミにつながる）。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 smell -->
+      <article class="hazard" style="--h:#7d74a6">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="吹き出し口から漂うカビ臭のイメージ">
+            <defs>
+              <filter id="a5" x="-30%" y="-30%" width="160%" height="160%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="3" seed="41" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1 .7"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#3a3550"/>
+            <rect width="240" height="260" fill="#b3a6dd" filter="url(#a5)" opacity=".7"/>
+            <rect x="0" y="0" width="240" height="46" fill="#20202c"/>
+            <rect x="14" y="30" width="212" height="10" rx="5" fill="#0e0e14"/>
+          </svg>
+          <span class="sev warn">深刻度：注意</span>
+          <span class="caption">冷房始動時のカビ臭</span>
+        </div>
+        <div class="body">
+          <p class="idx">トラブル 05</p>
+          <h3>カビ臭・すっぱい臭い <span class="tag">早期サイン</span></h3>
+          <p class="what"><b>正体：</b>内部のカビ・雑菌が出す臭い。冷房を入れた瞬間のモワッとした臭いは、内部カビの<b>一番わかりやすい警告</b>です。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>停止中に繁殖したカビや雑菌が、送風で一気に部屋へ運ばれます。<span class="agent-strong">「つけた直後だけ臭い」</span>のが典型で、これが出たらファン・フィンにカビが育っている合図。臭いを感じる＝すでに胞子を吸っている、ということです。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">初期</span><span class="state">つけた時だけ臭う</span></div>
+              <div class="step"><span class="dot"></span><span class="when">進行</span><span class="state">運転中も臭う</span></div>
+              <div class="step"><span class="dot"></span><span class="when">悪化</span><span class="state">部屋にこもる</span></div>
+              <div class="step"><span class="dot"></span><span class="when">放置</span><span class="state">咳・体調に影響</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>臭いを感じたら<b>プロ洗浄を検討する合図</b>。応急では冷房後に送風運転で乾かす、窓を開けて数分運転して臭いを追い出す。消臭スプレーでごまかさず、原因（内部カビ）を断つのが正解。</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div style="margin-top:22px">
+      <div class="caution">
+        <div class="cico">⚠️</div>
+        <div>
+          <h3>「お掃除機能付き」の落とし穴</h3>
+          <p>自動お掃除機能が掃除するのは<b>フィルターだけ</b>。一番カビる<b>ファンと熱交換器の奥は掃除されません</b>。むしろ内部構造が複雑なぶん、プロの分解洗浄費用は割高（通常機の倍近いことも）になりがちです。「お掃除機能付きだから安心」と放置して、数年後に高額洗浄…というのが典型的な後悔パターン。<b>自動＝フィルターだけ、と割り切って</b>、内部乾燥運転とプロ洗浄はふつうに必要と考えてください。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#0b131b;border-top:1px solid var(--hair)" class="health-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" style="color:#7fc0ff">風呂より広く拡散する</p>
+      <h2 style="color:#f2f7fb">放置エアコンが、体に何をするか</h2>
+      <p style="color:#aebdcb">エアコンはカビを「風にのせて部屋全体へ送る」ので、浴室のカビよりも吸い込む量と範囲が大きくなります。寝室のエアコンなら、寝ている間じゅう胞子を浴び続けることになります。</p>
+    </div>
+
+    <div class="hgrid">
+      <div class="hcard">
+        <div class="hicon">🫁</div>
+        <p class="htag">カビ胞子 ／ 送風で拡散</p>
+        <h3>夏型過敏性肺炎・喘息・アレルギー</h3>
+        <p class="hlead">内部カビの胞子を<b>風で直接吸い込む</b>ため、症状が出やすいのが特徴。とくに日本の住宅で多い<b>トリコスポロン</b>というカビが原因の肺の病気に注意です。</p>
+        <ul class="hlist">
+          <li><b>夏型過敏性肺炎</b>：咳・微熱・息切れ・倦怠感。<b>「家（エアコンのある部屋）にいると出て、外出すると治まる」</b>のが典型。エアコンが発生源になっている例が多い。放置で肺が線維化することも</li>
+          <li><b>気管支喘息・アレルギー性鼻炎の悪化</b>：胞子が気道を刺激し、咳や発作の引き金に</li>
+          <li><b>「冷房をつけると咳が出る」</b>は要注意サイン。内部カビを疑う</li>
+        </ul>
+        <p class="hrisk"><span>とくに注意</span>乳幼児・高齢者・妊娠中・喘息やアレルギー体質の人。寝室エアコンは就寝中ずっと浴びるので影響が大きい。</p>
+      </div>
+
+      <div class="hcard">
+        <div class="hicon">🌡️</div>
+        <p class="htag">効率低下 ／ 熱中症・電気代</p>
+        <h3>冷えない・電気代・夏の安全</h3>
+        <p class="hlead">健康被害はカビだけではありません。目詰まりで効きが落ちると、<b>猛暑日に部屋が十分冷えず</b>、高齢者や子どもの<b>熱中症リスク</b>にもつながります。</p>
+        <ul class="hlist">
+          <li><b>冷房効率の低下</b>：フィルター詰まりで電気代が数割増えることも</li>
+          <li><b>設定温度まで下がらない</b>：真夏の室温管理が甘くなり、体調不良・熱中症の一因に</li>
+          <li><b>結露・水漏れ</b>：ドレン詰まりで壁や天井にシミ、そこから<b>建材のカビ</b>へ二次被害</li>
+        </ul>
+        <p class="hrisk"><span>とくに注意</span>寝たきり・高齢の家族がいる部屋、子ども部屋。真夏前の点検が安全に直結する。</p>
+      </div>
+    </div>
+
+    <p class="hnote">共通の対策はやはり<b>「乾かす（冷房後の内部クリーン運転）／フィルターをこまめに／数年に1回プロ洗浄」</b>。すでに<b>冷房で咳が出る・強いカビ臭・水が垂れる</b>場合は、掃除より先にプロ洗浄の手配を。咳や息苦しさが続くなら医療機関へ。</p>
+  </div>
+</section>
+
+<section class="buy-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">結論：何を買って、どうするか</p>
+      <h2>自分でやる範囲と、プロに任せる範囲を分ける</h2>
+      <p>エアコンは<b>「手前は自分・奥はプロ」</b>と割り切るのが正解。無理に内部を分解すると故障や感電の危険があります。自分の担当を軽く回して、数年に一度だけプロに任せましょう。</p>
+    </div>
+
+    <div class="buy-cols">
+      <div class="buy-col must">
+        <p class="btier">自分でやる（買うもの）</p>
+        <ul class="blist">
+          <li><div class="bhead"><span class="bname">掃除機＋ブラシノズル</span><span class="bprice">手持ちでOK</span></div><span class="brole">フィルターのホコリを裏から吸う。基本はこれだけ</span></li>
+          <li><div class="bhead"><span class="bname">マイクロファイバークロス</span><span class="bprice">100円〜</span></div><span class="brole">ルーバー（吹き出し口）や本体表面の見える範囲を拭く</span></li>
+          <li><div class="bhead"><span class="bname">中性洗剤・アルコール</span><span class="bprice">〜500円</span></div><span class="brole">水洗いしたフィルターの仕上げ、見える範囲の除菌に</span></li>
+          <li><div class="bhead"><span class="bname">安定した脚立</span><span class="bprice">3,000円〜</span></div><span class="brole">高所作業を安全に。不安定な台に乗らない</span></li>
+        </ul>
+      </div>
+      <div class="buy-col nice">
+        <p class="btier">プロに任せる（数年に1回）</p>
+        <ul class="blist">
+          <li><div class="bhead"><span class="bname">エアコン分解洗浄</span><span class="bprice">1〜2万円/台</span></div><span class="brole">ファン・熱交換器を高圧洗浄。<b>2〜3年に1回</b>。黒カビはこれでしか落ちない</span></li>
+          <li><div class="bhead"><span class="bname">お掃除機能付きの洗浄</span><span class="bprice">2〜3.5万円/台</span></div><span class="brole">分解が複雑なぶん割高。台数と機種を業者に伝える</span></li>
+          <li><div class="bhead"><span class="bname">ドレンポンプ（任意）</span><span class="bprice">1,000円〜</span></div><span class="brole">水漏れ時、ホースの詰まりを自分で吸い出す用</span></li>
+          <li><div class="bhead"><span class="bname">（非推奨）フィン用スプレー</span><span class="bprice">−</span></div><span class="brole">洗剤残り・電装部リスクがあり、プロは勧めないことが多い。使うなら自己責任で</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="plan-head"><h3>で、こう回す</h3><p>自分の担当は軽い3リズム。奥だけ数年に一度プロへ。</p></div>
+    <div class="plan">
+      <div class="pstep"><div class="pnum">毎日<span>冷房を使う日</span></div><ul>
+        <li>冷房を切る前に<b>送風／内部クリーン運転</b>で内部を乾かす（カビ予防の本命）</li>
+        <li>タイマーやリモコンの自動内部乾燥をONに</li>
+      </ul></div>
+      <div class="pstep"><div class="pnum">月2回<span>使うシーズン中</span></div><ul>
+        <li><b>フィルターを掃除機</b>で吸う</li>
+        <li>ルーバー・吹き出し口の見える範囲を拭く</li>
+        <li>冷房ONで<b>臭い・咳が出ないか</b>チェック</li>
+      </ul></div>
+      <div class="pstep"><div class="pnum">2〜3年に1回<span>＋異変時はすぐ</span></div><ul>
+        <li><b>プロの分解洗浄</b>を予約（ファン・熱交換器）</li>
+        <li>カビ臭・水漏れ・咳が出たら年数に関係なく手配</li>
+        <li>繁忙期前（春）の予約が取りやすい</li>
+      </ul></div>
+    </div>
+
+    <p class="buy-final"><b>最小構成：</b>「冷房を切る前に送風で乾かす」を習慣にして、「フィルターを月2回掃除機」、あとは<b>2〜3年に1回プロ洗浄</b>を予約するだけ。奥のカビは自分で追わなくていい——予防と点検だけ担当して、洗浄はお金で解決するのが一番ラクで確実です。</p>
+  </div>
+</section>
+
+<section class="link-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">家事タスク表との連動</p>
+      <h2>この対策は、うちの hometasks のどれに当たるか</h2>
+      <p>エアコンは実は既に<b>DeepCleanPlanの5月・10月</b>に入っています（フィルター清掃・吹き出し口のカビ確認）。そこへ「日々の乾燥運転」と「数年に1回のプロ洗浄」を足せば体系が完成します。<b>✓＝既存／＋＝追加提案</b>。</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="link-tbl">
+        <thead><tr><th>ガイドの対策</th><th>対応するタスク</th><th>頻度</th><th>置き場所</th><th>状態</th></tr></thead>
+        <tbody>
+          <tr><td>冷房後に内部を乾かす（送風／内部クリーン運転）</td><td>冷房を切る前のワンボタン習慣</td><td>毎日（夏）</td><td>Notes（習慣メモ）</td><td><span class="st add">＋追加</span></td></tr>
+          <tr><td>フィルターを掃除機で吸う</td><td>エアコンフィルター各台</td><td>年2（5月・10月）</td><td>DeepCleanPlan</td><td><span class="st have">✓既存</span></td></tr>
+          <tr><td>吹き出し口・ファンのカビを目視チェック</td><td>吹き出し口の見えるカビ確認</td><td>年2（5月・10月）</td><td>DeepCleanPlan</td><td><span class="st have">✓既存</span></td></tr>
+          <tr><td>使用シーズン中はフィルターを月2回に増やす</td><td>フィルター清掃（夏の高頻度化）</td><td>月2（6〜9月）</td><td>TodoistImport</td><td><span class="st add">＋追加</span></td></tr>
+          <tr><td>ファン・熱交換器の黒カビをプロ洗浄</td><td>エアコン分解洗浄をプロに予約</td><td>2〜3年に1回</td><td>TodoistImport</td><td><span class="st add">＋追加</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="link-note"><b>連動の考え方：</b>5月・10月の既存タスクは「点検＋フィルター」に集中させ、夏場だけフィルター清掃を月2に増やし、奥のカビはお金（プロ洗浄）で数年に一度解決——という3層構造。<b>この「＋追加」分は hometasks(4).xlsx に追記済みです</b>（TodoistImportに「エアコンのフィルターを掃除する（夏の高頻度・隔週）」「エアコンの分解洗浄をプロに予約する（2年ごと）」、冷房後の乾燥運転はNotesの習慣メモへ）。編集前のバックアップは hometasks(4).bak_20260713.xlsx にあります。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    おうちメンテ・フィールドガイド／エアコン編 ／ イラストは各汚れの見た目を質感再現した図解です（実写真ではありません）。分解・内部洗浄は感電・故障の危険があるため無理をせず、奥はプロに依頼してください。
+  </div>
+</footer>
+
+</body>
+</html>

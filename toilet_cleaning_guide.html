@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>放置したトイレは、石になって臭う｜トイレ編</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%9A%BD%3C/text%3E%3C/svg%3E">
+<style>*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0}img,svg{max-width:100%}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#edf1ef;--surface:#ffffff;--surface-2:#f4f8f6;--ink:#16231d;--muted:#54655c;
+    --faint:#83958b;--hair:rgba(22,35,29,.12);--hair-strong:rgba(22,35,29,.22);
+    --accent:#1f9d74;--accent-soft:#d3ede2;--warn:#d68a15;--danger:#d1541f;--crit:#b12a2a;
+    --shadow:0 1px 2px rgba(22,35,29,.05), 0 8px 30px rgba(22,35,29,.06);--maxw:940px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#0b120f;--surface:#131c17;--surface-2:#18221c;--ink:#e6efe9;--muted:#9aaba1;
+      --faint:#6b7d73;--hair:rgba(230,239,233,.12);--hair-strong:rgba(230,239,233,.2);
+      --accent:#47c99a;--accent-soft:#0f3227;--warn:#e6a83e;--danger:#ec7a44;--crit:#e46464;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#edf1ef;--surface:#ffffff;--surface-2:#f4f8f6;--ink:#16231d;--muted:#54655c;
+    --faint:#83958b;--hair:rgba(22,35,29,.12);--hair-strong:rgba(22,35,29,.22);
+    --accent:#1f9d74;--accent-soft:#d3ede2;--warn:#d68a15;--danger:#d1541f;--crit:#b12a2a;
+    --shadow:0 1px 2px rgba(22,35,29,.05), 0 8px 30px rgba(22,35,29,.06);
+  }
+  :root[data-theme="dark"]{
+    --ground:#0b120f;--surface:#131c17;--surface-2:#18221c;--ink:#e6efe9;--muted:#9aaba1;
+    --faint:#6b7d73;--hair:rgba(230,239,233,.12);--hair-strong:rgba(230,239,233,.2);
+    --accent:#47c99a;--accent-soft:#0f3227;--warn:#e6a83e;--danger:#ec7a44;--crit:#e46464;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+    line-height:1.75;letter-spacing:.01em;font-feature-settings:"palt" 1;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+
+  header.hero{padding:72px 0 40px;border-bottom:1px solid var(--hair);background:radial-gradient(120% 80% at 82% -10%, var(--accent-soft) 0%, transparent 55%);}
+  .hero h1{font-size:clamp(2.1rem,5.6vw,3.4rem);line-height:1.12;margin:.5rem 0 .2rem;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .hero .lede{font-size:clamp(1.02rem,2.2vw,1.18rem);color:var(--muted);max-width:60ch;margin:.6rem 0 0}
+  .series{display:inline-flex;align-items:center;gap:8px;margin-bottom:6px;font-size:.76rem;color:var(--muted);background:var(--surface);border:1px solid var(--hair);border-radius:20px;padding:4px 12px}
+  .series b{color:var(--accent)}
+
+  .principle{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .principle .p{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:16px 16px 18px;box-shadow:var(--shadow)}
+  .principle .p .n{font-size:1.5rem}
+  .principle .p b{display:block;font-size:1.02rem;margin:.35rem 0 .15rem}
+  .principle .p span{color:var(--muted);font-size:.9rem;line-height:1.6;display:block}
+  .principle-note{margin-top:16px;padding:14px 18px;border-left:3px solid var(--accent);background:var(--surface-2);border-radius:0 12px 12px 0;color:var(--muted);font-size:.95rem}
+  .principle-note b{color:var(--ink)}
+
+  section{padding:44px 0}
+  .sec-head{margin:0 0 22px}
+  .sec-head h2{font-size:clamp(1.4rem,3.2vw,1.9rem);margin:.3rem 0 0;font-weight:800;letter-spacing:-.01em}
+  .sec-head p{color:var(--muted);margin:.4rem 0 0;max-width:64ch}
+
+  .hazards{display:flex;flex-direction:column;gap:22px}
+  .hazard{--h:#888;background:var(--surface);border:1px solid var(--hair);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:240px 1fr}
+  .hazard .viz{position:relative;background:#0a100d;min-height:100%}
+  .hazard .viz svg{display:block;width:100%;height:100%;position:absolute;inset:0}
+  .hazard .viz .caption{position:absolute;left:12px;bottom:11px;z-index:2;font-size:.72rem;color:#fff;background:rgba(0,0,0,.5);padding:3px 9px;border-radius:20px;letter-spacing:.04em}
+  .sev{position:absolute;top:12px;left:12px;z-index:2;font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:4px 10px;border-radius:20px;color:#fff}
+  .sev.warn{background:var(--warn)}.sev.danger{background:var(--danger)}.sev.crit{background:var(--crit)}
+
+  .hazard .body{padding:22px 24px 24px}
+  .hazard .idx{font-size:.72rem;letter-spacing:.2em;color:var(--faint);font-weight:700}
+  .hazard h3{font-size:1.35rem;margin:.15rem 0 .1rem;font-weight:800;letter-spacing:-.01em;display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+  .hazard h3 .tag{font-size:.72rem;font-weight:700;color:var(--h);border:1px solid currentColor;border-radius:6px;padding:1px 7px;letter-spacing:.03em}
+  .hazard .what{color:var(--muted);margin:.35rem 0 0;font-size:.95rem}
+  .hazard .what b{color:var(--ink)}
+
+  .block{margin-top:16px}
+  .block h4{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;margin:0 0 .35rem;color:var(--faint);font-weight:700}
+  .block h4::before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--h);margin-right:7px;vertical-align:middle}
+  .block.fix h4::before{background:var(--accent)}
+  .block p{margin:0;font-size:.95rem;color:var(--ink)}
+  .block.fix{background:var(--surface-2);border-radius:12px;padding:13px 15px;border:1px solid var(--hair)}
+  .agent-strong{color:var(--h);font-weight:700}
+
+  .timeline{margin-top:16px}
+  .timeline .track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+  .timeline .track::before{content:"";position:absolute;left:6%;right:6%;top:9px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--warn),var(--danger),var(--crit));opacity:.35}
+  .timeline .step{position:relative;text-align:center;padding-top:22px}
+  .timeline .step .dot{position:absolute;top:3px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;background:var(--surface);border:3px solid var(--h)}
+  .timeline .step .when{font-size:.72rem;font-weight:700;color:var(--ink);letter-spacing:.02em}
+  .timeline .step .state{font-size:.8rem;color:var(--muted);line-height:1.45;margin-top:2px;display:block}
+
+  .health-sec{color:#e6efe9}
+  .hgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .hcard{background:#141d17;border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:22px 22px 24px}
+  .hcard .hicon{font-size:1.7rem;line-height:1}
+  .hcard .htag{font-size:.72rem;letter-spacing:.1em;color:#63d3a6;font-weight:700;margin:.5rem 0 0}
+  .hcard h3{font-size:1.18rem;margin:.15rem 0 .5rem;font-weight:800;color:#f1f8f4;letter-spacing:-.01em}
+  .hcard .hlead{color:#b3c4ba;font-size:.93rem;margin:0 0 .7rem}
+  .hcard .hlead b{color:#f1f8f4}
+  .hcard .hlist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+  .hcard .hlist li{position:relative;padding-left:18px;font-size:.9rem;line-height:1.6;color:#cad6cf}
+  .hcard .hlist li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:#47c99a}
+  .hcard .hlist li b{color:#c8f0dd}
+  .hcard .hrisk{margin:.9rem 0 0;padding:11px 13px;border-radius:10px;background:rgba(71,201,154,.12);border:1px solid rgba(71,201,154,.28);font-size:.85rem;color:#d1e5db;line-height:1.55}
+  .hcard .hrisk span{display:inline-block;font-weight:700;color:#7bdcb4;margin-right:.4em;font-size:.72rem;letter-spacing:.06em}
+  .hnote{margin:22px 0 0;padding:16px 20px;border-radius:12px;background:rgba(255,255,255,.05);border-left:3px solid #47c99a;color:#c1d0c8;font-size:.94rem;line-height:1.7}
+  .hnote b{color:#f1f8f4}
+
+  .buy-sec{background:var(--ground)}
+  .buy-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .buy-col{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:20px 20px 22px;box-shadow:var(--shadow)}
+  .buy-col.must{border-top:4px solid var(--accent)}.buy-col.nice{border-top:4px solid var(--faint)}
+  .btier{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:0 0 .8rem;color:var(--accent)}
+  .buy-col.nice .btier{color:var(--muted)}
+  .blist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+  .blist li{border-bottom:1px solid var(--hair);padding-bottom:13px}.blist li:last-child{border-bottom:0;padding-bottom:0}
+  .bhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .bname{font-weight:800;font-size:.98rem;color:var(--ink)}
+  .bprice{font-size:.82rem;font-weight:700;color:var(--accent);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .brole{display:block;font-size:.87rem;color:var(--muted);line-height:1.55;margin-top:.25rem}
+  .brole b{color:var(--ink)}
+  .plan-head{margin:34px 0 16px}
+  .plan-head h3{font-size:1.3rem;margin:0;font-weight:800;letter-spacing:-.01em}
+  .plan-head p{margin:.35rem 0 0;color:var(--muted);font-size:.94rem}
+  .plan{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .pstep{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:18px 20px 20px;box-shadow:var(--shadow)}
+  .pnum{font-weight:800;font-size:1.05rem;color:var(--accent);display:flex;flex-direction:column;margin-bottom:.7rem}
+  .pnum span{font-size:.75rem;font-weight:600;color:var(--muted);letter-spacing:.02em;margin-top:.1rem}
+  .pstep ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .pstep li{position:relative;padding-left:20px;font-size:.9rem;line-height:1.55;color:var(--ink)}
+  .pstep li::before{content:"";position:absolute;left:0;top:.5em;width:11px;height:11px;border-radius:4px;border:2px solid var(--accent)}
+  .buy-final{margin:24px 0 0;padding:16px 20px;border-radius:12px;background:var(--accent-soft);border:1px solid var(--hair);color:var(--ink);font-size:.96rem;line-height:1.7}
+  .buy-final b{color:var(--ink)}
+
+  .warnbox{margin-top:26px;background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);border-top:4px solid var(--crit)}
+  .warnbox h3{margin:.1rem 0 .5rem;font-size:1.1rem;font-weight:800}
+  .warnbox h3::before{content:"⚠ ";color:var(--crit)}
+  .warnbox p{margin:.2rem 0;color:var(--muted);font-size:.94rem}
+  .warnbox p b{color:var(--ink)}
+
+  .link-sec{background:var(--surface-2);border-top:1px solid var(--hair)}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--hair);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+  .link-tbl{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px}
+  .link-tbl th,.link-tbl td{text-align:left;padding:12px 14px;vertical-align:top;border-bottom:1px solid var(--hair)}
+  .link-tbl thead th{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:700;background:var(--surface-2);white-space:nowrap}
+  .link-tbl tbody tr:last-child td{border-bottom:0}
+  .link-tbl td:first-child{color:var(--ink);font-weight:600;max-width:280px}
+  .link-tbl td:nth-child(2){color:var(--muted)}
+  .link-tbl td:nth-child(3),.link-tbl td:nth-child(4){white-space:nowrap;color:var(--muted);font-size:.84rem}
+  .st{display:inline-block;font-size:.74rem;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .st.have{background:var(--accent-soft);color:var(--accent)}
+  .st.add{background:rgba(214,138,21,.16);color:var(--warn)}
+  .st.note{background:var(--hair);color:var(--muted)}
+  .link-note{margin:18px 0 0;padding:15px 18px;border-radius:12px;background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--accent);color:var(--muted);font-size:.9rem;line-height:1.7}
+  .link-note b{color:var(--ink)}
+
+  footer{border-top:1px solid var(--hair);padding:30px 0 60px;color:var(--faint);font-size:.85rem}
+
+  @media (max-width:720px){
+    .principle{grid-template-columns:1fr}
+    .hazard{grid-template-columns:1fr}.hazard .viz{min-height:150px}
+    .hgrid{grid-template-columns:1fr}.buy-cols{grid-template-columns:1fr}.plan{grid-template-columns:1fr}
+    .timeline .step .state{font-size:.72rem}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="series">おうちメンテ・フィールドガイド <b>／ トイレ編</b></span>
+    <p class="eyebrow">臭いの正体は「石」と「見えない飛沫」</p>
+    <h1>放置したトイレは、石になって臭う。</h1>
+    <p class="lede">トイレのイヤなにおいは、消臭剤で隠すものではなく<b>原因物質を断つ</b>もの。臭いの正体は、便器にこびりついて<b>石のように硬くなった尿石</b>と、床や壁に飛んで乾いた<b>見えない尿はね</b>です。どこに何が溜まり、なぜ取れなくなるのかを整理しました。</p>
+
+    <div class="principle" aria-label="トイレ汚れの3要素">
+      <div class="p"><div class="n">🧪</div><b>尿＋ミネラル</b><span>尿の成分と水道水のミネラルが結びつき、空気で酸化して固まる（尿石）。</span></div>
+      <div class="p"><div class="n">💦</div><b>見えない飛沫</b><span>用を足すたび便器の外へ微細な尿が飛ぶ。床・壁・便器根元に蓄積。</span></div>
+      <div class="p"><div class="n">🦠</div><b>菌がアンモニアを作る</b><span>尿を分解する菌が増え、時間とともに強いアンモニア臭を発生させる。</span></div>
+    </div>
+    <p class="principle-note"><b>だから対策は2本柱です。</b>①<b>尿石を作らせない・溶かす（酸性）</b>、②<b>飛沫を毎回リセットする（床・便器を軽く拭く）</b>。硬い尿石になる前のこまめさが、臭いゼロへの一番の近道です。</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">放置の末路</p>
+      <h2>トイレに溜まる5つの汚れ</h2>
+      <p>左は各汚れの見た目を質感再現した図解です。とくに尿石は放置で硬化し、こする程度では取れなくなります。</p>
+    </div>
+
+    <div class="hazards">
+
+      <!-- 1 urine scale -->
+      <article class="hazard" style="--h:#c39a34">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="便器の水際に黄色く固着した尿石">
+            <defs>
+              <filter id="t1" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.2" numOctaves="4" seed="8" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#eef1f0"/>
+            <path d="M0 150 Q120 190 240 150 L240 260 L0 260 Z" fill="#d3e0e6"/>
+            <rect x="0" y="120" width="240" height="60" fill="#c39a34" filter="url(#t1)" opacity=".85"/>
+            <rect x="0" y="140" width="240" height="50" fill="#8a6a1e" filter="url(#t1)" opacity=".5"/>
+          </svg>
+          <span class="sev crit">深刻度：深刻</span>
+          <span class="caption">水際の黄ばみ・尿石</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 01</p>
+          <h3>尿石（黄ばみ・こびりつき） <span class="tag">アルカリ性・無機</span></h3>
+          <p class="what"><b>正体：</b>尿の成分（カルシウム・尿酸）と水道水のミネラルが結びつき、固まった「石」。便器の水際とふち裏に付きます。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>尿が乾くたびに成分が残り、空気に触れて酸化・固着します。<span class="agent-strong">層になると硬化して</span>普通の洗剤では歯が立たなくなり、内部で菌が増えて<b>強いアンモニア臭</b>を出します。トイレ臭の最大の発生源。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">数日</span><span class="state">薄い黄ばみ</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1週間</span><span class="state">ザラつき</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">固着・臭い</span></div>
+              <div class="step"><span class="dot"></span><span class="when">数ヶ月</span><span class="state">硬化・削らないと不可</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>アルカリ性なので<b>酸性洗剤（サンポール等）やクエン酸</b>で溶かす。トイレットペーパーで湿布すると効く。硬いものは専用スティックで削る。<b>塩素系と絶対に混ぜない</b>（有毒ガス）。予防は水際をこまめに一拭き。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 black ring -->
+      <article class="hazard" style="--h:#3a3d40">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="便器の水たまりの縁についた黒ずみのリング">
+            <defs>
+              <filter id="t2" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04 0.15" numOctaves="4" seed="17" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.7 1.05"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#eef1f0"/>
+            <ellipse cx="120" cy="150" rx="120" ry="55" fill="#cdd9df"/>
+            <ellipse cx="120" cy="150" rx="120" ry="55" fill="none" stroke="#2c2e31" stroke-width="26" opacity=".0"/>
+            <g opacity=".9"><rect x="0" y="98" width="240" height="26" fill="#2c2e31" filter="url(#t2)"/></g>
+            <ellipse cx="120" cy="150" rx="92" ry="40" fill="#c1ccd2"/>
+          </svg>
+          <span class="sev danger">深刻度：危険</span>
+          <span class="caption">水際の黒ずみリング</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 02</p>
+          <h3>黒ずみ・サボったリング <span class="tag">カビ＋菌</span></h3>
+          <p class="what"><b>正体：</b>便器にたまった水の縁（水際）にできる黒い輪。カビ・雑菌・ミネラルの混合物です。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>水が接する境目は常に湿っていて、<span class="agent-strong">カビや細菌が繁殖する好条件</span>。数日流す・こするをサボると輪状に定着します（俗に「サボったリング」）。尿石と混ざると落ちにくくなります。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">数日</span><span class="state">薄い輪</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1週間</span><span class="state">黒い輪が定着</span></div>
+              <div class="step"><span class="dot"></span><span class="when">2週間</span><span class="state">こすっても残る</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">尿石と一体化</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>初期なら<b>中性洗剤＋トイレブラシ</b>でこするだけで落ちる。定着したら塩素系トイレ洗剤。<b>週1でブラシを一周</b>させるだけで、そもそもできなくなります。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 under rim -->
+      <article class="hazard" style="--h:#6a5a3e">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="便器のふち裏に潜む見えない汚れ">
+            <defs>
+              <filter id="t3" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.06 0.06" numOctaves="4" seed="26" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#e7eb ea"/>
+            <rect width="240" height="260" fill="#e7ebea"/>
+            <path d="M0 40 Q120 0 240 40 L240 96 Q120 60 0 96 Z" fill="#cfd8dc"/>
+            <path d="M0 66 Q120 34 240 66 L240 96 Q120 66 0 96 Z" fill="#3f3320"/>
+            <rect x="0" y="66" width="240" height="34" fill="#6a5a3e" filter="url(#t3)" opacity=".75"/>
+            <path d="M0 96 Q120 120 240 96 L240 260 L0 260 Z" fill="#dfe6e8"/>
+          </svg>
+          <span class="sev danger">深刻度：危険</span>
+          <span class="caption">便器フチ裏（見えない汚れ）</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 03</p>
+          <h3>便器フチ裏の汚れ <span class="tag">死角・菌の巣</span></h3>
+          <p class="what"><b>正体：</b>便器のふちの内側（裏）に溜まる尿石・黒ずみ・菌。真上から見えないので放置されがちな死角です。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>水を流すたびに飛沫と汚れがふち裏に付き、<span class="agent-strong">見えないまま尿石と菌が育ちます</span>。ここが臭いの隠れた発生源で、「掃除しているのに臭う」原因の多くはフチ裏の見落としです。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">1週間</span><span class="state">汚れ付着</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">黒ずみ・臭い</span></div>
+              <div class="step"><span class="dot"></span><span class="when">数ヶ月</span><span class="state">尿石が固着</span></div>
+              <div class="step"><span class="dot"></span><span class="when">放置</span><span class="state">常時アンモニア臭</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p><b>ふち裏専用ノズルの洗剤</b>や、ブラシを寝かせて裏側をこする。鏡や手鏡で確認すると◎。週1のブラシがけの時に<b>必ずふち裏も一周</b>する習慣を。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 urine splash floor/wall -->
+      <article class="hazard" style="--h:#7f8a56">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="床や壁に飛んで乾いた見えない尿はね">
+            <defs>
+              <filter id="t4" x="-30%" y="-30%" width="160%" height="160%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="35" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -3 1.4"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#dfe6e4"/>
+            <rect x="0" y="150" width="240" height="4" fill="#c4cfcb"/>
+            <rect width="240" height="260" fill="#8f9a63" filter="url(#t4)" opacity=".55"/>
+          </svg>
+          <span class="sev danger">深刻度：危険</span>
+          <span class="caption">床・壁の尿はね（乾くと臭う）</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 04</p>
+          <h3>床・壁の尿はね <span class="tag">アンモニア臭の主因</span></h3>
+          <p class="what"><b>正体：</b>用を足すときに便器の外へ飛ぶ微細な尿。床・壁の下部・便器の根元に見えないまま蓄積します。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>立って用を足すと<span class="agent-strong">想像以上に広く飛沫が飛び</span>、乾くと目に見えませんが、菌に分解されてアンモニア臭を放ちます。「便器はきれいなのに部屋が臭う」典型的な原因がこれ。子どものいる家庭では特に広範囲になります。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">毎回</span><span class="state">飛沫が付く</span></div>
+              <div class="step"><span class="dot"></span><span class="when">数日</span><span class="state">乾いて臭う</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1週間</span><span class="state">床・壁に蓄積</span></div>
+              <div class="step"><span class="dot"></span><span class="when">放置</span><span class="state">部屋全体が臭う</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p><b>床・壁下部・便器根元を週1で拭く</b>（トイレ用シートが手軽）。飛沫を減らすには<b>座って用を足す</b>のが最も効く。消臭剤で隠さず、拭いて元から断つのが正解。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 washlet nozzle -->
+      <article class="hazard" style="--h:#3f8a84">
+        <div class="viz">
+          <svg viewBox="0 0 240 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="温水洗浄便座のノズルについた黒ずみ">
+            <defs>
+              <filter id="t5" x="-30%" y="-30%" width="160%" height="160%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.18 0.1" numOctaves="3" seed="44" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2 1.1"/>
+              </filter>
+            </defs>
+            <rect width="240" height="260" fill="#e7eb ea"/>
+            <rect width="240" height="260" fill="#e7ebea"/>
+            <rect x="30" y="120" width="180" height="26" rx="13" fill="#cfd8dc"/>
+            <rect x="30" y="120" width="150" height="26" rx="13" fill="#2f3a38" filter="url(#t5)" opacity=".8"/>
+            <circle cx="196" cy="133" r="9" fill="#aab6ba"/>
+          </svg>
+          <span class="sev warn">深刻度：注意</span>
+          <span class="caption">温水洗浄ノズルの黒ずみ</span>
+        </div>
+        <div class="body">
+          <p class="idx">汚れ 05</p>
+          <h3>温水洗浄便座のノズル <span class="tag">直接肌に触れる</span></h3>
+          <p class="what"><b>正体：</b>ウォシュレット等のノズルに付く黒ずみ・水垢・カビ。濡れて汚れが付きやすく、しかも<b>直接肌に当たる</b>部分です。</p>
+          <div class="block mech">
+            <h4>仕組み</h4>
+            <p>使用のたびに水と汚れにさらされ、<span class="agent-strong">湿ったまま格納されるとカビ・ぬめり</span>が発生。衛生に直結する場所なのに見落とされがちです。</p>
+          </div>
+          <div class="timeline">
+            <div class="track">
+              <div class="step"><span class="dot"></span><span class="when">数週間</span><span class="state">水垢・くもり</span></div>
+              <div class="step"><span class="dot"></span><span class="when">1ヶ月</span><span class="state">黒ずみ</span></div>
+              <div class="step"><span class="dot"></span><span class="when">数ヶ月</span><span class="state">カビ・ぬめり</span></div>
+              <div class="step"><span class="dot"></span><span class="when">放置</span><span class="state">衛生面のリスク</span></div>
+            </div>
+          </div>
+          <div class="block fix">
+            <h4>対策</h4>
+            <p>多くの機種に<b>ノズル掃除ボタン</b>があり、出したところを中性洗剤＋古歯ブラシで洗う。月1で十分。強い薬剤や研磨は故障の元なので避ける。</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section style="background:#0a120e;border-top:1px solid var(--hair)" class="health-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" style="color:#63d3a6">臭いと衛生のリアル</p>
+      <h2 style="color:#f1f8f4">放置したトイレが、暮らしに何をするか</h2>
+      <p style="color:#adbfb5">トイレの放置は、風呂やエアコンのような重い肺の病気とは違いますが、<b>アンモニア臭による不快</b>と<b>雑菌の広がり</b>という、生活の質に直結する被害を出します。</p>
+    </div>
+
+    <div class="hgrid">
+      <div class="hcard">
+        <div class="hicon">👃</div>
+        <p class="htag">アンモニア臭 ／ 空気から</p>
+        <h3>においと粘膜刺激、暮らしの質</h3>
+        <p class="hlead">尿石と尿はねから出る<b>アンモニア臭</b>は、慣れると自分では気づきにくく、来客に一番わかってしまう部分。濃いと体にも影響します。</p>
+        <ul class="hlist">
+          <li><b>目・鼻・のどの刺激</b>：アンモニアが濃い密室では、粘膜がピリピリしたり頭痛・吐き気の原因に</li>
+          <li><b>慢性的な不快・ストレス</b>：家の中に臭いがこもると生活の質と気分に響く</li>
+          <li><b>来客時の印象</b>：本人が慣れて気づかない分、他人にははっきり伝わる</li>
+          <li>消臭剤で隠しても<b>原因（尿石・尿はね）が残る限り再発</b>する</li>
+        </ul>
+        <p class="hrisk"><span>とくに注意</span>換気の悪い個室、窓なしトイレ。子どもがいる家庭は尿はねの範囲が広く臭いやすい。</p>
+      </div>
+
+      <div class="hcard">
+        <div class="hicon">🦠</div>
+        <p class="htag">雑菌・飛沫 ／ 接触で広がる</p>
+        <h3>菌の拡散と二次的なトラブル</h3>
+        <p class="hlead">便器や床には大腸菌などの雑菌が存在し、<b>流す時の飛沫（トイレプルーム）</b>や手・スリッパを介して周囲へ広がります。</p>
+        <ul class="hlist">
+          <li><b>菌の付着・拡散</b>：ふたを開けたまま流すと飛沫が舞い、便座・床・壁・歯ブラシ等へ及ぶことがある</li>
+          <li><b>手指を介した接触感染のリスク</b>：ドアノブ・レバーは家族みんなが触る</li>
+          <li><b>尿石による流れの悪化</b>：進行すると排水路が細くなり、詰まり・逆流の一因に</li>
+          <li>床の尿はねを放置すると<b>床材の劣化・変色</b>にもつながる</li>
+        </ul>
+        <p class="hrisk"><span>とくに注意</span>小さな子ども・免疫が下がっている家族。<b>流すときはふたを閉める</b>だけで飛沫拡散をかなり抑えられる。</p>
+      </div>
+    </div>
+
+    <p class="hnote">効く対策はシンプルで、<b>①尿石を作らせない（週1ブラシ＋酸性洗剤で予防）／②尿はねを毎回リセット（床・便器を拭く・座って用を足す）／③流すときはふたを閉める</b>。消臭剤は「隠す」ものと割り切り、原因を断つのが本筋です。</p>
+  </div>
+</section>
+
+<section class="buy-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">結論：何を買って、どうするか</p>
+      <h2>「隠す」より「石を作らせない」道具立て</h2>
+      <p>トイレは道具も安く、こまめさが9割。まずこれを買って、週1と月1の軽いリズムで回せば、臭いも黒ずみもほぼ出なくなります。</p>
+    </div>
+
+    <div class="buy-cols">
+      <div class="buy-col must">
+        <p class="btier">まず これだけ買う（必須）</p>
+        <ul class="blist">
+          <li><div class="bhead"><span class="bname">トイレ用中性洗剤＋ブラシ</span><span class="bprice">〜600円</span></div><span class="brole">日常の黒ずみ・輪じみ用。週1でふち裏まで一周</span></li>
+          <li><div class="bhead"><span class="bname">トイレ用お掃除シート</span><span class="bprice">200円〜</span></div><span class="brole">床・壁下部・便座・便器根元の尿はねを拭く。手を汚さない</span></li>
+          <li><div class="bhead"><span class="bname">酸性洗剤（尿石・黄ばみ用）</span><span class="bprice">300円〜</span></div><span class="brole">サンポール等。尿石を溶かす。※塩素系と混ぜない</span></li>
+          <li><div class="bhead"><span class="bname">ゴム手袋</span><span class="bprice">100円〜</span></div><span class="brole">酸性・塩素系を使うとき手を守る</span></li>
+        </ul>
+      </div>
+      <div class="buy-col nice">
+        <p class="btier">あると さらにラク（任意）</p>
+        <ul class="blist">
+          <li><div class="bhead"><span class="bname">流すだけスタンプ／置き型洗浄剤</span><span class="bprice">400円〜</span></div><span class="brole">便器に貼る/入れると、流すたび洗浄成分で黒ずみ・尿石を予防</span></li>
+          <li><div class="bhead"><span class="bname">ふち裏用ノズル洗剤</span><span class="bprice">400円〜</span></div><span class="brole">死角のふち裏に届く。臭いの隠れ発生源を断つ</span></li>
+          <li><div class="bhead"><span class="bname">タンク投入/設置タイプ洗浄剤</span><span class="bprice">300円〜</span></div><span class="brole">タンク内のカビ（黒い点の原因）を予防。※機種の可否を確認</span></li>
+          <li><div class="bhead"><span class="bname">クエン酸</span><span class="bprice">100円〜</span></div><span class="brole">軽い黄ばみ・水垢に。酸性洗剤より穏やかで日常予防向き</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="plan-head"><h3>で、こう回す</h3><p>手数の少ない3リズム。硬い尿石になる前に片付けるのがコツ。</p></div>
+    <div class="plan">
+      <div class="pstep"><div class="pnum">毎日<span>数秒</span></div><ul>
+        <li>流すときは<b>ふたを閉める</b>（飛沫拡散を防ぐ）</li>
+        <li>気づいた汚れはその場でシュッと拭く</li>
+        <li>できれば<b>座って用を足す</b>（尿はね激減）</li>
+      </ul></div>
+      <div class="pstep"><div class="pnum">週1<span>10分</span></div><ul>
+        <li>ブラシで便器を一周（<b>ふち裏も忘れず</b>）</li>
+        <li>便座裏・便器根元・<b>床・壁下部</b>をシートで拭く</li>
+        <li>各階トイレを順番に</li>
+      </ul></div>
+      <div class="pstep"><div class="pnum">月1<span>放置系</span></div><ul>
+        <li><b>尿石予防に酸性洗剤/クエン酸</b>を水際・ふち裏に</li>
+        <li>ウォシュレットの<b>ノズル掃除</b></li>
+        <li>置き型/スタンプ洗浄剤を補充</li>
+      </ul></div>
+    </div>
+
+    <p class="buy-final"><b>最小構成：</b>「中性洗剤＋ブラシ」「お掃除シート」「酸性洗剤」の3つを置いて、<b>週1でブラシ一周＋床拭き</b>、<b>流すときふたを閉める</b>を習慣にするだけ。硬い尿石も強い臭いも、そもそも発生しなくなります。</p>
+
+    <div class="warnbox">
+      <h3>トイレ洗剤の安全ルール</h3>
+      <p><b>酸性洗剤（サンポール・クエン酸など尿石用）と、塩素系（カビ取り・漂白系）は絶対に混ぜない。</b>有毒な塩素ガスが発生します。トイレは両方を使う場所なので特に注意。</p>
+      <p>使う日・場所を分け、間に<b>十分に水で流す</b>。使用中は<b>換気</b>し、<b>ゴム手袋</b>を着用。酸性洗剤は長時間置きすぎると素材を傷めるので表示時間を守る。</p>
+    </div>
+  </div>
+</section>
+
+<section class="link-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">家事タスク表との連動</p>
+      <h2>この対策は、うちの hometasks のどれに当たるか</h2>
+      <p>今回、<b>トイレ掃除（週1）と尿石予防（月1）を新しく追加</b>しました。既存の床掃除・補充確認・年2回のディープと合わせて、トイレは「毎週の便器＋床」「月1の尿石」「年2の総点検」の3層になります。<b>✓＝既存／＋＝今回追加</b>。</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="link-tbl">
+        <thead><tr><th>ガイドの対策</th><th>対応するタスク</th><th>頻度</th><th>置き場所</th><th>状態</th></tr></thead>
+        <tbody>
+          <tr><td>流すときふたを閉める・座って用を足す</td><td>日々の使い方の習慣</td><td>毎回</td><td>Notes（習慣メモ）</td><td><span class="st note">運用</span></td></tr>
+          <tr><td>便器をブラシで一周（ふち裏含む）＋床・壁下部を拭く</td><td>トイレ掃除（各階の便器・床）</td><td>毎週 水21:00</td><td>WeeklyTasks</td><td><span class="st add">＋追加</span></td></tr>
+          <tr><td>尿石を溶かす・作らせない（酸性洗剤/クエン酸）</td><td>トイレの尿石予防（便器を酸性洗剤/クエン酸）</td><td>月1（第3日）</td><td>TodoistImport</td><td><span class="st add">＋追加</span></td></tr>
+          <tr><td>床の紙ほこり・尿はねを取る</td><td>ルンバを走らせる 3/3（トイレ床）</td><td>毎週 金21:00</td><td>WeeklyTasks</td><td><span class="st have">✓既存</span></td></tr>
+          <tr><td>紙・洗剤・手拭きの不足を補充</td><td>各階補充確認（金曜朝の枠に同梱）</td><td>毎週 金07:00</td><td>WeeklyTasks</td><td><span class="st have">✓既存</span></td></tr>
+          <tr><td>便器・床・壁下部の総点検（夏の臭い対策含む）</td><td>各階トイレの便器・床／壁下部・床すみ</td><td>年2（1月・7月）</td><td>DeepCleanPlan</td><td><span class="st have">✓既存</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="link-note"><b>追記済み：</b>hometasks(4).xlsx の WeeklyTasks に「トイレ掃除（水21:00・ルンバ2/3と並行）」、TodoistImport に「トイレの尿石予防（第3日曜）」を追加しました。ふたを閉める・座って使うはNotesの習慣メモへ。編集前のバックアップは hometasks(4).bak_20260713.xlsx にあります。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    おうちメンテ・フィールドガイド／トイレ編 ／ イラストは各汚れの見た目を質感再現した図解です（実写真ではありません）。酸性洗剤と塩素系は絶対に混ぜないでください。薬剤は製品表示に従って使用を。
+  </div>
+</footer>
+
+</body>
+</html>

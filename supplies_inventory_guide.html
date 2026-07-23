@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>洗剤・消耗品 在庫ガイド</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%A7%B4%3C/text%3E%3C/svg%3E">
+<style>*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0}img,svg{max-width:100%}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#eef0f4;--surface:#ffffff;--surface-2:#f5f6fa;--ink:#191c28;--muted:#596071;
+    --faint:#8b93a4;--hair:rgba(25,28,40,.12);--hair-strong:rgba(25,28,40,.22);
+    --accent:#5560d8;--accent-soft:#e3e5fb;--warn:#c98a12;--danger:#d1541f;--good:#1f9d74;
+    --shadow:0 1px 2px rgba(25,28,40,.05), 0 8px 30px rgba(25,28,40,.06);--maxw:1000px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#0b0d13;--surface:#151824;--surface-2:#1b1f2d;--ink:#e7e9f2;--muted:#9aa1b4;
+      --faint:#6b7284;--hair:rgba(231,233,242,.12);--hair-strong:rgba(231,233,242,.2);
+      --accent:#8b93f0;--accent-soft:#20244a;--warn:#e6a83e;--danger:#ec7a44;--good:#47c99a;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#eef0f4;--surface:#ffffff;--surface-2:#f5f6fa;--ink:#191c28;--muted:#596071;
+    --faint:#8b93a4;--hair:rgba(25,28,40,.12);--hair-strong:rgba(25,28,40,.22);
+    --accent:#5560d8;--accent-soft:#e3e5fb;--warn:#c98a12;--danger:#d1541f;--good:#1f9d74;
+    --shadow:0 1px 2px rgba(25,28,40,.05), 0 8px 30px rgba(25,28,40,.06);
+  }
+  :root[data-theme="dark"]{
+    --ground:#0b0d13;--surface:#151824;--surface-2:#1b1f2d;--ink:#e7e9f2;--muted:#9aa1b4;
+    --faint:#6b7284;--hair:rgba(231,233,242,.12);--hair-strong:rgba(231,233,242,.2);
+    --accent:#8b93f0;--accent-soft:#20244a;--warn:#e6a83e;--danger:#ec7a44;--good:#47c99a;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+    line-height:1.7;letter-spacing:.01em;font-feature-settings:"palt" 1;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+
+  header.hero{padding:56px 0 30px;border-bottom:1px solid var(--hair);background:radial-gradient(120% 90% at 85% -20%, var(--accent-soft) 0%, transparent 55%);}
+  .hero h1{font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.14;margin:.4rem 0 .2rem;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .hero .lede{font-size:clamp(1rem,2vw,1.12rem);color:var(--muted);max-width:64ch;margin:.5rem 0 0}
+  .kpis{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .kpi{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:10px 15px;box-shadow:var(--shadow)}
+  .kpi b{font-size:1.3rem;font-variant-numeric:tabular-nums}
+  .kpi span{display:block;font-size:.74rem;color:var(--muted);letter-spacing:.03em}
+
+  section{padding:38px 0}
+  .sec-head{margin:0 0 18px}
+  .sec-head h2{font-size:clamp(1.3rem,3vw,1.7rem);margin:.2rem 0 0;font-weight:800;letter-spacing:-.01em}
+  .sec-head p{color:var(--muted);margin:.35rem 0 0;max-width:70ch;font-size:.95rem}
+  .layer-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.08em;color:var(--accent);background:var(--accent-soft);border-radius:20px;padding:3px 11px;margin-bottom:.2rem}
+
+  /* 系統カード */
+  .fam{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .fcard{background:var(--surface);border:1px solid var(--hair);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px}
+  .fcard h3{margin:0 0 .3rem;font-size:1.05rem;font-weight:800}
+  .fcard h3 .ph{font-size:.7rem;font-weight:700;color:#fff;border-radius:5px;padding:2px 8px;margin-left:.5rem;vertical-align:middle}
+  .ph.neutral{background:var(--good)}.ph.alkali{background:var(--accent)}.ph.acid{background:var(--warn)}.ph.chlorine{background:var(--danger)}
+  .fcard .own{font-size:.86rem;font-weight:700;color:var(--ink);margin:.2rem 0}
+  .fcard .cov{font-size:.86rem;color:var(--muted);margin:0}
+  .fcard .cut{margin:.6rem 0 0;padding:.5rem .8rem;background:var(--surface-2);border-radius:9px;font-size:.82rem;color:var(--muted)}
+  .fcard .cut b{color:var(--good)}
+
+  /* 在庫テーブル */
+  .tbl-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--hair);box-shadow:var(--shadow);background:var(--surface)}
+  table.inv{border-collapse:collapse;width:100%;min-width:760px;font-size:.86rem}
+  table.inv th{background:var(--surface-2);text-align:left;padding:10px 14px;font-size:.74rem;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--hair-strong);white-space:nowrap}
+  table.inv td{padding:10px 14px;border-bottom:1px solid var(--hair);vertical-align:top;line-height:1.55}
+  table.inv tr:last-child td{border-bottom:0}
+  table.inv td.name{font-weight:800;white-space:nowrap}
+  table.inv td.name small{display:block;font-weight:600;color:var(--faint);font-size:.72rem}
+  .pace{white-space:nowrap;font-weight:700;color:var(--accent)}
+  .stockn{white-space:nowrap;font-weight:700}
+  .grp td{background:var(--surface-2);font-weight:800;font-size:.8rem;letter-spacing:.08em;color:var(--accent);padding:7px 14px}
+  .opt{display:inline-block;font-size:.68rem;font-weight:700;color:var(--faint);border:1px solid var(--hair-strong);border-radius:5px;padding:0 6px;margin-left:.4rem;vertical-align:middle}
+
+  /* 補充運用 */
+  .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .rule{background:var(--surface);border:1px solid var(--hair);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px}
+  .rule .no{font-size:.72rem;font-weight:800;letter-spacing:.14em;color:var(--accent)}
+  .rule h3{margin:.2rem 0 .3rem;font-size:1rem;font-weight:800}
+  .rule p{margin:0;font-size:.86rem;color:var(--muted)}
+
+  .warnbox{margin-top:26px;padding:18px 20px;border-radius:14px;background:var(--surface);border:1px solid var(--hair);border-left:4px solid var(--danger)}
+  .warnbox h3{margin:0 0 .4rem;font-size:1rem;color:var(--danger)}
+  .warnbox p{margin:.3rem 0;font-size:.9rem;line-height:1.7}
+
+  .ngmap{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+  .ng{background:var(--surface);border:1px solid var(--hair);border-radius:12px;box-shadow:var(--shadow);padding:12px 15px;font-size:.86rem}
+  .ng b{display:block;font-size:.9rem}
+  .ng span{color:var(--muted)}
+
+  .note{margin-top:22px;padding:15px 18px;border-radius:12px;background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--accent);color:var(--muted);font-size:.92rem;line-height:1.7}
+  .note b{color:var(--ink)}
+
+  footer{border-top:1px solid var(--hair);padding:26px 0 56px;color:var(--faint);font-size:.84rem}
+
+  @media (max-width:820px){
+    .fam{grid-template-columns:1fr}.rules{grid-template-columns:1fr}.ngmap{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">おうちメンテ ／ 洗剤・消耗品 在庫ガイド</p>
+    <h1>家じゅうの洗剤は、この7本で回る</h1>
+    <p class="lede">トイレ・キッチン・風呂・エアコンの各ガイドの買い物リストを突き合わせて、<b>兼用できるものを1本化</b>した全体版です。洗剤は「中性・アルカリ・酸性・塩素」の4系統で考えると延べ13品→7品まで減ります。あとは<b>どのタスクで・いつ使い・いつ補充するか</b>をこの1枚で管理します。</p>
+    <div class="kpis">
+      <div class="kpi"><b>7本</b><span>常備する洗剤</span></div>
+      <div class="kpi"><b>4系統</b><span>中性・アルカリ・酸・塩素</span></div>
+      <div class="kpi"><b>金曜朝</b><span>在庫チェックの枠</span></div>
+      <div class="kpi"><b>残り1/3</b><span>買い足しライン</span></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <span class="layer-tag">考え方 ／ 4系統</span>
+    <div class="sec-head">
+      <h2>なぜ7本で足りるのか — 汚れの性質と洗剤の系統</h2>
+      <p>家の汚れはほぼ3種類しかない：<b>酸性の汚れ（油・皮脂）</b>、<b>アルカリ性の汚れ（水垢・尿石・石鹸カス）</b>、<b>生き物の汚れ（カビ・菌・ぬめり）</b>。酸性の汚れはアルカリで中和、アルカリ性の汚れは酸で中和、生き物は塩素で酸化分解——という対応関係が全部。商品がエリア別に分かれていても中身の系統は同じなので、系統ごとに1本あれば兼用できます。</p>
+    </div>
+    <div class="fam">
+      <div class="fcard">
+        <h3>中性 <span class="ph neutral">毎日の主役</span></h3>
+        <p class="own">① 食器用（キュキュット等）／② 住居用（ウタマロクリーナー等）</p>
+        <p class="cov"><b>効く仕組み：</b>界面活性剤が汚れを浮かせて包んで落とす。中和する力はない代わりに<b>素材を一切傷めない</b>。ホコリ・軽い皮脂・食べこぼし・日常のトイレ便器はこれで十分。</p>
+        <p class="cut"><b>なぜ兼ねられる：</b>トイレ用中性・風呂用中性・エアコン用は成分がほぼ同じ「中性＋界面活性剤」。容器と香りが違うだけなので住居用②の1本に統合。※スポンジ・ブラシだけは衛生上エリアごとに分ける</p>
+      </div>
+      <div class="fcard">
+        <h3>アルカリ <span class="ph alkali">油・皮脂＝酸性の汚れに</span></h3>
+        <p class="own">③ マジックリン（油汚れ用）／④ 重曹（粉）</p>
+        <p class="cov"><b>効く仕組み：</b>油・皮脂・手垢は酸性。アルカリで中和すると分解されて浮く。③は強め（レンジフード・コンロ級）、④は弱め（五徳つけ置き・風呂の皮脂こすり）。</p>
+        <p class="cut"><b>なぜ兼ねられる：</b>セスキは③と④の中間で役割が丸かぶりなので省略。重曹はキッチン用も風呂用も同じ粉——1袋で共用</p>
+      </div>
+      <div class="fcard">
+        <h3>酸性 <span class="ph acid">水垢・尿石＝アルカリ性の汚れに</span></h3>
+        <p class="own">⑤ サンポール（トイレ専用）／⑥ クエン酸（粉）</p>
+        <p class="cov"><b>効く仕組み：</b>水垢（炭酸カルシウム）・尿石（リン酸カルシウム）・白い石鹸カスはアルカリ性のかたまり。酸で中和して溶かす。⑥は弱い酸で日常用、⑤は塩酸9.5%で固まった尿石専用。</p>
+        <p class="cut"><b>なぜ兼ねられる：</b>クエン酸は風呂用もトイレ用も同じ粉なので1袋。<b>逆にサンポールが兼ねられない理由：</b>強すぎて陶器以外（風呂の金属・樹脂）を傷めるから、トイレ専用のまま</p>
+      </div>
+      <div class="fcard">
+        <h3>塩素 <span class="ph chlorine">カビ・菌・こびりつき＝生き物の汚れに</span></h3>
+        <p class="own">⑦ キッチンハイター（＋手持ちの塩素系トイレジェルを使い切るまで併用）</p>
+        <p class="cov"><b>効く仕組み：</b>カビ・ぬめり・黒ずみ・便のこびりつきは菌と色素の汚れで、中和では落ちない。次亜塩素酸ナトリウムがタンパク質と色素を酸化分解するので、<b>こすらず白くできる</b>。</p>
+        <p class="cut"><b>なぜ兼ねられる：</b>カビキラーも塩素系トイレ洗剤もヌメリ取りも主成分は同じ次亜塩素酸ナトリウム。中でもキッチンハイターは家庭用最高クラスの濃度（製造時6%）なので、ペーパー＋ラップの湿布で密着させれば全部の代わりになる。<b>唯一の例外：</b>髪の毛詰まりはタンパク質のかたまりを溶かす高濃度アルカリとの合わせ技が必要で、パイプクリーナーだけ別枠で残す</p>
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:18px">
+      <table class="inv">
+        <tr><th>汚れ</th><th>正体</th><th>使うもの</th><th>なぜこれか</th></tr>
+        <tr><td class="name">油・皮脂・手垢</td><td>酸性の汚れ</td><td>③マジックリン／④重曹</td><td>アルカリで中和して分解。軽ければ④、こびりつきは③</td></tr>
+        <tr><td class="name">水垢・鏡のウロコ</td><td>炭酸カルシウム（アルカリ性）</td><td>⑥クエン酸（湿布）</td><td>酸で溶かす。こすっても落ちないのは性質が合っていないから</td></tr>
+        <tr><td class="name">尿石（黄ばみのかたまり）</td><td>リン酸カルシウム（アルカリ性・硬い）</td><td>⑤サンポール</td><td>クエン酸では弱くて溶けない。強い酸だけがトイレに必要な理由</td></tr>
+        <tr><td class="name">石鹸カス</td><td>白＝金属石鹸（アルカリ性）／黒ずみ＝皮脂混合</td><td>白は⑥、黒ずみは④</td><td>白と黒で性質が逆。効かなければもう片方を試す</td></tr>
+        <tr><td class="name">黒カビ・ぬめり・除菌</td><td>菌＋色素</td><td>⑦ハイター（湿布）</td><td>次亜塩素酸が菌ごと色素を酸化分解。中和系では死なない</td></tr>
+        <tr><td class="name">便のこびりつき・黒ずみ</td><td>有機物＋細菌の膜</td><td>⑦ハイター or 手持ちの塩素ジェル</td><td>タンパク質を分解するのでこすらず落ちる。予防はスタンプ</td></tr>
+        <tr><td class="name">髪の毛詰まり</td><td>タンパク質のかたまり</td><td>パイプクリーナー</td><td>水酸化ナトリウム高濃度＋塩素の合わせ技でないと溶けない</td></tr>
+        <tr><td class="name">ホコリ・日常の軽い汚れ</td><td>中性〜弱酸性</td><td>①②中性洗剤・クロス</td><td>界面活性剤で十分。素材を傷めないので毎日使える</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface-2);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)">
+  <div class="wrap">
+    <span class="layer-tag">在庫リスト ／ いつ使う・いつ補充</span>
+    <div class="sec-head">
+      <h2>常備リストと消費ペース</h2>
+      <p>「使うタスク」は運用ダッシュボード（hometasks）の枠に対応。消費ペースは4人家族・この頻度で回した場合の目安です。</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="inv">
+        <tr><th>品目</th><th>使うタスク（いつ）</th><th>消費ペース</th><th>買い置き</th></tr>
+        <tr class="grp"><td colspan="4">洗剤 7本</td></tr>
+        <tr>
+          <td class="name">① 食器用中性洗剤<small>キッチン</small></td>
+          <td>毎日：食器・シンク・調理後のひと拭き</td>
+          <td class="pace">1〜2ヶ月/本</td><td class="stockn">＋1本</td>
+        </tr>
+        <tr>
+          <td class="name">② 住居用中性洗剤<small>トイレ・風呂・洗面・エアコン</small></td>
+          <td>水曜夜：トイレ掃除／木曜朝：洗面所拭き／風呂の週次こすり／エアコンのフィルター仕上げ（夏）</td>
+          <td class="pace">2〜3ヶ月/本</td><td class="stockn">＋1本</td>
+        </tr>
+        <tr>
+          <td class="name">③ マジックリン<small>キッチン</small></td>
+          <td>第1日曜：レンジフード表面／重い油の都度／2月・8月キッチンゾーン大掃除</td>
+          <td class="pace">3〜6ヶ月/本</td><td class="stockn">なし</td>
+        </tr>
+        <tr>
+          <td class="name">④ 重曹（粉）<small>キッチン・風呂</small></td>
+          <td>五徳のつけ置き（第1日曜・ゾーン月）／風呂の皮脂汚れ</td>
+          <td class="pace">半年/袋</td><td class="stockn">なし</td>
+        </tr>
+        <tr>
+          <td class="name">⑤ サンポール<small>トイレ専用</small></td>
+          <td>第3日曜：尿石予防（水際・ふち裏）</td>
+          <td class="pace">半年〜1年/本</td><td class="stockn">なし</td>
+        </tr>
+        <tr>
+          <td class="name">⑥ クエン酸（粉）<small>風呂・トイレ</small></td>
+          <td>風呂の水垢・鏡のウロコ（月1目安）／1月・7月風呂ゾーン大掃除</td>
+          <td class="pace">半年/袋</td><td class="stockn">なし</td>
+        </tr>
+        <tr>
+          <td class="name">⑦ キッチンハイター<small>キッチン・風呂・トイレ</small></td>
+          <td>毎週日曜：ふきん・スポンジ除菌／金曜朝：排水口／黒カビ・黒ずみ・便こびりつきの湿布（都度）</td>
+          <td class="pace">2〜3ヶ月/本</td><td class="stockn">＋1本</td>
+        </tr>
+        <tr class="grp"><td colspan="4">月1で「使ったら次を買う」もの（1個ずつ消費）</td></tr>
+        <tr>
+          <td class="name">洗濯槽クリーナー</td>
+          <td>第1金曜朝：槽洗浄</td>
+          <td class="pace">1個/月</td><td class="stockn">＋2個</td>
+        </tr>
+        <tr>
+          <td class="name">パイプクリーナー</td>
+          <td>第2日曜：排水管（キッチン・風呂・洗面）</td>
+          <td class="pace">1本/1〜2ヶ月</td><td class="stockn">＋1本</td>
+        </tr>
+        <tr>
+          <td class="name">追い焚き配管洗浄剤（ジャバ等）</td>
+          <td>第1土曜:追い焚き配管</td>
+          <td class="pace">1個/月</td><td class="stockn">＋2個</td>
+        </tr>
+        <tr>
+          <td class="name">防カビくん煙剤<small>風呂</small></td>
+          <td>隔月（Todoist通知）</td>
+          <td class="pace">1個/2ヶ月</td><td class="stockn">3個パック</td>
+        </tr>
+        <tr class="grp"><td colspan="4">毎日〜毎週の消耗品</td></tr>
+        <tr>
+          <td class="name">排水口ネット<small>キッチン・風呂</small></td>
+          <td>キッチンは毎日交換、風呂は週1目安</td>
+          <td class="pace">50枚≈2ヶ月</td><td class="stockn">＋1袋</td>
+        </tr>
+        <tr>
+          <td class="name">トイレお掃除シート</td>
+          <td>水曜夜：トイレ掃除（便座・床・壁）</td>
+          <td class="pace">1パック≈2ヶ月</td><td class="stockn">＋1個</td>
+        </tr>
+        <tr>
+          <td class="name">トイレスタンプ<span class="opt">導入するなら</span></td>
+          <td>2週間ごとに交換（便のこびりつき・黒ずみ予防）</td>
+          <td class="pace">替え2本≈2ヶ月</td><td class="stockn">＋2本</td>
+        </tr>
+        <tr>
+          <td class="name">ゴム手袋・キッチンペーパー</td>
+          <td>塩素・酸を使う日／湿布掃除の都度</td>
+          <td class="pace">都度</td><td class="stockn">各＋1</td>
+        </tr>
+        <tr>
+          <td class="name">スポンジ・ふきん類</td>
+          <td>毎週日曜に除菌、月1で交換目安</td>
+          <td class="pace">1〜2ヶ月で交換</td><td class="stockn">＋2個</td>
+        </tr>
+        <tr class="grp"><td colspan="4">道具（買い切り・在庫管理なし）</td></tr>
+        <tr>
+          <td class="name">マイクロファイバークロス<small>エアコン・鏡・仕上げ拭き</small></td>
+          <td>エアコン本体・フィルターの拭き掃除／鏡・蛇口の仕上げ／洗って繰り返し使う（100均でOK）</td>
+          <td class="pace">買い切り</td><td class="stockn">3〜5枚</td>
+        </tr>
+        <tr>
+          <td class="name">エリア別ブラシ・スポンジ</td>
+          <td>トイレ・風呂・キッチンに1つずつ。衛生上、エリア間で共有しない</td>
+          <td class="pace">傷んだら交換</td><td class="stockn">各1</td>
+        </tr>
+        <tr>
+          <td class="name">スクイジー（水切りワイパー）<small>風呂</small></td>
+          <td>毎日：風呂上がりの壁・鏡の水切り → 水垢とカビの予防</td>
+          <td class="pace">買い切り</td><td class="stockn">1本</td>
+        </tr>
+        <tr>
+          <td class="name">脚立・掃除機＋ブラシノズル</td>
+          <td>エアコンフィルター（夏隔週）／換気口・空気清浄機フィルター（第4金曜）</td>
+          <td class="pace">買い切り</td><td class="stockn">各1</td>
+        </tr>
+        <tr>
+          <td class="name">銅製ヘアキャッチャー<span class="opt">任意</span></td>
+          <td>風呂排水口に置くだけで銅イオンがぬめりを抑える</td>
+          <td class="pace">買い切り</td><td class="stockn">1個</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="layer-tag">補充の回し方</span>
+    <div class="sec-head">
+      <h2>在庫チェックは「金曜朝」の既存枠に載せる</h2>
+      <p>新しい習慣は作らない。毎週金曜朝の「排水口1か所＋補充確認」の枠で、洗剤も一緒に見るだけです。</p>
+    </div>
+    <div class="rules">
+      <div class="rule">
+        <div class="no">RULE 01</div>
+        <h3>残り1/3で買い物リストへ</h3>
+        <p>ボトル類（①②③⑦）は残量が1/3を切ったら、その場でスマホの買い物リストに入れる。切れてから買うと「掃除できない週」が生まれる。</p>
+      </div>
+      <div class="rule">
+        <div class="no">RULE 02</div>
+        <h3>月1品は「使ったら1個買う」</h3>
+        <p>洗濯槽クリーナー・ジャバ・防カビくん煙剤は1回1個消費。使った日に次の1個を補充する1-in-1-outで、買い置き2個を下回らない。</p>
+      </div>
+      <div class="rule">
+        <div class="no">RULE 03</div>
+        <h3>粉もの・酸は減らない前提</h3>
+        <p>重曹・クエン酸・サンポールは半年単位でしか減らない。金曜チェックの対象外にして、使う日に残量を見れば十分。</p>
+      </div>
+    </div>
+
+    <div class="warnbox">
+      <h3>⚠️ 安全ルール（系統をまたぐときの絶対条件）</h3>
+      <p><b>塩素系（⑦ハイター・カビ取り・パイプクリーナー）と酸性（⑤サンポール・⑥クエン酸）は絶対に混ぜない。</b>有毒な塩素ガスが発生します。同じ日に同じ水回りで使わず、間に十分な水で流す。使用中は換気＋ゴム手袋。</p>
+      <p>特に風呂とトイレは両方を使う場所。<b>「カビ取り・黒ずみの日（塩素）」と「水垢・尿石の日（酸）」を別の日に分ける</b>のを運用ルールにする。</p>
+    </div>
+
+    <div class="ngmap">
+      <div class="ng"><b>🚫 エアコンに塩素・酸・アルカリ強</b><span>アルミフィン腐食・電装故障の原因。中性＋水だけ。フィン用スプレーも非推奨</span></div>
+      <div class="ng"><b>🚫 トイレタンクにハイター</b><span>内部のゴム・樹脂部品が劣化して水漏れの原因に。タンクは専用剤のみ</span></div>
+      <div class="ng"><b>🚫 風呂にサンポール</b><span>金属・素材を傷める。風呂の酸はクエン酸まで</span></div>
+      <div class="ng"><b>🚫 金属・ウォシュレット樹脂に塩素原液</b><span>蛇口・鏡の金具・ノズルは腐食/劣化する。かかったらすぐ水拭き</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    洗剤・消耗品 在庫ガイド ／ トイレ・キッチン・風呂・エアコン各ガイドの買い物リストを兼用前提で統合した全体版です。消費ペースは目安なので、実際の減りに合わせて調整してください。酸性と塩素系は絶対に混ぜないでください。
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>今日の家事｜今日ビュー</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%93%85%3C/text%3E%3C/svg%3E">
+<style>*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0}img,svg{max-width:100%}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#eef0f4;--surface:#ffffff;--surface-2:#f5f6fa;--ink:#191c28;--muted:#596071;
+    --faint:#8b93a4;--hair:rgba(25,28,40,.12);--accent:#5560d8;--accent-soft:#e3e5fb;
+    --warn:#c98a12;--good:#1f9d74;--shadow:0 1px 2px rgba(25,28,40,.05),0 6px 22px rgba(25,28,40,.07);
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --ground:#0b0d13;--surface:#151824;--surface-2:#1b1f2d;--ink:#e7e9f2;--muted:#9aa1b4;
+    --faint:#6b7284;--hair:rgba(231,233,242,.12);--accent:#8b93f0;--accent-soft:#20244a;
+    --warn:#e6a83e;--good:#47c99a;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 26px rgba(0,0,0,.4);}}
+  :root[data-theme="light"]{--ground:#eef0f4;--surface:#fff;--surface-2:#f5f6fa;--ink:#191c28;--muted:#596071;--faint:#8b93a4;--hair:rgba(25,28,40,.12);--accent:#5560d8;--accent-soft:#e3e5fb;--warn:#c98a12;--good:#1f9d74}
+  :root[data-theme="dark"]{--ground:#0b0d13;--surface:#151824;--surface-2:#1b1f2d;--ink:#e7e9f2;--muted:#9aa1b4;--faint:#6b7284;--hair:rgba(231,233,242,.12);--accent:#8b93f0;--accent-soft:#20244a;--warn:#e6a83e;--good:#47c99a}
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;}
+  .app{max-width:480px;margin:0 auto;padding:16px 14px 40px}
+
+  .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+  .top .dateline{font-size:.82rem;color:var(--muted)}
+  .top .now{font-size:.72rem;color:var(--accent);font-weight:700}
+
+  /* day strip */
+  .strip{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:14px}
+  .dcell{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:8px 4px;text-align:center;cursor:pointer;box-shadow:var(--shadow);transition:transform .08s}
+  .dcell:active{transform:scale(.96)}
+  .dcell .dw{font-weight:800;font-size:.95rem}
+  .dcell .dd{font-size:.68rem;color:var(--faint);font-variant-numeric:tabular-nums}
+  .dcell .cnt{margin-top:4px;font-size:.62rem;color:var(--muted)}
+  .dcell.sat .dw{color:#3d7dc9}.dcell.sun .dw{color:#c0503f}
+  .dcell.sel{background:var(--accent);border-color:var(--accent)}
+  .dcell.sel .dw,.dcell.sel .dd,.dcell.sel .cnt{color:#fff}
+  .dcell .gd{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--warn);margin-top:3px}
+
+  /* main card */
+  .card{background:var(--surface);border:1px solid var(--hair);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .chead{padding:16px 18px 12px;border-bottom:1px solid var(--hair);display:flex;align-items:baseline;gap:10px}
+  .chead .big{font-size:1.8rem;font-weight:800;letter-spacing:-.01em}
+  .chead .sub{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+  .chead .today-badge{margin-left:auto;font-size:.68rem;font-weight:800;color:#fff;background:var(--good);padding:3px 9px;border-radius:20px}
+
+  .seg{padding:12px 18px;border-bottom:1px solid var(--hair)}
+  .seg:last-child{border-bottom:0}
+  .seg .sh{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .seg .sh .clock{font-weight:600;color:var(--muted);letter-spacing:0}
+  .task{display:flex;gap:10px;align-items:flex-start;padding:7px 0}
+  .task + .task{border-top:1px dashed var(--hair)}
+  .task .mk{width:18px;height:18px;border-radius:6px;border:2px solid var(--accent);flex:none;margin-top:2px}
+  .task .tx{font-size:.98rem;font-weight:600}
+  .task .tx small{display:block;font-weight:500;color:var(--muted);font-size:.78rem;margin-top:1px}
+  .task.gomi .mk{border-color:var(--warn);background:var(--warn)}
+  .task.gomi .tx{color:var(--warn);font-weight:800}
+  .task.rot .tx b{color:var(--accent)}
+  .seg.empty .none{color:var(--faint);font-size:.85rem;font-style:italic}
+
+  .habits{margin-top:14px;background:var(--surface);border:1px solid var(--hair);border-radius:14px;box-shadow:var(--shadow);padding:12px 16px}
+  .habits h3{margin:0 0 8px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:700}
+  .habits .h{display:flex;gap:9px;align-items:center;padding:4px 0;font-size:.86rem}
+  .habits .h .e{font-size:1.05rem}
+
+  .misc{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .mc{background:var(--surface);border:1px solid var(--hair);border-radius:14px;box-shadow:var(--shadow);padding:12px 14px}
+  .mc .l{font-size:.68rem;letter-spacing:.06em;color:var(--accent);font-weight:700;text-transform:uppercase}
+  .mc .v{font-size:.9rem;font-weight:700;margin-top:3px}
+  .mc .s{font-size:.74rem;color:var(--muted);margin-top:2px}
+
+  .tomo{background:var(--accent-soft);border:1px solid var(--accent);border-radius:16px;padding:14px 16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .tomo-h{font-weight:800;font-size:1rem;margin-bottom:8px}
+  .tomo-i{font-size:.96rem;font-weight:600;padding:6px 0;border-top:1px dashed var(--hair)}
+  .tomo-i:first-of-type{border-top:0}
+  .tomo-i.g{color:var(--warn);font-weight:800}
+  .tomo-i small{display:block;font-weight:500;color:var(--muted);font-size:.78rem;margin-top:1px}
+  .tomo-none{color:var(--muted);font-size:.88rem}
+  .tomo-note{margin-top:9px;font-size:.76rem;color:var(--muted)}
+
+  .foot{margin-top:16px;text-align:center;font-size:.72rem;color:var(--faint)}
+  .foot a{color:var(--accent)}
+</style>
+
+<div class="app">
+  <div class="top">
+    <div class="dateline" id="dateline">—</div>
+    <div class="now" id="nowline"></div>
+  </div>
+
+  <div id="tomorrow"></div>
+
+  <div class="strip" id="strip"></div>
+
+  <div class="card" id="card"></div>
+
+  <div class="habits">
+    <h3>毎日の習慣（数えない）</h3>
+    <div id="habits"></div>
+  </div>
+
+  <div class="misc">
+    <div class="mc">
+      <div class="l">今月のゾーン</div>
+      <div class="v" id="zone">—</div>
+      <div class="s">土日に1つだけ（第1金の夜に通知）</div>
+    </div>
+    <div class="mc">
+      <div class="l">たまに</div>
+      <div class="v" id="rare">—</div>
+      <div class="s" id="rare-s"></div>
+    </div>
+  </div>
+
+  <div class="foot">端末の時計で自動表示 ／ 日付をタップで前後の日を確認 ／ <a id="reload" href="#">今日に戻る</a></div>
+</div>
+
+<script>
+(function(){
+  var WD = ["日","月","火","水","木","金","土"];
+  var ROT_FRI = {1:"洗濯槽クリーナーで槽洗浄",2:"玄関マット・郵便受け・宅配ボックス",3:"手すり・ドアノブ・スイッチを拭く",4:"換気口・空気清浄機フィルター確認",5:"ベランダ排水口・外回り確認"};
+  var ROT_SUN = {1:"レンジフード表面・フィルター確認",2:"排水管にパイプクリーナー",3:"トイレの尿石予防（酸性洗剤）"};
+  var ZONES = {1:"トイレ・風呂・洗面所",2:"キッチン（＋冷蔵庫裏）",3:"リビング",4:"寝室",5:"エアコン・衣替え",6:"仕事部屋・玄関・ベランダ",7:"トイレ・風呂・洗面所",8:"キッチン（＋冷蔵庫裏）",9:"寝室",10:"エアコン・衣替え",11:"リビング",12:"予備・年末"};
+  var HABITS = [
+    {e:"🛁",t:"風呂を乾かす（換気扇＋水切り＋浴槽ひとこすり）"},
+    {e:"🍳",t:"調理後にコンロを拭く＋生ゴミを捨てる"},
+    {e:"🚽",t:"トイレは流すときふた閉め／座って使う"},
+    {e:"❄️",t:"冷房を切る前に送風で内部を乾かす",summer:true}
+  ];
+
+  function womOf(d){ return Math.floor((d.getDate()-1)/7)+1; }
+
+  function build(d){
+    var dow=d.getDay(), wom=womOf(d);
+    var morning=[], noon=[], evening=[], gomi=[];
+    if(dow===1){ morning.push({t:"シーツを洗濯機へ"}); evening.push({t:"ルンバ 1/3"}); evening.push({t:"キッチンリセット",s:"コンロを拭く→シンク→ゴミ受けの生ゴミ"}); }
+    if(dow===2){ morning.push({t:"子ども用品を洗う"}); gomi.push({t:"資源ごみを出す",s:"缶・びん・ペット等。8:30まで"}); evening.push({t:"ブラーバをセット"}); }
+    if(dow===3){ morning.push({t:"タオルを交換"}); gomi.push({t:"可燃ごみを出す",s:"8:30まで"}); evening.push({t:"ルンバ 2/3"}); evening.push({t:"トイレ掃除",s:"便座裏→ふち→床すみ→壁下部"}); }
+    if(dow===4){ morning.push({t:"洗面所まわりを拭く"}); evening.push({t:"階段と玄関を掃く"}); }
+    if(dow===5){ morning.push({t:ROT_FRI[wom]||"（金曜朝ローテ：予備）",rot:true}); morning.push({t:"排水口1か所＋各階の補充確認"}); evening.push({t:"ルンバ 3/3"}); if(wom===1)evening.push({t:"月1大掃除：今月のゾーンを確認",rot:true,s:"やる1つを選ぶだけ（掃除は始めない）"}); if(wom===3)evening.push({t:"月1大掃除：未完を1つ回収",rot:true}); }
+    if(dow===6){ gomi.push({t:"可燃ごみを出す",s:"8:30まで"}); if(wom===1)noon.push({t:"追い焚き配管を洗浄（ジャバ等）",rot:true,s:"洗浄剤でつけ置き"}); }
+    if(dow===0){ morning.push({t:"ふきん・スポンジを除菌／交換"}); if(ROT_SUN[wom])noon.push({t:ROT_SUN[wom],rot:true}); }
+    return {morning:morning,noon:noon,evening:evening,gomi:gomi};
+  }
+
+  function count(d){ var x=build(d); return x.morning.length+x.noon.length+x.evening.length+x.gomi.length; }
+
+  var today=new Date(); today.setHours(0,0,0,0);
+  var sel=0;
+
+  function render(){
+    var d=new Date(today); d.setDate(d.getDate()+sel);
+    var isToday=(sel===0);
+    var now=new Date();
+    document.getElementById("dateline").textContent = now.getFullYear()+"年"+(now.getMonth()+1)+"月"+now.getDate()+"日（"+WD[now.getDay()]+"）";
+    var hh=now.getHours();
+    document.getElementById("nowline").textContent = hh<11?"● いまは朝":hh<17?"● いまは昼":"● いまは夜";
+
+    // strip: today-2 .. today+2
+    var strip="";
+    for(var off=-2; off<=2; off++){
+      var dd=new Date(today); dd.setDate(dd.getDate()+off);
+      var cls="dcell"+(dd.getDay()===6?" sat":dd.getDay()===0?" sun":"")+(off===sel?" sel":"");
+      var b=build(dd), hasG=b.gomi.length>0;
+      strip+='<div class="'+cls+'" data-off="'+off+'">'
+        +'<div class="dw">'+WD[dd.getDay()]+'</div>'
+        +'<div class="dd">'+(dd.getMonth()+1)+"/"+dd.getDate()+'</div>'
+        +'<div class="cnt">'+count(dd)+'件'+(hasG?' <span class="gd"></span>':'')+'</div></div>';
+    }
+    document.getElementById("strip").innerHTML=strip;
+    Array.prototype.forEach.call(document.querySelectorAll(".dcell"),function(el){
+      el.onclick=function(){ sel=parseInt(el.getAttribute("data-off"),10); render(); };
+    });
+
+    // main card
+    var t=build(d);
+    function seg(label,clock,arr,extraClass){
+      var body="";
+      if(arr.length===0){ return ""; }
+      arr.forEach(function(it){
+        var c="task"+(it.gomi?" gomi":"")+(it.rot?" rot":"");
+        var tx=it.rot?("<b>"+it.t+"</b>"):it.t;
+        body+='<div class="'+c+'"><div class="mk"></div><div class="tx">'+tx+(it.s?'<small>'+it.s+'</small>':'')+'</div></div>';
+      });
+      return '<div class="seg"><div class="sh">'+label+(clock?'<span class="clock">'+clock+'</span>':'')+'</div>'+body+'</div>';
+    }
+    // merge gomi into morning display (it's a morning deadline)
+    var morn = t.gomi.map(function(g){g.gomi=true;return g;}).concat(t.morning);
+    var html='<div class="chead"><div class="big">'+WD[d.getDay()]+'</div>'
+      +'<div class="sub">'+(d.getMonth()+1)+"/"+d.getDate()+' ・ 第'+womOf(d)+'週</div>'
+      +(isToday?'<div class="today-badge">今日</div>':'')+'</div>';
+    var body="";
+    body+=seg("朝","07:00 / ゴミ08:00",morn);
+    body+=seg("昼","ローテ枠",t.noon);
+    body+=seg("夜","21:00",t.evening);
+    if(!body) body='<div class="seg empty"><div class="none">この日は固定タスクなし（習慣だけでOK）</div></div>';
+    document.getElementById("card").innerHTML=html+body;
+
+    // habits (summer-aware)
+    var m=now.getMonth()+1, summer=(m>=6&&m<=9);
+    var hh2="";
+    HABITS.forEach(function(h){ if(h.summer&&!summer)return; hh2+='<div class="h"><span class="e">'+h.e+'</span><span>'+h.t+'</span></div>'; });
+    document.getElementById("habits").innerHTML=hh2;
+
+    // zone + rare
+    document.getElementById("zone").textContent=ZONES[m];
+    var rare=[], rs=[];
+    rare.push("防カビくん煙剤（隔月）");
+    if(summer) rare.push("エアコンのフィルター（夏・隔週）");
+    document.getElementById("rare").textContent=rare.join(" / ");
+    document.getElementById("rare-s").textContent="半年:火災警報器の点検 ／ 2〜3年:エアコン分解洗浄";
+
+    // 夜（18時以降）は「明日の朝やること」を上に表示
+    var tm=document.getElementById("tomorrow");
+    if(now.getHours()>=18){
+      var tmr=new Date(today); tmr.setDate(tmr.getDate()+1);
+      var tb=build(tmr);
+      var items=tb.gomi.map(function(g){g.gomi=true;return g;}).concat(tb.morning);
+      var inner="";
+      if(items.length===0){ inner='<div class="tomo-none">固定タスクなし（朝の習慣だけでOK）</div>'; }
+      else { items.forEach(function(it){
+        inner+='<div class="tomo-i'+(it.gomi?' g':'')+'">'+(it.gomi?'🗑 ':'')+it.t+(it.s?'<small>'+it.s+'</small>':'')+'</div>';
+      }); }
+      var note=tb.gomi.length?'<div class="tomo-note">※ゴミがあるので、今夜のうちに玄関へまとめておく</div>':'';
+      tm.innerHTML='<div class="tomo"><div class="tomo-h">🌙 明日（'+WD[tmr.getDay()]+'）の朝にやること</div>'+inner+note+'</div>';
+    } else { tm.innerHTML=""; }
+  }
+
+  document.getElementById("reload").onclick=function(e){ e.preventDefault(); sel=0; render(); };
+  render();
+})();
+</script>
+
+</body>
+</html>
