@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>汚れの盲点チェックリスト｜おうちメンテ</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%94%8D%3C/text%3E%3C/svg%3E">
+<style>*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0}img,svg{max-width:100%}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#eef0f4;--surface:#ffffff;--surface-2:#f5f6fa;--ink:#191c28;--muted:#596071;
+    --faint:#8b93a4;--hair:rgba(25,28,40,.12);--accent:#b2557a;--accent-soft:#f6e2eb;
+    --pink:#d64d80;--black:#4f5058;--scale:#3f7fbf;--slime:#2f9e78;
+    --shadow:0 1px 2px rgba(25,28,40,.05),0 8px 30px rgba(25,28,40,.06);--maxw:920px;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --ground:#0b0d13;--surface:#151824;--surface-2:#1b1f2d;--ink:#e7e9f2;--muted:#9aa1b4;
+    --faint:#6b7284;--hair:rgba(231,233,242,.12);--accent:#e896b6;--accent-soft:#301826;
+    --pink:#ec6f9c;--black:#9aa0ad;--scale:#6fa9e0;--slime:#4fc79b;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 34px rgba(0,0,0,.4);}}
+  :root[data-theme="light"]{--ground:#eef0f4;--surface:#fff;--surface-2:#f5f6fa;--ink:#191c28;--muted:#596071;--faint:#8b93a4;--hair:rgba(25,28,40,.12);--accent:#b2557a;--accent-soft:#f6e2eb;--pink:#d64d80;--black:#4f5058;--scale:#3f7fbf;--slime:#2f9e78}
+  :root[data-theme="dark"]{--ground:#0b0d13;--surface:#151824;--surface-2:#1b1f2d;--ink:#e7e9f2;--muted:#9aa1b4;--faint:#6b7284;--hair:rgba(231,233,242,.12);--accent:#e896b6;--accent-soft:#301826;--pink:#ec6f9c;--black:#9aa0ad;--scale:#6fa9e0;--slime:#4fc79b}
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+    line-height:1.7;letter-spacing:.01em;font-feature-settings:"palt" 1;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+
+  header.hero{padding:60px 0 30px;border-bottom:1px solid var(--hair);background:radial-gradient(120% 90% at 85% -20%, var(--accent-soft) 0%, transparent 55%);}
+  .hero h1{font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.14;margin:.5rem 0 .2rem;font-weight:800;letter-spacing:-.015em;text-wrap:balance}
+  .hero .lede{font-size:clamp(1rem,2vw,1.14rem);color:var(--muted);max-width:64ch;margin:.6rem 0 0}
+
+  /* legend */
+  .legend{margin-top:26px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .lg{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:12px 13px;box-shadow:var(--shadow)}
+  .lg .dot{width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
+  .lg b{font-size:.9rem}
+  .lg p{margin:.3rem 0 0;font-size:.78rem;color:var(--muted);line-height:1.5}
+  .d-pink{background:var(--pink)}.d-black{background:var(--black)}.d-scale{background:var(--scale)}.d-slime{background:var(--slime)}
+
+  section{padding:26px 0}
+  .rule{background:var(--surface-2);border:1px solid var(--hair);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;color:var(--muted);font-size:.94rem;margin-bottom:8px}
+  .rule b{color:var(--ink)}
+
+  .area{margin-top:20px}
+  .area h2{font-size:1.25rem;font-weight:800;letter-spacing:-.01em;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+  .area h2 .e{font-size:1.3rem}
+  .spots{background:var(--surface);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+  .spot{display:grid;grid-template-columns:20px 1fr;gap:11px;padding:12px 16px;border-bottom:1px solid var(--hair)}
+  .spot:last-child{border-bottom:0}
+  .spot .mk{width:13px;height:13px;border-radius:50%;margin-top:5px}
+  .spot .b{font-weight:700;font-size:.96rem}
+  .spot .b .tag{font-size:.68rem;font-weight:700;padding:1px 7px;border-radius:20px;margin-left:6px;vertical-align:middle;color:#fff}
+  .t-pink{background:var(--pink)}.t-black{background:var(--black)}.t-scale{background:var(--scale)}.t-slime{background:var(--slime)}
+  .spot .s{font-size:.85rem;color:var(--muted);margin-top:2px;line-height:1.5}
+  .spot .s b{color:var(--ink)}
+  .blind{position:relative}
+  .blind::after{content:"盲点";position:absolute;top:12px;right:14px;font-size:.64rem;font-weight:800;color:var(--accent);background:var(--accent-soft);border-radius:20px;padding:1px 8px}
+
+  .prev{margin-top:24px;background:var(--surface);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:20px 22px}
+  .prev h2{margin:0 0 10px;font-size:1.2rem;font-weight:800}
+  .prev ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .prev li{position:relative;padding-left:22px;font-size:.95rem}
+  .prev li::before{content:"";position:absolute;left:0;top:.55em;width:10px;height:10px;border-radius:3px;background:var(--accent)}
+  .prev li b{font-weight:700}
+
+  footer{border-top:1px solid var(--hair);padding:26px 0 56px;color:var(--faint);font-size:.84rem;margin-top:18px}
+  @media (max-width:720px){.legend{grid-template-columns:1fr 1fr}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">おうちメンテ ／ 盲点チェックリスト</p>
+    <h1>汚れは、いつも“裏・底・隅・パッキン”に出る。</h1>
+    <p class="lede">風呂の栓の裏がピンクになるのと同じ理由で、家中に“汚れの盲点”があります。共通の条件は<b>①濡れたまま乾かない ②皮脂・石けんカス・食品くずの栄養 ③目が届かない死角</b>。この3つがそろう場所を部屋別にリスト化しました。色タグで汚れの種類と対処がひと目でわかります。</p>
+
+    <div class="legend">
+      <div class="lg"><b><span class="dot d-pink"></span>ピンク＝赤カビ</b><p>酵母菌。数日で出る。<b>こすれば取れる</b>→アルコールor塩素系で除菌。乾かせば予防。</p></div>
+      <div class="lg"><b><span class="dot d-black"></span>黒い点＝黒カビ</b><p>根を張る。<b>塩素系を密着</b>（ラップ湿布）。奥まで行くと取れないので早めに。</p></div>
+      <div class="lg"><b><span class="dot d-scale"></span>白いウロコ＝水垢</b><p>水道水のミネラル。<b>クエン酸（酸性）</b>で溶かす。水滴を拭けば予防。</p></div>
+      <div class="lg"><b><span class="dot d-slime"></span>ぬめり＝バイオフィルム</b><p>菌の膜。中性洗剤や塩素系＋<b>こまめに</b>。栄養（くず・皮脂）を断つ。</p></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="rule"><b>使う洗剤の早見：</b>ピンク・ぬめり→<b>中性洗剤＋こすり</b>／除菌は<b>塩素系 or アルコール</b>。黒カビ→<b>塩素系（カビ取り）</b>。白い水垢→<b>クエン酸</b>。⚠️<b>塩素系とクエン酸（酸性）は絶対に混ぜない・同じ日に近くで使わない。</b></div>
+
+    <div class="area">
+      <h2><span class="e">🛁</span>風呂</h2>
+      <div class="spots">
+        <div class="spot"><div class="mk t-pink"></div><div><div class="b">排水栓の裏・ヘアキャッチャー<span class="tag t-pink">赤カビ</span></div><div class="s">今回のところ。栓を外して裏・溝までこする。使わない時は<b>立てて乾燥</b>。</div></div></div>
+        <div class="spot blind"><div class="mk t-pink"></div><div><div class="b">シャンプー等ボトルの底<span class="tag t-pink">赤カビ</span></div><div class="s">床・ラック直置きの底がヌルつく。<b>浮かせる収納</b>にすると出なくなる。</div></div></div>
+        <div class="spot blind"><div class="mk t-pink"></div><div><div class="b">風呂椅子・洗面器の裏と底<span class="tag t-pink">赤カビ</span></div><div class="s">座面裏・底の縁が盲点。使ったら<b>立てかけて水を切る</b>。</div></div></div>
+        <div class="spot"><div class="mk t-black"></div><div><div class="b">ドアのゴムパッキン下・レール<span class="tag t-black">黒カビ</span></div><div class="s">水がたまり黒カビの定番。塩素系＋ラップ湿布。早めに。</div></div></div>
+        <div class="spot"><div class="mk t-black"></div><div><div class="b">床と壁の境・コーキング／天井<span class="tag t-black">黒カビ</span></div><div class="s">天井は胞子の発生源。手が届く範囲を<b>アルコールで拭く</b>のが予防に効く。</div></div></div>
+        <div class="spot blind"><div class="mk t-scale"></div><div><div class="b">シャワーヘッドの穴<span class="tag t-scale">水垢</span></div><div class="s">目詰まりの原因。<b>クエン酸に一晩漬ける</b>と復活。</div></div></div>
+        <div class="spot blind"><div class="mk t-slime"></div><div><div class="b">浴槽のフチ裏・オーバーフロー穴／追い焚き口カバー内<span class="tag t-slime">ぬめり</span></div><div class="s">見えない裏側。ブラシでこする。配管は月1のジャバで。</div></div></div>
+      </div>
+    </div>
+
+    <div class="area">
+      <h2><span class="e">🚰</span>洗面所</h2>
+      <div class="spots">
+        <div class="spot blind"><div class="mk t-pink"></div><div><div class="b">コップ・歯ブラシ立ての底<span class="tag t-pink">赤カビ</span></div><div class="s">水がたまる底がピンクに。<b>水を切って伏せる／穴あきの物</b>にする。</div></div></div>
+        <div class="spot"><div class="mk t-scale"></div><div><div class="b">蛇口の根元・レバーの裏<span class="tag t-scale">水垢</span></div><div class="s">白いウロコ・黒ずみ。クエン酸＋古歯ブラシ。使用後に水滴を拭く。</div></div></div>
+        <div class="spot blind"><div class="mk t-slime"></div><div><div class="b">オーバーフロー穴（洗面ボウルの小さな穴）<span class="tag t-slime">ぬめり</span></div><div class="s">まず見ない超盲点。中で赤カビ・ぬめり。細ブラシ＋塩素系で。</div></div></div>
+        <div class="spot"><div class="mk t-slime"></div><div><div class="b">排水口・ヘアキャッチャー<span class="tag t-slime">ぬめり</span></div><div class="s">髪を取る＋こする。月1パイプクリーナー。</div></div></div>
+      </div>
+    </div>
+
+    <div class="area">
+      <h2><span class="e">🍳</span>キッチン</h2>
+      <div class="spots">
+        <div class="spot"><div class="mk t-slime"></div><div><div class="b">スポンジ・スポンジ置き<span class="tag t-slime">ぬめり</span></div><div class="s">菌の温床。<b>浮かせて水切り</b>＋定期的に漂白/交換。</div></div></div>
+        <div class="spot"><div class="mk t-slime"></div><div><div class="b">三角コーナー・ゴミ受け・シンクの隅<span class="tag t-slime">ぬめり</span></div><div class="s">生ゴミは毎日捨てる。隅は赤カビも出る。中性洗剤＋塩素系。</div></div></div>
+        <div class="spot blind"><div class="mk t-slime"></div><div><div class="b">冷蔵庫の製氷機・給水タンク<span class="tag t-slime">ぬめり</span></div><div class="s">口に入る水なのに超盲点。タンク・通路を定期的に洗って乾かす。</div></div></div>
+        <div class="spot blind"><div class="mk t-pink"></div><div><div class="b">水切りかごの下・トレー<span class="tag t-pink">赤カビ</span></div><div class="s">水が溜まってピンク＆ぬめり。トレーを洗い、水を切る。</div></div></div>
+        <div class="spot"><div class="mk t-black"></div><div><div class="b">冷蔵庫ドアのパッキン<span class="tag t-black">黒カビ</span></div><div class="s">結露＋食品カスで黒カビ。アルコールか中性で拭く。</div></div></div>
+      </div>
+    </div>
+
+    <div class="area">
+      <h2><span class="e">🚽</span>トイレ</h2>
+      <div class="spots">
+        <div class="spot"><div class="mk t-black"></div><div><div class="b">便器の水際・ふち裏<span class="tag t-black">黒ずみ・尿石</span></div><div class="s">見えないふち裏が臭いの元。ブラシを寝かせて裏まで。尿石はクエン酸/酸性。</div></div></div>
+        <div class="spot blind"><div class="mk t-black"></div><div><div class="b">タンク内・手洗い部<span class="tag t-black">黒カビ</span></div><div class="s">開けないから盲点。黒い点が便器に出たらタンク内を疑う。置き型洗浄剤で予防。</div></div></div>
+        <div class="spot blind"><div class="mk t-slime"></div><div><div class="b">ウォシュレットのノズル<span class="tag t-slime">ぬめり・黒ずみ</span></div><div class="s">肌に触れる所。ノズル掃除ボタン＋古歯ブラシで月1。</div></div></div>
+      </div>
+    </div>
+
+    <div class="area">
+      <h2><span class="e">💧</span>その他（湿気モノ＝最大の盲点）</h2>
+      <div class="spots">
+        <div class="spot blind"><div class="mk t-black"></div><div><div class="b">洗濯機の洗剤投入口・ドアのゴムパッキン<span class="tag t-black">黒カビ</span></div><div class="s">ドラム式は特に。パッキンの溝に水と汚れ。拭いて乾かす＋月1槽洗浄。</div></div></div>
+        <div class="spot blind"><div class="mk t-slime"></div><div><div class="b">加湿器のタンク・トレー<span class="tag t-slime">ぬめり・カビ</span></div><div class="s">吸い込むので健康リスク。使う時期は<b>毎回すすいで乾かす</b>。</div></div></div>
+        <div class="spot"><div class="mk t-black"></div><div><div class="b">エアコンの吹き出し口・ドレンパン<span class="tag t-black">黒カビ</span></div><div class="s">冷房後の内部乾燥で予防。奥はプロ洗浄。</div></div></div>
+        <div class="spot blind"><div class="mk t-black"></div><div><div class="b">窓サッシ・ゴムパッキン（結露）<span class="tag t-black">黒カビ</span></div><div class="s">冬の結露でカビる。水滴を拭く＋出たら早めに塩素系。</div></div></div>
+        <div class="spot blind"><div class="mk t-pink"></div><div><div class="b">水筒のパッキン／ウォーターサーバー注ぎ口／ペットの水入れ／植物の受け皿<span class="tag t-pink">赤カビ</span></div><div class="s">水が触れて乾かない小物は全部ここ。分解して洗い、乾かす。</div></div></div>
+      </div>
+    </div>
+
+    <div class="prev">
+      <h2>共通の予防（これだけで大半消える）</h2>
+      <ul>
+        <li><b>乾かす・水を切る</b>：濡れっぱなしを無くす。3条件のうち“水分”を断つのが最強</li>
+        <li><b>立てる・伏せる・浮かせる</b>：栓・椅子・洗面器・ボトル・コップは底に水を残さない</li>
+        <li><b>栄養を残さない</b>：皮脂・石けんカス・食品くずを流す（最後に熱めのお湯をサッと）</li>
+        <li><b>週1で“裏・底・隅・パッキン”を見る</b>：盲点は見る習慣がないと気づけない。金曜の排水口ローテのついでに1か所チェック</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    おうちメンテ・盲点チェックリスト ／ 「盲点」タグ＝ふだん見ない/気づきにくい場所。⚠️塩素系と酸性（クエン酸・サンポール）は絶対に混ぜないでください。
+  </div>
+</footer>
+
+</body>
+</html>
