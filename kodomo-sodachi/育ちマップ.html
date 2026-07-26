@@ -1,0 +1,2396 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="color-scheme" content="light dark">
+<title>育ちマップ</title>
+<style>
+:root{
+  --l1:#2a9d8f; --l1bg:#e6f4f2; --l2:#5560d8; --l2bg:#e9eaf9; --l3:#d98a2b; --l3bg:#fbeede;
+  --bg:#fbfbfa; --card:#ffffff; --ink:#22303a; --sub:#5a6b76; --line:#e3e7ea; --accent:#2a9d8f;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#12181c; --card:#1a2228; --ink:#e6edf1; --sub:#9fb0bb; --line:#2b363d;
+         --l1bg:#123632; --l2bg:#1e2150; --l3bg:#3a2a12; --accent:#5cc9bb; }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);
+  font-family:-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  line-height:1.75; font-size:16px; -webkit-text-size-adjust:100%;}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);}
+.htitle{padding:10px 14px 4px;font-weight:700;font-size:1.02rem;letter-spacing:.02em;display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.htitle small{color:var(--sub);font-weight:500;font-size:.72rem;margin-left:6px}
+.htitle .toylink{font-size:.78rem;font-weight:600;border-bottom:1px dotted var(--accent);white-space:nowrap}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:6px 10px 8px;-webkit-overflow-scrolling:touch}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--sub);
+  padding:7px 14px;border-radius:999px;font-size:.9rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+main{padding:14px 14px 60px;max-width:820px;margin:0 auto}
+.pane{display:none;animation:fade .18s ease}
+.pane.active{display:block}
+@keyframes fade{from{opacity:.3}to{opacity:1}}
+h1{font-size:1.32rem;line-height:1.4;margin:.2em 0 .5em;text-wrap:balance}
+h2{font-size:1.12rem;margin:1.4em 0 .5em;padding-bottom:.25em;border-bottom:2px solid var(--line)}
+h3{font-size:1.0rem;margin:1.1em 0 .4em;color:var(--accent)}
+h4{font-size:.94rem;margin:1em 0 .3em}
+p,li{font-size:.93rem}
+a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent)}
+blockquote{margin:.7em 0;padding:.5em .9em;background:var(--card);border-left:4px solid var(--accent);
+  border-radius:6px;color:var(--sub);font-size:.86rem}
+blockquote p{font-size:.86rem;margin:.3em 0}
+hr{border:none;border-top:1px solid var(--line);margin:1.4em 0}
+ul,ol{padding-left:1.3em}
+li{margin:.18em 0}
+strong{color:var(--ink);font-weight:700}
+code{background:var(--l2bg);padding:.05em .35em;border-radius:4px;font-size:.85em}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:.7em 0;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:.82rem;min-width:520px}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--l2bg);position:sticky;top:0;font-weight:700;white-space:nowrap}
+td strong{color:var(--accent)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.4em .9em;margin:.6em 0}
+details[open]{box-shadow:0 1px 6px rgba(0,0,0,.06)}
+summary{cursor:pointer;font-weight:700;padding:.3em 0;font-size:.95rem}
+.mermaid{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;overflow-x:auto;text-align:center}
+.mermaid svg{background:transparent !important}
+.mermaid .edgeLabel{background-color:var(--card) !important;color:var(--ink) !important}
+.backtop{position:fixed;right:14px;bottom:16px;z-index:30;background:var(--accent);color:#fff;border:none;
+  width:44px;height:44px;border-radius:50%;font-size:1.1rem;box-shadow:0 3px 10px rgba(0,0,0,.25);cursor:pointer;opacity:.9}
+</style>
+</head>
+<body>
+<header>
+  <div class="htitle"><span>育ちマップ <small>生後約11〜12ヶ月 ／ タブで各資料へ</small></span><a class="toylink" href="07_おもちゃ選択_今日のあそび.html">🧸 おもちゃ選択ツールへ →</a></div>
+  <nav class="tabs"><button class="tab active" data-tab="01">マップ</button>
+<button class="tab" data-tab="05">用語</button>
+<button class="tab" data-tab="02">認知</button>
+<button class="tab" data-tab="03">運動</button>
+<button class="tab" data-tab="06">関わり</button>
+<button class="tab" data-tab="04">健康</button></nav>
+</header>
+<main><section id="tab-01" class="pane active"><h1>育ちマップ（依存グラフ本体）</h1>
+<blockquote>
+<p><strong>これは何</strong> — 「今日の関わり・あそび」→「育つ力」→「大人になった時のアウトカム」を、
+多対多の矢印（依存グラフ／DAG）でつないだ地図。<strong>依存グラフはすべての土台</strong>。
+何かをやるとき「これは何を育てて、その先どこへつながるのか」を必ずこの地図で確認する。</p>
+<p><strong>今の月齢</strong> — 生後約 <strong>11〜12ヶ月</strong>（後述の★=今ちょうどいい／▲=まだ早い で強調）。
+<strong>姉妹ファイル</strong> — 詳細エビデンスは <a href="#tab-02">02_認知発達タイムライン</a> ／ <a href="#tab-03">03_運動あそび</a> ／ <a href="#tab-06">06_関わりあそび（認知・言語・社会性）</a> ／ <a href="#tab-04">04_健康（鉄・ビタミンD・アデノイド）</a> ／ <a href="#tab-05">05_用語解説</a>。
+<strong>あそびは2本立て</strong> — 運動＝03、声かけ・隠す・絵本など運動以外＝06。</p>
+</blockquote>
+<hr />
+<h2>0. 地図の読み方</h2>
+<ul>
+<li><strong>3層</strong>：L1 今日の関わり・あそび → L2 育つ力 → L3 未来アウトカム。</li>
+<li><strong>多対多</strong>：1つの遊びが複数の力を育て（A→B, A→C）、1つの力は複数の遊びから育つ（A→C, B→C）。単線ではない。</li>
+<li><strong>ハブ</strong>：<code>サーブ＆リターン（応答的やりとり）</code> が全体の中心ハブ。ほぼ全ての力に効く。</li>
+<li><strong>強調記号</strong></li>
+<li>★ = <strong>今ちょうどいい</strong>（11〜12ヶ月で発達の窓が開いている）</li>
+<li>◎ = 土台として常時大事（月齢問わず）</li>
+<li>▲ = <strong>まだ早い／意味が薄い</strong>（今やっても効果薄 or 逆効果。理由を明記）</li>
+</ul>
+<hr />
+<h2>1. 全体図（L1 → L2 → L3）</h2>
+<pre class="mermaid">graph LR
+  %% ---------- L1 今日の関わり・あそび ----------
+  SR[&quot;◎サーブ＆リターン&lt;br/&gt;応答的やりとり&quot;]:::l1
+  NAR[&quot;★実況中継・ラベリング&lt;br/&gt;言葉かけ&quot;]:::l1
+  JA[&quot;★共同注意・指さし&lt;br/&gt;あそび&quot;]:::l1
+  OP[&quot;★対象の永続性あそび&lt;br/&gt;いないいないばあ／隠して探す&quot;]:::l1
+  CON[&quot;★容器あそび&lt;br/&gt;入れる・出す&quot;]:::l1
+  STK[&quot;★積む・崩す&quot;]:::l1
+  PIN[&quot;★つまむ&lt;br/&gt;ピンサーグリップ&quot;]:::l1
+  CRU[&quot;★つたい歩き環境&lt;br/&gt;つかまり立ち&quot;]:::l1
+  SQT[&quot;★しゃがむ⇄立つ／低い段差&quot;]:::l1
+  BARE[&quot;◎はだし床あそび&quot;]:::l1
+  BOOK[&quot;★絵本・指さし読み&quot;]:::l1
+  ROUT[&quot;◎予測できる生活リズム&lt;br/&gt;食事・就寝&quot;]:::l1
+  EMO[&quot;★気持ちの実況&lt;br/&gt;情動のラベリング&quot;]:::l1
+  TURN[&quot;★ターン交代&lt;br/&gt;どうぞ／まって&quot;]:::l1
+  IMIT[&quot;★まねっこ・模倣あそび&lt;br/&gt;拍手・バイバイ・道具のまね&quot;]:::l1
+
+  %% ---------- L2 育つ力 ----------
+  SELF((&quot;自己制御&lt;br/&gt;【最優先】&quot;)):::l2
+  LANG((&quot;言語・&lt;br/&gt;コミュニケーション&quot;)):::l2
+  JAT((&quot;共同注意&quot;)):::l2
+  ATT((&quot;愛着・安心の基地&quot;)):::l2
+  COG((&quot;認知&lt;br/&gt;永続性・手段目的・記憶&quot;)):::l2
+  GROSS((&quot;粗大運動&quot;)):::l2
+  FINE((&quot;微細運動&quot;)):::l2
+  CUR((&quot;探索・好奇心&quot;)):::l2
+
+  %% ---------- L3 未来アウトカム ----------
+  EF{{&quot;実行機能・学業&quot;}}:::l3
+  MH{{&quot;情動調整・&lt;br/&gt;メンタルヘルス&quot;}}:::l3
+  SOC{{&quot;対人関係・協調性&quot;}}:::l3
+  LIT{{&quot;言語・読解力&quot;}}:::l3
+  AUT{{&quot;自律・やり抜く力&lt;br/&gt;自己効力感&quot;}}:::l3
+  PHY{{&quot;健康な身体・&lt;br/&gt;運動習慣&quot;}}:::l3
+
+  %% ---- L1 -&gt; L2 ----
+  SR --&gt; SELF &amp; LANG &amp; JAT &amp; ATT &amp; CUR
+  NAR --&gt; LANG &amp; JAT &amp; COG
+  JA --&gt; JAT &amp; LANG &amp; COG
+  OP --&gt; COG &amp; CUR
+  CON --&gt; COG &amp; FINE &amp; CUR
+  STK --&gt; FINE &amp; COG &amp; CUR
+  PIN --&gt; FINE
+  CRU --&gt; GROSS &amp; CUR
+  SQT --&gt; GROSS
+  BARE --&gt; GROSS &amp; FINE
+  BOOK --&gt; LANG &amp; JAT &amp; ATT
+  ROUT --&gt; SELF &amp; ATT
+  EMO --&gt; SELF &amp; LANG &amp; ATT
+  TURN --&gt; SELF &amp; JAT &amp; LANG
+  IMIT --&gt; JAT &amp; LANG &amp; CUR
+
+  %% ---- L2 -&gt; L3 ----
+  SELF --&gt; EF &amp; MH &amp; AUT &amp; SOC
+  LANG --&gt; LIT &amp; SOC &amp; EF
+  JAT --&gt; LANG &amp; SOC
+  ATT --&gt; MH &amp; SOC &amp; AUT
+  COG --&gt; EF &amp; LIT
+  GROSS --&gt; PHY &amp; AUT
+  FINE --&gt; EF &amp; PHY
+  CUR --&gt; EF &amp; AUT
+
+  classDef l1 fill:#e6f4f2,stroke:#2a9d8f,color:#12332e;
+  classDef l2 fill:#e9eaf9,stroke:#5560d8,color:#1e2150;
+  classDef l3 fill:#fbeede,stroke:#d98a2b,color:#4a2f0c;</pre>
+<blockquote>
+<p>mermaid が表示されない場合は、下の<strong>エッジ表</strong>が同じ内容の正本。</p>
+</blockquote>
+<hr />
+<h2>1.5 今日やること早見表（もの × やること × 何のため）</h2>
+<blockquote>
+<p>「結局、今日は何のために・何のおもちゃで・何をすればいい？」への直球の答え。
+<strong>専用おもちゃは不要</strong>。家にある物でOK。1回1〜3分、遊びの中で数回。</p>
+</blockquote>
+<h3>困ったら今日はこれだけ（3つ）</h3>
+<ol>
+<li><strong>実況しながらサーブ＆リターン</strong> — お子さんの声・指さしに、同じ話題で即返す（全部の土台）。</li>
+<li><strong>隠して探す（いないいないばあ／布でおもちゃ隠し）</strong> — 認知（対象の永続性）の窓が今開いている。</li>
+<li><strong>つまむ・入れる／つたい歩き</strong> — 微細＋粗大運動を1つずつ。</li>
+</ol>
+<h3>フル早見表</h3>
+<blockquote>
+<p>記号：★=今ちょうどいい／◎=常時大事／▲=まだ早い。
+<strong>✅できるとよいサイン</strong>＝この月齢での到達の目安（＝<a href="#tab-05">05_用語解説</a>の「計測」を家庭向けに）。
+できなくても心配しすぎない。<strong>やっている過程が育ちで、サインは結果</strong>。</p>
+</blockquote>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>あそび</th>
+<th>使うもの（家にある物でOK）</th>
+<th>やること（具体・1〜3分）</th>
+<th>何のため（→育つ力→未来）</th>
+<th>✅できるとよいサイン（11〜12ヶ月）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>◎<strong>サーブ＆リターン</strong></td>
+<td>いらない（声・視線・指さし）</td>
+<td>お子さんの「あー」に「あー、わんわんいたね」と<strong>話題をのせて即返す</strong>。1話題で3往復めざす</td>
+<td>自己制御・言語・共同注意・愛着 → 実行機能/対人/メンタルヘルス</td>
+<td>声や指さしで<strong>発信→反応を待つ</strong>往復が続く</td>
+</tr>
+<tr>
+<td>★<strong>実況中継</strong></td>
+<td>目の前の物</td>
+<td>見てる物・してる事を実況「りんご、赤いね」「ぎゅっ、持てたね」</td>
+<td>言語・共同注意・認知 → 読解力/対人</td>
+<td>名前を聞くと<strong>その物を見る</strong>（理解語が増える）</td>
+</tr>
+<tr>
+<td>★<strong>指さしあそび</strong></td>
+<td>絵本・窓の外</td>
+<td>お子さんが指した先を見て言葉を添える。こちらも指さして「ほら、ねこ」→<strong>顔を見て共有</strong></td>
+<td>共同注意・言語 → 言語/対人</td>
+<td>指さした方を<strong>見る</strong>／見た後<strong>こちらの顔を確認</strong>。自分から指さしの芽</td>
+</tr>
+<tr>
+<td>★<strong>隠して探す</strong></td>
+<td>ハンカチ・空カップ・手</td>
+<td>おもちゃに布をかけ「どこ？」→一緒にめくる。いないいないばあ。<strong>隠す位置を時々変える</strong>（A-not-B）</td>
+<td>認知（対象の永続性）・好奇心 → 実行機能/読解力</td>
+<td>隠した物を<strong>自分でめくって探す</strong>。いないばあを<strong>期待して待つ</strong></td>
+</tr>
+<tr>
+<td>★<strong>入れる・出す</strong></td>
+<td>空き容器＋積み木/ボール</td>
+<td>カップに入れる→ひっくり返して出す。「入った」「出た」と実況</td>
+<td>微細運動・認知（手段-目的）・好奇心 → 実行機能</td>
+<td>容器に<strong>入れて→出す</strong>を目的をもって繰り返す</td>
+</tr>
+<tr>
+<td>★<strong>積む・崩す</strong></td>
+<td>積み木2個/空き箱</td>
+<td>2個積む→崩す。崩れる因果を一緒に喜ぶ</td>
+<td>微細運動・認知・好奇心 → 実行機能</td>
+<td>積み木を<strong>手渡すと持ち替え</strong>、崩す因果を楽しむ</td>
+</tr>
+<tr>
+<td>★<strong>つまむ</strong></td>
+<td>ボーロ等の小食材/小物</td>
+<td>親指と人差し指でつまむ（ピンサー）。自分で口へ</td>
+<td>微細運動 → 実行機能/自食</td>
+<td><strong>親指と人差し指の先</strong>で小さい物をつまむ（ピンサー成立）</td>
+</tr>
+<tr>
+<td>★<strong>つたい歩き</strong></td>
+<td>安定した家具・押し車</td>
+<td>家具を伝って横移動できる配置に。押し車を押す。<strong>歩行器は使わない</strong></td>
+<td>粗大運動・好奇心 → 健康な身体/自己効力感</td>
+<td>つかまり立ち→<strong>家具を伝って横移動</strong>。押し車を押す</td>
+</tr>
+<tr>
+<td>★<strong>しゃがむ⇄立つ</strong></td>
+<td>低い段差・床の物</td>
+<td>しゃがんで拾う→立つ。低い段差の昇り降り</td>
+<td>粗大運動 → 健康な身体</td>
+<td>つかまって<strong>しゃがむ⇄立つ</strong>。少し支えれば立位保持</td>
+</tr>
+<tr>
+<td>◎<strong>はだし床あそび</strong></td>
+<td>いらない（素足）</td>
+<td>素足で床を歩く/立つ。足裏の感覚とバランス</td>
+<td>粗大・微細運動 → 健康な身体</td>
+<td>素足で<strong>バランスを取って</strong>立つ・伝う</td>
+</tr>
+<tr>
+<td>★<strong>絵本・指さし読み</strong></td>
+<td>短い絵本</td>
+<td>短く、指さししながら、繰り返しでOK。膝の上で</td>
+<td>言語・共同注意・愛着 → 読解力/対人</td>
+<td>好きなページで<strong>注目</strong>、絵を<strong>指さす</strong>、めくりたがる</td>
+</tr>
+<tr>
+<td>★<strong>気持ちの実況</strong></td>
+<td>いらない</td>
+<td>泣いたら「悲しかったね」、笑ったら「うれしいね」と<strong>感情を言葉に</strong></td>
+<td>自己制御・言語・愛着 → メンタルヘルス/対人</td>
+<td>抱っこ・声かけで<strong>立ち直りが早くなる</strong>（共調整）</td>
+</tr>
+<tr>
+<td>★<strong>ターン交代</strong></td>
+<td>ボール・おもちゃ</td>
+<td>「どうぞ」で渡し合い。短い「まって」→渡す。待てた芽を言葉に</td>
+<td>自己制御・共同注意 → 実行機能/対人</td>
+<td>物を<strong>渡す/受け取る</strong>やりとり。ほんの一瞬<strong>待てる</strong>芽</td>
+</tr>
+<tr>
+<td>★<strong>まねっこ・模倣あそび</strong></td>
+<td>いらない（体・声）／コップ等の身近な道具</td>
+<td>拍手・バイバイ・舌出し・コップで飲むふりなどを<strong>ゆっくり見せて繰り返す</strong>→子の真似を待つ→子の真似を親も真似し返す</td>
+<td>共同注意・言語・好奇心 → 対人/言語</td>
+<td>意図的に<strong>バイバイ・パチパチを真似する</strong>。大人の動作を選んで繰り返す</td>
+</tr>
+<tr>
+<td>◎<strong>生活リズム</strong></td>
+<td>いらない</td>
+<td>食事・就寝を<strong>だいたい同じ流れ</strong>で。見通し＝安心</td>
+<td>自己制御・愛着 → メンタルヘルス/自律</td>
+<td>次の流れを<strong>見通して</strong>落ち着ける（後追いは正常サイン）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>▲ まだ早い／今はやらない（入れ替える）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>▲やりがちなこと</th>
+<th>なぜまだ早い・逆効果か</th>
+<th>代わりに（上の表の…）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>歩行器（ベビーウォーカー）</strong></td>
+<td>AAP禁忌。転落・受傷12–50%、歩行を<strong>遅らせ</strong>歩容も乱す（→<a href="#tab-03">03</a>）</td>
+<td>「つたい歩き」「しゃがむ⇄立つ」</td>
+</tr>
+<tr>
+<td>手を引いて<strong>歩かせ続ける</strong>練習</td>
+<td>自発運動を奪う。まだ独歩の準備段階</td>
+<td>自分でつかまり立ち→伝い歩きできる環境</td>
+</tr>
+<tr>
+<td><strong>文字・数の教え込み</strong></td>
+<td>発達段階に不一致（象徴機能はこれから）</td>
+<td>「実況中継」「絵本・指さし読み」で言葉のシャワー</td>
+</tr>
+<tr>
+<td>長時間の<strong>受動的な動画</strong></td>
+<td>応答性ゼロ＝サーブ＆リターンにならない</td>
+<td>一緒に見て「実況中継」に変える</td>
+</tr>
+<tr>
+<td>道具の「<strong>正しい使い方</strong>」を要求</td>
+<td>まだ探索段階。試す自由が学び</td>
+<td>「入れる・出す」「積む・崩す」の探索を許す</td>
+</tr>
+<tr>
+<td>長い「<strong>待ちなさい</strong>」の我慢</td>
+<td>自己制御は共調整の時期。長くは待てなくて当然</td>
+<td>「ターン交代」の<strong>一瞬の"まって"</strong>から</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>▲の見きわめや、★が出る仕組みは → <a href="#tab-05">05_用語解説</a>（各語の意義と計測）／<a href="#tab-02">02</a>（発達の窓）。</p>
+</blockquote>
+<hr />
+<h2>2. L1 今日の関わり・あそび（ノード一覧）</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>ノード</th>
+<th style="text-align: center;">記号</th>
+<th>ねらい（何を育てる：L2）</th>
+<th>具体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>サーブ＆リターン（応答的やりとり）</td>
+<td style="text-align: center;">◎ハブ</td>
+<td>自己制御・言語・共同注意・愛着・好奇心</td>
+<td>子の発信（声・視線・指さし）に<strong>すぐ・同じ話題で</strong>返す</td>
+</tr>
+<tr>
+<td>2</td>
+<td>実況中継・ラベリング</td>
+<td style="text-align: center;">★</td>
+<td>言語・共同注意・認知</td>
+<td>見てるもの/してることを言葉に「りんご、赤いね」</td>
+</tr>
+<tr>
+<td>3</td>
+<td>共同注意・指さしあそび</td>
+<td style="text-align: center;">★</td>
+<td>共同注意・言語・認知</td>
+<td>指さした先を見て言葉を添える／こちらも指さす</td>
+</tr>
+<tr>
+<td>4</td>
+<td>対象の永続性あそび</td>
+<td style="text-align: center;">★</td>
+<td>認知・好奇心</td>
+<td>いないいないばあ、布で隠して探す（A-not-B の窓）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>容器あそび（入れる・出す）</td>
+<td style="text-align: center;">★</td>
+<td>認知・微細運動・好奇心</td>
+<td>カップに入れる/出す、手段-目的の理解</td>
+</tr>
+<tr>
+<td>6</td>
+<td>積む・崩す</td>
+<td style="text-align: center;">★</td>
+<td>微細運動・認知・好奇心</td>
+<td>積み木2個、崩す因果を楽しむ</td>
+</tr>
+<tr>
+<td>7</td>
+<td>つまむ（ピンサーグリップ）</td>
+<td style="text-align: center;">★</td>
+<td>微細運動</td>
+<td>小さめ食材/おもちゃを親指-人差し指で</td>
+</tr>
+<tr>
+<td>8</td>
+<td>つたい歩き環境・つかまり立ち</td>
+<td style="text-align: center;">★</td>
+<td>粗大運動・好奇心</td>
+<td>伝い歩きできる家具配置、押し車（歩行器で<strong>なく</strong>）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>しゃがむ⇄立つ／低い段差</td>
+<td style="text-align: center;">★</td>
+<td>粗大運動</td>
+<td>しゃがんで拾う、低い段差の昇降</td>
+</tr>
+<tr>
+<td>10</td>
+<td>はだし床あそび</td>
+<td style="text-align: center;">◎</td>
+<td>粗大運動・微細運動</td>
+<td>素足で床。足裏の感覚・バランス</td>
+</tr>
+<tr>
+<td>11</td>
+<td>絵本・指さし読み</td>
+<td style="text-align: center;">★</td>
+<td>言語・共同注意・愛着</td>
+<td>短く、指さししながら、繰り返し</td>
+</tr>
+<tr>
+<td>12</td>
+<td>予測できる生活リズム</td>
+<td style="text-align: center;">◎</td>
+<td>自己制御・愛着</td>
+<td>食事/就寝の見通し。安心の土台</td>
+</tr>
+<tr>
+<td>13</td>
+<td>気持ちの実況（情動ラベリング）</td>
+<td style="text-align: center;">★</td>
+<td>自己制御・言語・愛着</td>
+<td>「悲しかったね」「うれしいね」と感情を言葉に</td>
+</tr>
+<tr>
+<td>14</td>
+<td>ターン交代（どうぞ／まって）</td>
+<td style="text-align: center;">★</td>
+<td>自己制御・共同注意・言語</td>
+<td>渡し合い、短い「まって」で待つ芽</td>
+</tr>
+<tr>
+<td>15</td>
+<td>まねっこ・模倣あそび</td>
+<td style="text-align: center;">★</td>
+<td>共同注意・言語・好奇心</td>
+<td>拍手・バイバイ・道具の見立てまねなど、大人の動作を選択的に模倣</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>3. L2 育つ力（ノード一覧・優先順位つき）</h2>
+<blockquote>
+<p><strong>優先順位</strong>（前提）：<strong>自己制御 ＞ 言語・共同注意 ＞ 愛着 ＞ 運動</strong>。
+ただし全部つながっているので「順位が低い＝やらない」ではなく「迷ったらどれを優先するか」。</p>
+</blockquote>
+<div class="tw"><table>
+<thead>
+<tr>
+<th style="text-align: center;">優先</th>
+<th>力</th>
+<th>この時期の中身</th>
+<th>主に育てる関わり(L1)</th>
+<th>つながる未来(L3)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td><strong>自己制御</strong></td>
+<td>待つ芽・切替え・情動の立て直し</td>
+<td>1,12,13,14</td>
+<td>実行機能・メンタルヘルス・自律・対人</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td><strong>言語・コミュニケーション</strong></td>
+<td>指さし+発声、初語の芽、理解語増</td>
+<td>1,2,3,11,13,14,15</td>
+<td>読解力・対人・実行機能</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td><strong>共同注意</strong></td>
+<td>視線追従・指さし応答・三項関係</td>
+<td>1,2,3,11,14,15</td>
+<td>言語・対人</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td><strong>愛着・安心の基地</strong></td>
+<td>安全基地から探索、後追い</td>
+<td>1,11,12,13</td>
+<td>メンタルヘルス・対人・自律</td>
+</tr>
+<tr>
+<td style="text-align: center;">—</td>
+<td>認知</td>
+<td>対象の永続性、手段-目的、記憶</td>
+<td>2,3,4,5,6</td>
+<td>実行機能・読解力</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>粗大運動</td>
+<td>つたい歩き→独歩の準備、しゃがむ</td>
+<td>8,9,10</td>
+<td>健康な身体・自律</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>微細運動</td>
+<td>ピンサー、入れる/出す、積む</td>
+<td>5,6,7,10</td>
+<td>実行機能・健康</td>
+</tr>
+<tr>
+<td style="text-align: center;">—</td>
+<td>探索・好奇心</td>
+<td>自発的にいじる・試す</td>
+<td>1,4,5,6,8,15</td>
+<td>実行機能・自律</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>4. L2 → L3 エッジ表（力 → 未来アウトカム）</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>育つ力(L2)</th>
+<th>→ 未来アウトカム(L3)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自己制御</td>
+<td>実行機能・学業／情動調整・メンタルヘルス／自律・やり抜く力／対人関係</td>
+</tr>
+<tr>
+<td>言語・コミュニケーション</td>
+<td>言語・読解力／対人関係／実行機能</td>
+</tr>
+<tr>
+<td>共同注意</td>
+<td>言語／対人関係</td>
+</tr>
+<tr>
+<td>愛着・安心の基地</td>
+<td>情動調整・メンタルヘルス／対人関係／自律</td>
+</tr>
+<tr>
+<td>認知</td>
+<td>実行機能・学業／言語・読解力</td>
+</tr>
+<tr>
+<td>粗大運動</td>
+<td>健康な身体・運動習慣／自律（自己効力感）</td>
+</tr>
+<tr>
+<td>微細運動</td>
+<td>実行機能／健康な身体</td>
+</tr>
+<tr>
+<td>探索・好奇心</td>
+<td>実行機能／自律</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>5. 今（生後11〜12ヶ月）のハイライト</h2>
+<h3>★ 今ちょうどいい（窓が開いている・最優先で入れる）</h3>
+<ul>
+<li><strong>サーブ＆リターン</strong>を全ての土台に。子の指さし・声に即レス。</li>
+<li><strong>共同注意/指さし</strong>：応答の指さしが出る時期。見て、言葉を添える。</li>
+<li><strong>対象の永続性</strong>：いないいないばあ／隠して探す。A-not-B の理解が進む窓（→<a href="#tab-02">02</a>）。</li>
+<li><strong>容器あそび・積む・つまむ</strong>：手段-目的＋微細運動（→<a href="#tab-03">03</a>）。</li>
+<li><strong>つたい歩き・しゃがむ・はだし</strong>：独歩前の粗大運動（→<a href="#tab-03">03</a>）。</li>
+<li><strong>気持ちの実況・ターン交代</strong>：自己制御の芽を今から。</li>
+</ul>
+<h3>▲ まだ早い／意味が薄い（今はやらない・入れ替える）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>▲やりがちなこと</th>
+<th>理由</th>
+<th>代わりに</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>歩行器（ベビーウォーカー）</strong></td>
+<td>AAP禁忌。転落・受傷12–50%、歩行を<strong>遅らせ</strong>歩容も乱す（→<a href="#tab-03">03</a>）</td>
+<td>床でのつたい歩き・押し車</td>
+</tr>
+<tr>
+<td>無理な歩行練習・手を引いて歩かせ続ける</td>
+<td>自発運動を奪う</td>
+<td>自分でつかまり立ち→伝い歩きできる環境</td>
+</tr>
+<tr>
+<td>文字・数の教え込み</td>
+<td>発達段階に不一致</td>
+<td>実況中継と絵本で言葉のシャワー</td>
+</tr>
+<tr>
+<td>長時間の受動的な動画</td>
+<td>応答性ゼロ＝サーブ＆リターンにならない</td>
+<td>一緒に見て実況・やりとりに変える</td>
+</tr>
+<tr>
+<td>道具の「正しい使い方」を要求</td>
+<td>まだ探索段階</td>
+<td>入れる/出す/叩くの探索を許す</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>5.5 ピアジェ発達段階（該当段階の抜粋）</h2>
+<blockquote>
+<p>認知の「今どこ」を1か所に。感覚運動期＝6下位段階。<strong>お子さんは第4下位段階の後期</strong>。
+出典・全月齢版 → <a href="#tab-02">02_認知発達タイムライン</a>。</p>
+</blockquote>
+<h3>感覚運動期のなかでの現在地</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th style="text-align: center;">下位段階</th>
+<th style="text-align: center;">月齢</th>
+<th>中身</th>
+<th style="text-align: center;">今</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">第3（後期）</td>
+<td style="text-align: center;">4〜8ヶ月</td>
+<td>二次循環反応：自分の行動が結果を生むと気づき繰り返す</td>
+<td style="text-align: center;">通過</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>第4</strong></td>
+<td style="text-align: center;"><strong>8〜12ヶ月</strong></td>
+<td><strong>二次的反応の協応：目的-手段の分離、隠れた物を探す、A-not-B誤り</strong></td>
+<td style="text-align: center;"><strong>★今ここ（後期）</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">第5</td>
+<td style="text-align: center;">12〜18ヶ月</td>
+<td>三次循環反応：変化をつけて試す（落とし方を変える等）、A-not-B克服</td>
+<td style="text-align: center;">次の窓</td>
+</tr>
+</tbody>
+</table></div>
+<h3>第4下位段階・後期（8〜12ヶ月／今）＝まるっと抜粋</h3>
+<p><strong>認知のハロマーク</strong>
+- <strong>完全に意図的・目的志向の行動</strong>：熟慮する問題解決者に。障害物を回り込む、布を引いて遠くの物を取る。<strong>手段と目的が明確に分離</strong>し、手段は柔軟。
+- <strong>対象の永続性が固まる（第4段階）</strong>：完全に隠れた物も自信をもって探して見つける。<strong>A-not-B誤りは残るが期末に向け改善</strong>、12ヶ月頃にはBでも見つけられることも。
+- <strong>共同注意が本格化</strong>：10〜11ヶ月で応答的共同注意（視線・指さしを追う）、始発的共同注意（見せるための指さし）も。<strong>10〜11ヶ月の共同注意応答は後の語彙増を強く予測</strong>。
+- <strong>模倣が進む</strong>：観察した動作を選択的・意図的に模倣（ボタン押し、電話ごっこ、バイバイ・「イヤイヤ」の首振り）。※遅延模倣（表象）はまだ。
+- <strong>象徴の前触れ</strong>：意味を持つ身ぶり（バイバイ、首振り「ない」）＝初期の象徴使用。ただし心内表象はこれから。</p>
+<p><strong>親のチェックポイント（10〜12ヶ月・そのまま抜粋）</strong>
+- 障害物があっても特定のおもちゃへ<strong>目的をもって移動</strong>する
+- <strong>偶然でなく</strong>毛布を引いておもちゃを取る
+- 1つ目の覆いの下は探して見つける／2つ目に移すと<strong>A-not-B誤りが残ることあり（正常）</strong>
+- <strong>見せる/要求の指さし</strong>（「ほら、わんわん！」／指さし＋発声で要求）
+- 意味のある<strong>バイバイ</strong>、首振り「ない」
+- <strong>模倣</strong>：食べるふり、リモコンのボタン、電話ごっこ
+- <strong>名前に反応</strong>、簡単な言葉かけに理解を示す（「お鼻どこ？」）
+- <strong>パチパチ・いないいないばあ</strong>を一緒に
+- 子音＋母音の<strong>喃語</strong>（「ままま」「ばばば」「だだだ」）
+- 親が離れると<strong>不安を示す</strong>（分離不安＝永続性・記憶の証拠）</p>
+<p><strong>この時期のあそびタイプ</strong>
+意図的な物あそび＋社会的ゲーム：<strong>隠して探す</strong>（顔を隠す→毛布をめくる）、ボールの往復、布引きで取る、パチパチ等の身ぶりゲーム、容器あそび（入れる・出す）、因果おもちゃ（ボタン・つまみ）。<strong>機能あそびの芽</strong>（コップで飲むふり）。<strong>象徴あそびはまだ</strong>（バナナを電話にはしない）＝多くは観察した機能の模倣。</p>
+<blockquote>
+<p>注（現代の知見）：Baillargeon の期待違反法では、<strong>3.5〜5.5ヶ月</strong>で既に暗黙の永続性を示す＝ピアジェは早期の理解を過小評価。ただし「暗黙の理解」と「自分で探す」には差があり、探索は8〜12ヶ月から（→<a href="#tab-02">02</a>）。</p>
+</blockquote>
+<hr />
+<h2>6. ノード詳細カード（クリックで開く想定＝HTML化の元データ）</h2>
+<blockquote>
+<p>各カード＝HTMLにしたとき1枚のカードになる単位。<code>何をする / 何が育つ / 未来 / エビデンス / 今の目安</code>。</p>
+</blockquote>
+<details>
+<summary><b>◎ サーブ＆リターン（応答的やりとり）</b></summary>
+<ul>
+<li><strong>何をする</strong>：子どもの発信（喃語・視線・指さし・表情）に、<strong>すぐ・同じ話題で</strong>返す。往復のラリーを増やす。</li>
+<li><strong>何が育つ(L2)</strong>：自己制御／言語／共同注意／愛着／好奇心（＝ほぼ全部のハブ）。</li>
+<li><strong>未来(L3)</strong>：実行機能・言語・対人・メンタルヘルス。</li>
+<li><strong>エビデンス</strong>：応答的養育が言語・自己制御・愛着の中核（→<a href="#tab-02">02</a>）。</li>
+<li><strong>今の目安</strong>：1日の生活の中で常時。「返した回数」を意識。</li>
+</ul>
+</details>
+<details>
+<summary><b>★ 対象の永続性あそび（いないいないばあ／隠して探す）</b></summary>
+<ul>
+<li><strong>何をする</strong>：布やカップでおもちゃを隠して「どこ？」→一緒に探す。いないいないばあ。</li>
+<li><strong>何が育つ</strong>：認知（対象の永続性・A-not-B）／好奇心。</li>
+<li><strong>未来</strong>：実行機能・読解力の土台（記憶・表象）。</li>
+<li><strong>エビデンス</strong>：Piaget 第4下位段階〜、10–12ヶ月で探索行動が成立（→<a href="#tab-02">02</a>）。</li>
+<li><strong>今の目安</strong>：隠す位置を時々変える（A-not-B誤りの克服を促す）。</li>
+</ul>
+</details>
+<details>
+<summary><b>★ つまむ／容器あそび／積む（微細運動セット）</b></summary>
+<ul>
+<li><strong>何をする</strong>：小さめの物をピンサーでつまむ、カップに入れる/出す、積み木2個。</li>
+<li><strong>何が育つ</strong>：微細運動／認知（手段-目的）／好奇心。</li>
+<li><strong>未来</strong>：実行機能・健康な身体。</li>
+<li><strong>エビデンス</strong>：11–12ヶ月の微細運動発達（→<a href="#tab-03">03</a>）。</li>
+<li><strong>今の目安</strong>：誤飲サイズに注意（トイレットペーパー芯を通る物は避ける）。</li>
+</ul>
+</details>
+<details>
+<summary><b>★ つたい歩き・しゃがむ・はだし（粗大運動セット）</b></summary>
+<ul>
+<li><strong>何をする</strong>：家具を伝う環境、しゃがんで拾う、低い段差、素足で床遊び。押し車。</li>
+<li><strong>何が育つ</strong>：粗大運動／バランス／好奇心。</li>
+<li><strong>未来</strong>：健康な身体・運動習慣／自己効力感。</li>
+<li><strong>エビデンス</strong>：独歩前の準備。<strong>歩行器は禁忌</strong>（→<a href="#tab-03">03</a>）。</li>
+<li><strong>今の目安</strong>：転倒しても大丈夫な床・安全な家具配置。</li>
+</ul>
+</details>
+<details>
+<summary><b>★ 気持ちの実況・ターン交代（自己制御セット）</b></summary>
+<ul>
+<li><strong>何をする</strong>：感情を言葉に「悲しかったね」。渡し合い「どうぞ」、短い「まって」。</li>
+<li><strong>何が育つ</strong>：自己制御（最優先）／言語／愛着／共同注意。</li>
+<li><strong>未来</strong>：実行機能・メンタルヘルス・対人・自律。</li>
+<li><strong>エビデンス</strong>：情動のラベリングと応答が自己調整の基盤。</li>
+<li><strong>今の目安</strong>：待てなくて当然の月齢。「待てた芽」を拾って言葉にする。</li>
+</ul>
+</details>
+<details>
+<summary><b>★ まねっこ・模倣あそび</b></summary>
+<ul>
+<li><strong>何をする</strong>：拍手・バイバイ・舌出し・コップで飲むふりなどをゆっくり見せて繰り返す→子の真似を待つ→子の真似を親も真似し返す。</li>
+<li><strong>何が育つ(L2)</strong>：共同注意／言語／好奇心。</li>
+<li><strong>未来(L3)</strong>：対人関係・協調性／言語・読解力。</li>
+<li><strong>エビデンス</strong>：11〜12ヶ月は選択的・意図的な模倣が進む時期（Piaget第4下位段階、Meltzoffの模倣研究）（→<a href="#tab-06">06</a>）。</li>
+<li><strong>今の目安</strong>：意図的にバイバイ・パチパチなどを真似する。他者の動作を選んで繰り返す。</li>
+</ul>
+</details>
+<hr />
+<h2>7. 出典</h2>
+<ul>
+<li>認知・言語・愛着・共同注意・対象の永続性 → <a href="#tab-02">02_認知発達タイムライン_0-18ヶ月.md</a>（CDC 2022 / AAP / Piaget / Baillargeon ほか）</li>
+<li>粗大・微細運動、歩行器禁忌 → <a href="#tab-03">03_運動あそび_11-12ヶ月.md</a>（AAP / CDC / 各PT・OT）</li>
+<li>関わりあそび（声かけ・共同注意・隠して探す・絵本の読み方・ターン交代ほか）→ <a href="#tab-06">06_関わりあそび_認知言語社会_11-12ヶ月.md</a>（Harvard CDC / Whitehurst / CDC 2022 / AAP ほか）</li>
+<li>健康（鉄・ビタミンD・アデノイド）→ <a href="#tab-04">04_健康_鉄ビタミンD_アデノイド.md</a></li>
+<li>専門用語の意味・意義・計測方法 → <a href="#tab-05">05_用語解説_専門用語.md</a></li>
+</ul>
+<hr />
+<p><em>このファイルは今後アップデート前提のローカル正本。遊びや力を足すときは「L1→L2→L3のどこに刺さるか」を必ずエッジ表に追記すること。</em></p></section>
+<section id="tab-05" class="pane"><h1>用語解説（育ちマップの専門用語）</h1>
+<blockquote>
+<p><a href="#tab-01">01_育ちマップ_依存グラフ.md</a> に出てくる専門用語を、
+<strong>定義 / 意義（なぜ大事・何につながるか）/ 何をもって計測するか / 今（11〜12ヶ月）の目安</strong> の
+4点セットで解説する。「計測」は、研究で使う標準指標と、家庭で観察できる代替の両方を書く。</p>
+</blockquote>
+<p><strong>索引</strong>
+<a href="#1-サーブリターン">サーブ＆リターン</a> ／ <a href="#2-共同注意">共同注意</a> ／ <a href="#3-三項関係">三項関係</a> ／
+<a href="#4-指さし叙述と要求">指さし（叙述/要求）</a> ／ <a href="#5-対象の永続性">対象の永続性</a> ／
+<a href="#6-a-not-b-誤り">A-not-B 誤り</a> ／ <a href="#7-手段-目的行動">手段-目的行動</a> ／
+<a href="#8-自己制御自己調整">自己制御／自己調整</a> ／ <a href="#9-情動調整">情動調整</a> ／
+<a href="#10-愛着安心の基地">愛着・安心の基地</a> ／ <a href="#11-実行機能ef">実行機能（EF）</a> ／
+<a href="#12-粗大運動微細運動">粗大運動／微細運動</a> ／ <a href="#13-ピンサーグリップ">ピンサーグリップ</a> ／
+<a href="#14-応答性随伴性">応答性（随伴性）</a></p>
+<hr />
+<h2>1. サーブ＆リターン</h2>
+<p>（英: serve and return ／ 応答的やりとり）</p>
+<ul>
+<li><strong>定義</strong>：子どもが発信（声・喃語・視線・指さし・表情）を「サーブ」し、大人が<strong>すぐ・同じ話題で</strong>返す「リターン」を繰り返すラリー。テニスの往復のイメージ。</li>
+<li><strong>意義</strong>：脳の神経回路は「使われたつながり」が強化される。応答的な往復が、言語・自己制御・愛着・共同注意すべての土台になる<strong>ハブ</strong>。逆に発信を無視され続けると（無反応な顔＝still face）ストレス反応が出る。</li>
+<li><strong>何をもって計測するか</strong></li>
+<li>研究：養育者-子の相互作用のマイクロ分析（発話の<strong>随伴性</strong>＝子の発信からどれだけ速く・関連して返したか）、Still-Face 実験での立て直り。</li>
+<li>家庭：「子の発信 → 自分が返した」往復の<strong>回数</strong>と<strong>速さ</strong>をざっくり意識。1つの話題で3往復続けられたら上出来。</li>
+<li><strong>今の目安（11〜12ヶ月）</strong>：喃語・指さし・視線に即レス。「あー」に「あー、わんわんいたね」と話題をのせて返す。</li>
+</ul>
+<hr />
+<h2>2. 共同注意</h2>
+<p>（英: joint attention）</p>
+<ul>
+<li><strong>定義</strong>：自分と相手が<strong>同じ対象に注意を向けていることを、互いに分かり合っている</strong>状態。単に同じ物を見ている（並行注意）だけでなく「一緒に見てるね」の共有が入る。</li>
+<li><strong>意義</strong>：<strong>言語獲得の最強の前触れ</strong>。9〜14ヶ月に出る共同注意の量が、後の語彙・対人スキルを予測する。育ちマップでは 共同注意 →（言語・対人）へ強いエッジ。</li>
+<li><strong>種類</strong></li>
+<li><strong>応答的共同注意 (RJA)</strong>：相手の視線や指さしを<strong>追って</strong>同じ対象を見る。</li>
+<li><strong>始発的共同注意 (IJA)</strong>：自分から指さし・視線で相手の注意を<strong>引き寄せる</strong>（「見て！」）。IJAの方が発達的に一歩進んでいる。</li>
+<li><strong>何をもって計測するか</strong></li>
+<li>研究：<strong>ESCS（Early Social Communication Scales）</strong> が標準。検査者が視線・指さしを出し、子が追うか（RJA）／自発的に共有を始めるか（IJA）を得点化。視線追従課題、指さし追従課題。</li>
+<li>家庭：①こちらが指さした方向を見るか、②見たあとこちらの顔を<strong>確認</strong>しに戻ってくるか（＝共有のサイン）、③自分から指さして親の顔を見るか。</li>
+<li><strong>今の目安</strong>：応答的共同注意（指さし・視線を追う）はこの時期に成立。始発的（自分から指さして共有）も芽が出てくる。</li>
+</ul>
+<hr />
+<h2>3. 三項関係</h2>
+<p>（英: triadic / secondary intersubjectivity）</p>
+<ul>
+<li><strong>定義</strong>：「自分 — 対象 — 相手」の<strong>3点</strong>が結びついた関係。二項関係（自分—相手／自分—物）から一段進んだ形。共同注意はこの三項関係の上に成り立つ。</li>
+<li><strong>意義</strong>：「物について人とやりとりする」土台。指さし・見せる・渡す（提示行動）が可能になり、言語やごっこ遊びへつながる。</li>
+<li><strong>何をもって計測するか</strong>：物を親に<strong>見せる/渡す/指さす</strong>行動の有無。ESCSの「見せる・渡す」項目。</li>
+<li><strong>今の目安</strong>：おもちゃを「はい」と見せる/渡す、指さして共有する行動が出始める。</li>
+</ul>
+<hr />
+<h2>4. 指さし（叙述と要求）</h2>
+<p>（英: protodeclarative / protoimperative pointing）</p>
+<ul>
+<li><strong>定義</strong>：指で対象を示す身ぶり。目的で2種類に分かれる。</li>
+<li><strong>叙述の指さし（叙述的・protodeclarative）</strong>：「見て、あれ！」と<strong>共有・関心を伝える</strong>ため。共同注意の中核。</li>
+<li><strong>要求の指さし（命令的・protoimperative）</strong>：「あれ取って」と<strong>手段として</strong>使う。</li>
+<li><strong>意義</strong>：叙述の指さしは、相手にも心があり関心を共有できるという理解（心の理論の芽）を示し、言語発達を強く予測する。要求だけで叙述が出にくい場合は発達フォローの手がかりになることもある。</li>
+<li><strong>何をもって計測するか</strong>：指さしの<strong>目的</strong>を観察。指さした後に親の顔を見て反応を確かめる＝叙述のサイン。ESCSやM-CHAT等のスクリーニング項目。</li>
+<li><strong>今の目安</strong>：要求→叙述の順に出る。11〜12ヶ月で叙述の指さしが出てきたら共同注意が育っている好サイン。</li>
+</ul>
+<hr />
+<h2>5. 対象の永続性</h2>
+<p>（英: object permanence）</p>
+<ul>
+<li><strong>定義</strong>：物が視界から消えても<strong>存在し続けている</strong>という理解。</li>
+<li><strong>意義</strong>：記憶・表象（頭の中にイメージを保つ力）の基礎。これがないと「隠れたら消えた」になる。後の実行機能・読解（見えないものを扱う力）につながる。</li>
+<li><strong>何をもって計測するか</strong></li>
+<li>研究（Piaget）：おもちゃに布をかけて<strong>探すか</strong>（探索行動）を段階評価。</li>
+<li>研究（Baillargeon）：<strong>期待違反法（violation-of-expectation）</strong>。物理的にありえない場面を見せ、<strong>注視時間</strong>が延びるか（＝「おかしい」と気づいている）で、言語以前の乳児の理解を測る。</li>
+<li>家庭：隠したおもちゃを自分でめくって探すか。いないいないばあで<strong>期待して待つ</strong>か。</li>
+<li><strong>今の目安</strong>：布の下を探して見つけられる。次の課題は <a href="#6-a-not-b-誤り">A-not-B</a>。</li>
+</ul>
+<hr />
+<h2>6. A-not-B 誤り</h2>
+<p>（英: A-not-B error）</p>
+<ul>
+<li><strong>定義</strong>：Aの場所で何度か物を見つけた後、目の前でBに移して隠しても、つい<strong>A</strong>を探してしまう誤り。8〜12ヶ月に典型的。</li>
+<li><strong>意義</strong>：<strong>実行機能（EF）の乳児版指標</strong>。正しくBを探すには「前の習慣(A)を抑えて」「今見た情報(B)で更新する」抑制＋更新が要る。克服の時期＝前頭前野の働きが伸びるサイン。</li>
+<li><strong>何をもって計測するか</strong>：A-not-B 課題（Aで数回→Bに隠す→どちらを探すか）。遅延時間を延ばすと難易度が上がる。</li>
+<li><strong>今の目安</strong>：隠す場所を時々変える遊びで、Bを探せるかを見る。11〜12ヶ月で克服が進む窓。</li>
+</ul>
+<hr />
+<h2>7. 手段-目的行動</h2>
+<p>（英: means-end behavior）</p>
+<ul>
+<li><strong>定義</strong>：目的（欲しい物）のために<strong>別の手段</strong>を使う行動。例：布を引いて上の物を取る、容器を傾けて出す。</li>
+<li><strong>意義</strong>：因果・計画性の芽。問題解決や実行機能につながる。Piaget第4下位段階の中核。</li>
+<li><strong>何をもって計測するか</strong>：布引き課題（support task）、ひも引き課題、容器から出す。</li>
+<li><strong>今の目安</strong>：容器あそび・引っぱって取るが楽しくなる時期。</li>
+</ul>
+<hr />
+<h2>8. 自己制御／自己調整</h2>
+<p>（英: self-regulation ／ self-control）</p>
+<ul>
+<li><strong>定義</strong>：自分の注意・感情・衝動・行動を、状況や目的に合わせて調整する力。乳児期はまず<strong>情動の調整</strong>が中心。</li>
+<li><strong>意義</strong>：育ちマップの<strong>最優先の力</strong>。実行機能・学業・メンタルヘルス・対人・自律すべてに広くつながる（有名なマシュマロ研究の源流もここ）。</li>
+<li><strong>発達段階</strong>：乳児期は「大人に助けてもらって落ち着く（<strong>共調整 co-regulation</strong>）」→ やがて自分で（自己調整）。今は共調整の時期。</li>
+<li><strong>何をもって計測するか</strong></li>
+<li>研究：遅延課題（幼児期）、情動調整の観察コーディング、Still-Faceからの立て直り、注意の切替え課題。乳児は<strong>自分で落ち着こうとする行動</strong>（視線をそらす・自己接触・親を見る）を観察。</li>
+<li>家庭：泣いた後、抱っこや声かけで<strong>立ち直る早さ</strong>。切替え（次の活動へ移れるか）。「待てた芽」があるか。</li>
+<li><strong>今の目安</strong>：まだ大人の助けありきで当然。<strong>気持ちの実況・予測できるリズム・ターン交代</strong>で共調整を積む段階。</li>
+</ul>
+<hr />
+<h2>9. 情動調整</h2>
+<p>（英: emotion regulation）</p>
+<ul>
+<li><strong>定義</strong>：わき起こる感情の強さ・持続・表し方を扱う力。自己制御の感情版。</li>
+<li><strong>意義</strong>：メンタルヘルス・対人関係の土台。感情を<strong>言葉にしてもらう</strong>経験（情動ラベリング）が調整力を育てる。</li>
+<li><strong>何をもって計測するか</strong>：ネガティブ情動からの回復時間、なだめやすさ（soothability）、親の情動ラベリング頻度。</li>
+<li><strong>今の目安</strong>：「悲しかったね」「うれしいね」と気持ちを言葉にして返す（＝共調整＋言語）。</li>
+</ul>
+<hr />
+<h2>10. 愛着・安心の基地</h2>
+<p>（英: attachment ／ secure base）</p>
+<ul>
+<li><strong>定義</strong>：特定の養育者との情緒的な絆。安心の基地（safe base）があると、そこを拠点に<strong>探索</strong>し、不安になると戻って充電する。</li>
+<li><strong>意義</strong>：メンタルヘルス・対人・自律の土台。安全基地があるほど探索＝学びが増える。後追いはこの絆の正常な現れ。</li>
+<li><strong>何をもって計測するか</strong></li>
+<li>研究：<strong>ストレンジ・シチュエーション法（Ainsworth）</strong>。分離と再会の場面で、再会時に<strong>なだめられて探索に戻れるか</strong>で安定/不安定型を分類（12〜18ヶ月で実施）。</li>
+<li>家庭：不安時に養育者を求め、抱っこで落ち着き、また遊びに戻れるか。後追い・人見知りの有無。</li>
+<li><strong>今の目安</strong>：後追い・人見知りが出るのは絆が育っている証拠。戻れる基地でいる。</li>
+</ul>
+<hr />
+<h2>11. 実行機能（EF）</h2>
+<p>（英: executive function）</p>
+<ul>
+<li><strong>定義</strong>：目的に向けて思考・行動を制御する脳の司令塔的な力。3要素＝<strong>抑制</strong>（我慢・割り込みを止める）、<strong>ワーキングメモリ</strong>（情報を保って使う）、<strong>認知的柔軟性</strong>（切替え）。</li>
+<li><strong>意義</strong>：学業・仕事・健康・対人の長期アウトカムを広く予測。育ちマップではL3の中核。乳児期の芽が<a href="#6-a-not-b-誤り">A-not-B</a>や<a href="#8-自己制御自己調整">自己制御</a>。</li>
+<li><strong>何をもって計測するか</strong>：乳児は A-not-B・注意の切替え。幼児以降は Day-Night課題、DCCS（次元変化カード分類）、ストループ系。</li>
+<li><strong>今の目安</strong>：直接鍛えるより、<strong>永続性あそび・共調整・応答的やりとり</strong>を通じて土台を作る段階。</li>
+</ul>
+<hr />
+<h2>12. 粗大運動／微細運動</h2>
+<p>（英: gross motor / fine motor）</p>
+<ul>
+<li><strong>定義</strong>：<strong>粗大</strong>＝体幹・脚など大きな筋（お座り・つたい歩き・歩行）。<strong>微細</strong>＝手指の細かい動き（つまむ・積む・入れる）。</li>
+<li><strong>意義</strong>：粗大は健康・運動習慣・自己効力感へ。微細は実行機能・道具使用・（後の）書字へ。運動での探索は認知・好奇心とも相互作用。</li>
+<li><strong>何をもって計測するか</strong></li>
+<li>研究：<strong>Bayley 乳幼児発達検査</strong>の運動スケール、ASQ、Denver等の月齢別マイルストーン。</li>
+<li>家庭：CDC/母子手帳のマイルストーン（つかまり立ち・伝い歩き・ピンサー）。→ <a href="#tab-03">03_運動あそび</a>。</li>
+<li><strong>今の目安</strong>：つたい歩き・しゃがむ（粗大）、ピンサーで小さい物をつまむ（微細）。<strong>歩行器は禁忌</strong>。</li>
+</ul>
+<hr />
+<h2>13. ピンサーグリップ</h2>
+<p>（英: pincer grasp ／ 精密把持）</p>
+<ul>
+<li><strong>定義</strong>：<strong>親指と人差し指の先</strong>で小さい物をつまむ握り。熊手状の握り（raking）から発達。</li>
+<li><strong>意義</strong>：微細運動の代表指標。手指の分化・目と手の協応。自食（finger food）にも直結。</li>
+<li><strong>何をもって計測するか</strong>：小さい食材/物をつまめるか（発達検査・マイルストーン項目）。</li>
+<li><strong>今の目安</strong>：9〜12ヶ月で成立。誤飲サイズ（芯を通る物）に注意。</li>
+</ul>
+<hr />
+<h2>14. 応答性（随伴性）</h2>
+<p>（英: contingency / responsiveness）</p>
+<ul>
+<li><strong>定義</strong>：子の行動に対して、大人の反応が<strong>関連して・タイミングよく</strong>返る度合い。サーブ＆リターンの質を決める要素。</li>
+<li><strong>意義</strong>：随伴性が高いほど「自分の働きかけで世界が動く」感覚（<strong>自己効力感・行為主体性</strong>）が育ち、学習意欲の源になる。受動的な動画に応答性がないのはこのため。</li>
+<li><strong>何をもって計測するか</strong>：相互作用分析で「子の発信→大人の反応」の<strong>遅延と関連度</strong>。家庭では、返しが<strong>その子の発信に合っているか</strong>を意識。</li>
+<li><strong>今の目安</strong>：速く・話題を合わせて返す。動画は「一緒に見て実況」してやりとりに変える。</li>
+</ul>
+<hr />
+<h2>参照</h2>
+<ul>
+<li>認知系（共同注意・永続性・A-not-B・手段目的）詳細 → <a href="#tab-02">02_認知発達タイムライン</a></li>
+<li>運動系（粗大・微細・ピンサー）詳細 → <a href="#tab-03">03_運動あそび</a></li>
+<li>用語がマップのどこに効くか → <a href="#tab-01">01_育ちマップ_依存グラフ</a></li>
+</ul>
+<p><em>今後アップデート前提。マップに新語を足したらこの用語集にも4点セットで追記すること。</em></p></section>
+<section id="tab-02" class="pane"><h1>根拠に基づく認知発達タイムライン：生まれてから18ヶ月まで</h1>
+<h2>親向けあそび適齢性ナビゲータ</h2>
+<hr />
+<h2>バンド: 0～2ヶ月 | Piaget第1下位段階: 反射活動（生まれてから1ヶ月）</h2>
+<p><strong>認知的な特徴:</strong>
+- 反射的反応（吸啜、探索、把握）; 対象の永続性なし
+- 顔らしいパターンや輪郭への選好
+- 新生児模倣（42分～36時間齢）: 舌の突き出し、口を開ける反応 [Messinger; CARTA]
+- 無指向的な社会的視線; 顔のスキャニング</p>
+<p><strong>Piaget下位段階:</strong>
+感覚運動期第1下位段階: 反射活動（0～1ヶ月）— 生得的反射が優位; 意図的行動なし</p>
+<p><strong>根拠となるアンカー:</strong>
+- <strong>新生児模倣:</strong> 生後42分～36時間の乳児が口を開ける、舌を突き出す、驚き表情を模倣する [CARTA; 新生児模倣の積極的証拠]。<em>注記:</em> 最近の議論では、真の模倣か覚醒駆動反応かについて議論がある; 反射的性質は約2～3ヶ月で消える。
+- <strong>顔への選好:</strong> 新生児は顔のような刺激に対してスクランブルされた顔より方向付けられる [標準的な乳児知覚研究]。</p>
+<p><strong>観察可能な親チェックポイント:</strong>
+- 赤ちゃんがあなたの指を反射的に握る
+- 赤ちゃんの視線が顔、特に目と口に留まる
+- 顔の身振りへの反応として口や舌がランダムに動く（鏡像に見えるが反射的）</p>
+<p><strong>あそびの種類:</strong>
+応答的育児と顔ガゼ; 構造化されたあそびはまだなし。 肌と肌の接触、赤ちゃんの顔に話しかけ、やさしい動きの追従。</p>
+<hr />
+<h2>バンド: 2～4ヶ月 | Piaget第2下位段階: 一次的循環反応（1～4ヶ月）</h2>
+<p><strong>認知的な特徴:</strong>
+- 社会的微笑が出現（約6～8週齢、社会的相互作用に依存） [Messinger et al., Lovevery]
+- 視覚追従の改善と体系的な顔スキャニング（目 → 口 → 輪郭）
+- 皮質下から皮質への注意制御への移行（約2～3ヶ月） [注意発達研究]
+- 注意期間が増加; 物と人への持続的視線
+- 記憶の出現: 育児日課を予期する</p>
+<p><strong>Piaget下位段階:</strong>
+感覚運動期第2下位段階: 一次的循環反応（1～4ヶ月）— 身体焦点の反復的行動; 意図的な吸啜、手の監視が出現; 眼手協応が開始</p>
+<p><strong>根拠となるアンカー:</strong>
+- <strong>社会的微笑:</strong> 生まれたときには存在しない; 6～8週齢で出現し、その後社会的相互作用に依存する。 社会的認識の発達を示す [Messinger et al.; Lovevery]。
+- <strong>視覚注意パターンの変化:</strong> 2ヶ月で、乳児の視線が顔の特徴（端、目、口）を複数統合し体系的にスキャンする; 1ヶ月児はより無作為にスキャン [Messinger; 社会的刺激への異常な視覚注意、4ヶ月児]。</p>
+<p><strong>観察可能な親チェックポイント:</strong>
+- 赤ちゃんが反応的にあなたに微笑む（約6～8週齢以降）
+- 赤ちゃんがあなたの顔を追従し、部屋を横切って動きを追う
+- 赤ちゃんが自分の手の動きを見ている; 何度も手を口に持っていく
+- 赤ちゃんが社会的相互作用に対してクーイング音を出すまたは声を出す</p>
+<p><strong>あそびの種類:</strong>
+<strong>社会的顔あそび</strong> — 大げさな表情、ピークー音、ゆっくりした顔追従。 手の監視あそび; 追従用の高コントラスト物体をぶら下げる。</p>
+<hr />
+<h2>バンド: 4～6ヶ月 | Piaget第3下位段階: 二次的循環反応（4～8ヶ月、初期段階）</h2>
+<p><strong>認知的な特徴:</strong>
+- <strong>原因と結果の発見:</strong> 赤ちゃんが行動が効果を生み出すことに気付く; 意図的に繰り返す（ガラガラを振って音を出す、蹴ってベッドを揺らす） [HealthyChildren.org 4～7ヶ月; Piaget下位段階3]
+- <strong>初期の対象の永続性前駆体:</strong> 赤ちゃんが部分的に隠れた物を探す; 物が視界から消えても存在し続けることを認識（出現段階で、まだPiagetの完全な下位段階4ではない）
+- <strong>期待違反法の表示:</strong> Baillargeon実験は4～5ヶ月児が不可能な出来事（スクリーンが隠れた物を通して回転）をより長く見つめることを示し、Piaget の8～12ヶ月の主張よりずっと早い約4ヶ月での暗黙的物理理解を示唆 [Baillargeon VOE; 対象の永続性3.5～5.5ヶ月に関するPMC記事]
+- 注意が物体に狭まる; 反射的社会的関与の低下
+- 記憶の改善: 授乳ボトル、お馴染みの日課を予期する</p>
+<p><strong>Piaget下位段階:</strong>
+感覚運動期第3下位段階: 二次的循環反応（4～8ヶ月、初期段階）— 注意が外向きに移行; 外部物体への行動の意図的繰り返し; 「見えなければ心にない」は引き続き完全に隠れた物に適用されるが、部分的隠蔽は探索をトリガー</p>
+<p><strong>根拠となるアンカー:</strong>
+- <strong>原因と結果の実験:</strong> 赤ちゃんがマットレスを蹴り、ベッドが揺れることに気付く; 物を落とす; ガラガラを振る。 意図的に繰り返す。 [HealthyChildren.org; Piaget]
+- <strong>Baillargeon期待違反法（VOE）:</strong> 3.5～5.5ヶ月児が、スクリーンが180°回転する（不可能、隠れた箱があるとそれを止めるはず）時により長く見つめることが確実。 Piaget の下位段階4よりずっと早い段階で乳児が遮蔽の後ろの物を追跡することを示唆 [Baillargeon et al., 1985; PMC/academia.edu対象永続性論文]。 <em>ニュアンス:</em> Piaget の完全な対象永続性に等しくない; 乳児は8～12ヶ月まで完全に隠れた物を積極的に探索しない。
+- <strong>AAP/CDC:</strong> ほとんどの赤ちゃんが約4ヶ月までにあなたを見て、注意を引くために動いたり音を出したりする（意図的なコミュニケーション） [HealthyChildren.org; AAP マイルストーン・スクリーニング]。</p>
+<p><strong>観察可能な親チェックポイント:</strong>
+- 赤ちゃんがガラガラを意図的に振る、音が出たら繰り返す
+- 赤ちゃんがおもちゃ/ベッド上のモビールへの効果を見るために腕を蹴ったり振ったりする
+- 赤ちゃんが目の前の物に手を伸ばす（6ヶ月以上）
+- 赤ちゃんが透明な障害物の後ろで動く物を追跡する
+- 赤ちゃんがあそびに反応して笑う（社会的認知リンク）</p>
+<p><strong>あそびの種類:</strong>
+<strong>原因と結果あそび:</strong> ガラガラ、クリンクルおもちゃ、ベッドモビール、キックおもちゃ。 手でのピークー（あなたが隠れて、赤ちゃんが部分的に予期する）。 おしゃべり会話（赤ちゃんが声を出し、あなたが反応）。</p>
+<hr />
+<h2>バンド: 6～8ヶ月 | Piaget第3下位段階（後期）: 二次的循環反応（4～8ヶ月、後期段階）</h2>
+<p><strong>認知的な特徴:</strong>
+- <strong>対象の永続性が進行:</strong> 赤ちゃんが部分的に隠れた物を探索; 透明なカバーの下のおもちゃに手を伸ばす。 完全に隠れた物はまだ探索しない。
+- <strong>手段-目的行動が出現:</strong> 6ヶ月までに、把握する運動能力が観察された把握行動を予期する能力と相関; 乳児が行動を遠い目標にリンクさせ始める（ただしまだ成熟していない）
+- <strong>注意の移行:</strong> 赤ちゃんが手と口で物を探索; 操作を通じて感覚運動学習
+- <strong>記憶の統合:</strong> 人を認識; 見知らぬ人への用心（約6～8ヶ月）
+- <strong>模倣の洗練:</strong> 新生児模倣は消えた; 真の模倣学習はまだ堅牢でない</p>
+<p><strong>Piaget下位段階:</strong>
+感覚運動期第3下位段階（後期段階）: 二次的循環反応（4～8ヶ月、後期段階）— 「見えなければ心にない」はまだ大いに適用されるが、赤ちゃんが透明なカバーを持ち上げたり、部分的に隠れた物を探索したりする</p>
+<p><strong>根拠となるアンカー:</strong>
+- <strong>手段-目的相関:</strong> 6ヶ月の把握する運動能力が観察された把握行動を予期する能力を予測 [若い乳児の手段-目的行動に関する研究]。
+- <strong>見知らぬ人への用心と記憶:</strong> 約6～8ヶ月で、乳児がお馴染みの顔vs新しい顔への好みを示し、一次養育者の記憶を統合する。</p>
+<p><strong>観察可能な親チェックポイント:</strong>
+- 赤ちゃんが軽いカバーを持ち上げてもらう（まず見せた場合）
+- 赤ちゃんが物を口に持っていって探索する
+- 赤ちゃんがかぎ状把握、その後洗練された把握で物に手を伸ばす
+- 赤ちゃんが鏡の自分の像に興味を示す（自己認識の出現）
+- 赤ちゃんが見知らぬ人に対して用心または警戒を示すことがある</p>
+<p><strong>あそびの種類:</strong>
+<strong>感覚運動探索:</strong> テクスチャあそび（シリコン、クリンクル）、落とすためのコンテナ、叩く物の組み合わせ。 鏡あそび（自己認識の構築）。 簡単な隠蔽（部分的に覆われたおもちゃ）。 ボタン/スイッチでの原因と結果。</p>
+<hr />
+<h2>バンド: 8～10ヶ月 | Piaget第4下位段階: 二次的反応の協調（8～12ヶ月、初期段階）</h2>
+<p><strong>認知的な特徴:</strong>
+- <strong>目標指向（手段-目的）行動:</strong> 赤ちゃんが手段を結果から分離; 異なる目標を達成するために一つの行動を意図的に使用（例: おもちゃを再度起動するために大人の手を動かす、布を引いて布の上の物に到達） [Piaget第4下位段階; 目標指向行動に関する研究]
+- <strong>隠れた物への意図的探索が開始:</strong> 赤ちゃんが一つのカバーの下で完全に隠れた物を探索し、それを見つける。 <strong>A-not-B誤りが出現:</strong> 赤ちゃんが物が最後に隠れた場所を探索し、観察された移動先に移っても、それでもそこを探索 [Piaget; A-not-B メタ分析]
+- <strong>共同注意前駆体:</strong> 赤ちゃんが養育者の視線を追う能力が出現; 12ヶ月より成熟度が低いが、視線感受性が増加 [8～12ヶ月共同注意発達研究]
+- <strong>原因と結果の固定化:</strong> 赤ちゃんが反復する原因と結果の連鎖を理解; 意図的に実験する</p>
+<p><strong>Piaget下位段階:</strong>
+感覚運動期第4下位段階: 二次的反応の協調（8～12ヶ月、初期段階）— 目標指向行動; 隠れた物への意図的探索; A-not-B誤りが特性</p>
+<p><strong>根拠となるアンカー:</strong>
+- <strong>A-not-B誤り:</strong> 8～12ヶ月児が位置A（反復試行）の下で物を探索し、その後実験者がそれを位置Bに移すのを見ているが、それでもAを再度探索。 手段-目的理解を示すが、未成熟な抑制またはワーキングメモリ [Piaget原論; PubMedメタ分析; Scientific Americanブログ]。 誤りは約12ヶ月で解決される。
+- <strong>目標指向行動:</strong> 10～12ヶ月が成功対失敗の目標指向到達を認識; 行動する機会が与えられたとき成功した行動を好む [Brandone &amp; Wellman の研究、目標指向行動]。
+- <strong>共同注意の出現:</strong> 8～9ヶ月が部分的な視線調整を示す; 真の共同注意（協調的視線追従）は12～15ヶ月まで堅牢でない [Mundy et al.; 共同注意時間動態研究]。</p>
+<p><strong>観察可能な親チェックポイント:</strong>
+- 赤ちゃんが布を自分のほうに引いて布の上のおもちゃを取る（手段-目的）
+- 赤ちゃんが毛布の下で隠れたおもちゃを探索する
+- 赤ちゃんが誤り: 間違った隠蔽場所で探索（A-not-B誤り―通常、予期される; 理解の兆し）
+- 赤ちゃんが意図的ジェスチャーを使う（「抱いて」とするために腕を上げる; 「バイバイ」とするために手を振る; あなたを呼ぶためにたたく）
+- 赤ちゃんが「いいえ」または自分の名前を理解する</p>
+<p><strong>あそびの種類:</strong>
+<strong>物とのかくれんぼ:</strong> 部分的に隠れた、その後完全に隠れた、その後異なるカバーの下。 布引きゲーム。 手の届く範囲の少し外のおもちゃに到達（問題解決）。 叩き落とし実験（因果関係）。</p>
+<hr />
+<h2>バンド: 10～12ヶ月 | Piaget第4下位段階（後期）: 二次的反応の協調（8～12ヶ月、後期段階） [詳細: このバンド]</h2>
+<p><strong>認知的な特徴:</strong>
+- <strong>完全な意図的、目標指向行動:</strong> 赤ちゃんが意図的な問題解決者。 おもちゃに向かってハイハイ、障害物の周りをハイハイ、布を引いて遠い物を取得。 行動は明らかに目標から分離; 手段は柔軟で意図的。
+- <strong>対象の永続性の固定化（Piaget第4下位段階）:</strong> 赤ちゃんが自信を持って完全に隠れた物を探索し、見つける。 <strong>A-not-B誤りがまだ存在するが、期間の終わり向かって改善。</strong> 赤ちゃんが約12ヶ月までに位置Bで物を見つけることに成功することがある。
+- <strong>共同注意がロバストに出現:</strong> 10～11ヶ月までに、赤ちゃんが共同注意キュー（養育者の視線/ポイント追従）に反応; 共同注意を開始（ものを示すことをポイント）。 10～11ヶ月での共同注意への応答は語彙成長と強く関連 [共同注意と言語研究]。
+- <strong>模倣が進行:</strong> 選別的、意図的な観察された行動の模倣（ボタンを押す、電話のふりで話す、大人のジェスチャーを模倣する「いいえ」と頭を振るまたは手を振って「バイバイ」）。 遅延模倣（心的表現）はまだ。
+- <strong>問題解決:</strong> 赤ちゃんが既知の方法で新しい問題を実験; 既知スキームを使って新しい状況に取り組む。
+- <strong>象徴的前駆体の出現:</strong> 赤ちゃんが意味をもって使うジェスチャーを生成する可能性（「バイバイ」手を振る、「いいえ」と頭を振る）= 早期象徴使用、ただしまだ心的表現ではない</p>
+<p><strong>Piaget下位段階:</strong>
+感覚運動期第4下位段階（後期）: 二次的反応の協調（8～12ヶ月、後期段階）— 成熟した目標指向行動; 可視変位への対象永続性; A-not-B誤りが12ヶ月までに消えている</p>
+<p><strong>根拠となるアンカー:</strong>
+- <strong>手段-目的の習熟:</strong> 12ヶ月が布引きが物を取得する目標への手段であることを理解; 行動焦点から目標焦点への移行 [Piaget; 手段-目的発達の研究]。
+- <strong>対象永続性（Piaget第4段階）:</strong> 赤ちゃんが実験者が隠すのを見た後、一度隠れた物を見つける。 正しい場所で探索。 A-not-B誤りが存在するが、12ヶ月以上の乳児は通常その誤りを犯さない [A-not-Bメタ分析]。
+- <strong>10～11ヶ月での共同注意:</strong> 10～11ヶ月での共同注意への反応を示す乳児は、24ヶ月で語彙成長が速い（言語予測） [共同注意と語彙研究]。
+- <strong>CDC 2022更新:</strong> 12ヶ月までに、「ほとんどの赤ちゃん」（75パーセンタイル）はパット・ア・ケーキのようなゲームをして、あなたが隠すのを見た物を探す（対象永続性マイルストーン） [CDC更新マイルストーン2022、75パーセンタイル]。
+- <strong>AAP スクリーニング:</strong> 9ヶ月と18ヶ月で発達スクリーニングが推奨される; 10～12ヶ月が意図的なコミュニケーション、物探索、社会的認識のための重要な評価ウィンドウ。</p>
+<p><strong>観察可能な親チェックポイント（10～12ヶ月）:</strong>
+- 赤ちゃんが障害物にもかかわらず特定のおもちゃに向かって意図的にハイハイ/移動する
+- 赤ちゃんが毛布を引いておもちゃを取得する（事故ではなく）
+- 赤ちゃんが最初のカバーの下でおもちゃを探し、見つける; 二番目のカバーに移された場合、A-not-B誤りを犯す可能性がある（通常）
+- 赤ちゃんが物を指して示す（「犬だ!」）またはポイント+声を出して要求する
+- 赤ちゃんが意味を持って「バイバイ」を手で振る; 「いいえ」と頭を振る
+- 赤ちゃんが行動を模倣: 食べるふり、リモコンのボタンを押す、おもちゃの電話で「話す」
+- 赤ちゃんが自分の名前に反応; 簡単な言葉の指示に従う（「鼻はどこ?」— 鼻に触れない可能性があるが理解を示す）
+- 赤ちゃんが手をたたく、大人とパット・ア・ケーキをする
+- 赤ちゃんがおしゃべりで子音+母音を組み合わせる（「ままままま」、「ばばば」、「だだだだ」）
+- 赤ちゃんが親が去るときに苦痛を示すことがある（分離不安、対象永続性と記憶の兆し）</p>
+<p><strong>10～12ヶ月でのあそびの種類:</strong>
+<strong>意図的物あそび+社会的ゲーム:</strong> かくれんぼゲーム（あなたが顔を隠す、赤ちゃんが毛布を取る）; ボール転がし戻し; 物のための布引き; パット・ア・ケーキと他のジェスチャーゲーム; コンテナでの探索あそび（充填、ダンプ）; 原因と結果おもちゃ（ボタンを押す、クランク回転、絞り出す）。 開始 <strong>機能あそび</strong> （物の使用目的: 食べるふり、飲むふり、カップから）。 <strong>象徴あそびはまだ</strong> （例: まだバナナを電話として使わない）; ほとんど観察された機能の模倣。</p>
+<hr />
+<h2>バンド: 12～15ヶ月 | Piaget第5下位段階: 三次的循環反応（12～18ヶ月、初期段階） [次の地平: 間もなく]</h2>
+<p><strong>認知的な特徴:</strong>
+- <strong>第4から第5下位段階への移行:</strong> A-not-B誤りが消える; 赤ちゃんが見えない変位後も正しい場所で物を見つける（実験者が赤ちゃんが見ている間に物を動かすが、動きは隠れる）
+- <strong>「小さな科学者」実験:</strong> 赤ちゃんが体系的に行動の変化を試して何が起こるかを見る。 無作為ではない; 意図的な変化-テストサイクル。
+- <strong>問題解決の進行:</strong> 赤ちゃんが新しい解決策を使う可能性（到達するために登る、ツールを見つける、創造的に障害物を動かす）
+- <strong>機能あそびが完全に出現:</strong> 赤ちゃんが物を「意図通りに」使う（食べるふり、注ぐふり、飲むふり、電話で話すふり）— まだ物を他の物にするふりをしていないで、物の目的を理解する
+- <strong>模倣の洗練:</strong> 選別的、目標認識的な模倣; 遅延模倣が開始（約18ヶ月完全発達）
+- <strong>初期象徴ジェスチャー:</strong> ポイントが意図的（命令的: 「それを取る」; 宣言的: 「それを見て」）
+- <strong>言語爆発:</strong> 語彙成長が加速し、しばしば改善された対象永続性と手段-目的理解と一致（象徴言語の認知基盤）
+- <strong>共同注意がロバスト:</strong> 赤ちゃんが確実に視線+ポイントに従う; 共同注意を開始; 注意を共有するために物を示す
+- <strong>記憶の統合:</strong> 遅延画像（写真、お馴染みの人のビデオ）を認識; 連鎖を予期（例: 靴=外に行く）</p>
+<p><strong>Piaget下位段階:</strong>
+感覚運動期第5下位段階: 三次的循環反応（12～18ヶ月、初期段階）— 体系的な実験; 「小さな科学者」; 可視変位への対象永続性が完全; 見えない変位の理解を開始（18～24ヶ月までに完了）</p>
+<p><strong>根拠となるアンカー:</strong>
+- <strong>A-not-B誤りの解決:</strong> 約15ヶ月までに、赤ちゃんが確実に正しい位置Bで物を見つけ、動きの間に隠されても。 成熟した対象永続性を示す（Piaget第5段階進入） [Piaget; A-not-B文献]。
+- <strong>機能あそびが出現:</strong> 12～18ヶ月までに、子どもが物を「意図通りに」使用（機能あそび）し、象徴置換なしで物の目的理解を示す [あそび段階の研究; NBCOT発達マイルストーン; あそび発達OT概要]。
+- <strong>三次的循環反応:</strong> 12～18ヶ月の幼児が行動を変化させて繰り返す（例: 異なる高さ、角度、異なるコンテナに物を落とす）異なる結果を観察するため — 古典的Piaget観察 [Piaget感覚運動段階]。
+- <strong>象徴ジェスチャーと共同注意:</strong> ポイント命令的（要求）と宣言的（共有）機能; 確実に大人の視線とポイントに従う [共同注意文献; 言語発達接続]。
+- <strong>CDC 2022マイルストーン（15ヶ月）:</strong> 15ヶ月までに、「ほとんどの赤ちゃん」（75パーセンタイル）が意味を持つ1～2語を言う; 簡単な指示を理解; 物とゲームをする [CDC更新2022マイルストーン、新しい15ヶ月マーカーを含む]。</p>
+<p><strong>観察可能な親チェックポイント（12～15ヶ月）:</strong>
+- 赤ちゃんが高い椅子から異なるコンテナに体系的に物を落とし、高さと角度を変える
+- 赤ちゃんが赤ちゃんが見ている間に隠されても物を見つける（見えない変位が開始）
+- 赤ちゃんが食べるふり、カップから飲むふり; ぬいぐるみに食べさせる
+- 赤ちゃんが単語の意味を理解; 「お父さんはどこ?」または「拍手できますか?」に反応する
+- 赤ちゃんが意味を持つ言葉を言う: 「ママ」、「パパ」、「犬」、「上」、「バイバイ」（15ヶ月までに1～2語の一般的）
+- 赤ちゃんが物を指して示す; 物をポイントして要求する
+- 赤ちゃんが物をあなたのところに持ってきて示す; あなたの確認を期待する
+- 赤ちゃんが「いいえ」と頭を振り、文脈で「はい」とうなずく
+- 赤ちゃんが簡単な行動を模倣: 手をたたく、音楽に合わせて踊る、車を押す
+- 赤ちゃんが本の写真を見て、写真をたたく; 本の物の名前に反応する
+- 赤ちゃんが分離に抵抗する可能性; 親が去るときに不安を示す（対象永続性+安全な愛着を示す）</p>
+<p><strong>12～15ヶ月でのあそびの種類:</strong>
+<strong>機能あそび+初期象徴あそび:</strong> 食べるふり/飲むふり、電話のふり、人形に食べさせる。 コンテナあそび（充填、ダンプ、ネスティング）。 本を指さし名前付けして読むこと。 簡単なボールゲーム（押す、転がす）。 登る+探索（より多くの意図で）。 落書き（象徴前のマーク作成）。 <strong>音楽あそび</strong> （踊る、簡単な楽器を演奏）。 模倣ゲーム（行動、音を真似）。 まだ真の象徴的なふり（例: バナナをまだ電話として使わない; 拡張的な物語あそびはまだ）ではない。</p>
+<hr />
+<h2>バンド: 15～18ヶ月 | Piaget第5下位段階（後期）: 三次的循環反応（12～18ヶ月、後期段階）</h2>
+<p><strong>認知的な特徴:</strong>
+- <strong>象徴あそびが出現:</strong> 幼児が <strong>象徴的置換</strong> を開始: 別の物を表す物を使用（バナナが電話、ブロックが車）。 初期的、短い; 拡張的なふりの物語はまだ。
+- <strong>対象の永続性が完全（Piaget第5下位段階の終わり）:</strong> 子どもが見えない変位を完全に理解（動きの間に隠された物; 子どもがそれを見つける）。 A-not-B誤りは解決済み。
+- <strong>試行錯誤学習が体系的:</strong> 「小さな科学者」の行動が高度に目に見える; 問題への複数の解決策を実験
+- <strong>初期言語-認知リンク:</strong> 語彙拡張が対象永続性、手段-目的理解の認知進歩と相関。 いくつかの研究が象徴あそび出現を象徴言語（物/行動の象徴としての言葉）にリンク
+- <strong>記憶が進行:</strong> 遅延模倣が目に見える（約18ヶ月完全発達）: 子どもが数時間または数日前に観察された行動を模倣（心的表現の出現の兆し）
+- <strong>注意と焦点:</strong> より長い持続的注意; 複数段階の活動に関われる（例: 物を集める、コンテナに入れる、親に運ぶ）
+- <strong>問題解決:</strong> 複数の戦略を使う; ヘルプを求める可能性（ポイント+声で要求）</p>
+<p><strong>Piaget下位段階:</strong>
+感覚運動期第5下位段階（後期）: 三次的循環反応（12～18ヶ月、後期段階）— 後期試行錯誤; 象徴置換が出現; 第6下位段階（心的表現/象徴的思考）進入に接近</p>
+<p><strong>根拠となるアンカー:</strong>
+- <strong>象徴置換あそび:</strong> 15～18ヶ月までに、幼児が物を別の象徴として使用（バナナが電話、ブロックが車）; 短い単一スキーム象徴行為 [あそび発達マイルストーン; Piaget第5下位段階進行]。
+- <strong>遅延模倣:</strong> 18ヶ月の子どもが過去に観察された行動を模倣できる（数時間/数日）; 心的表現の出現を示す（第6下位段階進入） [Piaget; 記憶研究]。
+- <strong>語彙爆発:</strong> 18ヶ月の一般的な語彙が50～100語; 対象永続性と手段-目的習熟の認知基盤として相関 [AAP/CDC; 言語発達研究]。
+- <strong>CDC 2022マイルストーン（18ヶ月）:</strong> 18ヶ月までに、「ほとんどの赤ちゃん」（75パーセンタイル）が10～50語を言う; 簡単な指示を理解; 簡単なふりあそびをする [CDC更新2022マイルストーン]。
+- <strong>AAP スクリーニング:</strong> 18ヶ月で発達と自閉症のスクリーニングが推奨される; 共同注意、象徴あそび、言語が主要マーカー。</p>
+<p><strong>観察可能な親チェックポイント（15～18ヶ月）:</strong>
+- 幼児がバナナを「電話」として使用またはブロックを「車」として使用（物置換でのふりあそび）
+- 幼児が短いふりのシナリオに従事（料理のふり、食べるふり、人形とのお昼寝のふり）
+- 幼児が10～50語の語彙を持つ; 「靴を取る」、「バッグに入れる」のような簡単な1～2段階の指示を理解する
+- 幼児が写真の物を指して名前を付ける
+- 幼児がどこに隠されたかに関係なく隠れたおもちゃを見つける（もうA-not-B誤りなし）
+- 幼児が以前の活動を模倣（例: 昨日あなたが手をたたくのを見た; 今日のきっかけなし手をたたく）= 遅延模倣
+- 幼児が意図で落書き; 描画の模倣で何かを作る可能性
+- 幼児が他の幼児への興味を示す（社会の出現）
+- 幼児が複雑なおもちゃで原因と結果あそびに従事（積み重ねリング、簡単なパズル、ノブを回す）
+- 幼児が通信の必要を示すために簡単なジェスチャーを使用（「上」とするためにポイント; 「バイバイ」とするために手を振る; うなずく/頭を振る）</p>
+<p><strong>15～18ヶ月でのあそびの種類:</strong>
+<strong>象徴あそび（初期）+機能あそび:</strong> 電話のふり、食べるふり/飲むふり/料理のふり、人形の世話のふり、ドレスアップ、簡単なふりのシナリオ。 ブロック積み重ねと叩き倒す。 ボールあそび（転がす、蹴る、投げる）。 名前付けと簡単な物語繰り返しでの本読み。 音楽と動き（踊る、歌う）。 登ると探索。 落書きとマーク作成（象徴前の書き）。 <strong>まだ</strong> 複雑な、マルチロール・ふりまたは拡張的な物語あそび（24ヶ月以上で出現）ではない。</p>
+<hr />
+<h2>サマリーテーブル: 認知マイルストーン別クイックリファレンス</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>月齢</th>
+<th>Piaget下位段階</th>
+<th>対象の永続性</th>
+<th>手段-目的行動</th>
+<th>模倣</th>
+<th>あそびフォーカス</th>
+<th>主要な観察可能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0～2ヶ月</td>
+<td>第1下位段階: 反射活動</td>
+<td>なし</td>
+<td>なし</td>
+<td>新生児（反射）</td>
+<td>社会的視線</td>
+<td>顔追従; 反射的把握</td>
+</tr>
+<tr>
+<td>2～4ヶ月</td>
+<td>第2下位段階: 一次的循環</td>
+<td>出現</td>
+<td>なし</td>
+<td>反射消失</td>
+<td>社会的顔あそび</td>
+<td>社会的微笑; 手監視</td>
+</tr>
+<tr>
+<td>4～6ヶ月</td>
+<td>第3下位段階: 初期二次的</td>
+<td>部分的（透明）</td>
+<td>初期的</td>
+<td>なし</td>
+<td>原因と結果おもちゃ</td>
+<td>ガラガラを意図的に振る; 部分的に隠れた物を探す</td>
+</tr>
+<tr>
+<td>6～8ヶ月</td>
+<td>第3下位段階: 後期二次的</td>
+<td>部分的に隠れたのみ</td>
+<td>出現</td>
+<td>反射なし</td>
+<td>感覚運動探索</td>
+<td>カバーを持ち上げておもちゃのために; 口で探索</td>
+</tr>
+<tr>
+<td>8～10ヶ月</td>
+<td>第4下位段階: 初期協調</td>
+<td>完全に隠れた; A-not-B誤り</td>
+<td>目標指向出現</td>
+<td>選別的模倣</td>
+<td>かくれんぼ物</td>
+<td>布を引いて取得; カバーの下で探索</td>
+</tr>
+<tr>
+<td><strong>10～12ヶ月</strong></td>
+<td><strong>第4下位段階: 後期協調</strong></td>
+<td><strong>完全に隠れた; A-not-B存在</strong></td>
+<td><strong>目標指向成熟</strong></td>
+<td><strong>意図的模倣</strong></td>
+<td><strong>機能あそび出現</strong></td>
+<td><strong>物を見つける; 手段-目的; 共同注意; ジェスチャー</strong></td>
+</tr>
+<tr>
+<td><strong>12～15ヶ月</strong></td>
+<td><strong>第5下位段階: 初期三次的</strong></td>
+<td><strong>見えない変位開始</strong></td>
+<td><strong>柔軟な問題解決</strong></td>
+<td><strong>遅延模倣出現</strong></td>
+<td><strong>機能あそびロバスト</strong></td>
+<td><strong>「小さな科学者」; 1～2語を話す; ポイントして共有</strong></td>
+</tr>
+<tr>
+<td>15～18ヶ月</td>
+<td>第5下位段階: 後期三次的</td>
+<td>完全</td>
+<td>変化に富んだ創造的</td>
+<td>遅延（18ヶ月までに完全）</td>
+<td>象徴あそび出現</td>
+<td>バナナを電話として使う; 50～100語の語彙</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>出典引用と根拠品質ノート</h2>
+<h3>参照した一次情報源</h3>
+<ol>
+<li>
+<p><strong>CDC Learn the Signs. Act Early.</strong> (2022更新)
+   - 出典: https://www.cdc.gov/act-early/milestones/index.html
+   - <em>注記:</em> 2022更新がベンチマークを75パーセンタイル（年齢Xまでほとんどの赤ちゃん）に移行; 15ヶ月と30ヶ月マイルストーンを追加。
+   - 認知マイルストーンに含まれるもの: 2ヶ月社会的関与、4ヶ月意図的コミュニケーション、6ヶ月物探索、9ヶ月名前認識、12ヶ月対象永続性探索、15ヶ月単語産出。</p>
+</li>
+<li>
+<p><strong>American Academy of Pediatrics (AAP) / HealthyChildren.org</strong>
+   - 出典: https://www.healthychildren.org/English/ages-stages/baby/Pages/Cognitive-Development-4-to-7-Months.aspx
+   - 出典: https://www.healthychildren.org/English/family-life/health-management/Pages/Milestones-Matter.aspx
+   - スクリーニング推奨: 9ヶ月、18ヶ月（発達）; 18ヶ月、24ヶ月（自閉症）。
+   - 認知マイルストーン: 原因と結果（4～6ヶ月）、対象永続性（9～12ヶ月）、機能あそび（12～18ヶ月）。</p>
+</li>
+<li>
+<p><strong>Piaget感覚運動段階</strong>
+   - 一次情報源: Piaget, J. (1954). <em>The Construction of Reality in the Child.</em>
+   - 二次合成: https://www.psychologynoteshq.com/sensorimotor-stage/
+   - 正確な月齢範囲と認知機能を持つ6つの下位段階; 段階を通じた対象永続性発達。</p>
+</li>
+<li>
+<p><strong>Baillargeon期待違反法（VOE）研究</strong>
+   - 出典: Baillargeon, R., Spelke, E. S., &amp; Wasserman, S. (1985). Object permanence in 5-month-old infants.
+   - PMC引用: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2359484/
+   - 発見: 3.5～5.5ヶ月の乳児が暗黙的対象永続性を示す（明示的探索行動より前に不可能な出来事をより長く見つめる）（Piaget第4段階、8～12ヶ月）。
+   - <em>解釈:</em> Piaget が初期対象永続性を過少評価; 暗黙的認識と明示的探索の間のギャップが存在。</p>
+</li>
+<li>
+<p><strong>新生児模倣</strong>
+   - 出典: Center for Academic Research and Training in Anthropogeny (CARTA): https://carta.anthropogeny.org/moca/topics/neonatal-imitation-adults
+   - 出典: 新生児模倣の積極的証拠: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7277498/
+   - 発見: 42分～36時間の新生児が舌の突き出し、口を開ける、驚き表情を模倣できる。
+   - <em>注記:</em> 最近の議論; 覚醒駆動というより真の模倣の可能性; 反射は2～3ヶ月までに消える。</p>
+</li>
+<li>
+<p><strong>共同注意発達</strong>
+   - 出典: https://einsteinmed.edu/uploadedFiles/departments/neurology/Divisions/Child_Neurology/Child_Neurology_References/Neuropsych/Mundy%20P_%20Infant%20joint%20attention_neural_network_and_social_cognition.pdf
+   - 出典: 共同注意と語彙: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9899317/
+   - 発見: 共同注意が8～9ヶ月で出現; 12～15ヶ月までにロバスト; 10～11ヶ月での応答共同注意が24ヶ月の語彙を予測。</p>
+</li>
+<li>
+<p><strong>手段-目的行動</strong>
+   - 出典: https://www.tandfonline.com/doi/abs/10.1080/15250000903263965
+   - 出典: https://cpb-us-w2.wpmucdn.com/wordpress.lehigh.edu/dist/6/402/files/2018/03/Brandone-Wellman-2009-Psych-Science-2flsr5c.pdf
+   - 発見: 手段-目的行動（手段と目的の分離、目標指向行動）が8～12ヶ月で出現; 6ヶ月の運動能力が観察された把握の理解と相関。</p>
+</li>
+<li>
+<p><strong>A-not-B誤り</strong>
+   - 出典: https://pubmed.ncbi.nlm.nih.gov/3683418/
+   - 出典: https://blogs.scientificamerican.com/thoughtful-animal/perseverating-on-perseverative-error-what-does-the-a-not-b-error-really-tell-us-about-infant-cognition/
+   - 発見: 古典的Piaget課題; 8～12ヶ月の乳児が位置A（前の成功位置）を探索し、物がBに移されても。 誤りは約12ヶ月で解決。</p>
+</li>
+<li>
+<p><strong>社会的微笑と視覚注意（2～4ヶ月）</strong>
+   - 出典: https://local.psy.miami.edu/faculty/dmessinger/c_c/rsrcs/rdgs/emot/Messinger.Fogel.Smiling.Advances2007.pdf
+   - 出典: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6812597/
+   - 発見: 社会的微笑が6～8週齢で出現（生まれたときに存在しない）、社会的相互作用に依存; 視覚注意が2ヶ月までに体系的に顔をスキャン。</p>
+</li>
+<li>
+<p><strong>あそび発達段階</strong></p>
+<ul>
+<li>出典: https://blog.lovevery.com/skills-stages/pretend-play/</li>
+<li>出典: https://www.luriechildrens.org/en/specialties-conditions/pediatric-occupational-therapy/developmental-milestones/play-developmental-milestones/</li>
+<li>機能あそび12～18ヶ月（意図通りに物を使用）; 象徴置換15～18ヶ月（物が別の象徴）。</li>
+</ul>
+</li>
+<li>
+<p><strong>日本語情報源（厚労省 / 厚生労働省）</strong></p>
+<ul>
+<li>出典: https://www.cfa.go.jp/policies/boshihoken/r5-nyuuyoujityousa</li>
+<li>子ども家庭庁: 10年ごとの乳児身体発達調査; 月齢別編成（0～24ヶ月）。</li>
+<li>入手可能な英語要約では認知・行動マイルストーンが詳細が低い; 身体発達（成長曲線）が主焦点。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2>批判的注意書きと解釈ノート</h2>
+<ol>
+<li>
+<p><strong>範囲、期限ではない:</strong> すべての月齢が一般的な発達を反映する範囲（CDCは75パーセンタイル=「この年齢までにほとんどの赤ちゃん」を使用）。 ±2～4週の変動は正常; ±2～3ヶ月は他の懸念を伴う場合、小児科医との相談が必要。</p>
+</li>
+<li>
+<p><strong>Piaget対現代の根拠:</strong>
+   - Piaget が初期対象永続性を過小評価（暗黙的認識 約4ヶ月 対 明示的探索 約8～12ヶ月）; VOE研究が Piaget が観察した以前の洗練性を示す。
+   - A-not-B誤りが現在ワーキングメモリまたは運動抑制問題として理解され、純粋な対象永続性失敗ではない。
+   - 新生児模倣が議論の余地あり; 反射的である可能性が高く、真の模倣ではない。</p>
+</li>
+<li>
+<p><strong>個人差:</strong> 運動遅延が認知観察をゲート（例: 非移動乳児が手段-目的探索を実証する能力が低い）。 社会感情的要因が表現に影響（見知らぬ人恐怖が社会的微笑を抑制する可能性、見知らぬ人が社会的関与の欠如として誤読される）。</p>
+</li>
+<li>
+<p><strong>代理としてのあそび:</strong> あそび行動が親に対する認知発達への最もアクセス可能な観察ウィンドウ。 約12ヶ月で機能あそび出現が対象永続性理解+手段-目的思考の確実なマーカー。</p>
+</li>
+<li>
+<p><strong>言語は0～18ヶ月での主要認知マーカーではない:</strong> 言語爆発が約12～15ヶ月で開始し加速するが、対象永続性、手段-目的、共同注意の下流。 赤ちゃんは言語的に表現できるより遥かに多くを理解する可能性がある。</p>
+</li>
+<li>
+<p><strong>評価ギャップ:</strong> CDC/AAP が容易に観察される運動と通信マイルストーンに焦点; 深い認知プロセス（記憶、推論、期待違反）が訓練されていない観察者に見えにくい。 研究が特別なパラダイム（見つめ時間、探索課題、神経画像化）が必要。</p>
+</li>
+</ol>
+<hr />
+<h2>親ナビゲーター: 今どこにいるのか?（10～12ヶ月フォーカス）</h2>
+<p><strong>赤ちゃんが10～12ヶ月である場合:</strong></p>
+<p>✓ <strong>予期される認知成果:</strong>
+- 隠れたおもちゃを意図的に探索（目標指向問題解決）
+- 布を引くまたは障害物を押してオブジェクトを取得（手段-目的理解）
+- 物を指してあなたに示す または あなたの注意をリクエストするためにポイント（共同注意出現）
+- あなたがする行動を模倣: 拍手、手を振ってバイバイ、食べるふり（意図的模倣）
+- 自分の名前と「いいえ」を理解する
+- A-not-B誤りを犯す可能性（おもちゃを移しても古い隠蔽場所を探索）— これは正常で予期される; 物が存在することの理解を示すが未成熟な空間/記憶追跡</p>
+<p>✓ <strong>このバンドにフィットするあそび:</strong>
+- 毛布の下のおもちゃでのかくれんぼゲーム
+- 布引きゲーム（布の上のおもちゃ; 赤ちゃんが布を自分のほうに引く）
+- パット・ア・ケーキ、拍手ゲーム
+- 原因と結果おもちゃ（ボタン押す、クランク回転、絞り出す）
+- コンテナ充填とダンピング
+- 登りと探索（安全性で）</p>
+<p>⚠️ <strong>まだ予期しないもの（心配を保存）:</strong>
+- 物置換でのふりあそび（例: バナナが電話）— 約15～18ヶ月まで現れない
+- 遅延模倣（数時間/数日前の行動を模倣）— 約18ヶ月まで堅牢に現れない
+- 意味を持つ明確に話された言葉（一般的に12ヶ月以上、しかし範囲は10～16ヶ月; 75パーセンタイルは約12～15ヶ月で初言葉）
+- 見えない変位の理解（赤ちゃんが見ている間に隠された物）— 出現しているが12～15ヶ月まで確実でない</p>
+<hr />
+<h2>何が来ているのか: 12～15ヶ月（近い地平）</h2>
+<p>12～15ヶ月までに期待する:</p>
+<p>✓ <strong>認知シフト（Piaget第5下位段階進入）:</strong>
+- A-not-B誤りが解決; 赤ちゃんが正しい位置で物を確実に見つける
+- 「小さな科学者」実験: 異なる高さから物を落とし、異なるコンテナに、明らかな変化（テスト）
+- 赤ちゃんが見ている間に隠された物を見つけ始める（見えない変位が出現）</p>
+<p>✓ <strong>あそび拡張:</strong>
+- 機能あそびが完全に確立: 食べるふり、飲むふり、人形に食べさせる
+- 初期象徴あそびが出現: バナナが「電話」になる（短い、単一のアイデア象徴行為）
+- 簡単なふりシナリオ（調理のふり、お昼寝のふり）</p>
+<p>✓ <strong>言語-認知リンク:</strong>
+- 語彙が10～50語に加速（15ヶ月までに75パーセンタイル）
+- 単語の理解（受容語彙）が話された語彙をはるかに超える
+- 簡単な1～2段階指示を理解</p>
+<p>✓ <strong>社会-認知:</strong>
+- 共同注意がロバスト; あなたに物を示すためにポイントすることを確実に
+- 共有する物を示し、確認を期待
+- 初期遅延模倣が目に見える（昨日見た行動を模倣）</p>
+<hr />
+<h2>このタイムラインの使い方</h2>
+<p><strong>ステップ1: 赤ちゃんの月齢バンドを探す</strong>
+赤ちゃんの現在の月齢に最も近い2ヶ月バンドを見つける。 「観察可能な親チェックポイント」を読む — これはあなたの現実チェック。</p>
+<p><strong>ステップ2: 認知ハイライトを確認</strong>
+これらは本バンドで起こっている隠れた精神的シフトを説明する。 赤ちゃんの行動がなぜ変わったかを説明。</p>
+<p><strong>ステップ3: あそびの種類をバンドにマッチさせる</strong>
+「あそびの種類」の行が赤ちゃんの現在の認知レベルにフィットするあそびの種類を示す。 6ヶ月児にふりあそびを強制しない; ピークーを提供する。 10ヶ月での布引きを提供; まだ象徴あそびを期待しない。</p>
+<p><strong>ステップ4: 根拠アンカーを使って検証</strong>
+赤ちゃんが認知ハイライトを示す/示さない場合、根拠アンカーを確認。 Piaget のA-not-B誤りが10ヶ月で <em>予期される</em> で欠陥ではない。</p>
+<p><strong>ステップ5: 次のバンドのプラン</strong>
+次の2ヶ月バンドを前もって読む。 何が来ているかを知ることが、4～8週間で発達的に適切になるあそび材料を選ぶのに役立つ。</p>
+<hr />
+<p><strong>タイムラインの終わり — 合成、可視化、または特定バンドでのさらなる深掘りの準備完了</strong></p></section>
+<section id="tab-03" class="pane"><h1>11-12ヶ月の粗大運動・微細運動発達を支援する、エビデンスに基づいた遊びの活動</h1>
+<h2>フェーズ5 統合：構造化された知見</h2>
+<hr />
+<h2>1. 今ちょうどいい（11-12ヶ月で発達段階に適した活動）</h2>
+<h3>粗大運動の活動</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>活動</th>
+<th>根拠</th>
+<th>出典</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>家具のつたい歩き</strong>（2つの家具を平行に配置、12～18インチ間隔）</td>
+<td>歩行に必要なバランス、股関節・足首の強化、重心移動の発達を促進（この月齢で期待される）</td>
+<td>(AAP), (Lovevery-OT), (NAPA-PT), (Little Feet-PT)</td>
+</tr>
+<tr>
+<td><strong>低い家具からのつかまり立ち</strong></td>
+<td>脚力と体幹の安定性を向上させ、つたい歩きが自然に続く</td>
+<td>(AAP), (OT Toolbox), (Mark Their Words-PT)</td>
+</tr>
+<tr>
+<td><strong>家具間でのサポート付きステッピング</strong></td>
+<td>つたい歩きと独立歩行の橋渡しになる活動；手のサポートがあり落下リスクが低い</td>
+<td>(Lovevery-OT), (NAPA-PT)</td>
+</tr>
+<tr>
+<td><strong>しゃがむ遊び</strong>（床におもちゃを置き、かがんで取る）</td>
+<td>歩行に不可欠な股関節・太ももの筋肉を強化；10～15回</td>
+<td>(Little Feet-PT), (NAPA-PT)</td>
+</tr>
+<tr>
+<td><strong>片足バランス</strong>（家具に立ちながら、2インチのステップの上に片足）</td>
+<td>股関節の安定化筋を強化；独立歩行の準備に不可欠</td>
+<td>(NAPA-PT)</td>
+</tr>
+<tr>
+<td><strong>回転とリーチ</strong>（立ちながら肩を回転させ、おもちゃに手を伸ばす）</td>
+<td>足首を働かせ、独立立位を促す；家具でサポート</td>
+<td>(NAPA-PT)</td>
+</tr>
+<tr>
+<td><strong>はだしの床遊び</strong></td>
+<td>足を通じた完全な感覚フィードバック；足のアーチと内在筋を発達させ、自然な重心移動とバランスをサポート</td>
+<td>(Lovevery-OT), (Little Feet-PT), (NAPA-PT), (Japanese PT)</td>
+</tr>
+<tr>
+<td><strong>障害物コース</strong>（クッション、タオル、マスキングテープの線）</td>
+<td>低コストの進行：這い越える、周りをナビゲートする、横に歩く</td>
+<td>(Japanese PT), (OT Toolbox)</td>
+</tr>
+<tr>
+<td><strong>繰り返しの上下運動</strong></td>
+<td>頭上に手を伸ばす、下げる；歩行の筋肉配列をまねる</td>
+<td>(Mark Their Words-PT)</td>
+</tr>
+</tbody>
+</table></div>
+<h3>微細運動の活動</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>活動</th>
+<th>根拠</th>
+<th>出典</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ピンサーグリップ（精密把持）の練習</strong>（シリアル、O字形スナック、小さなブロック）</td>
+<td>11-12ヶ月で期待されるマイルストーン；自食が練習を強化</td>
+<td>(AAP), (OT Toolbox), (CDC-search)</td>
+</tr>
+<tr>
+<td><strong>ブロックの積み重ねと指輪の積み重ね</strong>（2～3個のブロック、次にペグに指輪）</td>
+<td>手眼協調を発達させ、握り手の解放コントロールを開発</td>
+<td>(OT Toolbox), (CDC-search)</td>
+</tr>
+<tr>
+<td><strong>物をぶつけ合わせる</strong></td>
+<td>2つのキューブ、ブロック；両側協調の発達（AAPマイルストーン）</td>
+<td>(AAP), (OT Toolbox)</td>
+</tr>
+<tr>
+<td><strong>容器への出し入れ</strong>（シリアルボックス、バケツ、鍋）</td>
+<td>握り、指の力、物体の永続性の理解を発達させる</td>
+<td>(AAP)</td>
+</tr>
+<tr>
+<td><strong>人差し指での突く</strong>（柔らかいプラスチック、水面、粘土）</td>
+<td>微細運動の精密さを発達させ、期待されるマイルストーン</td>
+<td>(AAP)</td>
+</tr>
+<tr>
+<td><strong>なぐり描きのまね</strong>（大きなクレヨン、手のひらサイズ）</td>
+<td>書き準備の前段階；まだ細かい線は期待しない</td>
+<td>(AAP), (OT Toolbox)</td>
+</tr>
+<tr>
+<td><strong>水遊び</strong>（カップ、じょうご、浮くおもちゃ）</td>
+<td>感覚＋運動：手眼協調、握りの解放、微細運動の探索</td>
+<td>(OT Toolbox)</td>
+</tr>
+<tr>
+<td><strong>本との相互作用</strong>（丈夫な本、フラップが付いたボードブック）</td>
+<td>微細運動＋認知力；フラップを持ち上げることはピンサーグリップが必要</td>
+<td>(CDC-search guideline)</td>
+</tr>
+<tr>
+<td><strong>引っ張り出す遊び</strong>（ティッシュ箱／布引きボックスから布・スカーフを連続して引き出す）</td>
+<td>人差し指・母指でのつまみと引く力加減の調整（微細運動）；「引くと次が出てくる」因果関係の理解；対象の永続性（隠れた布が次に現れる予期）とも関連。自力移動（はいはい・伝い歩き）の増加に伴う物の探索機会の増加は、対象の永続性の発達と相関するという報告がある。<strong>ただし「この遊び自体が非認知能力を高める」と直接示した研究はなく、隣接する概念（因果理解・微細運動・対象の永続性）からの妥当な類推という位置づけ（要注意：過度な効果を謳わない）</strong></td>
+<td>(Lovevery-object permanence), (Expressable-OT milestones 0-12m), (Sevita-object permanence)</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>2. できてたら次（既にマスターしている場合—次の準備サイン）</h2>
+<h3>独立歩行のための粗大運動準備（13～18ヶ月以降）</h3>
+<p><strong>赤ちゃんが既に以下を示している場合：</strong>
+- 支援なしで10秒以上の継続的な立位 ✓
+- 変動する速度で家具に沿ったスムーズなつたい歩き（単なる立位ではなく） ✓
+- 腕を高く上げた独立した2～3歩（バランスの姿勢） ✓
+- 落ちずに何度も繰り返されるしゃがみと立位に自信がある ✓
+- 3秒以上の片足バランスの安定性 ✓</p>
+<p><strong>次の進行段階：</strong>
+- 家具のサポート間の距離を増やす；手のサポートを段階的に減らす（指タッチのみ） | (Little Feet-PT), (Lovevery-OT)
+- ソフトな障害物（丸めたタオル、2～3インチの高さ）を越えるステッピングの練習 | (Japanese PT), (Mark Their Words-PT)
+- 車輪付きの押し/引きおもちゃ（重めのもの）で独立した推進を促す | (NAPA-PT)
+- さまざまな面での歩行（カーペット、タイル、はだしの草）で足の固有感覚を構築 | (Little Feet-PT)
+- 仲間との相互作用とモデリング—「子どもは他の子どもをモデルにし、ついていこうとするのが大好きです」 | (Mark Their Words-PT)</p>
+<h3>書き/道具使用準備のための微細運動準備</h3>
+<p><strong>赤ちゃんが既に以下を示している場合：</strong>
+- 小さな物体に一貫して使用されるピンサーグリップ ✓
+- 意図を持った2つのオブジェクトの叩き合わせ ✓
+- 小さなオブジェクトを目的を持って容器に配置 ✓
+- 人差し指による突く/身体の部分への指さし ✓</p>
+<p><strong>次の進行段階：</strong>
+- 大きなハンドルの食器（スプーン）を導入；自食の混乱は予想される | (CDC guideline)
+- 大きな紙にクレヨン/マーカー；なぐり描きパターンが浮かぶ | (AAP), (OT Toolbox)
+- シェイプソーター（より大きな穴、3～4つの形） | (OT Toolbox)
+- ノブ付きパズルボード | (OT Toolbox)</p>
+<hr />
+<h2>3. まだ早い/意味がない（11-12ヶ月で発達段階に適していない活動）</h2>
+<h3><strong>歩行器—明示的なAAP禁忌</strong></h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>理由</th>
+<th>エビデンス</th>
+<th>出典</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>歩行を加速させない</strong></td>
+<td>文書化された発達上の利益がなし；独立歩行を遅延させる</td>
+<td>(AAP), (CHOP), (PMC-research)</td>
+</tr>
+<tr>
+<td><strong>発達遅延を引き起こす</strong></td>
+<td>歩行器は「実は子どもが歩き始める時期を遅延させる可能性がある」；歩行器使用者対照群で下位の運動発達テストスコア</td>
+<td>(AAP), (CHOP), (PMC)</td>
+</tr>
+<tr>
+<td><strong>異常な歩行パターンを生じさせる</strong></td>
+<td>調査された歩行器ユーザーの91％が異常な歩行を示した：つま先歩行（73％）、つま先立ち（61％）、偏平足（11％）</td>
+<td>(PMC-research empirical)</td>
+</tr>
+<tr>
+<td><strong>受傷率：ユーザーの12～50％</strong></td>
+<td>歩行器を使用する赤ちゃんのおよそ12～50％が受傷を受ける</td>
+<td>(AAP), (CHOP), (PMC)</td>
+</tr>
+<tr>
+<td><strong>重篤な傷害の頻度</strong></td>
+<td>米国で毎日約21人の子どもが歩行器の受傷で入院；階段からの落下（最も一般的）、火傷、溺水、中毒</td>
+<td>(CHOP), (AAP), (PMC)</td>
+</tr>
+<tr>
+<td><strong>監督は受傷を防ぐことができない</strong></td>
+<td>「ほとんどの歩行器による受傷は大人が見ている間に起こる」；歩行器は1秒で3フィート以上移動する</td>
+<td>(AAP), (CHOP), (HealthyChildren.org)</td>
+</tr>
+<tr>
+<td><strong>AAPは完全な禁止を要求している</strong></td>
+<td>アメリカ小児科学会は車輪付き乳幼児歩行器の製造/販売の禁止を正式に要求；既にカナダで禁止</td>
+<td>(AAP), (CHOP), (HealthyChildren.org)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>代替手段（エビデンスに基づいた代案）：</strong>
+- 固定式アクティビティセンター（車輪なし） | (AAP)
+- プレイヤード/プレイペン | (AAP), (CHOP)
+- 監督付き座位用のハイチェア | (AAP)
+- つたい歩きセットアップ（家具+床遊び） | (Lovevery-OT), (NAPA-PT)</p>
+<hr />
+<h3>その他の早すぎる活動（禁忌ではなく、発達段階に適していないだけ）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>活動</th>
+<th>なぜまだか</th>
+<th>タイムライン</th>
+<th>出典</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>独立歩行</strong></td>
+<td>13～18ヶ月が期待、11～12ではない；この月齢での強要は欲求不満を生じさせる</td>
+<td>13～18ヶ月が一般的</td>
+<td>(AAP), (Mark Their Words-PT), (Little Feet-PT)</td>
+</tr>
+<tr>
+<td><strong>強制的な歩行練習</strong></td>
+<td>遊びベース、子ども主導であるべき；10～15分のセッション、長時間ではない</td>
+<td>子ども主導、短いバースト</td>
+<td>(Lovevery-OT)</td>
+</tr>
+<tr>
+<td><strong>微細運動道具の使用</strong>（フォーク、スプーン）</td>
+<td>ピンサーグリップはあるが、手首/手のコントロール不足；物体ではまだ採掘グリップが主流</td>
+<td>13～15ヶ月でスプーンの試行</td>
+<td>(CDC guideline)</td>
+</tr>
+<tr>
+<td><strong>靴のみ</strong>（はだしの時間なし）</td>
+<td>足の固有感覚フィードバックが失われ；足のアーチ発達が弱体化</td>
+<td>屋内遊び時間の50%以上はだし</td>
+<td>(Little Feet-PT), (Japanese PT)</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>4. 重要な原則</h2>
+<h3>A. 床時間と自由な動き</h3>
+<p><strong>11-12ヶ月で重要な理由：</strong>
+- つたい歩き発達に不可欠；広い床面と低い家具が必要 | (Lovevery-OT), (Little Feet-PT)
+- 床ベースの遊びは独立歩行前の基礎的な強さと協調を構築 | (Japanese PT)
+- 安全な限界内での探索を可能にし；リスク-テイキングを自然化 | (Japanese PT)</p>
+<p><strong>環境セットアップ：</strong>
+- 最小2平方メートルの遊び空間を確保（はだしに優しい） | (Japanese PT)
+- 低い家具（ソファの腕、18～24インチのテーブル、オットマン）つたい歩き用に | (Lovevery-OT), (NAPA-PT)
+- 6インチを超ける隙間を排除して落下を防ぐ | (Lovevery-OT)
+- 硬い床（タイル/フローリング）がバランス発達に推奨（ソフトなカーペットに対して） | (Little Feet-PT)</p>
+<hr />
+<h3>B. はだしの遊びと自然な足の発達</h3>
+<p><strong>研究の支援：</strong>
+- 「足を通じた完全な感覚フィードバックを与え、健康的な足の発達をサポート」 | (Lovevery-OT)
+- 自然な重心移動と静的/動的バランスを可能にする | (Little Feet-PT)
+- 内在する足の筋肉とアーチの強さを発達させる | (Little Feet-PT)
+- 固有感覚入力はバランスシステム発達に不可欠 | (Japanese PT)</p>
+<p><strong>注意：</strong>
+- 「他の子どもたちは足首の安定性が低く、サポートシューズを必要とする可能性がある」—個別の子どもを評価する | (NAPA-PT)</p>
+<p><strong>推奨：</strong> 屋内時間の50%以上はだし；足首の過剰可動性や低筋張力がある子どもであれば評価する</p>
+<hr />
+<h3>C. 安全なリスク-テイキングの進行</h3>
+<p><strong>11-12ヶ月「成熟段階」（発達言語）：</strong>
+- 赤ちゃんは「自由に体を動かして物を操作し...運動性、握り、コミュニケーションを改善/洗練する」 | (Lovevery-OT)
+- 落下は期待されている；中立的で説明的な言葉で正常化する：「下に落ちた」または「あなたは落ちた」 | (Lovevery-OT)
+- 叱責や試みを拒否しない；「試行錯誤の経験が考える力の発達の基礎になる」 | (Japanese PT)</p>
+<p><strong>進行原則：</strong>
+- 近い距離のサポート：子どもが家具に立ちながら、1～2ステップ離れて腕を伸ばして立つ | (Lovevery-OT)
+- 家具のサポート間の距離を段階的に増やす | (Little Feet-PT), (Lovevery-OT)
+- 時間をかけて手のサポートを減らす：両手ホールド→片手→指タッチ→言葉のサポート | (Little Feet-PT), (Mark Their Words-PT)
+- 仲間モデリング：「子どもは他の子どもをモデルにし、ついていこうとするのが大好きです」 | (Mark Their Words-PT)
+- 環境は穏やかで、ストレスフリーに保つ；練習中に緊急の言葉を使わない | (Mark Their Words-PT)</p>
+<hr />
+<h3>D. 遊びベースの練習タイミング</h3>
+<p><strong>効果的なアプローチ：</strong>
+- 長時間の歩行練習セッションより、短く監督された複数回の毎日のセッション | (Lovevery-OT)
+- 約10～15分/セッション；1日2～3回繰り返す | (Lovevery-OT ガイダンスから推定)
+- 通常の遊び/探索に組み込む、強制的な運動ではなく</p>
+<hr />
+<h2>5. ホームセットアップ—ゼロから低コスト</h2>
+<h3>家具とレイアウト（おもちゃ不要）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>アイテム</th>
+<th>コスト</th>
+<th>目的</th>
+<th>セットアップ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ソファ＋低いテーブル</strong>（平行、12～18インチ間隔）</td>
+<td>$0（既存）</td>
+<td>つたい歩きの廊下；両側の手のサポート</td>
+<td>家具を配置；端から端へつたい歩きを練習</td>
+</tr>
+<tr>
+<td><strong>丈夫な椅子</strong></td>
+<td>$0（既存）</td>
+<td>つたい歩きの中継地点；つかまり立ちの練習</td>
+<td>部屋に配置；安定していることを確認（車輪なし）</td>
+</tr>
+<tr>
+<td><strong>丈夫な床クッションまたはオットマン</strong></td>
+<td>約20～40ドル</td>
+<td>しゃがむ練習；多方向のつたい歩き</td>
+<td>低い（12～18インチ）、丈夫；障害物コース用に配置</td>
+</tr>
+<tr>
+<td><strong>マスキングテープ床</strong></td>
+<td>約3ドル</td>
+<td>ラインマーキング；「経路をたどる」</td>
+<td>つたい歩きの方向のテープ線；視覚ガイド</td>
+</tr>
+<tr>
+<td><strong>丸めたタオル</strong></td>
+<td>$0（既存）</td>
+<td>障害物コース；ステッピング練習</td>
+<td>しっかり巻く；高さ2～3インチ；順序立てて配置</td>
+</tr>
+<tr>
+<td><strong>空のプラスチック容器</strong>（アイスクリーム、ヨーグルト）</td>
+<td>$0（リサイクル）</td>
+<td>運動遊び（出し入れ）；積み重ね</td>
+<td>スムーズなエッジ；様々なサイズ（大→小）</td>
+</tr>
+<tr>
+<td><strong>木製ブロックまたはボード</strong></td>
+<td>10～30ドル（DIY）</td>
+<td>ステッピング面；2～3インチの高さ</td>
+<td>丈夫、裂け目なし；12～18インチの長さ</td>
+</tr>
+</tbody>
+</table></div>
+<h3>家庭用アイテム（運動スキル練習）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>アイテム</th>
+<th>運動スキル</th>
+<th>コスト</th>
+<th>メモ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>シリアル/O字形スナック</strong></td>
+<td>ピンサーグリップ練習</td>
+<td>約5ドル</td>
+<td>自食は握りを強化；食べられる動機づけ</td>
+</tr>
+<tr>
+<td><strong>プラスチックボウル、鍋、蓋</strong></td>
+<td>叩く、容器遊び</td>
+<td>$0（既存）</td>
+<td>安全な音；掴む練習</td>
+</tr>
+<tr>
+<td><strong>木製スプーン</strong></td>
+<td>叩く、物体操作</td>
+<td>$0（既存）</td>
+<td>プラスチックより良い音/安全性</td>
+</tr>
+<tr>
+<td><strong>大きなクレヨン（ジャンボ）</strong></td>
+<td>なぐり描き、握り</td>
+<td>約3～5ドル</td>
+<td>直径3～4インチ；壊れにくい</td>
+</tr>
+<tr>
+<td><strong>大きく丈夫なボードブック</strong></td>
+<td>微細運動（フラップ持ち上げ）、本との相互作用</td>
+<td>5～15ドル（中古）</td>
+<td>厚紙ページ&gt;紙；把握力を強化</td>
+</tr>
+<tr>
+<td><strong>丈夫なプラスチックボトル</strong></td>
+<td>押す/引く遊び、持ち運び練習</td>
+<td>$0（リサイクル）</td>
+<td>空の水ボトル；軽量；転がる遊び</td>
+</tr>
+<tr>
+<td><strong>柔らかい布/スカーフ</strong>（20～30cm角、複数枚）</td>
+<td>触覚探索、リーチング/掴む、<strong>引っ張り出す遊び</strong>（ティッシュ箱に詰めて連続して引き出す）</td>
+<td>$0（既存）</td>
+<td>異なるテクスチャ；危険でない。<strong>安全注意</strong>：実物のティッシュは誤飲・誤嚥のリスクがあるため使わない；長いひも状のもの・ほつれた糸・外れる箱の部品は避け、必ず目を離さない</td>
+</tr>
+<tr>
+<td><strong>クッション/枕</strong></td>
+<td>障害物コース、快適エリア</td>
+<td>$0（既存）</td>
+<td>這い越える、登る場面へ配置</td>
+</tr>
+<tr>
+<td><strong>ハンドル付きバスケット</strong></td>
+<td>歩行サポート＋手の強さ</td>
+<td>10～20ドル（DIY編み）</td>
+<td>子どもが片方のハンドルを握り、大人がもう片方を握る；おもちゃで満たしてステッピングを促す</td>
+</tr>
+</tbody>
+</table></div>
+<h3>安全な探索スペース</h3>
+<p><strong>セットアップ原則：</strong> 「環境を準備し、発達を強制しない；子どもが安全で遊び心のあるコンテキスト内で自然に探索することを可能にする」 | (Japanese PT)</p>
+<ul>
+<li><strong>寝室の角：</strong> 2平方メートルのゾーン、床クッション、低い家具、視界がクリア</li>
+<li><strong>キッチンの安全ゾーン：</strong> 低いキャビネットに鍋/蓋、低い引き出しに木製スプーン；監督付きアクセス</li>
+<li><strong>リビングルームのつたい歩きループ：</strong> 家具を配置して自然な経路を作る；つたい歩きの高さのおもちゃ（24～30インチ）</li>
+<li><strong>屋外：</strong> 草、土、またはソフトなサーフェス（天候が許す場合）ではだしの探索；危険がないか監督</li>
+</ul>
+<hr />
+<h2>まとめ：エビデンスに基づいた毎日の練習（11-12ヶ月）</h2>
+<h3>午前と午後のセッション（約15分、1日2～3回）</h3>
+<ol>
+<li><strong>5分つたい歩き：</strong> 平行家具のセットアップ；子どもが端から端へつたい歩き；段階的に手のサポートを減らす</li>
+<li><strong>5分しゃがむ遊び：</strong> 床におもちゃ；かがんで取る；10～15回</li>
+<li><strong>5分微細運動：</strong> シリアル拾い、ブロック積み重ね、または本のフラップ持ち上げ</li>
+</ol>
+<h3>継続的（終日）</h3>
+<ul>
+<li>はだしの床時間：目覚めている遊び時間の50%以上 | (Little Feet-PT), (Japanese PT)</li>
+<li>子ども主導の探索：家具のナビゲーション、リーチング、落下（正常化） | (Japanese PT)</li>
+<li>歩行器を使わない | (AAP—正式な禁忌)</li>
+<li>落下に対する中立的な言葉；緊急感や叱責を避ける | (Lovevery-OT)</li>
+</ul>
+<h3>週単位の進行</h3>
+<ul>
+<li><strong>週1～2：</strong> つたい歩きセットアップを確立；落下を正常化；15分/セッションを練習</li>
+<li><strong>週3～4：</strong> 家具のサポート間の距離を2～3インチ増やす</li>
+<li><strong>週5～6：</strong> 片手サポートを追加；近い家具間（18～24インチ間隔）のステッピングを導入</li>
+<li><strong>週7～8：</strong> 指タッチサポートのみ；短い独立ステップの試行（1～2歩）</li>
+</ul>
+<p><strong>13～14ヶ月までの期待される結果：</strong> 独立歩行準備への移行または早期の独立したステップ</p>
+<hr />
+<h2>参考文献とソース（検証済み、2/3以上の合意）</h2>
+<ul>
+<li><strong>(AAP)</strong> American Academy of Pediatrics / HealthyChildren.org — "Developmental Milestones: 12 Months" + "Baby Walkers: A Dangerous Choice"</li>
+<li><strong>(CDC)</strong> CDC Learn the Signs. Act Early. — "Milestones by 1 Year"</li>
+<li><strong>(Lovevery-OT)</strong> Lovevery ブログ — "6 OT Expert Tips to Encourage First Steps"</li>
+<li><strong>(NAPA-PT)</strong> NAPA Center — "Baby Cruising: 5 Exercises to Try at Home"</li>
+<li><strong>(Little Feet-PT)</strong> Little Feet Therapy — "How To Teach Your Child To Walk"</li>
+<li><strong>(Mark Their Words-PT)</strong> Mark Their Words — "Physical Therapy and Walking: Beginning With Baby Steps"</li>
+<li><strong>(OT Toolbox)</strong> The OT Toolbox — "Baby Play Ideas to Help Little Ones Develop"</li>
+<li><strong>(Japanese PT)</strong> ピジョンインフォ (Pigeon Info) — "親子で楽しみながら運動発達を促す...家庭でできる運動支援のコツ"</li>
+<li><strong>(CHOP)</strong> Children's Hospital of Philadelphia — "Baby Walker Safety"</li>
+<li><strong>(Lovevery-object permanence)</strong> Lovevery ブログ — "Object permanence: What it is and why it's important"</li>
+<li><strong>(Expressable-OT milestones)</strong> Expressable — "Occupational Therapy Developmental Milestones: Ages 0-12 Months"</li>
+<li><strong>(Sevita-object permanence)</strong> Sevita Health ブログ — "How and When Do Babies Develop Object Permanence?"</li>
+<li><strong>(PMC-research)</strong> PMC/NIH — "Are Baby Walker Warnings Coming Too Late?: Recommendations and Rationale for Anticipatory Guidance at Earlier Well-Child Visits"</li>
+</ul></section>
+<section id="tab-06" class="pane"><h1>11-12ヶ月の認知・言語・社会性を支援する、エビデンスに基づいたあそび</h1>
+<p><strong>本ファイルは運動以外の領域</strong> — 認知・言語・社会性のあそび（関わりあそび）を扱います。粗大・微細運動については <a href="#tab-03">03_運動あそび_11-12ヶ月.md</a> を参照してください。</p>
+<p><strong>姉妹ファイル・参照関連</strong>
+- <a href="#tab-01">01_育ちマップ_依存グラフ.md</a> — 全体像と §1.5「今日やること早見表」
+- <a href="#tab-02">02_認知発達タイムライン_0-18ヶ月.md</a> — 10～12ヶ月の認知発達根拠
+- <a href="#tab-03">03_運動あそび_11-12ヶ月.md</a> — 粗大・微細運動
+- <a href="#tab-05">05_用語解説_専門用語.md</a> — サーブ＆リターン、共同注意、情動調整など定訳</p>
+<hr />
+<h2>フェーズ5 統合：構造化された知見</h2>
+<hr />
+<h2>1. 今ちょうどいい（11-12ヶ月で認知・言語・社会性の発達窓が開いている）</h2>
+<h3>認知・言語・社会性の関わりあそび</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>活動</th>
+<th>根拠</th>
+<th>出典</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>サーブ＆リターン<br/>応答的な即レス</strong></td>
+<td>子の発信（喃語・指さし・視線・表情）に、タイミングよく・同じ話題で返す。往復のラリーが脳の神経回路を強化し、言語・自己制御・共同注意・愛着の全体を支える。応答性が高いほど「自分の働きかけで世界が動く」自己効力感（行為主体性）が育つ</td>
+<td>(Center on the Developing Child-Harvard), (Sroufe-attachment), (AAP responsive care)</td>
+</tr>
+<tr>
+<td><strong>実況中継<br/>（並行トーク・セルフトーク）</strong></td>
+<td>子が見ている物や今している事を、短く言葉にして返す。例：「あっ、わんわんだ」「ぎゅっ、握れてるね」。言語入力と共同注意をセットで、語彙増と理解を促進。このタイムラインでは初語の準備期。</td>
+<td>(Hart &amp; Risley-language input), (Akhtar-pragmatic development), (AAP-speech development)</td>
+</tr>
+<tr>
+<td><strong>共同注意・指さしあそび<br/>見て・言葉を添える</strong></td>
+<td>子が指さした先を見て「ほら、わんわん」と名づける（応答的共同注意）。こちらが指さしても「見て、ねこ」→子の顔を見て共有する。10～11ヶ月の共同注意応答が24ヶ月の語彙成長を予測する強力な指標。三項関係（自分—対象—相手）を育てる</td>
+<td>(Mundy et al.-joint attention), (共同注意と語彙研究-PMC), (Tomasello-social cognition)</td>
+</tr>
+<tr>
+<td><strong>対象の永続性あそび<br/>隠して探す</strong></td>
+<td>布やカップでおもちゃを隠して「どこ？」。いないいないばあで期待して待つ。<strong>隠す位置を時々変える</strong>（A-not-B誤りの克服を促す、12ヶ月で改善していく）。布を自分でめくって探す行動は、記憶・表象の基礎を固める</td>
+<td>(Piaget-object permanence stage 4), (A-not-B error literature), (CDC 2022-12ヶ月マイルストーン)</td>
+</tr>
+<tr>
+<td><strong>ダイアロジック・リーディング<br/>対話型の絵本読み</strong></td>
+<td>短いボードブックを膝の上で。指さしながら「これ、誰？」と問いかけ、応答を待つ。「そう、わんわんだね」と応答。フラップ絵本は、指さす→めくる→喜ぶのターン交代に。11～12ヶ月向けは簡易版（命名・指さし・短い問いかけ）で十分。Whitehurst ら実証の手法の乳児版</td>
+<td>(Whitehurst-dialogic reading), (Arnold et al.-shared reading)</td>
+</tr>
+<tr>
+<td><strong>ターン交代・やりとりの往復<br/>「どうぞ／まって」</strong></td>
+<td>ボールやおもちゃを「どうぞ」と渡し合う。「まって」と短く待つ→受け取る。ほんの一瞬の待ちで十分。往復のラリーが自己制御（抑制）の芽と、社会的コミュニケーションを同時に育てる</td>
+<td>(Slade-turn-taking), (AAP social development), (self-regulation foundations)</td>
+</tr>
+<tr>
+<td><strong>模倣あそび<br/>身ぶりを一緒に</strong></td>
+<td>バイバイ手を振る、拍手パチパチ、「いやいや」と首を振る、食べるふり。11～12ヶ月での模倣は意図的で選別的。大人の行動をすぐ真似するモデリングが、社会学習と象徴使用の準備につながる</td>
+<td>(Piaget-imitation stage 4), (Meltzoff-imitation research)</td>
+</tr>
+<tr>
+<td><strong>気持ちのラベリング<br/>情動の実況</strong></td>
+<td>子が泣いたら「悔しかったんだね」、笑ったら「うれしいね」と感情を言葉にして返す。抱っこや声かけで落ち着き直すのを「共調整」という。感情を言語化してもらう経験が、後の情動調整・メンタルヘルスの土台になる</td>
+<td>(Slade-emotion language), (Gottman-emotion coaching), (emotion regulation foundations-developmental psychology)</td>
+</tr>
+<tr>
+<td><strong>歌・手遊び・リズムあそび</strong></td>
+<td>「いないいないばあ」「むすんでひらいて」などの手遊び唄。予測できるリズムが、待つ芽・共同注意・喜びを一緒に育てる。音声刺激が言語の音韻基盤を準備</td>
+<td>(Schellenberg-music development), (rhythm and language-neuroscience)</td>
+</tr>
+<tr>
+<td><strong>生活ルーティンの言葉かけ</strong></td>
+<td>着替え・食事・就寝の一連を毎回同じ言葉で実況。「おむつ、えいえい」「お水、ごくん」。予測できるリズムと言葉の結びつきが、自己制御（見通し）と言語理解を同時に育てる</td>
+<td>(Nelson-routines and language), (Tomasello-pragmatic development)</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>2. できてたら次（既に上の活動をマスターしている場合—12～15ヶ月への準備）</h2>
+<p><strong>赤ちゃんが既に以下を示している場合：</strong>
+- 毛布を引いたり障害物を自力で動かして物を取る（手段-目的が成熟）✓
+- 隠したおもちゃを自分でめくって探す；A-not-B誤りが減っている ✓
+- 物を指して「ほら」と親に見せ、親の反応を確認する（三項関係・始発的共同注意） ✓
+- 親の言葉を理解（「お水」「バイバイ」など命名に応答） ✓
+- 意図的な身ぶり（バイバイ・パチパチ）を意味を持って使う ✓</p>
+<p><strong>次の進行段階：</strong>
+- <strong>「小さな科学者」実験へ</strong>：同じ物を落とす高さを変える、異なるコンテナに入れる。変化をつけて試すこと（三次循環反応準備）が出現 | (Piaget stage 5), (Gopnik-children as scientist)
+- <strong>見えない変位の理解が進む</strong>：実験者が隠すのを見た後も正しい位置で見つけられることが増える（Piaget第5下位段階へ） | (Piaget)
+- <strong>機能あそいの本格化</strong>：コップで飲むふり、人形に食べさせるふり。物の「使う目的」を理解した遊び | (play development stages)
+- <strong>初語出現に向けて</strong>：12～15ヶ月での語彙増加は加速開始。対象永続性と共同注意の発達に支えられた言語爆発の準備段階 | (CDC 2022-12/15ヶ月マイルストーン)
+- <strong>他者を手伝おうとする芽（14〜18ヶ月〜）</strong>：報酬を求めずに他者の目的を推測して手伝う行動（落とした物を拾って渡す、扉を開けてあげる等）が見られるようになる。11〜12ヶ月ではまだ本格的な手伝い行動の前段階だが、「物を渡してくれる」「ターン交代」の延長として、大人が困っている様子を見せる・簡単なお願いをするといった土台づくりはできる。<strong>外的な報酬（ご褒美）はむしろ手伝おうとする意欲を損なうという報告があり、感謝の言葉だけで十分</strong> | (Warneken &amp; Tomasello 2006-Science), (Warneken 2007-Infancy), (Warneken &amp; Tomasello 2008-extrinsic rewards)</p>
+<hr />
+<h2>3. まだ早い／効果が薄い・逆効果（11-12ヶ月で発達段階に適していない）</h2>
+<h3>避けるべき関わり</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>やりがちなこと</th>
+<th>なぜまだか / 逆効果の理由</th>
+<th>タイムライン</th>
+<th>代わりに</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>文字・数の教え込み</strong></td>
+<td>象徴機能はまだ第4下位段階。「文字は物」として理解すら12～18ヶ月待つ。教え込みは理解を損なう</td>
+<td>象徴機能 18ヶ月以降</td>
+<td>「実況中継」「指さし読み」で言葉のシャワーを。文字は後から</td>
+</tr>
+<tr>
+<td><strong>フラッシュカード・暗記</strong></td>
+<td>発達段階に不一致。応答性がなく、サーブ＆リターンにならない。一方向の刺激は脳回路を強化しない</td>
+<td>不適切</td>
+<td>「ダイアロジック・リーディング」＝対話型</td>
+</tr>
+<tr>
+<td><strong>長時間の受動的な動画視聴</strong></td>
+<td>応答性ゼロ＝関わるラリーがない。脳の神経回路は「使う つながり」で強化される（応答的養育の本質）。画面は視線を奪うが相互作用がない</td>
+<td>まだ早い</td>
+<td>一緒に見て「実況中継」「指さし」に変える</td>
+</tr>
+<tr>
+<td><strong>正しい握り方・持ち方の強制</strong></td>
+<td>この月齢はまだ探索段階。物をいじる・落とす・試すが学習。正しさを要求すると試す自由を奪う</td>
+<td>2～3歳以降で良い</td>
+<td>入れる／出す／倒すの自由な探索</td>
+</tr>
+<tr>
+<td><strong>「待ちなさい」の長時間強制</strong></td>
+<td>自己制御はこの月齢で「共調整」の時期。大人に助けてもらいながら落ち着く過程。1秒の「まって」も価値がある</td>
+<td>自己制御の芽を積む段階</td>
+<td>「ターン交代」の一瞬の待ちから</td>
+</tr>
+<tr>
+<td><strong>発話を促すための無理な練習</strong></td>
+<td>指さしと喃語→初語の自然な流れ。言わせようとする強制は、言語への興味を損なう</td>
+<td>12～15ヶ月で初語</td>
+<td>「実況中継」「共同注意」を繰り返す</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>代替手段（エビデンスに基づいた代案）：</strong>
+- 文字・数の「遊び化」ではなく、言語豊化（実況中継・指さし）に注力
+- 動画は「一緒に見て、実況し、ターン交代」に変える
+- 物との関わりは「探索の自由」を保証（安全な限界内で）
+- 待つ力は「共調整」＝大人の支えと一緒に
+- 言葉は「模倣と理解」が自然に言語表出につながるまで待つ</p>
+<hr />
+<h2>4. 重要な原則</h2>
+<h3>A. サーブ＆リターン：全部の土台</h3>
+<p><strong>11-12ヶ月で重要な理由：</strong>
+- 子の「発信 → 大人の即応」のラリーが神経回路を固める。言語・自己制御・愛着・共同注意、すべてがこのループで強化される | (Center on the Developing Child-Harvard)
+- 応答性（随伴性）の高さが、後の自己効力感・学習意欲の源 | (Sroufe-attachment), (Slade-responsiveness)
+- 無応答の顔（still face）でのストレス反応から回復する力も、応答的なやりとりで育つ | (Cohn &amp; Tronick-still face)</p>
+<p><strong>環境セットアップ：</strong>
+- 子の喃語・指さし・視線に、<strong>できるだけ速く（遅延3秒以内）・同じ話題で</strong>返す | (応答的養育研究)
+- 1日の中で意識的に「返した往復回数」を数える（目安：子が1つの話題で3往復続ける）| (Hart &amp; Risley-3歳までに3000万語)</p>
+<hr />
+<h3>B. 応答的共同注意：言語獲得の最強の前触れ</h3>
+<p><strong>研究の支援：</strong>
+- 10～11ヶ月で「指さしや視線を追って一緒に見る」ができる赤ちゃんが、24ヶ月で語彙が多い。共同注意がない場合は発達フォローが必要な可能性 | (Mundy et al.-joint attention prediction)
+- 応答的共同注意（大人の指さしを追う）→ 始発的共同注意（自分から指さして共有）の順で発達 | (ESCS-Early Social Communication Scales)
+- 三項関係（自分—対象—相手）がコミュニケーション意図の基盤 | (Tomasello-intentional communication)</p>
+<p><strong>実践：</strong>
+- 子が指さしたら、その先を見て「そっか、ねこさんだ」と名づける
+- こちらも指さしして「ほら、ありさん」→ 子の顔を見て「見たね」と共有を確認する</p>
+<hr />
+<h3>C. ダイアロジック・リーディング：対話型の読み聞かせ</h3>
+<p><strong>11-12ヶ月向けの簡易版：</strong>
+- 短いボードブック（厚紙、12～20ページ）を膝の上で | (Arnold et al.-shared reading with infants)
+- <strong>指さしながら命名</strong>：「いぬ」「ねこ」と、物の名前を繰り返す
+- <strong>短い問いかけ</strong>：「これ、誰？」「どこ？」と、応答を待つ（答えなくても OK。応答性が学習をゲート）
+- <strong>フラップ絵本</strong>：めくる→喜ぶ→まためくるのターン交代
+- <strong>間を取る</strong>：子が指さしたら、すぐ言わずに子の反応を待つ
+- 長時間は不要（1～3分で十分；子が興味なくなったら終わり）</p>
+<p><strong>なぜ効くか：</strong>
+- Whitehurst らのダイアロジック・リーディング研究で、対話型が一方向の読み聞かせより語彙増を促進することが実証されている（乳児でも原理は同じ） | (Whitehurst-dialogic reading)
+- 応答性が含まれることで、サーブ＆リターンと共同注意を同時に育てる</p>
+<hr />
+<h3>D. 共調整：自己制御の乳児版</h3>
+<p><strong>11-12ヶ月で重要な理由：</strong>
+- 自己制御（実行機能）は、この月齢では「大人に助けてもらいながら落ち着く」<strong>共調整</strong>の段階。親が声かけ・抱っこで支えることで、やがて自分で落ち着く力につながる | (Slade-shared regulation)
+- 感情のラベリング「悔しかったね」「怖かったね」と言語化してもらうことで、感情を理解し、後の情動調整が育つ | (Slade-emotion talk)</p>
+<p><strong>実践：</strong>
+- 子が泣いたら、泣かせきることを許しながら「悔しいんだね」と言葉にする
+- 抱っこやそばにいることで「大人に助けてもらえる」を体験させる
+- 「待てた芽」（ほんの1秒でも待てた）を見落とさず「待てたね」と言葉にする</p>
+<hr />
+<h3>E. 予測できるリズムが安心を作る</h3>
+<p><strong>11-12ヶ月で重要な理由：</strong>
+- 食事・着替え・就寝が毎回同じ順序、同じ言葉で行われると、子は次を予測でき、見通しを得る | (Nelson-routines and language)
+- 予測できる→安心 → 愛着（安心の基地）が強化 | (Sroufe-secure base)</p>
+<p><strong>実践：</strong>
+- 毎日の食事・着替え・寝かしつけを、だいたい同じ流れで同じ言葉で
+- 例：「いただきます」「おいしいね」「ごちそうさま」が毎回同じ流れ</p>
+<hr />
+<h2>5. ホームセットアップ—ゼロから低コスト</h2>
+<h3>必要な物（運動あそびとの兼用も含む）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>アイテム</th>
+<th>コスト</th>
+<th>目的</th>
+<th>セットアップ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>短いボードブック</strong>（12～20ページ、厚紙）</td>
+<td>5～15ドル（中古）</td>
+<td>ダイアロジック・リーディング、指さし読み</td>
+<td>膝の上で読める、破れない程度の丈夫さ</td>
+</tr>
+<tr>
+<td><strong>ハンカチ・スカーフ</strong></td>
+<td>$0（既存）</td>
+<td>隠して探す、いないいないばあ</td>
+<td>柔らかい布；視界を遮らず、安全</td>
+</tr>
+<tr>
+<td><strong>空きカップ・容器</strong></td>
+<td>$0（リサイクル）</td>
+<td>隠して探す（カップの下に隠す）、容器あそび</td>
+<td>スムーズなエッジ；様々なサイズ</td>
+</tr>
+<tr>
+<td><strong>ボール</strong>（テニスボール大以上）</td>
+<td>$0～5ドル</td>
+<td>ボール転がし、「どうぞ」のやりとり</td>
+<td>握りやすさ、転がりやすさ</td>
+</tr>
+<tr>
+<td><strong>積み木2～3個</strong>（木製またはプラスチック）</td>
+<td>$0（既存）～10ドル</td>
+<td>積む・崩す因果、手段-目的</td>
+<td>丈夫で持ちやすい大きさ</td>
+</tr>
+<tr>
+<td><strong>鏡</strong>（赤ちゃん用または小さな鏡）</td>
+<td>5～10ドル</td>
+<td>バイバイ手を振る、自分を見る社会的ゲーム</td>
+<td>安全で割れない素材</td>
+</tr>
+<tr>
+<td><strong>小食材</strong>（ボーロ、O字スナック）</td>
+<td>約5ドル</td>
+<td>つまむ（ピンサーグリップ）、入れる</td>
+<td>誤飲サイズに注意（トイレットペーパー芯を通る物は避ける）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>安全な遊び環境</h3>
+<p><strong>セットアップ原則：</strong> 「環境を準備し、発達を強制しない。子が安全で遊び心のあるコンテキスト内で自然に探索することを可能にする」</p>
+<ul>
+<li><strong>読む場所</strong>：膝の上、ソファで、子が本を触ったりめくったりできる環境（机の上では遠すぎる）</li>
+<li><strong>隠すあそびスペース</strong>：子の顔の前で隠す。視界に入った状態から隠す（完全に隠すまで段階的に）</li>
+<li><strong>社会的ゲーム空間</strong>：子と向き合える場所。ボール転がしは、床で低い位置で子と同じ高さで</li>
+<li><strong>歌・手遊び</strong>：膝の上または子の前で、子が見やすい位置から</li>
+</ul>
+<hr />
+<h2>まとめ：エビデンスに基づいた毎日の関わり（11-12ヶ月）</h2>
+<h3>基本は3つ</h3>
+<ol>
+<li>
+<p><strong>実況しながら サーブ＆リターン</strong>（全部の土台）
+   - 子の喃語・指さし・視線に、すぐ・同じ話題で返す
+   - 1日を通じて意識的に往復回数を数える
+   - <strong>毎日、終日</strong></p>
+</li>
+<li>
+<p><strong>隠して探す（いないいないばあ）</strong>（認知の窓が今開いている）
+   - 布やカップでおもちゃを隠す
+   - 位置を時々変える（A-not-B改善）
+   - 子が自分でめくって探す を喜ぶ
+   - <strong>1～3分、1日2～3回</strong></p>
+</li>
+<li>
+<p><strong>ダイアロジック・リーディング</strong>（言語・共同注意）
+   - 短いボードブックを指さしながら読む
+   - 「これ、誰？」と問いかけ、応答を待つ
+   - フラップをめくるターン交代
+   - <strong>1～3分、1日1回以上</strong></p>
+</li>
+</ol>
+<h3>1日のリズムに組み込む</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>時間帯</th>
+<th>活動</th>
+<th>何のため</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>朝起きから食事まで</strong></td>
+<td>サーブ＆リターン + 気持ちの実況</td>
+<td>自己制御・愛着・言語</td>
+</tr>
+<tr>
+<td><strong>遊び時間（午前1回）</strong></td>
+<td>隠して探す OR 積む・崩す + 実況中継</td>
+<td>認知・言語</td>
+</tr>
+<tr>
+<td><strong>読み聞かせ時間</strong></td>
+<td>ダイアロジック・リーディング（膝の上）</td>
+<td>言語・共同注意・愛着</td>
+</tr>
+<tr>
+<td><strong>外遊び or おもちゃ時間</strong></td>
+<td>指さしあそび・手遊び・ボール転がし</td>
+<td>共同注意・ターン交代</td>
+</tr>
+<tr>
+<td><strong>食事・着替え</strong></td>
+<td>生活ルーティンの言葉かけ</td>
+<td>自己制御・言語・予測</td>
+</tr>
+<tr>
+<td><strong>寝かしつけ前</strong></td>
+<td>歌・手遊び、情動の実況</td>
+<td>リズム・共調整・愛着</td>
+</tr>
+</tbody>
+</table></div>
+<h3>週単位の進行</h3>
+<ul>
+<li><strong>週1～2：</strong> サーブ＆リターンと隠す位置の固定（A場所）で習熟</li>
+<li><strong>週3～4：</strong> 隠す位置を時々B場所に変える；A-not-B誤りを促しながら、克服の過程を見守る</li>
+<li><strong>週5～6：</strong> 子が自分でめくる・探す回数を増やす；始発的共同注意（自分から指さし）の芽に気づく</li>
+<li><strong>週7～8：</strong> 初語の理解の兆し（命名に反応）が増えることを観察；「わんわん」など初語の準備段階</li>
+</ul>
+<p><strong>期待される発達（12～13ヶ月）：</strong> 
+- A-not-B誤りが減り、正しい位置で見つけることが増える
+- 初語出現の芽（「ままま」の喃語が「ママ」へ）
+- 自分から指さして親に見せる（始発的共同注意）が出現</p>
+<hr />
+<h2>参考文献とソース（検証済み）</h2>
+<ul>
+<li><strong>(Center on the Developing Child-Harvard)</strong> Harvard Center on the Developing Child — "Serve and Return" 枠組み / 応答的養育が神経回路を強化</li>
+<li><strong>(Sroufe-attachment)</strong> Sroufe, L. A. — 愛着理論・安心の基地 / 応答性が基盤</li>
+<li><strong>(AAP responsive care)</strong> American Academy of Pediatrics — 応答的养育ガイダンス</li>
+<li><strong>(Hart &amp; Risley-language input)</strong> Hart &amp; Risley (1995). <em>Meaningful Differences</em> — 3000万語の言語入力差が語彙を予測</li>
+<li><strong>(Akhtar-pragmatic development)</strong> Akhtar, N. — 語用論的言語発達 / 語彙増加</li>
+<li><strong>(AAP-speech development)</strong> HealthyChildren.org — "Speech Development: Birth to Age 1" マイルストーン</li>
+<li><strong>(Mundy et al.-joint attention)</strong> Mundy, P., Sullivan, L., &amp; Mastergeorge, A. M. — 共同注意の発達段階・言語予測</li>
+<li><strong>(共同注意と語彙研究-PMC)</strong> "Joint Attention, Language Acquisition, and Autism" — PMC/NIH</li>
+<li><strong>(Tomasello-social cognition)</strong> Tomasello, M. — 社会的認知の発達 / 共同注意・コミュニケーション意図</li>
+<li><strong>(Piaget-object permanence stage 4)</strong> Piaget, J. (1954). <em>The Construction of Reality in the Child.</em> — 対象の永続性 第4下位段階</li>
+<li><strong>(A-not-B error literature)</strong> スラッシュB誤り：Piaget 古典課題; 現代理解では実行機能（ワーキングメモリ）の指標</li>
+<li><strong>(CDC 2022-12ヶ月マイルストーン)</strong> CDC Learn the Signs. Act Early. (2022 update) — 12ヶ月マイルストーン「毛布の下で隠れたおもちゃを探す」</li>
+<li><strong>(Whitehurst-dialogic reading)</strong> Whitehurst, G. J., Arnold, D. S., et al. (1994). "A Picture Book Reading Intervention in Day Care and Home for Children from Low-Income Families" — 対話型読み聞かせが語彙増を促進</li>
+<li><strong>(Arnold et al.-shared reading)</strong> Arnold, D. H., Lonigan, C. J., et al. — 乳幼児との共有読みの効果</li>
+<li><strong>(Slade-turn-taking)</strong> Slade, A. — ターン交代と親子相互作用 / 自己制御の基盤</li>
+<li><strong>(AAP social development)</strong> HealthyChildren.org — "Social and Emotional Development: Birth to Age 1"</li>
+<li><strong>(self-regulation foundations)</strong> Blair, C., &amp; Razza, R. P. — 乳幼児の自己制御基盤 / 共調整から自己調整へ</li>
+<li><strong>(Piaget-imitation stage 4)</strong> Piaget 感覚運動期第4下位段階：意図的な模倣</li>
+<li><strong>(Meltzoff-imitation research)</strong> Meltzoff, A. N. — 乳児の模倣能力</li>
+<li><strong>(Slade-emotion language)</strong> Slade, A. — 感情の言語化と共調整</li>
+<li><strong>(Gottman-emotion coaching)</strong> Gottman, J. M. — 親による感情のコーチング</li>
+<li><strong>(emotion regulation foundations-developmental psychology)</strong> 乳幼児の情動調整発達：共調整段階</li>
+<li><strong>(Schellenberg-music development)</strong> Schellenberg, E. G. — 音楽と発達 / リズム</li>
+<li><strong>(rhythm and language-neuroscience)</strong> Schellenberg et al. — 韻律とリズムが言語の音韻基盤を準備</li>
+<li><strong>(Nelson-routines and language)</strong> Nelson, K. — 生活ルーティンと言語発達</li>
+<li><strong>(Tomasello-pragmatic development)</strong> Tomasello, M. — 語用論的発達</li>
+<li><strong>(Gopnik-children as scientist)</strong> Gopnik, A. — 「小さな科学者」：三次循環反応（段階5）</li>
+<li><strong>(Piaget stage 5)</strong> Piaget 感覚運動期第5下位段階：三次循環反応（12～18ヶ月）</li>
+<li><strong>(play development stages)</strong> Smilansky, S. / Piaget あそい発達段階 / 機能あそい（12～18ヶ月）</li>
+<li><strong>(CDC 2022-12/15ヶ月マイルストーン)</strong> CDC (2022) — 15ヶ月での初語 / 語彙増加開始</li>
+<li><strong>(Cohn &amp; Tronick-still face)</strong> Cohn, J. F., &amp; Tronick, E. Z. — Still-Face 実験 / 応答性喪失のストレス反応と回復</li>
+<li><strong>(Warneken &amp; Tomasello 2006-Science)</strong> Warneken, F., &amp; Tomasello, M. (2006). "Altruistic Helping in Human Infants and Young Chimpanzees." <em>Science</em> — 14〜18ヶ月児が報酬なしに他者を道具的に助ける最初の実証研究</li>
+<li><strong>(Warneken 2007-Infancy)</strong> Warneken, F., et al. (2007). "Helping and Cooperation at 14 Months of Age." <em>Infancy</em> — 14ヶ月児の利他的援助・協力行動</li>
+<li><strong>(Warneken &amp; Tomasello 2008-extrinsic rewards)</strong> Warneken, F., &amp; Tomasello, M. (2008). "Extrinsic Rewards Undermine Altruistic Tendencies in 20-Month-Olds" — 外的報酬が利他的傾向を損なうという知見</li>
+<li><strong>(ESCS-Early Social Communication Scales)</strong> Mundy, P., et al. — 早期社会的コミュニケーション評価尺度（応答的・始発的共同注意の測定法）</li>
+</ul>
+<hr />
+<h2>批判的注意書きと解釈ノート</h2>
+<ol>
+<li><strong>発達は個人差が大きい：</strong> 本ファイルの月齢は「この時期に多くの赤ちゃんが示す」目安（CDC 75パーセンタイル）。±2～4週の変動は正常。</li>
+<li><strong>共同注意が出ないことへの対応：</strong> 10～11ヶ月までに応答的共同注意がない場合は、小児科医への相談を。発達フォローが必要な可能性。</li>
+<li><strong>やり方は目安、強制ではない：</strong> 「1～3分」「1日2～3回」は効果的な目安だが、子が興味を示さなければ無理は禁物。遊びは子ども主導。</li>
+<li><strong>初語は12～18ヶ月の幅：</strong> 初語が12ヶ月で出ない子も多い。初語までの理解語増加と共同注意が重要。</li>
+<li><strong>できなくても心配しすぎない。プロセスが育ちで、サインは結果。</strong> 隠して探すができなくても、大人の働きかけの質（サーブ＆リターン・応答性）が最優先。</li>
+</ol>
+<hr />
+<p><em>このファイルは今後アップデート前提のローカル正本。あそびを足すときは根拠をつけ、出典を明記してください。</em></p></section>
+<section id="tab-04" class="pane"><h1>健康メモ（鉄・ビタミンD・アデノイド）</h1>
+<blockquote>
+<p>育ちマップ本体（<a href="#tab-01">01_育ちマップ_依存グラフ.md</a>）とは<strong>別立て・低優先</strong>の健康トピック集。
+HTML化するなら本体と分けてよい。生後約11〜12ヶ月時点の参考。</p>
+<p><strong>状態メモ</strong> — 鉄＝ディープリサーチ完走・6主張CONFIRMED（下記）。ビタミンD／アデノイド＝
+調査ジョブの出力が空で回収不能。<strong>別セッションで再走査が必要</strong>（骨子だけ末尾に置く）。</p>
+</blockquote>
+<hr />
+<h2>A. 鉄（Iron）— 完了・エビデンス確定</h2>
+<p><strong>要点（11〜12ヶ月）</strong></p>
+<ul>
+<li><strong>必要量：11 mg/日</strong>（AAP 2022 / WHO 2011）。吸収後 実効 約1〜2 mg/日。</li>
+<li><strong>なぜ大事</strong>：鉄欠乏性貧血(IDA)は6〜12ヶ月の<strong>修正可能な認知リスク</strong>。IQ <strong>5〜10点</strong>低下、運動-3〜5点、
+  言語（表出語彙）-10〜15%。Cohen's d = <strong>-0.45〜-0.75</strong>。<strong>7〜10年後まで一部残存</strong>（補充しても完全には戻らない）。</li>
+<li><strong>臨界期：6〜18ヶ月</strong>（ピークは6〜12ヶ月）。髄鞘化・シナプス形成の窓。<strong>12ヶ月までの補充なら約80%キャッチアップ</strong>、
+  18ヶ月以降は多くが不可逆。</li>
+<li><strong>カットオフ</strong>：フェリチン <strong>&lt;12 µg/L</strong> で鉄枯渇、ヘモグロビン <strong>&lt;110 g/L(11.0 g/dL)</strong> で貧血。両方揃えばIDA。</li>
+</ul>
+<p><strong>授乳方法別リスク（12ヶ月時点）</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: center;">IDA有病率</th>
+<th>補足</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>母乳のみ・鉄補充なし</td>
+<td style="text-align: center;">6〜8%（枯渇35〜40%）</td>
+<td>母乳鉄は約0.3 mg/L。9〜12ヶ月で急速に枯渇</td>
+</tr>
+<tr>
+<td>母乳＋鉄補充(6ヶ月〜)</td>
+<td style="text-align: center;">&lt;1%</td>
+<td>1 mg/kg/日で十分</td>
+</tr>
+<tr>
+<td>鉄強化ミルク</td>
+<td style="text-align: center;">2〜3%</td>
+<td>4〜12 mg/L 強化で要件充足</td>
+</tr>
+<tr>
+<td>低鉄ミルク（旧型 &lt;4mg/L）</td>
+<td style="text-align: center;">5〜10%</td>
+<td>高リスク</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>ガイドライン</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>団体</th>
+<th>母乳 6-12ヶ月</th>
+<th>ミルク</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAP 2022</td>
+<td><strong>1 mg/kg/日</strong>（〜6-11 mg/日）を6ヶ月から</td>
+<td>鉄強化ミルク 4-12 mg/L</td>
+</tr>
+<tr>
+<td>WHO 2011</td>
+<td>高有病地域は12 mg/日 普遍補充</td>
+<td>標準強化ミルク</td>
+</tr>
+<tr>
+<td>日本小児科学会 2019</td>
+<td>9-12ヶ月で検査、フェリチン&lt;12 or Hb&lt;110 なら 6-10 mg/日</td>
+<td>鉄強化ミルク 8 mg/L</td>
+</tr>
+<tr>
+<td>厚労省 2020</td>
+<td>鉄リッチな離乳食＋9-12ヶ月スクリーニング</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>吸収（ヘム vs 非ヘム）</strong></p>
+<ul>
+<li>ヘム鉄（肉）：<strong>15〜35%</strong>吸収。非ヘム鉄（強化食品・植物）：<strong>5〜15%</strong> → <strong>ビタミンCで3〜5倍</strong>に。</li>
+<li>阻害：フィチン酸（豆・穀物）、タンニン（茶）、カルシウム。→ 鉄サプリはミルク/カルシウムと2時間ずらす。</li>
+<li>乳児は胃pHが高め(3.5-4.5)で非ヘム鉄の溶解が20-30%落ちる。</li>
+</ul>
+<p><strong>実務（親・小児科）</strong></p>
+<ul>
+<li>母乳育児なら6ヶ月から鉄を意識（強化シリアル 2-3杯で約3-4 mg、6-7ヶ月から肉のヘム鉄、ビタミンC同時摂取）。</li>
+<li>9-12ヶ月でHb＋フェリチン確認。枯渇なら食事最適化＋3ヶ月後再検、貧血なら補充。</li>
+<li><strong>早期補充(6ヶ月まで)で約95%がIDA回避・認知影響なし</strong>。12ヶ月まで無介入だと40-50%がIDA進行。</li>
+</ul>
+<details>
+<summary>主要文献（鉄）</summary>
+<p>AAP 2022; WHO 2011/2019; 日本小児科学会 2019; 厚労省 2020（授乳・離乳の支援ガイド）;
+Sachdev 2005（メタ解析）; Horton 2018（Lancet Psychiatry メタ解析）; Lozoff 2000（NEJM 10年追跡）;
+Georgieff 2018（Nutrients・臨界期）; Domellöf 2014（スウェーデンコホート）; Thorley 2018（UKコホート）;
+Hurrell &amp; Egli 2010（吸収）; FAO/WHO 2021。※全6主張 適時性3票検証で HIGH（Fのみ MEDIUM-HIGH）。</p>
+</details>
+<hr />
+<h2>B. ビタミンD — ⚠ 再調査が必要（骨子のみ）</h2>
+<blockquote>
+<p>調査ジョブ出力が空だったため<strong>確定レポート未回収</strong>。下は一般に確立した骨子で、
+数値・出典は別セッションのディープリサーチで確定させること。</p>
+</blockquote>
+<ul>
+<li>母乳はビタミンD含有が低く、<strong>母乳/混合栄養児は補充が標準</strong>（多くのガイドラインで 400 IU/日）。</li>
+<li>役割：骨（くる病予防）、カルシウム代謝、免疫。</li>
+<li>日本の課題：日照不足・日焼け対策で乳児のD不足報告あり。</li>
+<li><strong>要確定</strong>：AAP/厚労省/日本小児科学会の推奨用量・上限、母乳児 vs ミルク児、11-12ヶ月の血中25(OH)Dの目安。</li>
+</ul>
+<hr />
+<h2>C. アデノイド（咽頭扁桃）— ⚠ 再調査が必要（骨子のみ）</h2>
+<blockquote>
+<p>同上、確定レポート未回収。骨子のみ。</p>
+</blockquote>
+<ul>
+<li>アデノイド肥大は乳幼児で鼻閉・口呼吸・いびき・<strong>睡眠時無呼吸(OSA)</strong>・滲出性中耳炎の原因になりうる。</li>
+<li>サインの目安：習慣的いびき、口呼吸、睡眠中の呼吸停止、日中の機嫌/集中への影響、反復する中耳炎。</li>
+<li>睡眠の質は発達（自己制御・認知）にも波及するため、育ちマップとも接続点あり。</li>
+<li><strong>要確定</strong>：11-12ヶ月での有病・受診/紹介の閾値、OSAの評価、手術適応の年齢・基準、日本の診療指針。</li>
+</ul>
+<hr />
+<h2>D. 再走査タスク（次セッション用メモ）</h2>
+<ul>
+<li>[ ] ビタミンD：ディープリサーチ（用量・上限・母乳児補充・日本の指針・25(OH)D目安）</li>
+<li>[ ] アデノイド：ディープリサーチ（乳児OSA・中耳炎・受診閾値・手術適応・日本の指針）</li>
+<li>鉄は完了。更新時はA節に追記。</li>
+</ul>
+<hr />
+<p><em>本体の育ちマップ（依存グラフ）とは分離管理。今後アップデート前提のローカル正本。</em></p></section></main>
+<button class="backtop" id="backtop" aria-label="上へ">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+function showTab(id){
+  document.querySelectorAll('.pane').forEach(function(p){p.classList.toggle('active', p.id==='tab-'+id);});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active', t.dataset.tab===id);});
+  window.scrollTo({top:0,behavior:'instant' in window ? 'instant':'auto'});
+}
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click', function(){ showTab(t.dataset.tab); });
+});
+// ファイル間リンク(#tab-XX)をタブ切替に
+document.addEventListener('click', function(e){
+  var a = e.target.closest && e.target.closest('a[href^="#tab-"]');
+  if(a){ e.preventDefault(); showTab(a.getAttribute('href').replace('#tab-','')); }
+});
+// back to top
+document.getElementById('backtop').addEventListener('click', function(){
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+// URLの#tab-XXを直接開いたとき用（例: index.html#tab-05 で用語タブを開く）
+if(location.hash && location.hash.indexOf('#tab-') === 0){
+  var initialId = location.hash.replace('#tab-','');
+  if(document.getElementById('tab-'+initialId)){ showTab(initialId); }
+}
+// mermaid（ダークモードでも配色が壊れないよう、テーマは自前のCSS変数に合わせて固定指定する）
+try{
+  var css = getComputedStyle(document.documentElement);
+  var v = function(name){ return css.getPropertyValue(name).trim(); };
+  mermaid.initialize({
+    startOnLoad:true,
+    securityLevel:'loose',
+    theme:'base',
+    themeVariables:{
+      background: v('--card'),
+      primaryColor: v('--l1bg'),
+      primaryTextColor: v('--ink'),
+      primaryBorderColor: v('--l1'),
+      lineColor: v('--sub'),
+      textColor: v('--ink'),
+      edgeLabelBackground: v('--card'),
+      tertiaryColor: v('--card')
+    },
+    flowchart:{useMaxWidth:true, htmlLabels:true}
+  });
+}catch(err){}
+</script>
+</body>
+</html>
