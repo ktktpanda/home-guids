@@ -130,6 +130,36 @@
   </div>
 </header>
 
+<style>
+  .nav-sec{padding-top:30px}
+  .navgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+  .navcard{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink);transition:transform .08s,border-color .08s}
+  .navcard:hover{transform:translateY(-2px)}
+  .navcard:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .navcard .e{font-size:1.55rem;line-height:1}
+  .navcard b{display:block;font-size:.98rem;font-weight:800}
+  .navcard small{color:var(--muted);font-size:.78rem}
+  .navcard.hot{border-color:var(--accent);background:var(--accent-soft)}
+</style>
+<section class="nav-sec">
+  <div class="wrap">
+    <span class="layer-tag">ガイド一覧</span>
+    <div class="sec-head">
+      <h2>各ページへ</h2>
+      <p>毎朝はこのダッシュボードか「今日ビュー」を。買うものは「買い物リスト」から。</p>
+    </div>
+    <div class="navgrid">
+      <a class="navcard hot" href="supplies_inventory_guide.html"><span class="e">🛒</span><span><b>買い物リスト</b><small>洗剤・消耗品 在庫ガイド（この7本で回る）</small></span></a>
+      <a class="navcard" href="home_today_view.html"><span class="e">📅</span><span><b>今日ビュー</b><small>今日やること＋前後2日・夜は明日の朝</small></span></a>
+      <a class="navcard" href="storage_style_guide.html"><span class="e">🧺</span><span><b>生活感を消す収納</b><small>掃除用品を浮かせる・そろえる・詰め替える</small></span></a>
+      <a class="navcard" href="bath_cleaning_guide.html"><span class="e">🛁</span><span><b>風呂</b><small>黒カビ・レジオネラ・予防</small></span></a>
+      <a class="navcard" href="aircon_cleaning_guide.html"><span class="e">❄️</span><span><b>エアコン</b><small>内部カビ・健康被害・プロ洗浄</small></span></a>
+      <a class="navcard" href="toilet_cleaning_guide.html"><span class="e">🚽</span><span><b>トイレ</b><small>尿石・尿はね・臭い対策</small></span></a>
+      <a class="navcard" href="kitchen_cleaning_guide.html"><span class="e">🍳</span><span><b>キッチン</b><small>油・食中毒・火災リスク</small></span></a>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <span class="layer-tag">層 1 ／ 毎日</span>
