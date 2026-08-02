@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="color-scheme" content="light dark">
+<title>発達の「量」データ集 — パーセンタイル・相関・効果量</title>
+<style>
+:root{
+  --l1:#2a9d8f; --l1bg:#e6f4f2; --l2:#5560d8; --l2bg:#e9eaf9; --l3:#d98a2b; --l3bg:#fbeede;
+  --warn:#c0392b; --warnbg:#fbe9e7;
+  --bg:#fbfbfa; --card:#ffffff; --ink:#22303a; --sub:#5a6b76; --line:#e3e7ea; --accent:#2a9d8f;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#12181c; --card:#1a2228; --ink:#e6edf1; --sub:#9fb0bb; --line:#2b363d;
+         --l1bg:#123632; --l2bg:#1e2150; --l3bg:#3a2a12; --warnbg:#3a1a16; --accent:#5cc9bb; }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);
+  font-family:-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  line-height:1.75; font-size:16px; -webkit-text-size-adjust:100%;}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);}
+.htitle{padding:12px 14px 2px;font-weight:700;font-size:1.05rem;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+.htitle small{display:block;color:var(--sub);font-weight:500;font-size:.74rem;margin-top:2px}
+.htitle a{font-size:.78rem;font-weight:600;border-bottom:1px dotted var(--accent);color:var(--accent);text-decoration:none;white-space:nowrap}
+nav.toc{display:flex;gap:6px;overflow-x:auto;padding:8px 10px 10px;-webkit-overflow-scrolling:touch}
+nav.toc a{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--sub);
+  padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:600;text-decoration:none;white-space:nowrap}
+main{padding:6px 14px 60px;max-width:840px;margin:0 auto}
+h1{font-size:1.2rem;margin:1.4em 0 .3em;padding-top:.6em;border-top:2px solid var(--line);scroll-margin-top:110px}
+h1:first-of-type{border-top:none;margin-top:.6em}
+h2{font-size:1.0rem;margin:1.1em 0 .4em;color:var(--accent)}
+p{font-size:.92rem;color:var(--ink)}
+.lead{color:var(--sub);font-size:.88rem}
+.note{font-size:.82rem;color:var(--sub);margin:.4em 0}
+.badge{display:inline-block;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:.3em;white-space:nowrap}
+.badge.high{background:var(--l1bg);color:var(--l1)}
+.badge.medium{background:var(--l3bg);color:var(--l3)}
+.badge.unconf{background:var(--warnbg);color:var(--warn)}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:.6em 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.82rem;min-width:480px}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--l2bg);position:sticky;top:0;font-weight:700;white-space:nowrap}
+td strong{color:var(--accent)}
+.src{font-size:.76rem;color:var(--sub);margin:.3em 0 1.2em;padding-left:.8em;border-left:3px solid var(--line)}
+tr.interp td{background:var(--l3bg)}
+.badge.interp{background:var(--l3bg);color:var(--l3)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:.8em 0}
+.hl{background:var(--l1bg);border-left:4px solid var(--l1);border-radius:8px;padding:.7em .9em;margin:.7em 0;font-size:.88rem}
+.backtop{position:fixed;right:14px;bottom:16px;z-index:30;background:var(--accent);color:#fff;border:none;
+  width:44px;height:44px;border-radius:50%;font-size:1.1rem;box-shadow:0 3px 10px rgba(0,0,0,.25);cursor:pointer;opacity:.9}
+</style>
+</head>
+<body>
+<header>
+  <div class="htitle">
+    <span>発達の「量」データ集
+      <small>パーセンタイル・相関係数・効果量。すべて一次または信頼できる二次資料に基づく数値のみ掲載</small>
+    </span>
+    <a href="育ちマップ.html">📖 育ちマップへ →</a>
+  </div>
+  <nav class="toc">
+    <a href="#motor">運動</a>
+    <a href="#comm">会話・視線</a>
+    <a href="#vocab">語彙・初語</a>
+    <a href="#reading">絵本</a>
+    <a href="#safety">食の安全統計</a>
+    <a href="#howto">使い方</a>
+  </nav>
+</header>
+<main>
+<p class="lead">07（おもちゃ選択）・09（喜び笑いタイムライン）・02（認知タイムライン）で根拠として使っている定量データのうち、<strong>パーセンタイル表・分布・相関係数・効果量</strong>など数値そのものが主役の情報をここに集約した。<span class="badge high">HIGH</span>＝一次資料またはそれに準ずる確度、<span class="badge medium">MEDIUM</span>＝二次資料経由・要フォロー、<span class="badge unconf">未確認</span>＝存在するか自体が不明、<span class="badge interp">推定</span>＝前後の実測値から線形補間した試算値（実測ではない）、を表す。</p>
+
+<h1 id="motor">🏃 運動発達マイルストーン</h1>
+
+<h2>WHO Multicentre Growth Reference Study（2006）― 6大粗大運動マイルストーンの達成月齢 <span class="badge high">HIGH</span></h2>
+<p>多国籍コホート（複数国のべ数百〜千人規模）による、健康な乳児の運動マイルストーン達成月齢のパーセンタイル分布。<strong>「1st〜99thパーセンタイルの幅」がそのまま「正常範囲の広さ」</strong>を表す。</p>
+<div class="tw"><table>
+<tr><th>マイルストーン</th><th>1stパーセンタイル</th><th>50th/平均</th><th>95th</th><th>99thパーセンタイル</th><th>幅（1st〜99th）</th></tr>
+<tr><td>支えなし座位</td><td>3.8ヶ月</td><td>—</td><td>—</td><td>9.2ヶ月</td><td>5.4ヶ月（最も狭い）</td></tr>
+<tr><td>つかまり立ち</td><td>4.8ヶ月</td><td>—</td><td>—</td><td>11.4ヶ月</td><td>6.6ヶ月</td></tr>
+<tr><td>ハイハイ</td><td>5.2ヶ月</td><td>8.3ヶ月</td><td>—</td><td>13.5ヶ月</td><td>8.3ヶ月</td></tr>
+<tr><td>伝い歩き</td><td>5.9ヶ月</td><td>—</td><td>—</td><td>13.7ヶ月</td><td>7.8ヶ月</td></tr>
+<tr><td>つかまらず立位</td><td>6.9ヶ月</td><td>—</td><td>—</td><td>16.9ヶ月</td><td>10.0ヶ月</td></tr>
+<tr><td><strong>独歩（つかまらず歩行）</strong></td><td><strong>8.2ヶ月</strong></td><td><strong>平均12.1ヶ月・SD1.8ヶ月／5th=9.4ヶ月／95th=15.3ヶ月</strong></td><td>15.3ヶ月</td><td><strong>17.6ヶ月</strong></td><td><strong>9.4ヶ月（最も広い）</strong></td></tr>
+</table></div>
+<p class="src">出典：WHO Multicentre Growth Reference Study Group, "WHO Motor Development Study: Windows of achievement for six gross motor development milestones," <em>Acta Paediatrica Supplement</em>, 2006, 450:86-95。</p>
+<div class="hl">💡 <strong>「範囲であって締切ではない」の具体例</strong>：独歩は1〜99パーセンタイルで<strong>9.4ヶ月もの幅</strong>がある。「何ヶ月で歩けるべきか」という発想自体が、実際のヒトの発達の多様性とはずれている。</div>
+
+<h2>Tummy time（うつ伏せ練習）の量-反応関係 <span class="badge high">HIGH</span></h2>
+<div class="tw"><table>
+<tr><th>月齢</th><th>タミータイム量</th><th>結果</th></tr>
+<tr><td>生後2ヶ月</td><td>30〜44分/日</td><td>15分未満/日と比べ発達総合スコア有意高</td></tr>
+<tr><td>生後4ヶ月</td><td>量が多いほど</td><td>粗大運動発達スコアと直線的な正の関係</td></tr>
+<tr><td>生後6ヶ月</td><td><strong>61〜120分/日</strong>（120分超も含む）</td><td>30分未満/日と比べ発達総合スコア有意高</td></tr>
+</table></div>
+<p class="src">出典：Zhang et al. (2023), <em>European Journal of Pediatrics</em>（乳児411名の追跡研究、PMID: 36224434）。AAP一次声明（Moon et al. 2022, <em>Pediatrics</em> 150(1):e2022057990）は「生後7週までに1日合計15〜30分まで漸増」とのみ規定。</p>
+
+<h2>WHO 24-Hour Movement Guidelines for the Early Years（2019） <span class="badge high">HIGH</span></h2>
+<div class="tw"><table>
+<tr><th>区分</th><th>身体活動</th><th>スクリーンタイム</th><th>拘束時間</th><th>睡眠</th></tr>
+<tr><td><strong>1歳未満（今の月齢）</strong></td><td>floor-based playを覚醒中に分散、<strong>タミータイム少なくとも30分/日</strong>。「多いほどよい」</td><td>推奨されない</td><td><strong>1回1時間超の拘束（ベビーカー・チェア・抱っこ紐等）を避ける</strong></td><td>0〜3ヶ月14〜17h／4〜11ヶ月12〜16h</td></tr>
+<tr><td>1〜2歳（参考・次の段階）</td><td>全強度合計<strong>180分以上/日</strong></td><td>1歳：推奨されない／2歳：1時間以内</td><td>同左＋長時間座り続けも避ける</td><td>11〜14h</td></tr>
+</table></div>
+<p class="src">出典：WHO, <em>Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age</em>, 2019（NCBI Bookshelf本文で直接確認）。</p>
+
+<h1 id="comm">👀 会話・視線・共同注意の「量」</h1>
+
+<h2>語りかけ語数と語彙格差（Hart &amp; Risley 1995） <span class="badge medium">MEDIUM</span></h2>
+<div class="tw"><table>
+<tr><th>家庭階層</th><th>1時間あたり語りかけ語数</th><th>年間累積推定</th></tr>
+<tr><td>専門職家庭</td><td><strong>2,153語</strong></td><td>約1,100万語/年</td></tr>
+<tr><td>労働者層家庭</td><td>1,251語</td><td>約600万語/年</td></tr>
+<tr><td>生活保護家庭</td><td>616語</td><td>約300万語/年</td></tr>
+</table></div>
+<p class="src">出典：Hart, B., &amp; Risley, T. R. (1995). <em>Meaningful Differences in the Everyday Experience of Young American Children</em>. カンザスシティ近郊42家庭、生後7〜9ヶ月〜3歳まで月1回1時間の家庭訪問。3歳までの累積差＝通称「3000万語の格差」。</p>
+<p class="note">⚠️ <strong>後年の再検証で強い疑義あり</strong>：Sperry, Sperry &amp; Miller (2019, <em>Child Development</em> 90(4))は42人（生後18〜48ヶ月）を再分析し、「養育者から子への直接語りかけ」のみでは階層差はHart &amp; Risleyほど一貫せず、家族全員・周囲の会話まで含めると定義次第で貧困層家庭が専門職家庭を上回るケースもあったと報告。数値そのものより「子に直接向けられた応答的な会話」の重要性が本質、というのが現在の理解（Golinkoff et al. 2019による反論あり、両論併記が妥当）。</p>
+
+<h2>会話ターン数と語彙・脳発達（Romeo et al. 2018） <span class="badge high">HIGH</span></h2>
+<div class="tw"><table>
+<tr><th>指標</th><th>数値</th></tr>
+<tr><td>会話ターン数 × 言語性総合スコア</td><td><strong>r = .51</strong>（p&lt;.001）</td></tr>
+<tr><td>大人の語りかけ語数 × 言語スコア</td><td>r = .36（p&lt;.05）</td></tr>
+<tr><td>子どもの発話数 × 言語スコア</td><td>r = .34（p&lt;.05）</td></tr>
+<tr><td>SES・IQ統制後の会話ターン数の独立効果</td><td>β = 0.09（p=.01）</td></tr>
+<tr><td>ブローカ野活動が媒介する割合</td><td><strong>48%</strong></td></tr>
+</table></div>
+<p class="src">出典：Romeo, R. R., et al. (2018). "Beyond the 30-Million-Word Gap." <em>Psychological Science</em>. 4.5〜6.8歳（平均5.8歳）36人、LENA録音＋fMRI。会話ターン数の効果は語数単体・SESより強く独立していた＝「量より応答的な往復」を裏付ける最強データ。</p>
+
+<h2>サーブ&amp;リターンの頻度「基準」は存在しない <span class="badge high">HIGH</span></h2>
+<p class="note">Harvard Center on the Developing Childの公式資料を直接確認したが、<strong>「1日/1時間あたり何回」という数値基準は一切示されていない</strong>（テニスの比喩による定性的説明のみ）。ネット上に流布する「1時間に◯回」的な数値があれば、それは同センター発の一次資料には基づかない。</p>
+
+<h2>アイコンタクト・共同注意の実測値（今の月齢に完全一致） <span class="badge high">HIGH</span></h2>
+<p>Franchak, Kretch, &amp; Adolph (2018) "See and be seen," <em>Developmental Science</em>。<strong>生後11.8〜12.4ヶ月</strong>の乳児17名＋養育者、頭部装着型アイトラッカーで5分間の自由遊びを記録。</p>
+<div class="tw"><table>
+<tr><th>指標</th><th>値</th></tr>
+<tr><td>乳児が養育者の顔を見ていた時間割合</td><td><strong>4.7%</strong></td></tr>
+<tr><td>乳児がおもちゃを見ていた時間割合</td><td>37.5%</td></tr>
+<tr><td>養育者が乳児の顔を見ていた時間割合</td><td><strong>31.5%</strong></td></tr>
+<tr><td>相互注視（mutual gaze）の時間割合</td><td>2.5%（姿勢により0.24〜3.61%）</td></tr>
+<tr><td>共同注意の時間割合</td><td>セッションの17.1%</td></tr>
+</table></div>
+<p class="src">出典：PMC5920801。<strong>「アイコンタクトは意外と少ない」のが定型発達の実態</strong>――乳児が親の顔を見ているのはわずか4.7%、それでも共同注意（おもちゃ＋視線調整）は17.1%成立している。「もっと目を合わせないと」と焦る必要がないことの定量的な裏付け。</p>
+
+<h2>共同注意エピソード頻度の月齢変化 <span class="badge high">HIGH</span></h2>
+<div class="tw"><table>
+<tr><th>月齢</th><th>パートナーへの視線指向頻度</th></tr>
+<tr><td>5ヶ月（平均5.3ヶ月、n=24）</td><td>2.99回/分（実測）</td></tr>
+<tr class="interp"><td><strong>12ヶ月ごろ（今の月齢）</strong> <span class="badge interp">推定</span></td><td><strong>約5.0回/分</strong>（線形補間の試算値）</td></tr>
+<tr><td>15ヶ月（平均15.77ヶ月、n=24）</td><td><strong>6.11回/分</strong>（実測、5ヶ月比2倍以上）</td></tr>
+</table></div>
+<p class="src">出典："Who Leads and Who Follows?" <em>Child Development</em>（PMC12023812）。t(44)=-4.517, p&lt;.001で有意増加。<strong>12ヶ月の行は実測値ではなく、5ヶ月と15ヶ月の2点を結ぶ線形補間の試算</strong>（(6.11-2.99)/(15.77-5.3)=約0.298回/分/月として計算）。共同注意の伸びが本当に直線的かは未検証で、あくまで目安。</p>
+
+<h1 id="vocab">🗣️ 語彙・初語</h1>
+
+<h2>初語になりやすい単語（3言語横断） <span class="badge high">HIGH</span></h2>
+<p>Tardif et al. (2008), <em>Developmental Psychology</em> 44(4)。英語話者265名／プートンホワ336名／広東語369名、生後8〜16ヶ月・語彙1〜10語段階。</p>
+<div class="tw"><table>
+<tr><th>3言語共通トップ語</th><th>英語特有</th><th>中国語特有</th></tr>
+<tr><td>mommy, daddy, hello, bye, uh-oh, <strong>woof-woof（わんわん＝擬声語）</strong></td><td>bottle, banana, no, kitty</td><td>お姉さん/お兄さん・祖父母・おばさん等の親族語彙</td></tr>
+</table></div>
+<p class="src">香港・北京の子は動詞を最初の10語に含む確率が米国児より有意に高い（米国児はほぼ名詞のみ）。単一物体語・単一動作語の保有確率で言語間に10〜20倍の差。</p>
+
+<h2>名詞優位（noun bias）― 7言語圏共通 <span class="badge high">HIGH</span></h2>
+<div class="tw"><table>
+<tr><th>語彙量段階</th><th>動詞比率</th></tr>
+<tr><td>0〜50語</td><td>4%</td></tr>
+<tr><td>101〜200語</td><td>19%</td></tr>
+<tr><td>201〜500語</td><td>46%</td></tr>
+</table></div>
+<p class="src">出典：Bornstein et al. (2004), <em>Child Development</em>。スペイン・オランダ・フランス・イスラエル・イタリア・韓国・米国、20ヶ月児269名。初期語彙は言語を問わずほぼ名詞中心。</p>
+
+<h2>日本語の初期語彙 ― 幼児語（オノマトペ）の比率 <span class="badge medium">MEDIUM</span></h2>
+<p class="note">小椋たみ子 (2007)「日本の子どもの初期の語彙発達」（『言語研究』132号）：<strong>早期表出50語のうち20語（40%）が幼児語</strong>（オノマトペ中心）、早期理解50語のうち約30%が幼児語。日本語のオノマトペの体系性・養育者の育児語使用傾向の両方が背景と示唆されるが、直接検証した統制実験は未確認。</p>
+
+<h2>表出語彙数の中央値（CDI標準化データ） <span class="badge medium">MEDIUM</span></h2>
+<div class="tw"><table>
+<tr><th>月齢</th><th>表出語彙数（中央値）</th></tr>
+<tr><td>12ヶ月</td><td>10語未満（実測）</td></tr>
+<tr class="interp"><td><strong>14ヶ月ごろ</strong> <span class="badge interp">推定</span></td><td><strong>約20語前後</strong>（線形補間の試算値）</td></tr>
+<tr><td>16ヶ月</td><td>約40語（実測）</td></tr>
+<tr><td>30ヶ月</td><td>573語（実測）</td></tr>
+</table></div>
+<p class="src">出典：Fenson et al. (1994), <em>Monographs of the Society for Research in Child Development</em>（MacArthur-Bates CDI標準化データ）。<strong>14ヶ月の行は12ヶ月（<10語、便宜上8語と仮定）と16ヶ月（約40語）を結ぶ線形補間の試算</strong>で、実測ではない。語彙獲得は17〜22ヶ月ごろに加速する非線形（語彙爆発）なので、この補間値は控えめな見積もりになっている可能性が高い。</p>
+
+<h2>語彙爆発（vocabulary spurt）― 12〜18ヶ月の先の姿 <span class="badge medium">MEDIUM</span></h2>
+<div class="tw"><table>
+<tr><th>時期</th><th>月あたり獲得語数</th></tr>
+<tr><td>17〜20ヶ月</td><td>約20語/月</td></tr>
+<tr><td>21〜24ヶ月</td><td><strong>約46語/月</strong>（2〜3倍に加速）</td></tr>
+</table></div>
+<p class="note">12〜18ヶ月時点はまだ爆発の"手前"であることが多い。24ヶ月までの平均到達語彙は約300語という報告あり。</p>
+
+<h2>初語出現月齢 ― 測定法で2ヶ月ずれる好例 <span class="badge medium">MEDIUM</span></h2>
+<div class="tw"><table>
+<tr><th>方法</th><th>統計値</th><th>出典</th></tr>
+<tr><td>親の回顧報告</td><td>最大75%が生後10ヶ月までに初語／約25%が12ヶ月時点で0語</td><td>Schneider et al.</td></tr>
+<tr><td>直接観察（月次家庭訪問44名）</td><td>最速は生後9ヶ月／中央値は12ヶ月付近／<strong>16%は15ヶ月以降まで初語なし</strong></td><td>Dailey &amp; Bergelson (2023), <em>Child Development</em> 94(2)</td></tr>
+</table></div>
+<p class="note">観察研究は親報告より遅め（観察頻度の限界・親の主観バイアスの差）。臨床的な相談目安は「16ヶ月時点で単語ゼロなら言語聴覚士へ」（ASHA系）。</p>
+
+<h2>ジェスチャー発達（CDI Words &amp; Gestures版） <span class="badge medium">MEDIUM</span></h2>
+<div class="tw"><table>
+<tr><th>指標</th><th>値</th></tr>
+<tr><td>12ヶ月時点の総ジェスチャー得点中央値</td><td>25/63点（約39.7%）</td></tr>
+<tr><td>「宣言的な見せる」を50%の乳児が示す月齢</td><td>8ヶ月</td></tr>
+<tr><td>「宣言的な指さし」を50%の乳児が示す月齢</td><td>10ヶ月</td></tr>
+</table></div>
+<p class="src">二次資料経由（Marchman et al. 2023系）。公式規準表（mb-cdi.stanford.edu）の直接確認は未達。</p>
+
+<h1 id="reading">📖 絵本・読み聞かせ</h1>
+
+<h2>シェアードリーディングの効果量 <span class="badge high">HIGH</span></h2>
+<div class="tw"><table>
+<tr><th>指標</th><th>数値</th></tr>
+<tr><td>対象研究数</td><td>29件</td></tr>
+<tr><td>全体効果量</td><td><strong>d = .59</strong></td></tr>
+<tr><td>Emergent literacyへの効果量</td><td>d = 0.58（N=1,293）</td></tr>
+<tr><td>読み能力達成への効果量</td><td>d = 0.55（N=2,248）</td></tr>
+<tr><td>分散説明率</td><td>約8%</td></tr>
+</table></div>
+<p class="src">出典：Bus, van IJzendoorn &amp; Pellegrini (1995), <em>Review of Educational Research</em>。頻度別（週◯回等）の連続的dose-response曲線は本論文からは未確認。</p>
+
+<h2>ダイアロジック・リーディング（対話型読み聞かせ）の効果量 <span class="badge high">HIGH</span></h2>
+<p><strong>対象研究16件、表出語彙への効果量 d = 0.59</strong>（k=9, n=322, SE=.08, 95%CI [0.44, 0.75], p&lt;.001）。対象児が4〜5歳、または言語リスクありの場合は効果量が大きく減少。</p>
+<p class="src">出典：Mol, Bus, de Jong &amp; Smeets (2008), <em>Early Education and Development</em>。06の対話型読み聞かせ（指さし・命名・問いかけ・応答・間）の理論的裏付け。</p>
+
+<h2>読み聞かせ頻度別の推定累積単語露出（5歳まで） <span class="badge high">HIGH</span></h2>
+<div class="tw"><table>
+<tr><th>頻度</th><th>5歳までの推定累積単語数</th></tr>
+<tr><td>全く読まない</td><td>4,662語</td></tr>
+<tr><td>週1〜2回</td><td>63,570語</td></tr>
+<tr><td>週3〜5回</td><td>169,520語</td></tr>
+<tr><td><strong>毎日1冊</strong></td><td><strong>296,660語</strong></td></tr>
+<tr><td>1日5冊</td><td>1,483,300語</td></tr>
+</table></div>
+<p class="src">出典：Logan et al. (2019), "The Million Word Gap," <em>Journal of Developmental &amp; Behavioral Pediatrics</em>。これは露出量の<strong>理論推計値</strong>であり実測語彙差そのものではない点に注意。「1日1冊」という目安の最も近い定量的裏付け。</p>
+<p class="note">「1日1冊」を直接検証した用量反応の実験研究そのものは見つからず。複数の周辺エビデンス（頻度が高いほど良いという相関研究群＋この理論推計）が収束して支持する実務的目安、というのが正直な位置づけ。</p>
+
+<h1 id="safety">⚠️ 食の安全統計</h1>
+
+<h2>日本の窒息・誤嚥事故統計（消費者庁） <span class="badge high">HIGH</span></h2>
+<div class="hl">平成26年〜令和元年（2014〜2019年）の<strong>6年間で、食品を誤嚥して窒息死した14歳以下の子どもは80人、うち5歳以下が73人（約9割）</strong>。名指しされている高リスク食材：豆類・ナッツ類（5歳以下には食べさせない推奨）、ミニトマト、ぶどう（4等分または加熱して軟らかくする）。</div>
+<p class="src">出典：消費者庁「食品による子どもの窒息・誤嚥事故に注意！」。11〜12ヶ月単月の内訳は非公表。</p>
+
+<h2>米国の窒息統計（AAP/CDC） <span class="badge high">HIGH</span></h2>
+<ul>
+<li>米国では食物による窒息でおよそ<strong>5日に1人</strong>の子どもが死亡（AAP政策声明）</li>
+<li>14歳以下、年間推定<strong>17,537人がER受診</strong>、うち59.5%が食物由来（CDC MMWR、2001年NEISS-AIPベース）</li>
+<li>食物関連窒息ER受診の平均年齢は約4.5歳。リスクは11〜12ヶ月だけでなく<strong>1〜5歳を通じて高止まり</strong>する</li>
+</ul>
+<p class="src">出典：Smith GA et al. (2010), <em>Pediatrics</em> 125(3):601-607 "Prevention of Choking Among Children"。「窒息事故の3分の2は1歳未満」という数値は低品質サイトのみに出現しCDC/StatPearlsデータと矛盾するため不採用。</p>
+
+<h2>BLW（Baby-Led Weaning）の窒息リスク：RCTでは有意差なし <span class="badge high">HIGH</span></h2>
+<p>Fangupo et al. (2016), <em>Pediatrics</em> 138(4):e20160772（BLISSトライアル、n=206、査読済RCT）：BLW系アプローチと通常ケアを比較し、6〜12ヶ月時点での窒息・むせの頻度に<strong>統計的有意差なし</strong>。6〜8ヶ月時点で35%の乳児が少なくとも1回むせを経験（両群とも同水準）。</p>
+<p class="note">ただし純粋BLWでは鉄摂取量不足の懸念が指摘されている（因果は未確定）。</p>
+
+<h1 id="howto">📌 このページの使い方</h1>
+<ul>
+<li>07（おもちゃ選択ツール）・09（喜び笑いタイムライン）・02（認知発達タイムライン）の各カード末尾「出典」に書かれた数値の一次情報はここに集約している。「もっと詳しく見たい」ときの参照先。</li>
+<li>数値は<strong>目安・分布であって締切ではない</strong>。特に運動発達（独歩9.4ヶ月幅）は、個人差の大きさを実感するための好例として使ってほしい。</li>
+<li><span class="badge unconf">未確認</span>の項目（このページには極力載せていないが）は「存在しない」ではなく「見つからなかった」という意味。次回リサーチでの再挑戦対象。</li>
+<li><span class="badge interp">推定</span>の行は、前後に実測データがある場合にのみ線形補間で試算した値。<strong>実測データが片側にも無い場合（例：09の喜び笑いタイムラインの12〜18ヶ月の月単位区分）は補間の起点が無いため、無理に埋めず「データなし」のままにしている。</strong></li>
+</ul>
+
+</main>
+<button class="backtop" id="backtop" aria-label="上へ">↑</button>
+<script>
+document.getElementById('backtop').addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+</script>
+</body>
+</html>
