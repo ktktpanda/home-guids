@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12か月ごはんメモ ― 結論まとめ</title>
+<style>
+  :root {
+    --paper: #eff0e5;
+    --surface: #ffffff;
+    --ink: #24291f;
+    --ink-soft: #5e6555;
+    --accent: #a15a22;
+    --accent-soft: #f1e3d2;
+    --line: #d8d9c9;
+    --pending-bg: #fbf0da;
+    --pending-line: #d9a54a;
+    --pending-ink: #6b4a12;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #1b1d17;
+      --surface: #23261e;
+      --ink: #ece9dd;
+      --ink-soft: #a9ac9b;
+      --accent: #e0975a;
+      --accent-soft: #3a2c1c;
+      --line: #3a3d30;
+      --pending-bg: #332a15;
+      --pending-line: #d9a54a;
+      --pending-ink: #ecd7a3;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    line-height: 1.85;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+
+  header.hero {
+    margin-bottom: 40px;
+  }
+
+  .eyebrow {
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+
+  h1 {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1.4;
+    text-wrap: balance;
+    margin: 0 0 14px;
+  }
+
+  .lede {
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  h2 {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    font-weight: 600;
+    font-size: 21px;
+    margin: 0 0 4px;
+    text-wrap: balance;
+  }
+
+  section {
+    margin-top: 52px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+
+  section .num {
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
+    margin: 0 0 6px;
+  }
+
+  section > p, .box p {
+    margin: 14px 0 0;
+  }
+
+  ul.bullets {
+    margin: 14px 0 0;
+    padding-left: 1.2em;
+  }
+  ul.bullets li {
+    margin: 8px 0;
+  }
+  ul.bullets li::marker {
+    color: var(--accent);
+  }
+
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    padding: 22px 24px;
+    margin-top: 28px;
+  }
+  .summary-card .eyebrow { margin-bottom: 12px; }
+  .summary-card ol {
+    margin: 0;
+    padding-left: 1.25em;
+  }
+  .summary-card li {
+    margin: 10px 0;
+  }
+  .summary-card li::marker {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    font-size: 14.5px;
+  }
+  .table-wrap { overflow-x: auto; }
+  th, td {
+    text-align: left;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--line);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  th {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+  }
+  td:first-child, th:first-child { white-space: normal; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  .recipe {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px 22px;
+    margin-top: 18px;
+  }
+  .recipe + .recipe { margin-top: 14px; }
+  .recipe h3 {
+    font-size: 15.5px;
+    margin: 0 0 10px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .recipe h3 .tag {
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+  .recipe dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 4px 14px;
+    font-size: 14.5px;
+  }
+  .recipe dt { color: var(--ink-soft); }
+  .recipe dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .recipe .steps {
+    margin: 12px 0 0;
+    padding-left: 1.2em;
+    font-size: 14.5px;
+  }
+  .recipe .steps li { margin: 6px 0; }
+  .recipe .note {
+    margin-top: 12px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    border-top: 1px dashed var(--line);
+    padding-top: 10px;
+  }
+
+  .pending {
+    margin-top: 20px;
+    background: var(--pending-bg);
+    border: 1px solid var(--pending-line);
+    border-radius: 6px;
+    padding: 18px 22px;
+    color: var(--pending-ink);
+  }
+  .pending .eyebrow { color: var(--pending-ink); }
+  .pending p { margin: 8px 0 0; color: var(--pending-ink); }
+  .pending strong { font-weight: 700; }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <p class="eyebrow">育児メモ — 12か月ごろの食事</p>
+    <h1>市販パウチ・ミルク・手作り副菜、結論だけまとめ</h1>
+    <p class="lede">ChatGPTでの長い相談から、実践に移せる結論だけを抜き出したもの。数値は会話中で挙がったメーカー公表値・目安値。</p>
+  </header>
+
+  <div class="summary-card">
+    <p class="eyebrow">要点</p>
+    <ol>
+      <li>ご飯は家で用意できるなら、<strong>「ご飯＋安いおかずパウチ」</strong>で十分。高い「栄養マルシェ」系はご飯まで入っているから高いだけで、栄養が上というわけではない。</li>
+      <li>パウチは<strong>肉・魚・鉄強化系／野菜たっぷり系をローテーション</strong>すると、たんぱく質と野菜の両方をカバーしやすい。</li>
+      <li>パウチの価値は「安さ」ではなく<strong>「調理と栄養設計を外注できること」</strong>。材料費だけなら手作りの方が安い可能性がある。</li>
+      <li>フォローアップミルクは通常ミルクの下位互換ではなく、<strong>鉄・カルシウムに重点を置いた別設計</strong>。切り替えは食事量とミルク量次第。</li>
+      <li>かぼちゃ・にんじんスープは<strong>濃縮ペーストにして小分け冷凍→食べる時にお湯で戻す</strong>方式が省スペースで扱いやすい。</li>
+    </ol>
+  </div>
+
+  <section>
+    <p class="num">01</p>
+    <h2>市販ベビーフードの使い分け</h2>
+    <p>「栄養マルシェ」（高め）は最初から主食＋おかずの2カップ構成で、ご飯・麺・丼まで一皿に完結させている商品が多い。一方「グーグーキッチン」などの安いレンジ・湯せんパウチは基本おかずのみで、家のご飯と組み合わせる前提の設計。</p>
+    <ul class="bullets">
+      <li>ご飯を作れる家庭 → 安いパウチ＋家のご飯で置き換え可能。栄養が劣るわけではない。</li>
+      <li>外出時など一式欲しいとき → ご飯まで入った「◯◯どん」「◯◯ごはん」系や栄養マルシェが便利。</li>
+      <li>「1食分の野菜が摂れる」系パウチは野菜量が強い分、たんぱく質・脂質は少なめになりやすい → 主菜が別に必要。</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="num">02</p>
+    <h2>栄養の数値比較（会話中に挙がった例）</h2>
+    <p>参考：1〜2歳の1日あたり目安（2025年版 食事摂取基準）＝ たんぱく質20g／鉄4.5mg／カルシウム 男450mg・女400mg／脂質は総エネルギーの20〜30%。1食あたりの単純な1/3ではなく、1日単位で見る指標。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>商品例</th><th>量</th><th>kcal</th><th>たんぱく質</th><th>脂質</th><th>炭水化物</th><th>鉄</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>BIG栄養マルシェ 根菜きんぴら弁当（鯛めし＋根菜きんぴら）</td><td>190g</td><td>約123</td><td>約4.1g</td><td>約1.7g</td><td>約22.8g</td><td>—</td></tr>
+          <tr><td>具たっぷりグーグーキッチン 牛すき焼き卵とじ</td><td>80g</td><td>27〜64</td><td>0.9〜3.2g</td><td>0.1〜3.1g</td><td>5.8g</td><td>1.5mg</td></tr>
+          <tr><td>1食分の野菜が摂れる グーグーキッチン 筑前煮</td><td>100g</td><td>37</td><td>0.5〜1.7g</td><td>0.50g</td><td>7.1g</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13.5px; color:var(--ink-soft); margin-top:10px;">牛すき焼き卵とじの鉄1.5mgは、1〜2歳の推奨量4.5mg/日のおよそ1/3にあたる。筑前煮は野菜（にんじん・キャベツ・大根・ごぼう・ブロッコリー・いんげん・ほうれん草・カリフラワー・小松菜）は豊富だが、主菜としてはたんぱく質・脂質がやや弱い。</p>
+  </section>
+
+  <section>
+    <p class="num">03</p>
+    <h2>コスト構造の結論</h2>
+    <p>材料費だけを比べると、元の手作り献立（パンケーキ＋ハンバーグ＋スープ）の方が安くなる可能性がある。パウチのメリットは金額そのものではなく、工程を丸ごと外注できる点。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>方式</th><th>食材費</th><th>調理の手間</th><th>栄養設計</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>元の手作り3品</td><td>安い</td><td>多い（買う・切る・成形・焼く・煮る）</td><td>自分で毎回考える</td></tr>
+          <tr><td>ご飯＋パウチ</td><td>やや高い</td><td>ほぼゼロ（チン＋開けるだけ）</td><td>ほぼメーカー任せ</td></tr>
+          <tr><td>ご飯＋パウチ＋フォロミ</td><td>やや高い</td><td>ほぼゼロ</td><td>栄養設計まで外注</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>特に鉄などの微量栄養素は、原料コストは小さい一方、家庭で毎食確実に狙って入れるのは手間がかかる。ここを工場側の強化に任せられるのがパウチの実質的な価値。</p>
+  </section>
+
+  <section>
+    <p class="num">04</p>
+    <h2>フォローアップミルク vs 通常ミルク</h2>
+    <p>安い＝品質が低いという関係ではなく、設計目的が違う。通常の乳児用ミルクは母乳代替として全栄養素を細かく調整するのに対し、フォローアップミルクは「食事で不足しがちな鉄・カルシウム」に重点を置き、脂質はやや控えめにしている。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>（100mlあたり）</th><th>脂質</th><th>鉄</th><th>カルシウム</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>乳児用ミルク（旧・明治ほほえみ）</td><td>3.52g</td><td>0.81mg</td><td>51mg</td></tr>
+          <tr><td>フォローアップミルク（旧・明治ステップ）</td><td>2.52g</td><td>1.40mg</td><td>112.5mg</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>12か月時点で切り替えるべきかは、現状のミルク量と離乳食の摂取量次第。「安いから今すぐ変える」判断は早計で、個別に量を見て決める話。</p>
+  </section>
+
+  <section>
+    <p class="num">05</p>
+    <h2>かぼちゃ・にんじんスープ ― 冷凍のやり方</h2>
+    <p>ポイントは「鍋ごと冷凍」ではなく、最初から1食分に小分けして凍らせること。つくね（鉄強化）と組み合わせる場合は、乳製品を入れないバージョンの方が使い回しやすい。</p>
+
+    <div class="recipe">
+      <h3>そのまま食べる分量 <span class="tag">7〜9食分</span></h3>
+      <dl>
+        <dt>かぼちゃ</dt><dd>100g</dd>
+        <dt>にんじん</dt><dd>60g</dd>
+        <dt>玉ねぎ</dt><dd>40g</dd>
+        <dt>水</dt><dd>300ml</dd>
+        <dt>（好みで）豆乳・牛乳</dt><dd>100ml</dd>
+      </dl>
+      <ol class="steps">
+        <li>野菜を小さめに切り、水でやわらかく煮る。12か月なら完全ペーストにせず5〜8mm角の具を残してOK。</li>
+        <li>ポタージュにしたい場合は加熱後にブレンダーへ。</li>
+        <li>粗熱を取り、1回50〜70gずつ離乳食用トレーで冷凍 → 固まったら保存袋にまとめる。</li>
+      </ol>
+      <p class="note">つくね3個＋ご飯80〜100g＋このスープ50〜70gで一食が完成する。</p>
+    </div>
+
+    <div class="recipe">
+      <h3>お湯で戻す濃縮ペースト版 <span class="tag">8〜10食分</span></h3>
+      <dl>
+        <dt>かぼちゃ</dt><dd>150g</dd>
+        <dt>にんじん</dt><dd>100g</dd>
+        <dt>玉ねぎ</dt><dd>50g</dd>
+        <dt>水</dt><dd>100〜150ml（通常より少なめ）</dd>
+      </dl>
+      <ol class="steps">
+        <li>やわらかく煮て、軽くつぶすかブレンダーにかける。</li>
+        <li>1回分30〜40gずつ小分けして冷凍。</li>
+        <li>食べる時：濃縮野菜30〜40g＋お湯20〜30ml → 1食50〜70g相当に戻る。おすすめは野菜35g＋お湯25ml。</li>
+      </ol>
+      <p class="note">お湯を15〜20mlにするとポタージュ寄り、30〜40mlにするとさらっと薄め。解凍後に濃さを調整できるうえ冷凍庫の場所も取らない。シロカの加熱ブレンダーで水少なめに仕込むのと相性がよい。</p>
+    </div>
+  </section>
+
+  <div class="pending">
+    <p class="eyebrow">未回答・宿題</p>
+    <p><strong>鉄強化つくね＋卵ハンバーグ</strong>（鶏もも200g＋豆腐150g、冷凍ほうれん草90g、できあがり約20個）の鉄分・栄養計算は、会話ログでは「計算するから待ってね」で終わっており、具体的な数値はまだ出ていない。次にChatGPTへ聞く際はこの分量をそのまま伝えて再計算してもらう必要あり。</p>
+  </div>
+
+  <footer>
+    元になったChatGPT相談の要旨をもとに作成。数値は各社公表値・2025年版食事摂取基準に基づく目安であり、個々の商品ロットや月齢差で変動する。
+  </footer>
+
+</div>
+</body>
+</html>
